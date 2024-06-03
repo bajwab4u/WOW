@@ -1,0 +1,1180 @@
+{
+	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+	"version": 1,
+	"newProjectRoot": "projects",
+	"projects": {
+		"wow-business": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"prefix": "wow",
+					"styleext": "scss"
+				},
+				"@schematics/angular:directive": {
+					"prefix": "wow"
+				}
+			},
+			"root": "projects/wow-business",
+			"sourceRoot": "projects/wow-business/src",
+			"prefix": "wow",
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-angular:browser",
+					"options": {
+						
+						"outputPath": "dist/wow-business",
+						"index": "projects/wow-business/src/index.html",
+						"main": "projects/wow-business/src/main.ts",
+						"polyfills": "projects/wow-business/src/polyfills.ts",
+						"tsConfig": "projects/wow-business/tsconfig.app.json",
+						"aot": true,
+						"assets": [
+							"projects/wow-business/src/favicon.ico",
+							"projects/wow-business/src/assets",
+							{
+								"glob": "**/*",
+								"input": "./shared-assets",
+								"output": "assets"
+							}
+						],
+						"styles": [
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"./node_modules/bootstrap/dist/css/bootstrap.css",
+							"node_modules/alphabet-filter/alphabet-filter.scss",
+							"projects/wow-business/src/styles.scss",
+							"node_modules/ng2-daterangepicker/assets/daterangepicker.css"
+						],
+						"scripts": [
+							"./node_modules/jquery/dist/jquery.js",
+							"./node_modules/popper.js/dist/umd/popper.min.js",
+							"./node_modules/bootstrap/dist/js/bootstrap.js"
+						]
+					},
+					"configurations": {
+						"production": {
+							"fileReplacements": [
+								{
+									"replace": "projects/wow-business/src/environments/environment.ts",
+									"with": "projects/wow-business/src/environments/environment.prod.ts"
+								}
+							],
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"extractCss": true,
+							"namedChunks": false,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "6kb",
+									"maximumError": "10kb"
+								}
+							]
+						},
+						"test": {
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"extractCss": true,
+							"namedChunks": false,
+							"aot": true,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"fileReplacements": [
+								{
+									"replace": "projects/wow-business/src/environments/environment.ts",
+									"with": "projects/wow-business/src/environments/environment.test.ts"
+								}
+							],
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "6kb",
+									"maximumError": "10kb"
+								}
+							]
+						},
+						"qa": {
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"extractCss": true,
+							"namedChunks": false,
+							"aot": true,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"fileReplacements": [
+								{
+									"replace": "projects/wow-business/src/environments/environment.ts",
+									"with": "projects/wow-business/src/environments/environment.qa.ts"
+								}
+							],
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "6kb",
+									"maximumError": "10kb"
+								}
+							]
+						},
+						"dev": {
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"extractCss": true,
+							"namedChunks": false,
+							"aot": true,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"fileReplacements": [
+								{
+									"replace": "projects/wow-business/src/environments/environment.ts",
+									"with": "projects/wow-business/src/environments/environment.dev.ts"
+								}
+							],
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "6kb",
+									"maximumError": "10kb"
+								}
+							]
+						}
+					}
+				},
+				"serve": {
+					"builder": "@angular-devkit/build-angular:dev-server",
+					"options": {
+						"browserTarget": "wow-business:build"
+					},
+					"configurations": {
+						"production": {
+							"browserTarget": "wow-business:build:production"
+						},
+						"test": {
+							"browserTarget": "wow-business:build:test"
+						},
+						"qa": {
+							"browserTarget": "wow-business:build:qa"
+						},
+						"dev": {
+							"browserTarget": "wow-business:build:dev"
+						}
+					}
+				},
+				"extract-i18n": {
+					"builder": "@angular-devkit/build-angular:extract-i18n",
+					"options": {
+						"browserTarget": "wow-business:build"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"main": "projects/wow-business/src/test.ts",
+						"polyfills": "projects/wow-business/src/polyfills.ts",
+						"tsConfig": "projects/wow-business/tsconfig.spec.json",
+						"karmaConfig": "projects/wow-business/karma.conf.js",
+						"assets": [
+							"projects/wow-business/src/favicon.ico",
+							"projects/wow-business/src/assets"
+						],
+						"styles": [
+							"projects/wow-business/src/styles.scss"
+						],
+						"scripts": []
+					}
+				},
+				"lint": {
+					"builder": "@angular-devkit/build-angular:tslint",
+					"options": {
+						"tsConfig": [
+							"projects/wow-business/tsconfig.app.json",
+							"projects/wow-business/tsconfig.spec.json",
+							"projects/wow-business/e2e/tsconfig.json"
+						],
+						"exclude": [
+							"**/node_modules/**"
+						]
+					}
+				},
+				"e2e": {
+					"builder": "@angular-devkit/build-angular:protractor",
+					"options": {
+						"protractorConfig": "projects/wow-business/e2e/protractor.conf.js",
+						"devServerTarget": "wow-business:serve"
+					},
+					"configurations": {
+						"production": {
+							"devServerTarget": "wow-business:serve:production"
+						}
+					}
+				}
+			}
+		},
+		"wow-employer": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"prefix": "wow",
+					"styleext": "scss"
+				},
+				"@schematics/angular:directive": {
+					"prefix": "wow"
+				}
+			},
+			"root": "projects/wow-employer",
+			"sourceRoot": "projects/wow-employer/src",
+			"prefix": "wow",
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-angular:browser",
+					"options": {
+						
+						"outputPath": "dist/wow-employer",
+						"index": "projects/wow-employer/src/index.html",
+						"main": "projects/wow-employer/src/main.ts",
+						"polyfills": "projects/wow-employer/src/polyfills.ts",
+						"tsConfig": "projects/wow-employer/tsconfig.app.json",
+						"aot": true,
+						"assets": [
+							"projects/wow-employer/src/favicon.ico",
+							"projects/wow-employer/src/assets",
+							{
+								"glob": "**/*",
+								"input": "./shared-assets",
+								"output": "assets"
+							}
+						],
+						"styles": [
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"./node_modules/bootstrap/dist/css/bootstrap.css",
+							"node_modules/alphabet-filter/alphabet-filter.scss",
+							"projects/wow-employer/src/styles.scss",
+							"node_modules/ng2-daterangepicker/assets/daterangepicker.css"
+						],
+						"scripts": [
+							"./node_modules/jquery/dist/jquery.js",
+							"./node_modules/popper.js/dist/umd/popper.min.js",
+							"./node_modules/bootstrap/dist/js/bootstrap.js"
+						]
+					},
+					"configurations": {
+						"production": {
+							"fileReplacements": [
+								{
+									"replace": "projects/wow-employer/src/environments/environment.ts",
+									"with": "projects/wow-employer/src/environments/environment.prod.ts"
+								}
+							],
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"extractCss": true,
+							"namedChunks": false,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "6kb",
+									"maximumError": "10kb"
+								}
+							]
+						},
+						"test": {
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"extractCss": true,
+							"namedChunks": false,
+							"aot": true,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"fileReplacements": [
+								{
+									"replace": "projects/wow-employer/src/environments/environment.ts",
+									"with": "projects/wow-employer/src/environments/environment.test.ts"
+								}
+							],
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "6kb",
+									"maximumError": "10kb"
+								}
+							]
+						},
+						"qa": {
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"extractCss": true,
+							"namedChunks": false,
+							"aot": true,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"fileReplacements": [
+								{
+									"replace": "projects/wow-employer/src/environments/environment.ts",
+									"with": "projects/wow-employer/src/environments/environment.qa.ts"
+								}
+							],
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "6kb",
+									"maximumError": "10kb"
+								}
+							]
+						},
+						"dev": {
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"extractCss": true,
+							"namedChunks": false,
+							"aot": true,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"fileReplacements": [
+								{
+									"replace": "projects/wow-employer/src/environments/environment.ts",
+									"with": "projects/wow-employer/src/environments/environment.dev.ts"
+								}
+							],
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "6kb",
+									"maximumError": "10kb"
+								}
+							]
+						}
+					}
+				},
+				"serve": {
+					"builder": "@angular-devkit/build-angular:dev-server",
+					"options": {
+						"browserTarget": "wow-employer:build"
+					},
+					"configurations": {
+						"production": {
+							"browserTarget": "wow-employer:build:production"
+						},
+						"test": {
+							"browserTarget": "wow-employer:build:test"
+						},
+						"qa": {
+							"browserTarget": "wow-employer:build:qa"
+						},
+						"dev": {
+							"browserTarget": "wow-employer:build:dev"
+						}
+					}
+				},
+				"extract-i18n": {
+					"builder": "@angular-devkit/build-angular:extract-i18n",
+					"options": {
+						"browserTarget": "wow-employer:build"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"main": "projects/wow-employer/src/test.ts",
+						"polyfills": "projects/wow-employer/src/polyfills.ts",
+						"tsConfig": "projects/wow-employer/tsconfig.spec.json",
+						"karmaConfig": "projects/wow-employer/karma.conf.js",
+						"assets": [
+							"projects/wow-employer/src/favicon.ico",
+							"projects/wow-employer/src/assets"
+						],
+						"styles": [
+							"projects/wow-employer/src/styles.scss"
+						],
+						"scripts": []
+					}
+				},
+				"lint": {
+					"builder": "@angular-devkit/build-angular:tslint",
+					"options": {
+						"tsConfig": [
+							"projects/wow-employer/tsconfig.app.json",
+							"projects/wow-employer/tsconfig.spec.json",
+							"projects/wow-employer/e2e/tsconfig.json"
+						],
+						"exclude": [
+							"**/node_modules/**"
+						]
+					}
+				},
+				"e2e": {
+					"builder": "@angular-devkit/build-angular:protractor",
+					"options": {
+						"protractorConfig": "projects/wow-employer/e2e/protractor.conf.js",
+						"devServerTarget": "wow-employer:serve"
+					},
+					"configurations": {
+						"production": {
+							"devServerTarget": "wow-employer:serve:production"
+						}
+					}
+				}
+			}
+		},
+		"wow-agency": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"prefix": "wow",
+					"styleext": "scss"
+				},
+				"@schematics/angular:directive": {
+					"prefix": "wow"
+				}
+			},
+			"root": "projects/wow-agency",
+			"sourceRoot": "projects/wow-agency/src",
+			"prefix": "wow",
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-angular:browser",
+					"options": {
+						
+						"outputPath": "dist/wow-agency",
+						"index": "projects/wow-agency/src/index.html",
+						"main": "projects/wow-agency/src/main.ts",
+						"polyfills": "projects/wow-agency/src/polyfills.ts",
+						"tsConfig": "projects/wow-agency/tsconfig.app.json",
+						"aot": true,
+						"assets": [
+							"projects/wow-agency/src/favicon.ico",
+							"projects/wow-agency/src/assets",
+							{
+								"glob": "**/*",
+								"input": "./shared-assets",
+								"output": "assets"
+							}
+						],
+						"styles": [
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"./node_modules/bootstrap/dist/css/bootstrap.css",
+							"node_modules/alphabet-filter/alphabet-filter.scss",
+							"projects/wow-agency/src/styles.scss",
+							"node_modules/ng2-daterangepicker/assets/daterangepicker.css"
+						],
+						"scripts": [
+							"./node_modules/jquery/dist/jquery.js",
+							"./node_modules/popper.js/dist/umd/popper.min.js",
+							"./node_modules/bootstrap/dist/js/bootstrap.js"
+						]
+					},
+					"configurations": {
+						"production": {
+							"fileReplacements": [
+								{
+									"replace": "projects/wow-agency/src/environments/environment.ts",
+									"with": "projects/wow-agency/src/environments/environment.prod.ts"
+								}
+							],
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"extractCss": true,
+							"namedChunks": false,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "6kb",
+									"maximumError": "10kb"
+								}
+							]
+						},
+						"test": {
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"extractCss": true,
+							"namedChunks": false,
+							"aot": true,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"fileReplacements": [
+								{
+									"replace": "projects/wow-agency/src/environments/environment.ts",
+									"with": "projects/wow-agency/src/environments/environment.test.ts"
+								}
+							],
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "6kb",
+									"maximumError": "10kb"
+								}
+							]
+						},
+						"qa": {
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"extractCss": true,
+							"namedChunks": false,
+							"aot": true,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"fileReplacements": [
+								{
+									"replace": "projects/wow-agency/src/environments/environment.ts",
+									"with": "projects/wow-agency/src/environments/environment.qa.ts"
+								}
+							],
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "6kb",
+									"maximumError": "10kb"
+								}
+							]
+						},
+						"dev": {
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"extractCss": true,
+							"namedChunks": false,
+							"aot": true,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"fileReplacements": [
+								{
+									"replace": "projects/wow-agency/src/environments/environment.ts",
+									"with": "projects/wow-agency/src/environments/environment.dev.ts"
+								}
+							],
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "6kb",
+									"maximumError": "10kb"
+								}
+							]
+						}
+					}
+				},
+				"serve": {
+					"builder": "@angular-devkit/build-angular:dev-server",
+					"options": {
+						"browserTarget": "wow-agency:build"
+					},
+					"configurations": {
+						"production": {
+							"browserTarget": "wow-agency:build:production"
+						},
+						"test": {
+							"browserTarget": "wow-agency:build:test"
+						},
+						"qa": {
+							"browserTarget": "wow-agency:build:qa"
+						},
+						"dev": {
+							"browserTarget": "wow-agency:build:dev"
+						}
+					}
+				},
+				"extract-i18n": {
+					"builder": "@angular-devkit/build-angular:extract-i18n",
+					"options": {
+						"browserTarget": "wow-agency:build"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"main": "projects/wow-agency/src/test.ts",
+						"polyfills": "projects/wow-agency/src/polyfills.ts",
+						"tsConfig": "projects/wow-agency/tsconfig.spec.json",
+						"karmaConfig": "projects/wow-agency/karma.conf.js",
+						"assets": [
+							"projects/wow-agency/src/favicon.ico",
+							"projects/wow-agency/src/assets"
+						],
+						"styles": [
+							"projects/wow-agency/src/styles.scss"
+						],
+						"scripts": []
+					}
+				},
+				"lint": {
+					"builder": "@angular-devkit/build-angular:tslint",
+					"options": {
+						"tsConfig": [
+							"projects/wow-agency/tsconfig.app.json",
+							"projects/wow-agency/tsconfig.spec.json",
+							"projects/wow-agency/e2e/tsconfig.json"
+						],
+						"exclude": [
+							"**/node_modules/**"
+						]
+					}
+				},
+				"e2e": {
+					"builder": "@angular-devkit/build-angular:protractor",
+					"options": {
+						"protractorConfig": "projects/wow-agency/e2e/protractor.conf.js",
+						"devServerTarget": "wow-agency:serve"
+					},
+					"configurations": {
+						"production": {
+							"devServerTarget": "wow-agency:serve:production"
+						}
+					}
+				}
+			}
+		},
+		"wow-admin": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"prefix": "wow",
+					"styleext": "scss"
+				},
+				"@schematics/angular:directive": {
+					"prefix": "wow"
+				}
+			},
+			"root": "projects/wow-admin",
+			"sourceRoot": "projects/wow-admin/src",
+			"prefix": "wow",
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-angular:browser",
+					"options": {
+						
+						"outputPath": "dist/wow-admin",
+						"index": "projects/wow-admin/src/index.html",
+						"main": "projects/wow-admin/src/main.ts",
+						"polyfills": "projects/wow-admin/src/polyfills.ts",
+						"tsConfig": "projects/wow-admin/tsconfig.app.json",
+						"aot": true,
+						"assets": [
+							"projects/wow-admin/src/favicon.ico",
+							"projects/wow-admin/src/assets",
+							{
+								"glob": "**/*",
+								"input": "./shared-assets",
+								"output": "assets"
+							}
+						],
+						"styles": [
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"./node_modules/bootstrap/dist/css/bootstrap.css",
+							"node_modules/alphabet-filter/alphabet-filter.scss",
+							"projects/wow-admin/src/styles.scss",
+							"node_modules/ng2-daterangepicker/assets/daterangepicker.css"
+						],
+						"scripts": [
+							"./node_modules/jquery/dist/jquery.js",
+							"./node_modules/popper.js/dist/umd/popper.min.js",
+							"./node_modules/bootstrap/dist/js/bootstrap.js"
+						]
+					},
+					"configurations": {
+						"production": {
+							"fileReplacements": [
+								{
+									"replace": "projects/wow-admin/src/environments/environment.ts",
+									"with": "projects/wow-admin/src/environments/environment.prod.ts"
+								}
+							],
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"extractCss": true,
+							"namedChunks": false,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "6kb",
+									"maximumError": "10kb"
+								}
+							]
+						},
+						"test": {
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"extractCss": true,
+							"namedChunks": false,
+							"aot": true,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"fileReplacements": [
+								{
+									"replace": "projects/wow-admin/src/environments/environment.ts",
+									"with": "projects/wow-admin/src/environments/environment.test.ts"
+								}
+							],
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "6kb",
+									"maximumError": "10kb"
+								}
+							]
+						},
+						"qa": {
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"extractCss": true,
+							"namedChunks": false,
+							"aot": true,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"fileReplacements": [
+								{
+									"replace": "projects/wow-admin/src/environments/environment.ts",
+									"with": "projects/wow-admin/src/environments/environment.qa.ts"
+								}
+							],
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "6kb",
+									"maximumError": "10kb"
+								}
+							]
+						},
+						"dev": {
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"extractCss": true,
+							"namedChunks": false,
+							"aot": true,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"fileReplacements": [
+								{
+									"replace": "projects/wow-admin/src/environments/environment.ts",
+									"with": "projects/wow-admin/src/environments/environment.dev.ts"
+								}
+							],
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "6kb",
+									"maximumError": "10kb"
+								}
+							]
+						}
+					}
+				},
+				"serve": {
+					"builder": "@angular-devkit/build-angular:dev-server",
+					"options": {
+						"browserTarget": "wow-admin:build"
+					},
+					"configurations": {
+						"production": {
+							"browserTarget": "wow-admin:build:production"
+						},
+						"test": {
+							"browserTarget": "wow-admin:build:test"
+						},
+						"qa": {
+							"browserTarget": "wow-admin:build:qa"
+						},
+						"dev": {
+							"browserTarget": "wow-admin:build:dev"
+						}
+					}
+				},
+				"extract-i18n": {
+					"builder": "@angular-devkit/build-angular:extract-i18n",
+					"options": {
+						"browserTarget": "wow-admin:build"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"main": "projects/wow-admin/src/test.ts",
+						"polyfills": "projects/wow-admin/src/polyfills.ts",
+						"tsConfig": "projects/wow-admin/tsconfig.spec.json",
+						"karmaConfig": "projects/wow-admin/karma.conf.js",
+						"assets": [
+							"projects/wow-admin/src/favicon.ico",
+							"projects/wow-admin/src/assets"
+						],
+						"styles": [
+							"projects/wow-admin/src/styles.scss"
+						],
+						"scripts": []
+					}
+				},
+				"lint": {
+					"builder": "@angular-devkit/build-angular:tslint",
+					"options": {
+						"tsConfig": [
+							"projects/wow-admin/tsconfig.app.json",
+							"projects/wow-admin/tsconfig.spec.json",
+							"projects/wow-admin/e2e/tsconfig.json"
+						],
+						"exclude": [
+							"**/node_modules/**"
+						]
+					}
+				},
+				"e2e": {
+					"builder": "@angular-devkit/build-angular:protractor",
+					"options": {
+						"protractorConfig": "projects/wow-admin/e2e/protractor.conf.js",
+						"devServerTarget": "wow-admin:serve"
+					},
+					"configurations": {
+						"production": {
+							"devServerTarget": "wow-admin:serve:production"
+						}
+					}
+				}
+			}
+		},
+		"wow-auth": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"prefix": "wow",
+					"styleext": "scss"
+				},
+				"@schematics/angular:directive": {
+					"prefix": "wow"
+				}
+			},
+			"root": "projects/wow-auth",
+			"sourceRoot": "projects/wow-auth/src",
+			"prefix": "wow",
+			"architect": {
+			  "build": {
+				"builder": "@angular-devkit/build-angular:browser",
+				"options": {
+					
+					"outputPath": "dist/wow-auth",
+					"index": "projects/wow-auth/src/index.html",
+					"main": "projects/wow-auth/src/main.ts",
+					"polyfills": "projects/wow-auth/src/polyfills.ts",
+					"tsConfig": "projects/wow-auth/tsconfig.app.json",
+					"aot": true,
+
+					"assets": [
+						"projects/wow-auth/src/favicon.ico",
+						"projects/wow-auth/src/assets"
+					],
+					"styles": [
+						"node_modules/bootstrap/dist/css/bootstrap.min.css",
+						"./node_modules/bootstrap/dist/css/bootstrap.css",
+						"node_modules/alphabet-filter/alphabet-filter.scss",
+						"projects/wow-auth/src/styles.scss",
+						"node_modules/ng2-daterangepicker/assets/daterangepicker.css"
+					],
+					"scripts": [
+						"./node_modules/jquery/dist/jquery.js",
+						"./node_modules/popper.js/dist/umd/popper.min.js",
+						"./node_modules/bootstrap/dist/js/bootstrap.js"
+					]
+				},
+				"configurations": {
+
+				  "production": {
+					"fileReplacements": [
+					  {
+						"replace": "projects/wow-auth/src/environments/environment.ts",
+						"with": "projects/wow-auth/src/environments/environment.prod.ts"
+					  }
+					],
+					"optimization": true,
+					"outputHashing": "none",
+					"sourceMap": false,
+					"extractCss": true,
+					"namedChunks": false,
+					"extractLicenses": true,
+					"vendorChunk": false,
+					"buildOptimizer": true,
+					"budgets": [
+					  {
+						"type": "initial",
+						"maximumWarning": "2mb",
+						"maximumError": "5mb"
+					  },
+					  {
+						"type": "anyComponentStyle",
+						"maximumWarning": "6kb",
+						"maximumError": "10kb"
+					  }
+					]
+				  },
+				  "test": {
+					"fileReplacements": [
+					  {
+						"replace": "projects/wow-auth/src/environments/environment.ts",
+						"with": "projects/wow-auth/src/environments/environment.test.ts"
+					  }
+					],
+					"optimization": true,
+					"outputHashing": "none",
+					"sourceMap": false,
+					"extractCss": true,
+					"namedChunks": false,
+					"extractLicenses": true,
+					"vendorChunk": false,
+					"buildOptimizer": true,
+					"budgets": [
+					  {
+						"type": "initial",
+						"maximumWarning": "2mb",
+						"maximumError": "5mb"
+					  },
+					  {
+						"type": "anyComponentStyle",
+						"maximumWarning": "6kb",
+						"maximumError": "10kb"
+					  }
+					]
+				  },
+				  "qa": {
+					"fileReplacements": [
+					  {
+						"replace": "projects/wow-auth/src/environments/environment.ts",
+						"with": "projects/wow-auth/src/environments/environment.qa.ts"
+					  }
+					],
+					"optimization": true,
+					"outputHashing": "none",
+					"sourceMap": false,
+					"extractCss": true,
+					"namedChunks": false,
+					"extractLicenses": true,
+					"vendorChunk": false,
+					"buildOptimizer": true,
+					"budgets": [
+					  {
+						"type": "initial",
+						"maximumWarning": "2mb",
+						"maximumError": "5mb"
+					  },
+					  {
+						"type": "anyComponentStyle",
+						"maximumWarning": "6kb",
+						"maximumError": "10kb"
+					  }
+					]
+				  },
+				  "dev": {
+						"fileReplacements": [
+						{
+							"replace": "projects/wow-auth/src/environments/environment.ts",
+							"with": "projects/wow-auth/src/environments/environment.dev.ts"
+						}
+					],
+					"optimization": true,
+					"outputHashing": "none",
+					"sourceMap": false,
+					"extractCss": true,
+					"namedChunks": false,
+					"extractLicenses": true,
+					"vendorChunk": false,
+					"buildOptimizer": true,
+					"budgets": [
+					  {
+						"type": "initial",
+						"maximumWarning": "2mb",
+						"maximumError": "5mb"
+					  },
+					  {
+						"type": "anyComponentStyle",
+						"maximumWarning": "6kb",
+						"maximumError": "10kb"
+					  }
+					]
+				  }
+				}
+			  },
+			  "serve": {
+				"builder": "@angular-devkit/build-angular:dev-server",
+				"options": {
+				  	"browserTarget": "wow-auth:build"
+				},
+				"configurations": {
+					"production": {
+						"browserTarget": "wow-auth:build:production"
+					},
+					"test": {
+						"browserTarget": "wow-auth:build:test"
+					},
+					"qa": {
+						"browserTarget": "wow-auth:build:qa"
+					},
+					"dev": {
+						"browserTarget": "wow-auth:build:dev"
+					}
+				}
+			  },
+			  "extract-i18n": {
+				"builder": "@angular-devkit/build-angular:extract-i18n",
+				"options": {
+				  "browserTarget": "wow-auth:build"
+				}
+			  },
+			  "test": {
+				"builder": "@angular-devkit/build-angular:karma",
+				"options": {
+				  "main": "projects/wow-auth/src/test.ts",
+				  "polyfills": "projects/wow-auth/src/polyfills.ts",
+				  "tsConfig": "projects/wow-auth/tsconfig.spec.json",
+				  "karmaConfig": "projects/wow-auth/karma.conf.js",
+				  "assets": [
+						"projects/wow-auth/src/favicon.ico",
+						"projects/wow-auth/src/assets"
+				  ],
+				  "styles": [
+						"projects/wow-auth/src/styles.scss"
+				  ],
+				  "scripts": []
+				}
+			  },
+			  "lint": {
+				"builder": "@angular-devkit/build-angular:tslint",
+				"options": {
+				  "tsConfig": [
+					"projects/wow-auth/tsconfig.app.json",
+					"projects/wow-auth/tsconfig.spec.json",
+					"projects/wow-auth/e2e/tsconfig.json"
+				  ],
+				  "exclude": [
+					"**/node_modules/**"
+				  ]
+				}
+			  },
+			  "e2e": {
+				"builder": "@angular-devkit/build-angular:protractor",
+				"options": {
+				  "protractorConfig": "projects/wow-auth/e2e/protractor.conf.js",
+				  "devServerTarget": "wow-auth:serve"
+				},
+				"configurations": {
+				  "production": {
+					"devServerTarget": "wow-auth:serve:production"
+				  }
+				}
+			  }
+			}
+		}
+	},
+	"defaultProject": "wow-business",
+	"cli": {
+		"analytics": "36c046a4-ae09-45e8-8095-bf3de6b20aef"
+	}
+}

@@ -1,0 +1,46 @@
+
+<form [formGroup]="form">
+    <div class="" (mouseover)="item='focused'" (mouseout)="item='none'">
+
+        <div class="form-group row">
+            <div class="form-group-label text-right col-lg-2 col-md-6 col-sm-12 text-align-l ">
+                <label class="col-form-label col-form-label-sm">
+                    Name
+                </label>
+            </div>
+            <div class="col-md-4 col-sm-12 form-field">
+                <input type="text" wowInputBehaviour [type]="item" name="name" formControlName="name"
+                    class="form-control"
+                    [ngClass]="{ 'is-invalid': isControlValid('name') ||  isControlValid('name') }"
+                    placeholder="Category Name" required maxlength="200">
+                <div *ngIf="isControlValid('name')" class="invalid-feedback">
+                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Category Name is required.">
+                    </i>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="form-group-label text-right col-lg-2 col-md-6 col-sm-12 text-align-l ">
+                <label class="col-form-label col-form-label-sm">
+                    Description
+                </label>
+            </div>
+            <div class="col-md-4 col-sm-12 text-right form-field">
+                <textarea type="text" rows="4" maxlength="1000" col="" name="description" formControlName="description"
+                    #description wowInputBehaviour [type]="item" class="form-control" placeholder="Description">
+						</textarea>
+<!--                <span class="pull-right label label-default" id="count_message">{{description.value.length-->
+<!--                    || 0}}/1000-->
+<!--                    char.</span>-->
+<!--                <div *ngIf="isControlValid('description') || isControlValid('description','maxlength')"-->
+<!--                    class="invalid-feedback">-->
+<!--                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" [tooltip]="-->
+<!--											form.controls.description.errors.maxlength?-->
+<!--											'Description can contain upto 1000 characters only': -->
+<!--											'Invalid value'">-->
+<!--                    </i>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
+</form>

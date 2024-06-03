@@ -1,0 +1,45 @@
+
+<div class="sidebar-wrapper mrgntop2">
+	<div class="nav-container">
+		<div class="griddisplay mt-4 mb-4">
+			<img class="imgAdjusttoggle" (click)="toggleSidebar()" 
+			src="assets/images/sidebar/sidebar-togglebutton.svg" />
+		</div>
+
+		<div class="griddisplay mt-4 mb-4">
+			<div class="nameInUpperCase" [title]="fullName">{{ profileImg }}</div>
+			<span class="mt-2 mb-2 fullName ellipse" [title]="fullName" *ngIf="!sidebarHalf">{{fullName}}</span>
+		</div>
+		
+		<ul class="nav" routerLinkActive="active">
+			<li *ngFor="let menuItem of ACTIVATED_ROUTE; let i = index" 
+				routerLinkActive="active" class="sidebarmenuitems" 
+				[ngClass]="{'mb-5':ACTIVATED_ROUTE.length-1 === i}">
+				<!-- <ng-container *ngIf="!menuItem?.child"> -->
+					<ng-container *ngIf="menuItem.displayName === 'CRM'">
+						<a  [href]="sanitize(menuItem.url)" target="_blank">
+							<img class="material-icons imgAdjust" [src]="menuItem.asset" />
+							<span class="sidebarTitle" *ngIf="!sidebarHalf">{{menuItem.displayName}}</span>
+						</a>
+					</ng-container>
+
+					<ng-container *ngIf="menuItem.displayName !== 'CRM'">
+						<a [routerLink]="[menuItem.url]">
+							<img class="material-icons imgAdjust" [title]="menuItem.displayName" [src]="menuItem.asset" />
+							<span class="sidebarTitle" *ngIf="!sidebarHalf">{{menuItem.displayName}} </span>
+						</a>
+					</ng-container>
+				<!-- </ng-container> -->
+			</li>
+		</ul>
+	</div>
+
+	<div class="sidebar-footer">
+		<div class="griddisplaybottom mt-4 mb-4">
+			<a routerLink="../dashboard">
+				<img  class="imgAdjustbottom" src='assets/images/sidebar/logosidebarbottom.svg' />
+			</a>
+		</div>
+	</div>
+
+</div>

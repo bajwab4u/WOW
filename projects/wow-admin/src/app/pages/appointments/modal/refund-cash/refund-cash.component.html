@@ -1,0 +1,54 @@
+<div class="container col-9 float-left content-box-mt component-paddingRL" style="min-width: 100% !important;">
+    <form name="from" [formGroup]="form" autocomplete="off">
+        <div class="row">
+            <div class="col col-sm-12 col-md-12 text-left p-0">
+                <h3>Refund</h3>
+            </div>
+        </div>
+        <div class="col-12 float-left p-0">
+            <div class="row inputLabelText ml-5">
+                <div class="col-12 p-0">
+
+                    <div class="">
+                        <div class="form-group form-row mr-0 ml-0">
+                            <div class="col-md-12 col-sm-12 p-0">
+                                <label class="float-left">Total Payed</label>
+                                <input type="text" class="form-control" formControlName="listedAmount"
+                                    placeholder="Total Amount" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group form-row mr-0 ml-0">
+                            <div class="col-md-12 col-sm-12 p-0">
+                                <label class="float-left">Refund Amount</label>
+                                <input type="text" class="form-control" formControlName="refundAmount" placeholder="$$$"
+                                    [wowOnlyNumbers]="true"
+                                    [ngClass]="{ 'is-invalid': isControlValid('refundAmount', 'required') || form.get('refundAmount').value > form.get('listedAmount').value}"
+                                    required>
+                                <div *ngIf="isControlValid('refundAmount', 'required') " class="invalid-feedback">
+                                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                        tooltip="Amount is required">
+                                    </i>
+                                </div>
+                                <div *ngIf="isFormSubmitted && form.get('refundAmount').value > form.get('listedAmount').value"
+                                    class="invalid-feedback">
+                                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                        tooltip="Amount must be less than total amount">
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-sm-12 col-md-12 text-align-l text-right mt-4 p-0">
+                <button type="button" class="btn addbtn-size btnDownloadColor btn-properties-white mr-2"
+                    (click)="closeModal()">Cancel</button>
+                <button type="button" class="btn addbtn-size btn-properties-gray" (click)="onSubmit()"
+                    [ngClass]="!form.dirty ? 'btn-properties-gray': 'btnAddColor'"
+                    [disabled]="!form.dirty ">Refund</button>
+            </div>
+        </div>
+    </form>
+</div>

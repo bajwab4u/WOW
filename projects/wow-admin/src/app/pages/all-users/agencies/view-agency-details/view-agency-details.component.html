@@ -1,0 +1,83 @@
+<div class=" layout-blank component-paddingRL content-box-mt">
+
+    <div class="row">
+        <div class="col-12 p-0">
+            <div class="wow-dh-wrapper ">
+                <div class="wow-dh-left-parent text-left">
+                    <div class="wow-dh-left-heading ">
+                        <h3 class="mb-0">
+                            <span (click)="onGoBack()" style="cursor: pointer" class="mr-2">
+                                <img src="assets/images/details-back-btn.svg" height="12px">
+                            </span>
+                            {{selectedAgency.affiliateName}}
+                        </h3>
+                    </div>
+                </div>
+                <div class="wow-dh-right-parent">
+                    <div class="wow-dh-action-btns-wrapper">
+                        <div class="wow-dh-action-btn">
+                            <button type="button" class="btn mr-2"
+                                [title]="selectedAgency?.status ? 'Inactive Agency' : 'Active Agency'"
+                                [ngClass]="selectedAgency?.status ? 'custom-danger-btn' : 'custom-success-btn'"
+                                (click)="onChangeStatus()">
+                                <i style="font-size: 17px;" class="fa mt-1 fa-ban"
+                                    [ngClass]="selectedAgency?.status ? 'fa-ban' : 'fa-check'"></i>
+                            </button>
+                        </div>
+                        <div class="wow-dh-action-btn">
+                            <button type="button" class="btn btn-space btn-properties-white mr-2"
+                                (click)="onGoBack()">Cancel</button>
+                        </div>
+                        <div class="wow-dh-action-btn">
+                            <button type="button" class="btn btn-properties-gray" [disabled]="isFormDisabled"
+                                [ngClass]="isFormDisabled ? 'btn-properties-gray' : 'btnAddColor'"
+                                (click)="onSubmit()">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 p-0">
+            <wow-tabs-group (selectedTabChange)="onSelectedTabChange($event)" [showConfirmPopup]="true">
+                <wow-tab-item tabTitle="Details">
+                    <ng-container *ngIf="selectedTabIndex === 0">
+                        <div class="row">
+                            <div class="col-12 p-0">
+                                <div class="wow-adg-content">
+                                    <wow-agency-details [selectedAgency]="selectedAgency"
+                                        (signals)="onHandleSignals($event)" [action]="action">
+                                    </wow-agency-details>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </wow-tab-item>
+
+                <!-- 2nd Tab start -->
+                <wow-tab-item tabTitle="Agents">
+                    <ng-container *ngIf="selectedTabIndex === 1 ">
+                        <wow-agency-data-tables class="w-100" [selectedTabIndex]="selectedTabIndex"
+                            [affiliateId]="selectedAgency.affiliateId">
+                        </wow-agency-data-tables>
+                    </ng-container>
+                </wow-tab-item>
+                <!-- 2nd Tab end -->
+
+                <!-- 3rd Tab start -->
+                <wow-tab-item tabTitle="Child Agency">
+                    <ng-container *ngIf="selectedTabIndex === 2">
+                        <wow-agency-data-tables class="w-100" [selectedTabIndex]="selectedTabIndex"
+                            [affiliateId]="selectedAgency.affiliateId">
+                        </wow-agency-data-tables>
+                    </ng-container>
+                </wow-tab-item>
+                <!-- 3rd Tab end -->
+
+            </wow-tabs-group>
+        </div>
+    </div>
+
+</div>

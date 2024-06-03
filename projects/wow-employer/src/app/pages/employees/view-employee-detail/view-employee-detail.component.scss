@@ -1,0 +1,76 @@
+// .tab {
+//     overflow: hidden;
+//     border: none;
+//     background-color: #ffff;
+//   }
+
+//   .tab-btn {
+//     margin-right: 10%;
+//   }
+//   /* Style the buttons inside the tab */
+//   .tab .tab1 {
+//     background-color: inherit;
+//     float: left;
+//     border: none;
+//     outline: none;
+//     cursor: pointer;
+//     padding: 0px 0px;
+//     transition: 0.3s;
+//     font-size: 13px;
+//     width: fit-content;
+//     color: #575757;
+//   }
+//   .tab .tab2 {
+//     background-color: inherit;
+//     float: left;
+//     border: none;
+//     outline: none;
+//     cursor: pointer;
+//     padding: 0px 0px;
+//     transition: 0.3s;
+//     font-size: 13px;
+//     width: fit-content;
+//     color: #575757;
+//     // margin: 0 10%;
+//   }
+//   .tab .tab3 {
+//     background-color: inherit;
+//     float: left;
+//     border: none;
+//     outline: none;
+//     cursor: pointer;
+//     padding: 0px 0px;
+//     transition: 0.3s;
+//     font-size: 13px;
+//     width: fit-content;
+//     color: #575757;
+//   }
+  /* Change background color of buttons on hover */
+  /* .tab button:active {
+
+  } */
+  
+  /* Create an active/current tablink class */
+  // .tab button.active {
+  //   border-bottom: 4px solid #524456;
+  // }
+  // .tabcontent {
+  //   display: none;
+  //   padding: 6px 0px;
+  //   border: none;
+  //   border-top: none;
+  //   margin-top: 20px;
+  //   width: 100%;
+  // }
+
+  label{
+    color: #575757;
+    padding-right: 40px;
+    text-align: right;
+  }
+
+  @media (min-width: 400px) and (max-width: 786px) {
+	.wow-pl-1{
+		padding-left: 1rem !important;
+	}
+  }

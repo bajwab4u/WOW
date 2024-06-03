@@ -1,0 +1,79 @@
+<div class=" layout-blank component-paddingRL content-box-mt">
+
+    <div class="row">
+        <div class="col-12 p-0">
+            <div class="wow-dh-wrapper ">
+                <div class="wow-dh-left-parent text-left">
+                    <div class="wow-dh-left-heading ">
+                        <h3 class="text-overflow mb-0" style="width: 30ch;" 
+                            [title]="selectedCoupon?.couponName">
+                            <span (click)="onGoBack()" style="cursor: pointer" class="mr-2">
+                                <img src="assets/images/details-back-btn.svg" height="12px">
+                            </span>
+                            {{selectedCoupon?.couponName}}
+                        </h3>
+                    </div>
+                </div>
+                <div class="wow-dh-right-parent">
+                    <div class="wow-dh-action-btns-wrapper">
+                        <div class="wow-dh-action-btn">
+                            <button type="button" class="btn statusBtn"
+                                [title]="selectedCoupon.couponStatus ? 'Inactive Coupon' : 'Active Coupon'"
+                                [ngClass]="selectedCoupon.couponStatus ? 'custom-danger-btn' : 'custom-success-btn'"
+                                (click)="onChangeStatus()">
+                                <i style="font-size: 17px;" class="fa fa-ban"
+                                    [ngClass]="selectedCoupon.couponStatus ? 'fa-ban' : 'fa-check'"></i>
+                                <span class="pl-2">{{ selectedCoupon.couponStatus ? 'Inactive Coupon': 'Active
+                                    Coupon'}}</span>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 p-0">
+
+            <wow-tabs-group (selectedTabChange)="onSelectedTabChange($event)">
+                <wow-tab-item tabTitle="Details">
+
+                    <ng-container *ngIf="selectedTabIndex === 0">
+                        <div class="row">
+                            <div class="col-12 p-0">
+                                <div class="wow-adg-content">
+                                    <wow-coupon-details [couponId]="couponId">
+                                    </wow-coupon-details>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </ng-container>
+                </wow-tab-item>
+
+                <!-- 2nd Tab start -->
+                <wow-tab-item tabTitle="Services">
+                    <ng-container *ngIf="selectedTabIndex === 1">
+                        <wow-coupon-services class="w-100" [couponId]="couponId"></wow-coupon-services>
+                    </ng-container>
+                </wow-tab-item>
+                <!-- 2nd Tab end -->
+
+
+                <!-- 2nd Tab start -->
+                <wow-tab-item tabTitle="Providers">
+                    <ng-container *ngIf="selectedTabIndex === 2">
+                        <wow-coupon-providers class="w-100" [couponId]="couponId"></wow-coupon-providers>
+                    </ng-container>
+                </wow-tab-item>
+                <!-- 2nd Tab end -->
+
+            </wow-tabs-group>
+        </div>
+    </div>
+
+</div>

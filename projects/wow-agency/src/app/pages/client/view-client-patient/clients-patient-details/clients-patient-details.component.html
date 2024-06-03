@@ -1,0 +1,61 @@
+<div class="wow-agdc-root">
+  <div class="wow-agdc-parent">
+    <div class="wow-agdc-subparent">
+      <div class="wow-agdc-wrapper">
+        <div class="row">
+          <div class="col-md-12 p-0">
+            <div class="wow-agdc-header">
+              <div class="wow-dh-root">
+                <div class="wow-dh-parent">
+                  <div class="wow-dh subparent">
+                    <div class="wow-dh-wrapper">
+                      <div class="wow-dh-left-parent">
+                        <div class="wow-dh-left-heading">
+                          <h2>
+                            <span class="pr-2" style="cursor: pointer;" (click)="onGoBack()">
+                              <img src="assets/images/details-back-btn.svg" height="12px">
+                            </span>
+                            {{selectedRow?.firstName + ' ' + selectedRow?.lastName}}
+                          </h2>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 p-0">
+            <wow-tabs-group (selectedTabChange)="onSelectedTabChange($event)">
+              <wow-tab-item tabTitle="Details">
+                <ng-container *ngIf="selectedTabIndex === 0">
+                  <div class="row">
+                    <div class="col-12 p-0">
+                      <div class="wow-adg-content">
+                        <wow-patient-details [selectedRow]="selectedRow"></wow-patient-details>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </wow-tab-item>
+
+              <!-- 2nd Tab start -->
+              <wow-tab-item tabTitle="Memberships">
+                <ng-container *ngIf="selectedTabIndex === 1">
+                  <wow-patient-memberships
+                    class="w-100"
+                    [selectedRow]="selectedRow"
+                  ></wow-patient-memberships>
+                </ng-container>
+              </wow-tab-item>
+              <!-- 2nd Tab end -->
+            </wow-tabs-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

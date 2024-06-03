@@ -1,0 +1,85 @@
+<div class="layout-blank component-paddingRL content-box-mt">
+  <div class="row">
+    <div class="col-12 p-0">
+      <div class="wow-dh-wrapper">
+        <div class="wow-dh-left-parent text-left">
+          <div class="wow-dh-left-heading">
+            <h3 class="mb-0">
+              <span (click)="onGoBack()" style="cursor: pointer" class="mr-2">
+                <img src="assets/images/details-back-btn.svg" height="12px" />
+              </span>
+              {{ selectedPatient.firstName+' '+selectedPatient.lastName }}
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="width: 960px !important;">
+    <div class="col-md-12 p-0">
+      <wow-tabs-group (selectedTabChange)="onSelectedTabChange($event)" [showConfirmPopup]="true">
+        <wow-tab-item tabTitle="Profile">
+          <ng-container *ngIf="selectedTabIndex === 0">
+            <div class="row">
+              <div class="col-12 p-0">
+                <div class="wow-adg-content">
+                  <wow-patient-profile [selectedPatient]="selectedPatient"> </wow-patient-profile>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </wow-tab-item>
+
+        <!-- 2nd Tab start -->
+        <wow-tab-item tabTitle="Family Profile">
+          <div class="row">
+            <div class="col-12 p-0">
+              <ng-container *ngIf="selectedTabIndex === 1">
+                <wow-patient-family-info [selectedPatient]="selectedPatient"></wow-patient-family-info>
+              </ng-container>
+            </div>
+          </div>
+        </wow-tab-item>
+        <!-- 2nd Tab end -->
+
+        <!-- 3rd tab start -->
+        <wow-tab-item tabTitle="Memberships">
+          <div class="row">
+            <div class="col-12 p-0">
+              <ng-container *ngIf="selectedTabIndex === 2">
+                <wow-patient-memberships [selectedPatient]="selectedPatient"></wow-patient-memberships>
+              </ng-container>
+            </div>
+          </div>
+        </wow-tab-item>
+        <!-- 3rd tab end -->
+
+        <!-- 4th tab start -->
+        <wow-tab-item tabTitle="Appointments">
+          <div class="row">
+            <div class="col-12 p-0">
+              <ng-container *ngIf="selectedTabIndex === 3">
+                <wow-patient-appointments [selectedPatient]="selectedPatient"></wow-patient-appointments>
+              </ng-container>
+            </div>
+          </div>
+        </wow-tab-item>
+        <!-- 4th tab end -->
+
+        <!-- 5th tab start -->
+        <wow-tab-item tabTitle="Transactions History">
+          <div class="row">
+            <div class="col-12 p-0">
+              <ng-container *ngIf="selectedTabIndex === 4">
+                <wow-patient-transaction-history [selectedPatient]="selectedPatient"></wow-patient-transaction-history>
+              </ng-container>
+            </div>
+          </div>
+        </wow-tab-item>
+        <!-- 5th tab end -->
+
+      </wow-tabs-group>
+    </div>
+  </div>
+</div>

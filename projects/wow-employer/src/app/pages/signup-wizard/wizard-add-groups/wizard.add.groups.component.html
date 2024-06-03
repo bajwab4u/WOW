@@ -1,0 +1,107 @@
+<div class="modal-body">
+	<div class="row">
+		<div class="col-lg-10">
+			<h3>Create or Select Employee Groups</h3>
+			<p >Choose the Employee Groups for easier management of your employee benefits.
+				You can always edit or create new groups later.</p>
+			
+				<div *ngIf="selectedGroups.length === 0 && isGroupSelected"  class="row alert error-alert alert-danger" >
+					Atleast one employee group is must.
+				</div>
+
+			<form class="form-group" [formGroup]="groupsForm">
+				<table class="table table-borderless" style="border-spacing: 0;">
+					<tbody>
+						<tr style="height: 40px;">
+							<td style="width: 40%; padding-left: 0px;">
+								<input type="text" formControlName="employeeGroupName" required
+									class="form-control  ml-2" placeholder="Group Name e.g Manager"
+									[ngClass]="{ 'is-invalid': (isFormSubmitted && groupsForm.get('employeeGroupName').invalid) || groupsForm.get('employeeGroupName').hasError('uniqueName') }"
+									tooltip="" [isDisabled]="!isFormSubmitted"
+									maxlength="35" autocomplete="off">
+								
+								<div *ngIf="groupsForm.get('employeeGroupName').hasError('uniqueName')"
+									class="fa fa-info-circle fa-errorIcon"
+									tooltip="You are not allowed to add multiple groups with same name">
+								</div>
+
+								<div class="invalid-feedback"
+									*ngIf="isFormSubmitted && !groupsForm.get('employeeGroupName').valid">
+
+									<i aria-hidden="true" *ngIf="groupsForm.get('employeeGroupName').hasError('required')"
+										class="fa fa-info-circle fa-errorIcon" tooltip="Group Name is required">
+									</i>
+
+									<i aria-hidden="true" *ngIf="groupsForm.get('employeeGroupName').hasError('maxlength')"
+										class="fa fa-info-circle fa-errorIcon" tooltip="Max 35 characters allowed">
+									</i>
+								</div>
+
+							</td>
+							<td style="width: 40%; padding-left: 0px; position: relative;">
+								<img style="position: absolute; left: 15px; top: 25px;" class="" src="assets/images/color-picker.svg">
+								<input readonly formControlName="employeeGroupColor" type="text" class="form-control  ml-2"
+									required name="employeeGroupColor" placeholder="Pick a Color"
+									[ngClass]="{ 'is-invalid': isFormSubmitted && groupsForm.get('employeeGroupColor').invalid }"
+									tooltip="" [isDisabled]="!isFormSubmitted"
+									maxlength="35" autocomplete="off" style="padding-left: 25px;">
+								
+								<input type="color" class="color-picker-field" readonly 
+									formControlName="selectedColor" (change)="onColorChange()">
+
+								<div class="invalid-feedback"
+									*ngIf="isFormSubmitted && !groupsForm.get('employeeGroupColor').valid">
+
+									<i aria-hidden="true" *ngIf="groupsForm.get('employeeGroupColor').hasError('required')"
+										class="fa fa-info-circle fa-errorIcon" style="margin-right: 30px !important;"
+										tooltip="Group color is required">
+									</i>
+								</div>
+
+							</td>
+
+							<td style="padding-left: 10px;">
+								<button type="button" 
+									class="btn btn-properties" (click)="addGroupItem()">
+									Create Group
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+			</form>
+
+			<div class="groups-container">
+				<ng-container *ngFor="let opt of selectedGroups; let idx=index"
+					[ngTemplateOutlet]="groupTempRef"
+					[ngTemplateOutletContext]="{ opt: opt, idx: idx, ac: 'REMOVE' }">
+
+				</ng-container>
+			</div>
+
+			<div>
+				<h4>Choose from existing</h4>
+				<div class="groups-container">
+					<ng-container *ngFor="let opt of preExistedGroup; let idx=index"
+						[ngTemplateOutlet]="groupTempRef"
+						[ngTemplateOutletContext]="{ opt: opt, idx: idx, ac: 'ADD' }">
+					
+					</ng-container>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<ng-template #groupTempRef let-opt="opt" let-idx="idx" let-ac="ac">
+
+	<div *ngIf="isVisible(opt)" (click)="onHandleAction(opt, idx, ac)"
+		class="group-color-content group-item"
+		[style.border]="getBorder(opt)">
+		<img [src]="ac === 'ADD' ? 'assets/images/add-icon.svg' : 'assets/images/tick-icon.svg'"> &nbsp;&nbsp;
+		{{opt.title}}
+	</div>
+
+</ng-template>

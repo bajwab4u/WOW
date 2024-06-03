@@ -1,0 +1,30 @@
+.progress-bar {
+    width: 80%;
+    margin-left: -40%;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+
+    z-index: 1000;
+    pointer-events: none;
+    position: absolute;
+    height: 16px;
+    left: 50%;
+    top: 50%;
+    margin-top: -8px;
+
+    .upload {
+        background-color: #666;
+        background: #333;
+        background: linear-gradient(to bottom,#666,#444);
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        transition: width .3s ease-in-out;
+    }
+}
+
+.img-border {
+    border: 1px solid lightgrey;
+}

@@ -1,0 +1,69 @@
+<div class="wow-agsb-root">
+    <div class="wow-agsb-parent">
+        <div class="wow-agsb-subparent">
+            <div class="wow-agsb-wrapper">
+                <div class="container p-0">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-10 col-sm-10 text-left p-0">
+                            <h3>All Transactions <span *ngIf="totalItems > 0">({{totalItems}})</span></h3>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row mb-3">
+                        <div class="col col-12 col-sm-12 col-lg-12 calendar-date-view">
+
+                            <span class="fa fa-caret-left" aria-hidden="true" style="cursor: pointer;"
+                                mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+                                (viewDateChange)="onBackBtnChange(viewDate)"></span>&nbsp;&nbsp;
+
+                            <span style="font-weight: 600; cursor: pointer;" mwlCalendarToday [(viewDate)]="viewDate"
+                                (viewDateChange)="onTodayBtn(viewDate)">Today</span> &nbsp;&nbsp;
+                            <span>{{ viewDate | calendarDate: view + 'ViewTitle':locale }}</span> &nbsp;&nbsp;
+
+                            <span class="fa fa-caret-right" aria-hidden="true"
+                                [ngClass]="disableNextBtn ? 'disabled': 'enabled'" mwlCalendarNextView [view]="view"
+                                [(viewDate)]="viewDate" (viewDateChange)="onNextBtnChange($event)"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 p-0">
+                            <div class="wow-agsb-tbl-wrapper">
+                                <div class="wow-agsb-tb">
+                                    <wow-table style="width: 100% !important;" [config]="agencySetupConfig"
+                                        [actions]="action" (signals)="onTableSignals($event)">
+
+                                        <ng-template dataTableCell="image" let-row="row" let-col="col">
+                                            <div class="imgsize">
+                                                <img class="imgsize responsive-image rounded-circle"
+                                                    src="assets/images/agency-setup-billing.svg" width="36px">
+                                            </div>
+                                        </ng-template>
+
+                                        <ng-template dataTableCell="id" let-row="row" let-col="col">
+                                            <span>{{row?.appointmentID}}</span>
+                                        </ng-template>
+
+                                        <ng-template dataTableCell="time and date" let-row="row" let-col="col">
+                                            {{row?.date}} {{row?.time}}
+                                        </ng-template>
+                                        <ng-template dataTableCell="type" let-row="row" let-col="col">
+                                            {{row?.transactionType}}
+
+                                        </ng-template>
+
+                                        <ng-template dataTableCell="amount" let-row="row" let-col="col">
+                                            $ {{row?.amount}}
+                                        </ng-template>
+
+                                    </wow-table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

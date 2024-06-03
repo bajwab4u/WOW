@@ -1,0 +1,516 @@
+<form name="form" [formGroup]="form">
+    <div class="row inputLabelText">
+        <div class="col-12" (mouseover)="item='focused'" (mouseout)="item='none'">
+            <div class="form-group row">
+
+                <div class="col-md-2 text-right wow-profile-responsive-img">
+                    <wow-file-picker [image]="form?.controls?.profileImageUrl?.value" (change)="onChangeImage($event)"
+                        class="width-100"></wow-file-picker>
+                </div>
+
+                <div class="col-lg-5 col-md-6 col-sm-12 mt-3">
+
+                    <input autocomplete="nope" [type]="item" class="form-control" wowInputBehaviour
+                        formControlName="staffFirstName" required placeholder="First Name"
+                        [ngClass]="{ 'is-invalid': isControlValid('staffFirstName') || isControlValid('staffFirstName', 'maxlength') }"
+                        maxlength="35">
+
+
+                    <div *ngIf="isControlValid('staffFirstName')  || isControlValid('staffFirstName', 'maxlength')"
+                        class="invalid-feedback">
+                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                            [tooltip]="isControlValid('staffFirstName') ? 'First Name is required.' : 'Length cannot be greater than 35 characters'">
+                        </i>
+                    </div>
+
+                    <input autocomplete="nope" [type]="item" class="form-control mt-3" wowInputBehaviour
+                        formControlName="staffLastName" required placeholder="Last Name"
+                        [ngClass]="{ 'is-invalid': isControlValid('staffLastName') || isControlValid('staffLastName', 'maxlength') }"
+                        maxlength="35">
+
+                    <div *ngIf="isControlValid('staffLastName') || isControlValid('staffLastName', 'maxlength')"
+                        class="invalid-feedback">
+                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                            [tooltip]="isControlValid('staffLastName') ? 'Last Name is required.' : 'Length cannot be greater than 35 characters'">
+                        </i>
+                    </div>
+
+                    <input autocomplete="off" [type]="item" class="form-control mt-3" wowInputBehaviour
+                        formControlName="staffEmail" placeholder="Email" readonly>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="text-align-r col-2 col-form-label col-form-label-sm">
+                    Credentials
+                </label>
+                <div class="col-md-5 col-sm-12">
+                    <input autocomplete="off" [type]="item" class="form-control" wowInputBehaviour
+                        formControlName="staffCredentials" required placeholder="e.g DDS" maxlength="15"
+                        [ngClass]="{ 'is-invalid': isFormSubmitted && (isControlValid('staffCredentials', 'maxlength') || isControlValid('staffCredentials', 'required')) }">
+
+                    <img class="imgCustom ml-3 tooltipIconSize tooltipstylePurple"
+                        src="assets/images/shared-new-theme/tooltipIcon.svg"
+                        style="position: absolute; right: -13px; top: 10px;"
+                        tooltip="Will be displayed on website, e.g 'John Doe, DDS'">
+
+                    <div *ngIf="isFormSubmitted && (isControlValid('staffCredentials', 			'maxlength') || isControlValid('staffCredentials', 'required'))"
+                        class="invalid-feedback">
+                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                            [tooltip]="isControlValid('staffCredentials', 'required') ? 'Credentials are required' : 'Max 15 characters allowed'">
+                        </i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="text-align-r col-md-2 col-sm-4 text-align-l col-form-label col-form-label-sm">
+                    Staff Type
+                </label>
+                <div class="col-md-5 col-sm-12">
+
+                    <select autocomplete="off" class="form-control" [type]="item" class="form-control" wowInputBehaviour
+                        formControlName="staffType" required [ngClass]="{ 'is-invalid': isControlValid('staffType') }"
+                        (change)="onStaffTypeChange($event.target.value)">
+                        <option value='' disabled>Select</option>
+                        <option *ngFor="let opt of staffTypes" [value]="opt['value']">
+                            {{opt['title']}}
+                        </option>
+                    </select>
+
+                    <div *ngIf="isControlValid('staffType')" class="invalid-feedback">
+                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Staff Type is required">
+                        </i>
+                    </div>
+                </div>
+
+                <div class="col-md-5 col-sm-12" style="padding-top: 5px;" *ngIf="isProvider">
+                    <div class="form-check float-left pl-1">
+                        <input type="checkbox" class="form-check-input" formControlName="staffMemberSupervisor">
+                        <label style="font-size: 10px !important;margin-top: 0px;"
+                            class="form-check-label label-style font-weight-normal checkboxText">
+                            Prescriptions from this provider must be supervised
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group row" *ngIf="isProvider">
+                <label for="exampleInputEmail1"
+                    class="text-align-r text-align-l col-md-2 col-sm-4 col-form-label col-form-label-sm">
+                    NPI Number
+                </label>
+                <div class="col-md-5 col-sm-12">
+                    <!--   [type]="item" wowOnlyNumbers-->
+                    <input autocomplete="off" [readOnly]="form?.controls?.noNPINumber?.value" type="text" wowInputBehaviour mask="0000000000"
+                        class="form-control" formControlName="npiNumber" placeholder="Npi Number"
+                         minlength="10" maxlength="10"
+                        [ngClass]="{ 'is-invalid': (isControlValid('npiNumber', 'minlength') || isControlValid('npiNumber', 'maxlength')) }">
+
+                    <div *ngIf="isControlValid('npiNumber', 'minlength') || isControlValid('npiNumber', 'maxlength')"
+                        class="invalid-feedback">
+                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                            tooltip="NPI number should be of 10 digits"> </i>
+                    </div>
+                </div>
+
+                <div class="col-md-5 col-sm-12" style="padding-top: 5px;">
+                    <div class="form-check float-left pl-1">
+                        <input type="checkbox" class="form-check-input" formControlName="noNPINumber">
+                        <label style="font-size: 10px !important;margin-top: 0px;"
+                            class="form-check-label label-style font-weight-normal checkboxText" for="exampleCheck1">
+                            I don't have NPI Number
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="exampleInputEmail1"
+                    class="text-align-r text-align-l col-md-2 col-sm-4 col-form-label col-form-label-sm">
+                    Gender
+                </label>
+                <div class="col-sm-12 col-md-5">
+                    <select autocomplete="off" class="form-control" [type]="item" class="form-control" wowInputBehaviour
+                        formControlName="gender">
+                        <option value=null>Select</option>
+                        <option value="MALE">Male</option>
+                        <option value="FEMALE">Female</option>
+                        <option value="NOT_LISTED">Not Listed</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="exampleInputEmail1"
+                    class="text-align-r text-align-l col-md-2 col-sm-4 col-form-label col-form-label-sm">
+                    DOB
+                </label>
+                <div class="col-md-5 col-sm-12">
+
+                    <input autocomplete="off" class="form-control" readonly daterangepicker id="dob"
+                        style="position: relative;" [options]="dobConfig" [type]="item" formControlName="dateOfBirth1"
+                        wowInputBehaviour #dobRef placeholder="MMM DD, YYYY" (selected)="setDOBDate($event)"
+                        (hideDaterangepicker)="onCancelDatePicker($event)"
+                        (showDaterangepicker)="onShowDatePicker($event)"
+                        (cancelDaterangepicker)="onCancelDatePicker($event)">
+
+                    <span class="fa fa-times-circle remove-date-btn" title="Reset DOB!" (click)="onResetDate()"
+                        *ngIf="showRemoveDate"></span>
+
+
+                </div>
+            </div>
+
+            <div class="form-group row" style="width: 97% !important;">
+                <label for="exampleInputEmail1"
+                    class="text-align-r text-align-l col-md-2 col-sm-12 col-form-label col-form-label-sm">
+                    Mobile
+                </label>
+                <div class="col-lg-1half customWidth">
+                    <input disabled type="email" wowInputBehaviour [type]='item' class="form-control " placeholder="">
+                    <img src="assets/images/country-flag.svg" class="responsive-image fa-errorIcon" alt="Null">
+
+                </div>
+                <div class="col-md-4 col-sm-10" style="position: relative;">
+                    <input autocomplete="off" [type]="item" class="form-control" wowInputBehaviour
+                        formControlName="contactNumber1" placeholder="000-000-0000" [mask]="maskedFormat"
+                        [ngClass]="{ 'is-invalid': isControlValid('contactNumber1', 'mask') }">
+
+                    <img class="imgCustom ml-3 tooltipIconSize tooltipstylePurple"
+                        src="assets/images/shared-new-theme/tooltipIcon.svg"
+                        style="position: absolute; right: -7px; top: 10px;" tooltip="This number will not be shared with anyone.
+                                                    It will be used to deliver notifications">
+
+                    <div *ngIf="isControlValid('contactNumber1', 'mask')"
+                        class="invalid-feedback">
+                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                            tooltip="Mobile number should be of required format"> </i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row" style="width: 97% !important;">
+                <label for="exampleInputEmail1"
+                    class="text-align-r text-align-l col-md-2 col-sm-12 col-form-label col-form-label-sm">
+                    Phone
+                </label>
+                <div class="col-lg-1half customWidth">
+                    <input type="email" disabled wowInputBehaviour [type]='item' class="form-control " placeholder="">
+                    <img src="assets/images/country-flag.svg" class="responsive-image fa-errorIcon" alt="Null">
+
+                </div>
+                <div class="col-md-4 col-sm-10">
+                    <input autocomplete="off" [type]="item" class="form-control" wowInputBehaviour
+                        formControlName="contactNumber2" placeholder="000-000-0000" [mask]="maskedFormat"
+                        [ngClass]="{ 'is-invalid': isControlValid('contactNumber2', 'mask') }">
+
+                    <div *ngIf="isControlValid('contactNumber2', 'mask')"
+                        class="invalid-feedback">
+                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                            tooltip="Phone number should be of required format"> </i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label 
+                    class="text-align-r text-align-l col-md-2 col-sm-12 col-form-label col-form-label-sm">
+                    Address
+                </label>
+                <div class="col-md-5 col-sm-12">
+                    <input autocomplete="off" [type]="item" class="form-control" wowInputBehaviour
+                        formControlName="address" placeholder="Address" maxlength="35"
+                        [ngClass]="{ 'is-invalid': isControlValid('address', 'maxlength') }">
+
+                    <div *ngIf="isControlValid('address', 'maxlength')" class="invalid-feedback">
+                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                            tooltip="Max 35 characters allowed"> </i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="exampleInputEmail1"
+                    class="text-align-r text-align-l col-md-2 col-sm-12 col-form-label col-form-label-sm">
+                </label>
+                <div class="col-md-5 col-sm-12">
+                    <input autocomplete="off" type="text" class="form-control" wowInputBehaviour [type]="item"
+                        formControlName="city" placeholder="City" detailInput maxlength="45"
+                        [ngClass]="{ 'is-invalid': isControlValid('city', 'maxlength') }">
+                    <div *ngIf="isControlValid('city', 'maxlength')" class="invalid-feedback">
+                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                            tooltip="Max 45 characters allowed"> </i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row ml-4" style="width: 96% !important;">
+                <label for="exampleInputEmail1" class="col-2 col-form-label col-form-label-sm">
+                </label>
+                <div class="col-md-5 text-left" style="padding-right: 0px !important;">
+                    <div class="row" style="padding-left: 0px !important;padding-right: 0px !important;">
+
+                        <div class="col-md-6 " style="padding-left: 5px !important;padding-right: 0px !important;">
+                            <input autocomplete="nope" type="text" list="states" class="form-control"
+                                style="padding-right: 2px;" wowInputBehaviour [type]="item" #State formControlName="state" (change)="setstate(State.value)"
+                                placeholder="State" detailInput maxlength="45"
+                                [ngClass]="{ 'is-invalid': isControlValid('state', 'maxlength') }">
+                                <datalist id="states">
+									<option [value]="" disabled>Choose State</option>
+									<option *ngFor="let state of states" [ngValue]="state.stateName"> {{ state.stateName
+										}}</option>
+								</datalist>
+
+                            <div *ngIf="isControlValid('state', 'maxlength')" class="invalid-feedback">
+                                <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                    tooltip="Max 45 characters allowed"> </i>
+                            </div>
+                        </div>
+                        <div class="col-md-6" style="padding-left: 5px !important;padding-right: 0px !important;">
+                            <input autocomplete="off" type="text" class="form-control" wowInputBehaviour [type]="item"
+                                formControlName="zipCode" placeholder="Zip Code" detailInput minlength="5" maxlength="5"
+                                wowOnlyNumbers
+                                [ngClass]="{ 'is-invalid': isControlValid('zipCode', 'maxlength') || isControlValid('zipCode', 'minlength') }">
+
+                            <div *ngIf="isControlValid('zipCode', 'minlength') || isControlValid('zipCode', 'maxlength')"
+                                class="invalid-feedback">
+                                <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                    [tooltip]="isControlValid('zipCode', 'minlength') ? 'Zip code should be 5 digits' : 'Zip code should be 5 digits'">
+                                </i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ng-container *ngIf="isProvider">
+                <div class="linebar mb-3"></div>
+
+                <div class="form-group row">
+                    <label for="limitPerDay"
+                        class="text-align-r text-align-l col-md-2 col-sm-12 col-form-label col-form-label-sm pt-0 ">
+                        Appointment Rules (Optional)
+                    </label>
+                    <div class="col-md-5 col-sm-12">
+                        <label style="float: left;">Limit per Day
+                            <img class="imgCustom ml-3 tooltipIconSize tooltipstylePurple"
+                                src="assets/images/shared-new-theme/tooltipIcon.svg"
+                                tooltip="Maximum number of appointments you get in a day">
+                        </label>
+                        <input autocomplete="off" id="limitPerDay" class="form-control" [type]="item" wowInputBehaviour
+                            formControlName="maximumNumberOfAppointmentsPerDay" maxlength="3" wowOnlyNumbers
+                            [class.is-invalid]="isControlValid('maximumNumberOfAppointmentsPerDay', 'maxlength')">
+
+                        <div *ngIf="isControlValid('maximumNumberOfAppointmentsPerDay', 'maxlength')"
+                            class="invalid-feedback">
+                            <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Max 3 digits allowed">
+                            </i>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="offset-2 wow-offset-0 col-md-5 col-sm-11">
+                        <label style="float: left;">Appointment Lead Time
+                            <img class="imgCustom ml-3 tooltipIconSize tooltipstylePurple"
+                                src="assets/images/shared-new-theme/tooltipIcon.svg"
+                                tooltip="Advance notice you require before clients book an appointment">
+                        </label>
+                        <input autocomplete="off" class="form-control" [type]="item" wowInputBehaviour maxlength="3"
+                            wowOnlyNumbers formControlName="appointmentLeadTimeInDays"
+                            [class.is-invalid]="isControlValid('appointmentLeadTimeInDays', 'maxlength')">
+
+                        <div *ngIf="isControlValid('appointmentLeadTimeInDays', 'maxlength')" class="invalid-feedback">
+                            <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Max 3 digits allowed">
+                            </i>
+                        </div>
+
+                    </div>
+                    <label style="display: flex; align-items: flex-end;" class="col-1 p-0">Days</label>
+                </div>
+
+                <div class="form-group row">
+                    <div class="offset-2 wow-offset-0 col-md-5 col-sm-12">
+                        <label style="float: left;">Patient Age Limit
+                            <img class="imgCustom ml-3 tooltipIconSize tooltipstylePurple"
+                                src="assets/images/shared-new-theme/tooltipIcon.svg"
+                                tooltip="Make appointments with patients of this age group">
+                        </label>
+
+                        <select autocomplete="off" class="form-control" [type]="item" class="form-control"
+                            wowInputBehaviour formControlName="patientAgeRule">
+                            <option value='' disabled>Select</option>
+                            <option *ngFor="let opt of patientAgeRule" [value]="opt['value']">
+                                {{opt['title']}}
+                            </option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="linebar mb-3"></div>
+
+                <div class="form-group row">
+                    <label for="limitPerDay"
+                        class="text-align-r text-align-l col-md-2 col-sm-12 col-form-label col-form-label-sm pt-0 pl-0">
+                        About Me
+                    </label>
+                    <div class="col-md-5 col-sm-12 pl-0">
+                        <textarea rows="4" [type]="item" class="form-control" formControlName="aboutMe" maxlength="1000"
+                            wowInputBehaviour placeholder="Description"
+                            [class.is-invalid]="isControlValid('aboutMe', 'maxlength')"></textarea>
+
+                        <div *ngIf="isControlValid('aboutMe', 'maxlength')" class="invalid-feedback">
+                            <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                tooltip="Max 1000 characters allowed"> </i>
+                        </div>
+
+                        <div style="font-size: 10px; float: right;">Max characters : <span
+                                style="color: #FF6868;">1000</span></div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="offset-2 col-md-5 wow-offset-0 col-sm-12">
+                        <label style="float: left;">Years of Experience</label>
+                        <input autocomplete="off" class="form-control" [type]="item" [wowOnlyNumbers]="true"
+                            wowInputBehaviour maxlength="4"
+                            [class.is-invalid]="isControlValid('yearsOfExperience', 'maxlength')"
+                            placeholder="e.g 2 or 3.5" formControlName="yearsOfExperience">
+
+                        <div *ngIf="isControlValid('yearsOfExperience', 'maxlength')" class="invalid-feedback">
+                            <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Max 4 digits allowed">
+                            </i>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="offset-2 wow-offset-0 col-md-5 col-sm-12">
+                        <label style="float: left;">Languages Spoken</label>
+                        <ng-multiselect-dropdown [type]="item" wowInputBehaviour [placeholder]="'Languages Spoken'"
+                            [settings]="dropdownSettings" [data]="languagesSpoken" name="languagesSpoken"
+                            formControlName="languagesSpoken">
+                        </ng-multiselect-dropdown>
+                    </div>
+                </div>
+
+                <div class="linebar mb-3"></div>
+
+                <div class="form-group row">
+                    <label for="limitPerDay"
+                        class="text-align-r col-md-2 col-sm-12 text-align-l col-form-label col-form-label-sm pt-0 pl-0">
+                        Academic Information
+                    </label>
+                    <div class="col-md-5 col-sm-12 pl-0">
+                        <label style="float: left;">Education & Training</label>
+                        <div style="background-color: #F8F8F8;" class="p-2 mt-5">
+                            <ul class="list-unstyled m-0">
+                                <li class="add-list my-2 pl-2 pr-4 py-1" style="position: relative;"
+                                    *ngFor="let item of form?.controls?.educationAndTraining?.value; let idx=index">
+
+                                    <textarea autocomplete="off" class="form-control" type="text" maxlength="300"
+                                        [ngModelOptions]="{standalone: true}" [name]="'eduction_training_'+idx"
+                                        [attr.id]="'educationAndTraining_'+idx" (input)="onFormChange()"
+                                        [(ngModel)]="item.text"
+                                        [class.is-invalid]="item?.text?.length > 300"></textarea>
+
+                                    <span class="delete-list" (click)="onRemoveRecord('educationAndTraining', idx)">
+                                        <i class="fa fa-times"></i>
+                                    </span>
+
+                                    <div *ngIf="item?.text?.length > 300" class="invalid-feedback">
+                                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                            tooltip="Max 300 characters allowed">
+                                        </i>
+                                    </div>
+
+                                </li>
+                            </ul>
+                            <div class="add-btn py-3">
+                                <a (click)="addDefaultAcademic('educationAndTraining')" style="cursor: pointer;">
+                                    <i class="fa fa-plus"></i> Add New
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="offset-2 wow-offset-0 col-md-5 col-sm-12 pl-0">
+                        <label style="float: left;">Board Certifications</label>
+                        <div style="background-color: #F8F8F8;" class="p-2 mt-5">
+                            <ul class="list-unstyled m-0">
+                                <li class="add-list my-1 pl-2 pr-4 py-1" style="position: relative;"
+                                    *ngFor="let item of form?.controls?.boardCertifications?.value; let idx=index">
+
+                                    <textarea autocomplete="off" class="form-control" type="text" maxlength="300"
+                                        [ngModelOptions]="{standalone: true}" [name]="'board_certification_'+idx"
+                                        [attr.id]="'boardCertifications_'+idx" (input)="onFormChange()"
+                                        [(ngModel)]="item.text"
+                                        [class.is-invalid]="item?.text?.length > 300"></textarea>
+
+                                    <span class="delete-list" (click)="onRemoveRecord('boardCertifications', idx)">
+                                        <i class="fa fa-times"></i>
+                                    </span>
+
+                                    <div *ngIf="item?.text?.length > 300" class="invalid-feedback">
+                                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                            tooltip="Max 300 characters allowed">
+                                        </i>
+                                    </div>
+
+                                </li>
+                            </ul>
+                            <div class="add-btn py-3">
+                                <a (click)="addDefaultAcademic('boardCertifications')" style="cursor: pointer;">
+                                    <i class="fa fa-plus"></i> Add New
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="offset-2 wow-offset-0 col-md-5 col-sm-12 pl-0">
+                        <label style="float: left;">Awards and Publications</label>
+                        <div style="background-color: #F8F8F8;" class="p-2 mt-5">
+                            <ul class="list-unstyled m-0">
+                                <li class="add-list my-1 pl-2 pr-4 py-1" style="position: relative;"
+                                    *ngFor="let item of form?.controls?.awardsAndPublications?.value; let idx=index">
+
+                                    <textarea autocomplete="off" class="form-control" type="text" maxlength="300"
+                                        [ngModelOptions]="{standalone: true}" [name]="'awards_publications_'+idx"
+                                        [attr.id]="'awardsAndPublications_'+idx" (input)="onFormChange()"
+                                        [(ngModel)]="item.text"
+                                        [class.is-invalid]="item?.text?.length > 300"></textarea>
+
+                                    <span class="delete-list" (click)="onRemoveRecord('awardsAndPublications', idx)">
+                                        <i class="fa fa-times"></i>
+                                    </span>
+
+                                    <div *ngIf="item?.text?.length > 300" class="invalid-feedback">
+                                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                            tooltip="Max 300 characters allowed">
+                                        </i>
+                                    </div>
+
+                                </li>
+                            </ul>
+                            <div class="add-btn py-3">
+                                <a (click)="addDefaultAcademic('awardsAndPublications')" style="cursor: pointer;">
+                                    <i class="fa fa-plus"></i> Add New
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,151 @@
+<div class="container-fluid pb-5">
+  <!-- Close Icon -->
+<div class="card-header">
+  <span class="closeIcon" (click)="activeModal.close()">
+    <i class="fa fa-window-close" aria-hidden="true" style="font-size: 18px;"></i>
+  </span>
+</div>
+<!-- Close Icon -->
+
+
+<div class="outerContainer">
+
+  <div class="HEADING_CONTAINER">
+    <h4 class="HEADING">
+      Membership Details
+    </h4>
+  </div>
+
+
+  <div class="row DETAILS">
+    <div class="col-6 m-auto">
+      <!-- Appointment Details and Family Members Label-->
+      <div class="form-group form-row mr-0 ml-0">
+        <div class="row mr-2">
+          <div class="col-sm-3 p-0">
+            <label class="mt-1">Plan Type: </label>
+          </div>
+          <div class="col-sm-6 p-0">
+            <input type="text" class="form-control" [value]="row?.membershipPlanGroup" readonly
+              placeholder="Selected Plan" readonly>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 m-auto">
+      <!-- Appointment Details and Family Members Label-->
+      <div class="form-group form-row mr-0 ml-0">
+        <div class="row">
+          <div class="col-sm-4 p-0">
+            <label class="mt-1">Membership Name: </label>
+          </div>
+          <div class="col-sm-6 p-0">
+            <input type="text" class="form-control" [value]="row?.membershipName" readonly placeholder="Name" readonly>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="outerContainer">
+  <div class="HEADING_CONTAINER">
+    <h4 class="HEADING">
+      Family Members
+    </h4>
+  </div>
+
+  <div *ngIf="!OpenedMembershipFamilyMembers?.length">
+    <div class="h6 d-flex justify-content-center">
+      No Family Members are yet added for this membership
+    </div>
+  </div>
+
+  <div class="row" *ngIf="OpenedMembershipFamilyMembers?.length > 0">
+    <div class="col-12">
+      <!-- Family Members Table div -->
+      <table class="table w-100">
+        <thead>
+          <tr>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">DOB</th>
+            <th scope="col">Email</th>
+            <th scope="col">Relation</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Active</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of OpenedMembershipFamilyMembers; let idx = index;">
+            <td>{{item?.firstName}}</td>
+            <td>{{item?.lastName}}</td>
+            <td>{{item?.dob}}</td>
+            <td>{{item?.email}}</td>
+            <td>{{item?.relationship}}</td>
+            <td>{{item?.gender}}</td>
+            <td>{{item?.active ? 'Yes' : 'No'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<div class="outerContainer">
+
+  <div class="HEADING_CONTAINER">
+    <h4 class="HEADING">
+      Services Details
+    </h4>
+  </div>
+
+  <div *ngIf="!OpenedMembershipServices?.length" class="h6 d-flex justify-content-center">
+    No Services for this membership
+  </div>
+
+  <div class="row" *ngIf="OpenedMembershipServices?.length > 0">
+    <div class="col-12">
+      <!-- Services Table Div -->
+      <table class="table w-100">
+        <thead>
+          <tr>
+            <th scope="col">Service Name</th>
+            <th scope="col">Activation</th>
+            <th scope="col">Expiration</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let item of OpenedMembershipServices;">
+            <tr *ngIf="item?.enabled == true">
+              <td>{{item?.serviceName}}</td>
+              <td>{{item?.activationDate}}</td>
+              <td>{{item?.expirationDate}}</td>
+              <td>
+
+                <div *ngIf="item?.txtMembershipProfileStatus == 'IN_COMPLETE' || item?.downloadCard == true" class="btn-group d-flex justify-content-start align-items-center">
+                  <button type="button" class="btn more-btn" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    <span class="more-dot"></span>
+                    <span class="more-dot"></span>
+                    <span class="more-dot"></span>
+                  </button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" (click)="cardActions(item, 'VIEW')">Download Card</a>
+                    <a class="dropdown-item" (click)="cardActions(item, 'SEND_EMAIL')">Email Card to Patient</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+</div>

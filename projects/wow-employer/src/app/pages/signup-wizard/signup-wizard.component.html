@@ -1,0 +1,62 @@
+<div class="modal-header modal-title">
+	<img [src]="img" class="responsive-image mt-10" alt="Null">
+</div>
+
+<!-- <wow-loader class="wizrad-loader" [type]="'bar'" [showLoader]="loading"></wow-loader> -->
+<div class="modal-body signup-wizard-container">
+	
+	<div class="row">
+
+		<ng-container *ngIf="next === 'ADD_EMPLOYEE_GROUPS'">
+			<wizard-add-groups [action]="action" 
+				(signals)="updateLoadingStatus($event)"
+				(stepChanged)="loadStep($event)"></wizard-add-groups>
+		</ng-container>
+
+		<ng-container *ngIf="next === 'ADD_EMPLOYEES' || next === 'ALLOCATE_BUDGET'">
+			<wizard-add-employees [action]="action" 
+				(signals)="updateLoadingStatus($event)"
+				(stepChanged)="loadStep($event)"></wizard-add-employees>
+		</ng-container>
+
+		<!-- <ng-container *ngIf="next === 'ALLOCATE_BUDGET'">
+			<wizard-allocate-budget [action]="action" 
+				(signals)="updateLoadingStatus($event)"
+				(stepChanged)="loadStep($event)">
+			</wizard-allocate-budget>
+		</ng-container> -->
+		
+	</div>
+
+</div>
+
+<div class="modal-footer dlg-footer">
+
+	<div style="flex: 1;">
+		<a *ngIf="showBack" style="float: left; cursor: pointer;"
+			class="text-style" (click)="onGoBack()">
+			<i class="fa fa-angle-left mr-2" style="font-size:15px;font-weight: bold;"></i>
+			Back
+		</a>
+	</div>
+
+	<div class="footer-action-btn" *ngIf="['ADD_EMPLOYEE_GROUPS', 'ADD_EMPLOYEES', 'ALLOCATE_BUDGET'].includes(next)">
+
+		<a *ngIf="next !== 'ADD_EMPLOYEE_GROUPS'" 
+			style="cursor: pointer; margin-right: 15px;"
+			class="text-style" (click)="skipStep()">
+			Skip this step
+		</a>
+
+		<button style="float: right;" type="button" 
+			[disabled]="isSubmitted"
+			class="btn btn-properties" (click)="onHandleAction()">
+			<!-- {{ next === 'ALLOCATE_BUDGET' ? 'Finish' : 'Next'}}  -->
+			{{ (next === 'ADD_EMPLOYEES' || next === 'ALLOCATE_BUDGET') ? 'Finish' : 'Next'}} 
+			
+			<wow-loader [type]="'btn-spinner'" 
+				[showLoader]="isSubmitted"></wow-loader>
+		</button>
+	</div>
+
+</div>

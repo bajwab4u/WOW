@@ -1,0 +1,25 @@
+<wow-table
+  style="width: 100%"
+  [config]="config"
+  [actions]="action"
+  (signals)="onTableSignals($event)"
+>
+  <ng-template dataTableCell="membershipName" let-row="row" let-col="col">
+    <p class="m-0 text-overflow text-overflow-20ch">{{row?.membershipName}}</p>
+  </ng-template>
+
+  <ng-template dataTableCell="activationDate" let-row="row" let-col="col">
+    <p class="m-0 text-overflow text-overflow-20ch">{{row?.activationDate}}</p>
+  </ng-template>
+
+  <ng-template
+    dataTableCell="status"
+    let-row="row"
+    let-col="col"
+    let-i="index"
+  >
+    <p class="m-0 text-overflow text-overflow-20ch">
+      {{row?.status === "IN_ACTIVE" ? "Inactive": "Active"}}
+    </p>
+  </ng-template>
+</wow-table>

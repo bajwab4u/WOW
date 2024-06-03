@@ -1,0 +1,41 @@
+.radio-container {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #8055805E;
+    border-radius: 4px;
+    opacity: 1;
+    text-align: left;
+}
+
+.radioBtnDiv{
+    @extend .radio-container;
+    height: 75px;
+    padding-top:12px;
+    padding-left: 25px;
+    padding-bottom: 17px;
+}
+
+.radioNewMethod {
+    @extend .radio-container;
+    padding: 10px 20px;
+    width: 96%;
+    margin: 10px auto 0;
+
+    > label {
+        margin: 0;
+    }
+}
+
+.methodCont {
+    @extend .radio-container;
+    width: 96%;
+    margin: -2px auto;
+    // height: 100%;
+    height: 310px;
+    border-top: 0;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.wow-ap-cards-img {
+    justify-content: space-between;
+}

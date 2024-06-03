@@ -1,0 +1,64 @@
+<div style="height: 100%; padding: 0;">
+
+    <div class="col-12 staff-form-container p-0">
+        <div class="">
+
+            <div class="row">
+                <div class="col-md-6 text-left" style="padding: 0;">
+                    <h3>
+                        All Groups
+                        <span *ngIf="empDetail?.groupName"> > {{empDetail?.groupName}}</span>
+                    </h3>
+                </div>
+                <div class="col-md-6" style="padding: 0;">
+                    <div class="text-right float-right mt-1">
+
+                        <button type="button" class="btn mr-2"
+                            [title]="isActive ? 'Inactive Employee' : 'Active Employee'"
+                            [ngClass]="isActive ? 'custom-danger-btn' : 'custom-success-btn'"
+                            (click)="onStatusChange()">
+                            <i style="font-size: 17px;" class="fa mt-1"
+                                [ngClass]="isActive ? 'fa-ban' : 'fa-check'"></i>
+                            <!-- fa-trash -->
+                        </button>
+
+                        <button type="button" class="btn btn-space btn-properties-white mr-2"
+                            (click)="onGoBack()">Cancel</button>
+                        <button type="buton" (click)="submitData()" class="btn btn-properties-gray"
+                            [disabled]="isFormDisabled"
+                            [ngClass]="isFormDisabled ? 'btn-properties-gray' : 'btnAddColor'">Save</button>
+                    </div>
+                </div>
+            </div>
+
+            <wow-tabs-group
+                (selectedTabChange)="onSelectedTabChange($event)">
+
+                <wow-tab-item tabTitle="Details">
+                    <ng-container *ngIf="selectedTabIndex === 0 && empDetail">
+                        <wow-employee-detail-form
+                            [employeeId]="employeeId"
+                            [employeeDetail]="empDetail"
+                            [action]="action"
+				            (signals)="onHandleEvents($event)"></wow-employee-detail-form>
+                    </ng-container>
+                </wow-tab-item>
+
+                <!-- 2nd Tab start -->
+                <wow-tab-item tabTitle="Budget">
+                    <wow-employee-budget *ngIf="selectedTabIndex === 1" [employeeId]="employeeId"
+                        [budgetDetail]="empDetail?.budgetDTO" (signals)="onHandleEvents($event)" style="width: 100% !important;">
+                    </wow-employee-budget>
+                </wow-tab-item>
+                <!-- 2nd Tab end -->
+
+                <!-- 3rd tab start -->
+                <wow-tab-item tabTitle="Memberships">
+                    <wow-employee-membership *ngIf="selectedTabIndex === 2" [employeeId]="employeeId"
+                        style="width: 100% !important;">
+                    </wow-employee-membership>
+                </wow-tab-item>
+            </wow-tabs-group>
+        </div>
+    </div>
+</div>

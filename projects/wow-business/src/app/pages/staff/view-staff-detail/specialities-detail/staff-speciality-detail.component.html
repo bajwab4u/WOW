@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="row mb-4" style="gap: 15px">
+
+        <div class="col-5" style="padding: 0;">
+            <wow-auto-complete
+				[config]="specialityConfig"
+                [(ngModel)]="selectedSpeciality" (change)="onChange()"></wow-auto-complete>
+        </div>
+
+        <button type="button" class="btn savebtn-size btnAddColor float-left search-new-btn" 
+            (click)="onChangeStaffSpecialities('ADD')">Add Specialty</button>
+    </div>
+    <div class="col-md-12 pl-0 pr-0">
+        <div class="table-responsive table-border-radius">
+            <table class="table table-striped table-hover ">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 20px;"></th>
+                        <th scope="col">Specialty Name
+                            <img  class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple" 
+                            src="assets/images/shared-new-theme/tooltipIcon.svg"
+                            tooltip="Select the specialty of this staff">
+                        </th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngIf="staffSpecialitiesIdsList.length === 0">
+                        <tr>
+                            <td colspan="100%" style="text-align: center;">no specialty assigned!</td>
+                        </tr>
+                    </ng-container>
+                    <tr *ngFor="let item of this.staffSpecialitiesIdsList | paginate: 
+                        { 	itemsPerPage: pagination?.numberOfRecordsPerPage, 
+                            currentPage: pagination?.pageNumber, 
+                            totalItems: pagination?.totalNumberOfRecords }; let i = index;">
+                        <td  style="width: 20px;">
+                            <div>
+                                <img (click)="onChangeStaffSpecialities('DELETE', item['id'], i)"
+                                    style="height: 12px; width: 15px; cursor: pointer;" src="assets/images/shared-new-theme/deleteicon.svg" alt="">
+                            </div>
+                        </td>
+                        <td>{{item.name}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row" *ngIf="!loadingState && this.pagination.totalNumberOfPages > 1">
+            <div class="col-md-12 paginationBgColor"
+                [ngStyle]="{'margin' : previousLabel === '' ? '20px -1.2rem' : '20px -0.625rem'}">
+                <pagination-controls (pageChange)="onPageChange($event)" 
+                    [previousLabel]="previousLabel"
+                    [nextLabel]="nextLabel"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>

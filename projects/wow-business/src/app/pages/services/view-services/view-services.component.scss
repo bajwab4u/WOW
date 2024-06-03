@@ -1,0 +1,166 @@
+/* .margnTop-30{
+    margin-top: 30px !important;
+}
+.margnTop-45{
+    margin-top: 45px;
+}
+.margnbot-40{
+    margin-bottom: 40px;
+}
+.margnTblTop{
+margin-top: 30px;
+margin-bottom: 30px;
+}
+.inputContainer i {
+    position: absolute;
+    margin-left: -137px;
+ }
+ .icon {
+    padding: 15px;
+    color: rgb(49, 0, 128);
+    width: 70px;
+    text-align: left;
+ }
+ .inputContainer {
+    width: 100%;
+    margin-bottom: -10px;
+ }
+ .tblcolorDiv{
+    width: 4px;
+    height: 25px;
+    background: #FF9898 0% 0% no-repeat padding-box;
+    border-radius: 1px;
+    opacity: 1;
+ }
+ .paginationBgColor
+{
+    height: 71px;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    background-color:#ffff;
+    margin-top: 20px;
+}
+.nextPrevBtn{
+	padding: 4px;
+    padding-top: 0px;
+    margin-top: 3px;
+    margin-left: 2px;
+    margin-right: 2px;
+    color: #524456 !important;
+}
+.pageIndexDiv{
+    width: 120px;
+    font-size: 12pt;
+    margin-top: 8px;
+    color: #524456 ;
+    float: left;
+  }
+  .mrgnleft15
+{
+    margin-left: 17px;
+}
+.pagination>.disabled>a{
+    color: #524456 !important;
+    cursor: not-allowed;
+} */
+/* .nextPrevBtn{
+	padding: 4px;
+    padding-top: 0px;
+    margin-top: 3px;
+    margin-left: 2px;
+    margin-right: 2px;
+    color: #524456 !important;
+} */
+
+.form-control {
+    background-image:url('/assets/images/Group 61.svg');
+    padding-right: calc(1.5em + 0.75rem);
+    /* background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e); */
+    background-repeat: no-repeat;
+    background-position: left calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    padding-left: 35px;
+    
+}
+
+.table tbody tr:hover{
+    background-color: #C6C6C629 !important;
+}
+
+.tblcolorDivRed{
+    width: 3px;
+    height: 29px;
+    background: #E282AF 0% 0% no-repeat padding-box;
+    border-radius: 1px;
+    opacity: 1;
+ }
+
+ .tblcolorDivGreen{
+    width: 3px;
+    height: 29px;
+    background: #98CCFF 0% 0% no-repeat padding-box;
+    border-radius: 1px;
+    opacity: 1;
+ }
+
+/* Media quries for submenu  responsiveness*/
+// .customWidth
+// {
+//     width: 220px;
+// }
+// @media only screen and (min-width:320px)
+// {
+// .customWidth
+// {
+//     width: 533px;
+// }
+// }
+// @media only screen and (min-width:768px)
+// {
+// .customWidth
+// {
+//     width: 160px;
+// }
+// }
+// @media only screen and (min-width:1200px)
+// {
+// .customWidth
+// {
+//     width: 240px;
+// }
+// }
+// @media only screen and (min-width:1824px)
+// {
+// .customWidth
+// {
+//     width: 360px;
+// }
+// }
+
+.service-tbtooltip
+{
+    ::ng-deep.tooltip
+    {
+        top: -55px !important;
+    }
+}
+
+.service1-tbtooltip
+{
+    ::ng-deep.tooltip
+    {
+        top: 20px !important;
+    }
+}
+
+.col-width
+{
+    width: 22.75% !important;
+}
+
+.imgsize
+{
+    width: 36px;
+    height: 36px;
+    float: right;
+}

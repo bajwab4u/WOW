@@ -1,0 +1,181 @@
+<!-- Close Icon -->
+<div class="modal-card-header">
+<span class="closeIcon" (click)="activeModal.close()">
+  <i class="fa fa-window-close" aria-hidden="true" style="font-size: 18px;"></i>
+</span>
+</div>
+<!-- Close Icon -->
+<div class="mainContainer">
+
+  <div style="box-shadow: 0px 3px 15px #57575775;" class="card p-3 mb-5 bg-white rounded">
+    <div class="card-body">
+      <h2 class="signup-login-heading">
+        Add New Employer
+      </h2>
+
+      <form #businessSignUp="ngForm" (ngSubmit)="businessSignUp.valid && signup()" autocomplete="off"
+        class="formText">
+        <div class="form-group">
+          <label for="colFormLabelSm" form-control-sm>First Name</label>
+          <input type="text" class="form-control form-control-lg mb-1" name="firstName"
+            [(ngModel)]="user.firstName" #firstName="ngModel" required minlength="2" maxlength="35"
+            placeholder="e.g John"
+            [ngClass]="{ 'is-invalid': businessSignUp.submitted && firstName.invalid }"
+            >
+          <div *ngIf="businessSignUp.submitted && firstName.invalid" class="invalid-feedback">
+            <div *ngIf="firstName.errors.required"><i class="fa fa-info-circle fa-errorIcon"
+                aria-hidden="true" tooltip="Fisrt Name is required.">
+              </i>
+            </div>
+            <div *ngIf="firstName.errors.minlength"><i class="fa fa-info-circle fa-errorIcon "
+                aria-hidden="true" tooltip="Minimum two characters.">
+              </i>
+            </div>
+            <div *ngIf="firstName.errors.maxlength"><i class="fa fa-info-circle fa-errorIcon"
+                aria-hidden="true" tooltip="Max 35 characters allowed.">
+              </i>
+            </div>
+          </div>
+
+          <label for="exampleInputEmail1">Last Name</label>
+          <input type="text" class="form-control form-control-lg mb-1" required name="lastName"
+            [(ngModel)]="user.lastName" #lastName="ngModel" minlength="2" maxlength="35"
+            placeholder="e.g Doe"
+            [ngClass]="{ 'is-invalid': businessSignUp.submitted && lastName.invalid }">
+          <div *ngIf="businessSignUp.submitted && lastName.invalid" class="invalid-feedback">
+            <div *ngIf="lastName.errors.required"><i class="fa fa-info-circle fa-errorIcon"
+                aria-hidden="true" tooltip="Last Name is required.">
+              </i>
+            </div>
+            <div *ngIf="lastName.errors.minlength"><i class="fa fa-info-circle fa-errorIcon"
+                aria-hidden="true" tooltip="Minimum two characters.">
+              </i>
+            </div>
+            <div *ngIf="lastName.errors.maxlength"><i class="fa fa-info-circle fa-errorIcon"
+                aria-hidden="true" tooltip="Max 35 characters allowed.">
+              </i>
+            </div>
+          </div>
+          <label for="exampleInputEmail1">Email</label>
+          <input type="email" class="form-control form-control-lg mb-1" id="exampleInputEmail1"
+            name="email" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+            [(ngModel)]="user.email" #email="ngModel" minlength="5" maxlength="50" required
+            aria-describedby="emailHelp" autocomplete="off" placeholder="mail@example.com"
+            [ngClass]="{ 'is-invalid': businessSignUp.submitted && email.invalid }">
+          <div *ngIf="businessSignUp.submitted && email.invalid" class="invalid-feedback">
+            <div *ngIf="email.errors.required"><i class="fa fa-info-circle fa-errorIcon"
+                aria-hidden="true" tooltip="Email is required.">
+              </i>
+            </div>
+            <div *ngIf="email.errors.pattern"><i class="fa fa-info-circle fa-errorIcon"
+                aria-hidden="true" tooltip="Email is invalid.">
+              </i>
+            </div>
+          </div>
+          <label for="exampleInputPassword">Password <img
+              class=" infoIcon ml-1 tooltipIconSize tooltipstylePurple" tooltip="Password must be at least 8 characters with at least 1 Uppercase alphabet, 1 lowercase alphabet , and 1 number.
+            " src="assets/images/shared-new-theme/info-tooltip-icon.svg"> </label>
+          <input [type]="showit ? 'text' : 'password'" class="form-control form-control-lg mb-1"
+            required name="password" [(ngModel)]="user.password" placeholder="*******"
+            pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\w~@#$%^&*+=`|{}:;!.?\"()\[\]-]{8,25}$'
+            #password="ngModel" minlength="8" maxlength="50" id="exampleInputPassword1"
+            autocomplete="new-password" (input)="matchstrings()"
+            [ngClass]="{ 'is-invalid': businessSignUp.submitted && password.invalid }">
+
+          <a class="iconsettings"
+            [ngStyle]="{'margin-right': businessSignUp.submitted && isPasswordInValid(password) ? '27px' : '10px'}"
+            (click)="showit=!showit"><i class="fa"
+              [ngClass]="showit ? 'fa-eye-slash' : 'fa-eye'"></i></a>
+          <!-- <a class="iconsettings" *ngIf="showit" (click)="showit=!showit"><i class="fa fa-eye"></i></a>
+            <a class="iconsettings" *ngIf="!showit" (click)="showit=!showit"><i class="fa fa-eye-slash"></i></a> -->
+
+          <div *ngIf="businessSignUp.submitted && password.invalid" class="invalid-feedback">
+            <div *ngIf="password.errors.required"><i class="fa fa-info-circle fa-errorIcon"
+                aria-hidden="true" tooltip="Password is required.">
+              </i>
+            </div>
+            <div *ngIf="password.errors.minlength"><i class="fa fa-info-circle fa-errorIcon"
+                aria-hidden="true" tooltip="Minimum 8 characters.">
+              </i>
+            </div>
+            <div *ngIf="password.errors.pattern"><i class="fa fa-info-circle fa-errorIcon"
+                aria-hidden="true" tooltip="Password is invalid.">
+              </i>
+            </div>
+          </div>
+          <label for="exampleInputPassword1">Confirm Password</label>
+          <input
+          [type]="showit ? 'text' : 'password'"
+          class="form-control form-control-lg"
+          required
+          name="confirm"
+          #confirm="ngModel"
+          (input)="matchstrings()"
+          [(ngModel)]="user.confirmPassword"
+          minlength="8"
+          maxlength="50"
+          placeholder="*******"
+          [ngClass]="{ 'is-invalid': businessSignUp.submitted && confirm.invalid }">
+
+          <div *ngIf="businessSignUp.submitted && confirm.invalid" class="invalid-feedback">
+            <div *ngIf="confirm.errors.required"><i class="fa fa-info-circle fa-errorIcon"
+                aria-hidden="true" tooltip="Confirm Password is required.">
+              </i>
+            </div>
+          </div>
+          <div *ngIf="confirmpassnotmatch">
+            <!-- <div *ngIf="confirmpassnotmatch"> -->
+            <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+              tooltip="Password does not match.">
+            </i>
+            <!-- </div> -->
+          </div>
+        </div>
+
+
+
+
+        <!-- <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input mt-3" name="checkbox" required
+            id="exampleCheck1" [(ngModel)]="checkBox" #checkbox="ngModel"
+            [ngClass]="{ 'is-invalid': businessSignUp.submitted && checkbox.invalid }">
+          <label class="form-check-label marginTop">I agree to the <a
+              (click)="onTermsAndConditions()"><span style="color: #800080; cursor: pointer;">Terms and
+                Conditions</span></a></label>
+          <div *ngIf="businessSignUp.submitted && checkbox.invalid" class="invalid-feedback">
+            <div class="alert error-alert alert-light customError pl-0"
+              *ngIf="checkbox.errors.required">
+              Please agree to the Terms and Conditions before signing up.
+            </div>
+          </div>
+        </div> -->
+
+
+
+
+
+        <div class="col-md-8 text-right d-none" style="padding-right: 0;">
+          <div class="text-right dropdown">
+
+            <div [formGroup]="fileForm">
+              <input _ngcontent-kfe-c196="" type="file" accept=".xlsx" formControlName="uploadingFile"
+                (change)="attachFile($event)" #theFileUpload>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="d-flex justify-content-center">
+          <button type="submit" style="padding: 8px 42px !important; margin-top: 2.5rem;"
+            class="btn btnAddColor d-inline-block">Add</button>
+          <button type="button" style="padding: 8px 42px !important; margin-top: 2.5rem;"
+            class="btn d-inline-block btnDownloadColor btn-properties-white ml-2" (click)="activeModal.close()">Close</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="modal-wrapper">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLongTitle"><strong>
+                        {{isReceipt ? 'Receipt':'Report'}}
+                    </strong></h3>
+                    <button type="button" class="btn py-0" (click)="closeModal()" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true"><i class="fa fa-times"></i></span>
+                    </button>
+
+                </div>
+                <div class="modal-top-btn" *ngIf="!isReceipt">
+                    <button class="btn btn-size btnAddColor " (click)="processPayout()">Process Payout</button>
+                </div>
+                <div class="modal-body">
+                    <div *ngIf="!isReceipt" id="pdffile">
+
+                    </div>
+                    <div *ngIf="isReceipt">
+                        <img class="modal-img-size" src="{{fileObject.data}}" alt="">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

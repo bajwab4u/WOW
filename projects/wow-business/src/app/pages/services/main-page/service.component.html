@@ -1,0 +1,30 @@
+<div class="row" style="height: 100%; position: relative;">
+
+	<div class="service-sub-menu" [ngClass]="{'col-md-3': !removecss, 'col-auto': removecss}">
+
+		<wow-sub-menu [showPopUp]="true" [config]="subMenuConfig" (signal)="handleSignal($event)">
+		</wow-sub-menu>
+	</div>
+
+	<div [ngClass]="{'col-md-9':!removecss,'col-md-12':removecss}" class="layout-blank" style="padding: 0;">
+
+		<ng-container [ngSwitch]="activeState">
+
+			<ng-container *ngSwitchCase="'TABLE'">
+				<wow-view-services [selectedSubMenu]="selectedSubMenu" [isExpanded]='removecss'
+					(signals)="onHandleSignals($event)"></wow-view-services>
+			</ng-container>
+
+			<ng-container *ngSwitchCase="'ADD'">
+				<wow-add-service [activeServiceType]="activeServiceType" (signals)="onGoBack($event)"></wow-add-service>
+			</ng-container>
+
+			<ng-container *ngSwitchCase="'DETAIL'">
+				<wow-view-service-detail [serviceEvent]="servicedetails" (signals)="onGoBack($event)">
+				</wow-view-service-detail>
+			</ng-container>
+
+		</ng-container>
+
+	</div>
+</div>

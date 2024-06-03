@@ -1,0 +1,44 @@
+<div class="cartDiv">
+    <div class="text-left float-left content-pd" style="margin-bottom: 20px;">
+        <div class="cartHeadingItem">Selected Plan</div>
+        <div class="margn10 cartLabel">{{name}}</div>
+        <div class="margn10" style="color: #707070; font-size: 12px;">{{packgCost | currency}} / employee / month</div>
+        <div class="cartHeadingItem margn10">Billing Schedule</div>
+        <div class="monthlyCheckbox">
+            <div class="form-check float-left pl-0  margn10">
+                <!-- <input type="checkbox" name="isEmail" class=" form-check-input ml-1" id="exampleCheck1" [checked]='true' [disabled]='true'> -->
+                <label class="form-check-label label-style checkboxLabel checkboxText"
+                    for="exampleCheck1">Monthly</label>
+            </div>
+        </div>
+        <div style="width: 100%;" class="cartHeadingItem margn10 float-left">No. of Employees <img
+                class=" infoIcon  tooltipIconSize tooltipstylePurple"
+                tooltip="The number of employees in this membership for current month."
+                src="assets/images/shared-new-theme/tooltipIcon.svg"></div>
+        <div class="NoOfEmpDiv text-center margn10 float-left">{{totalEmployees}}</div>
+    </div>
+
+    <div class="cartInfoTxt">
+        ** Final amount will be calculated and sent by invoice.
+    </div>
+
+    <div class="CostDiv">
+
+        <div *ngFor="let item of cartTotals" class="content-pd cartTotal">
+            <div style="font-size: 14px;" class="text-left subheading" [ngStyle]="{'color': item?.key === 'Sub Total' ? '#524456' : ''}"
+                [class.cartHeadingItem]="item?.key === 'Total' || 'Sub Total'">
+                {{item?.key}}
+
+                <span *ngIf="isVisible(item)">{{item?.subValue}}</span>
+            </div>
+            <div [ngStyle]="{'color': item?.key !== 'Total' ? '#707070e6' : ''}" class="cartHeadingItem text-right">{{item?.value | currency}}</div>
+        </div>
+
+    </div>
+
+    <!-- <div class="CostDiv" style="font-size: 12px; display: inline-block; padding: 10px 20px;">
+        By Enrolling for the membership, you have read the document accept our 
+        <span style="color: #3b7496; text-decoration: underline; cursor: pointer;">subscription agreement</span>
+    </div> -->
+
+</div>

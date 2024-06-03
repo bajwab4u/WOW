@@ -1,0 +1,11 @@
+<div class="otp-container">
+  <h1>Enter OTP</h1>
+  <div class="otp-field">
+
+    <form #form="ngForm" (submit)="onSubmit(form, submitBtn)">
+      <input type="text" name="otp" #otp ngModel maxlength="6" (change)="enableSubmit(submitBtn)"/>
+      <button type="submit" #submitBtn class="btn btn-primary mt-4 float-right mr-2" [disabled]="otp.value.length < 6">Submit</button>
+      <button type="button" (click)="closeModal()" class="btn btn-outline-secondary mt-4 float-right mr-1">Cancel</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,123 @@
+<div class="wow-adg-root">
+    <div class="wow-adg-parent">
+        <div class="wow-adg-sub-parent">
+            <div class="wow-adg-wrapper">
+                <div class="wow-adg-form-wrapper">
+                    <div class="wow-adg-form">
+                        <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+                            <div class="row">
+                                <div class="col-md-12 p-0">
+                                    <div class="wow-adg-header">
+                                        <div class="wow-adg-header-left">
+                                            <div class="wow-adg-heading">
+                                                <h2>
+                                                    Add Agent
+                                                </h2>
+                                            </div>
+                                            <div class="wow-adg-sm-heading">
+                                                <p>Add an agent and send an email with invitation links for clients.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="wow-adg-header-right">
+                                            <button class="btn addbtn-size btnDownloadColor btn-properties-white"
+                                                (click)="onGoBack()" type="button">
+                                                Cancel
+                                            </button>
+                                            <button class="btn addbtn-size btnAddColor" type="submit">
+                                                Save
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                    <div class="linebar"></div>
+
+                                </div>
+                            </div>
+
+                            <div class="row pt-3">
+                                <div class="col-md-12 p-0">
+                                    <div class="wow-adg-content-wrapper">
+                                        <div class="wow-adg-content-desc-box ">
+                                            <div class="wow-adg-content-desc">
+                                                <p>
+                                                    Invitation email will be sent to this agent which will contain
+                                                    the onboarding links for their clients. Agents can use the links
+                                                    for marketing campaigns.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row pt-3">
+                                <div class="col-md-4 p-0">
+                                    <div class="wow-adg-form-fields-wrapper">
+                                        <div class="wow-adg-form-field">
+                                            <label>First Name*</label>
+                                            <input type="text" class="form-control" placeholder="John"
+                                                formControlName="firstName" required maxlength="45" [ngClass]="{ 'is-invalid': isControlValid('firstName') || isControlValid('firstName', 'required')
+                                            || isControlValid('firstName','maxlength')}">
+
+                                            <div class="invalid-feedback" *ngIf="isControlValid('firstName', 'required') || isControlValid('firstName', 'maxlength')
+                                                || isControlValid('firstName','whitespace')">
+                                                <i aria-hidden="true" class="fa fa-info-circle fa-errorIcon"
+                                                    [tooltip]="form.controls.firstName.errors.required ? 'First Name is required'
+                                : (form.controls.firstName.errors.firstName ? 'Invalid Name' : form.controls.fistname.errors.whitespace ? 'White spaces are not allowed' : 'Max 35 characters allowed')">
+                                                </i>
+                                            </div>
+                                        </div>
+                                        <div class="wow-adg-form-field">
+                                            <label>Last Name*</label>
+                                            <input type="text" class="form-control" placeholder="Doe"
+                                                formControlName="lastName" required maxlength="45" [ngClass]="{'is-invalid': isControlValid('lastName','required') || isControlValid('lastName', 'maxlength')
+                                            }">
+                                            <div class="invalid-feedback"
+                                                *ngIf="isControlValid('lastName') || isControlValid('lastName', 'maxlength') || isControlValid('firstName','whitespace')">
+                                                <i aria-hidden="true" class="fa fa-info-circle fa-errorIcon"
+                                                    [tooltip]="form.controls.lastName.errors.required ? 'Last Name is required'
+                                                    : (form.controls.lastName.errors.lastName ? 'Invalid Name' : 'Max 35 characters allowed')">
+                                                </i>
+                                            </div>
+                                        </div>
+                                        <div class="wow-adg-form-field">
+                                            <label>Email*</label>
+                                            <input type="text" class="form-control" placeholder="example@gmail.com"
+                                                [wowWhiteSpaceAllowed]="false" formControlName="email" required
+                                                maxlength="50"
+                                                [ngClass]="{'is-invalid': isControlValid('email') || isControlValid('lastName', 'maxlength') || isControlValid('email','email')}">
+                                            <div class="invalid-feedback"
+                                                *ngIf="isControlValid('email') || isControlValid('email', 'maxlength') || isControlValid('email', 'email')">
+                                                <i class="fa fa-info-circle fa-errorIcon"
+                                                    *ngIf="isControlValid('email', 'email')" aria-hidden="true"
+                                                    tooltip="Invalid Email"> </i>
+                                                <i aria-hidden="true" class="fa fa-info-circle fa-errorIcon"
+                                                    [tooltip]="form.controls.email.errors.required ? 'Email is required'
+                                                : (form.controls.email.errors.email ? 'Invalid Email' : 'Max 50 characters allowed')">
+                                                </i>
+                                            </div>
+                                        </div>
+                                        <div class="wow-adg-form-field">
+                                            <label>Phone Number*</label>
+                                            <input type="text" class="form-control" 
+                                                placeholder="000-000-0000" [mask]="maskedFormat"
+                                                formControlName="phone" required
+                                                [ngClass]="{ 'is-invalid': (isControlValid('phone', 'required') || isControlValid('phone', 'inValidFormat')) }">
+
+                                            <div *ngIf="isControlValid('phone', 'required') || isControlValid('phone', 'inValidFormat')"
+                                                class="invalid-feedback">
+                                                <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" 
+                                                    [tooltip]="form.controls.phone.errors.required? 'Phone Number is required.' : 
+                                                        'Phone number should be of required format'"> </i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="container content-box-mt col-9 float-left px-0" style="min-width: 100% !important;">
+  <form name="from" autocomplete="off" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" class="form-margin">
+    
+    
+    <div class="row">
+      <div class="col-md-7 col-sm-12 text-left p-0">
+        <h3>Working Hours</h3>
+        <div class="subheading"> Change working hours details for your business</div>
+        <!-- <div *ngIf="showatleastonescheduleerror"  class="row alert error-alert alert-danger" >
+          Atleast one schedule is required.
+        </div> -->
+      </div>
+      <div class="col-md-5 col-sm-12 text-align-l text-right p-0"s>
+        <!-- <button type="button" class="btn btn-space btn-properties-white px-4 mr-2">Cancel</button> -->
+        <button type="submit" class="btn btn-properties-active">Save</button>
+      </div>
+    </div>
+    <hr />
+    <div class="row text-right">
+      <div class="col-12">
+        <a class="apply-to-all wow-apply-all-resp" (click)="onSetSchedule()" >Apply to all</a>
+      </div>
+    </div>
+    <ng-container *ngFor="let day of businessSchedule.schedule; let i=index">
+     
+      <div style="display: flex; align-items: center;" class="form-group row field-style input-space">
+        <div class="col-lg-2 col-md-4 col-sm-12">
+          <div class="form-check float-left">
+            <input type="checkbox" [name]="getControlName(day.dayName, 'check', i)" style="margin-top: 8px;" class="form-check-input" 
+              (change)=" onChange(i)"
+              id="exampleCheck1" [(ngModel)]="day.check">
+            <label class="form-check-label" 
+              class="ml-4 pt-1 labelTextStyle">{{day.dayName | titlecase}}</label>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-12 ml-5 mr-4 wow-no-margin">
+          <div class="md-form" (click)="day.check = true">
+            
+            <wow-time-picker [width]="ctrlWidth" 
+              [required]="day.check"
+              [isFormSubmitted]="f.submitted"
+              placeHolder='Start Time'
+              [controlName]="getControlName(day.dayName, 'start', i)"
+              [value]="day.startTime"
+              (signals)="onChangeValue($event, 'startTime', i)">
+            </wow-time-picker>
+          </div>
+        </div>
+        <div class="col-md-1 col-sm-12">
+          To
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-12 ml-4 wow-no-margin">
+          <div class="md-form" (click)="day.check = true">
+
+            <wow-time-picker [width]="ctrlWidth"
+              [required]="day.check"
+              [isFormSubmitted]="f.submitted"
+              placeHolder='End Time'
+              inValidErrMsg='End time should be greater than start time.'
+              [inValid]='!isTimeValid(i)'
+              [controlName]="getControlName(day.dayName, 'end', i)"
+              [value]="day.endTime"
+              (signals)="onChangeValue($event, 'endTime', i)">
+            </wow-time-picker>
+          </div>
+        </div> 
+        <a class="apply-to-all wow-apply-all-none" (click)="onSetSchedule()" *ngIf="i === 0">Apply to all</a>
+      </div>
+    </ng-container>
+  </form>
+  </div>

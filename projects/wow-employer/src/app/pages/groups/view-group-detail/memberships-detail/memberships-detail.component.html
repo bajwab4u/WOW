@@ -1,0 +1,16 @@
+<wow-table  
+    [config]="membershipConfig" 
+    [actions]="action"
+    (signals)="onTableSignals($event)">
+
+    <ng-template dataTableCell="activationDate" 
+        let-row="row" let-col="col">
+        {{formatDate(row['activationDate'])}}
+    </ng-template>
+
+    <ng-template dataTableCell="expiryDate"
+        let-row="row" let-col="col">
+        {{formatDate(row['expiryDate'])}}
+    </ng-template>
+
+</wow-table>

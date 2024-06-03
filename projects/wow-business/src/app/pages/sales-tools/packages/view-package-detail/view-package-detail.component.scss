@@ -1,0 +1,41 @@
+.btn-properties-gray:disabled
+{
+  cursor: not-allowed;
+}
+
+.btn-properties-gray:hover
+{
+  background: #C9C9C978 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 16px #CCCCCC29;
+  border-radius: 6px;
+}
+
+.btn-properties-active
+{
+  background-color: #524456;
+  border: none;
+  color: #fff;
+  padding : 12px 42px !important;
+  font-size: 13px;
+  border-radius: 6px;
+  outline: 0 !important;
+}
+
+.btn-properties-active:hover
+{
+  background: #524456 !important;
+  box-shadow: 0px 3px 16px #CCCCCC29 !important;
+  border-radius: 6px !important;
+}
+
+.form-control::-webkit-input-placeholder 
+{
+  color: #707070B3;
+  font-size: 13px;
+}
+
+.package-form-container
+{
+  height: calc(100% - 105px); 
+  overflow: auto;
+}

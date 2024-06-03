@@ -1,0 +1,44 @@
+<div class="row">
+
+    <div class="col-md-12 text-right">
+        <div class="text-right dropdown">
+            <button type="button" class="btn btn-size btnAddColor" (click)="uploadFile()">
+                <i class="fa pr-2 fa-plus"></i>
+                Add More</button>
+            <input style="display: none;" type="file" accept="application/pdf" id="upload-attachment" name="file"
+                (change)="handleInputChangeImg($event)" />
+        </div>
+    </div>
+</div>
+<div *ngFor="let attachment of attachments">
+    <div class="row border p-4 mt-3">
+        <div class="col-md-2 d-flex justify-content-center"> <img src="assets/images/file-icon.png" alt=""></div>
+        <div class="col-md-8 d-flex justify-content-start align-self-center">{{attachment.fileTitle}}</div>
+        <div class="col-md-2 d-flex justify-content-end align-self-center">
+            <!-- <a href="" id="downloadLink"></a> -->
+            <div (click)="downloadAttachment(attachment.filePathId)"><img
+                    src="assets/images/ic_vertical_align_bottom_24px.svg" data-toggle="modal" data-target="#myModal" height="12px" style="cursor: pointer;">
+            </div>
+            <div> <img (click)="deleteAttachment(attachment.id)" class="ml-4"
+                    style="height: 12px; width: 15px; cursor: pointer;"
+                    src="assets/images/shared-new-theme/deleteicon.svg" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" (click)="closeModal()" class="close" data-dismiss="modal">&times;</button>
+              </div>
+            <div class="modal-body">
+                <div class="content-width">
+                    <div class="content-width" id="showfile"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,85 @@
+<ng-container [ngSwitch]="activeState">
+    <div class="container col-12 float-left content-box-mt px-0" style="min-width: 100% !important;"
+        *ngSwitchCase="'TABLE'">
+
+        <div class="row">
+            <h2>All Transactions <span *ngIf="totalItems > 0">({{totalItems}})</span></h2>
+        </div>
+        <div class="row margnTblTop">
+            <div class="col-md-4 p-0">
+                <search-control palceHolder="Wow ID" (signal)="onSearchValueChange($event)" [maskFormat]="'0000-0000-0000'">
+                </search-control>
+            </div>
+            <div class="col-md-8 p-0">
+                <div class="text-right float-right">
+                    <a id="downloadLink" hidden></a>
+                    <a class="btn addbtn-size btnDownloadColor btn-properties-white mr-2"
+                        (click)="downlaodFinancialReport()">Financial Report <img
+                            src="assets/images/ic_vertical_align_bottom_24px.svg" class="pl-2" height="12px"></a>
+                    <a class="btn btn-size  btn-properties-gray " >Payment Process</a>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="width: 100%;">
+            <wow-table style="width: 100%;" [config]="config" [actions]="action" (signals)="onTableSignals($event)">
+
+                <!-- <ng-container customNoRecTempRef>
+                <div class="row p-5">
+                    <div class="col-md-12">
+                        <img src="assets/images/coupondetail/couponIcon.svg" class="image-pointer pb-4" alt="Null">
+                        <h2>Add a coupon</h2>
+                        <p style="font-size: 14px; color: #575757;" class="pt-2">You have no active coupon listed
+                        </p>
+                    </div>
+                </div>
+            </ng-container> -->
+
+                <ng-template dataTableCell="image" let-row="row" let-col="col">
+                    <img class="imgsize responsive-image rounded-circle" src="assets/images/transaction-history.svg"
+                        onError="this.src='assets/images/transaction-history.svg'">
+                </ng-template>
+
+                <ng-template dataTableCell="txtDebitCredit" let-row="row" let-col="col">
+                    <span [ngClass]="isExpanded ? 'text-overflow-30ch' : 'text-overflow-20ch'" class="m-0 text-overflow"
+                        [title]="row?.txtDebitCredit">
+                        {{row?.txtDebitCredit === 'Cr' ? 'Credit' : row?.txtDebitCredit === 'Dr' ?'Debit' : ''}}
+                    </span>
+                </ng-template>
+
+                <ng-template dataTableCell="wowId" let-row="row" let-col="col">
+                    <span [ngClass]="isExpanded ? 'text-overflow-30ch' : 'text-overflow-20ch'" class="m-0 text-overflow"
+                        [title]="row?.wowId">
+                        {{row?.wowId}}
+                    </span>
+                </ng-template>
+
+                <ng-template dataTableCell="timeAndDate" let-row="row" let-col="col">
+                    <span [ngClass]="isExpanded ? 'text-overflow-30ch' : 'text-overflow-20ch'" class="m-0 text-overflow"
+                        [title]="row?.dteCreatedDate">
+                        {{row?.dteCreatedDate | date: 'MMM d, yyyy h:mm a'}}
+                    </span>
+                </ng-template>
+
+                <ng-template dataTableCell="numAmount" let-row="row" let-col="col">
+                    <span [ngClass]="isExpanded ? 'text-overflow-30ch' : 'text-overflow-20ch'" class="m-0 text-overflow"
+                        [title]="row?.numAmount">
+                        <img [src]="row?.tranType === '+' ? 
+                        'assets/images/icon-plus.svg' : 'assets/images/icon-minus.svg'" alt="row?.tranType">&nbsp;
+                        ${{row?.numAmount}}
+                    </span>
+                </ng-template>
+
+            </wow-table>
+
+        </div>
+    </div>
+
+    <div id="comp-render" *ngSwitchCase="'ADD'">
+        <div class="container col-md-12 float-left" style="min-width: 100% !important;padding: 0px;">
+            <wow-payment-process (previousPage)="onGoBack($event)"></wow-payment-process>
+        </div>
+    </div>
+
+</ng-container>

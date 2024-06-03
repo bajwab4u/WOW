@@ -1,0 +1,41 @@
+.calendar-date-view
+{
+    // display: flex;
+    align-items: center;
+    // justify-content: center;
+}
+
+.cal-filter-container
+{
+    padding: 0;
+    // display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    display: flex;
+}
+
+.appoint-status-dp
+{
+    box-shadow: 1px 0px 5px 0px #aaa;
+    // box-shadow: rgb(170 170 170) -2px 0px 2px 0px;
+    position: absolute;
+    transform: translate3d(214px, 39px, 0px);
+    // top: 0px;
+    left: 0px;
+    z-index: 10001;
+    will-change: transform;
+    top: 10px !important;
+}
+
+.status-content
+{
+    text-align: center;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 10px;
+}
+
+.status-divider
+{
+    border-bottom: 1px solid lightgray;
+}

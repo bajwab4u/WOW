@@ -1,0 +1,77 @@
+<div class=" layout-blank component-paddingRL content-box-mt">
+
+    <div class="row">
+        <div class="col-12 p-0">
+            <div class="wow-dh-wrapper ">
+                <div class="wow-dh-left-parent text-left">
+                    <div class="wow-dh-left-heading ">
+                        <h3 class="mb-0">
+                            <span (click)="onGoBack()" style="cursor: pointer" class="mr-2">
+                                <img src="assets/images/details-back-btn.svg" height="12px">
+                            </span>
+                            {{ selectedProvider.name }}
+                        </h3>
+                    </div>
+                </div>
+                <div class="wow-dh-right-parent">
+                    <div class="wow-dh-action-btns-wrapper">
+                        <div class="wow-dh-action-btn">
+                            <button type="button" class="btn mr-2"
+                                [title]="selectedProvider.status ? 'Inactive Provider' : 'Active Provider'"
+                                [ngClass]="selectedProvider?.status ? 'custom-danger-btn' : 'custom-success-btn'"
+                                (click)="onChangeStatus()">
+                                <i style="font-size: 17px;" class="fa mt-1 fa-ban"
+                                    [ngClass]="selectedProvider.status ? 'fa-ban' : 'fa-check'"></i>
+                            </button>
+                        </div>
+                        <div class="wow-dh-action-btn">
+                            <button type="button" class="btn btn-space btn-properties-white mr-2"
+                                (click)="onGoBack()">Cancel</button>
+                        </div>
+                        <div class="wow-dh-action-btn">
+                            <button type="button" class="btn btn-properties-gray" [disabled]="isFormDisabled"
+                                [ngClass]="isFormDisabled ? 'btn-properties-gray' : 'btnAddColor'"
+                                (click)="onSubmit()">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 p-0">
+
+            <wow-tabs-group (selectedTabChange)="onSelectedTabChange($event)" [showConfirmPopup]="true">
+                <wow-tab-item tabTitle="Details">
+
+                    <ng-container *ngIf="selectedTabIndex === 0">
+                        <div class="row">
+                            <div class="col-12 p-0">
+                                <div class="wow-adg-content">
+                                    <wow-view-provider-details [selectedProvider]="selectedProvider"
+                                        (signals)="onHandleSignals($event)" [action]="action">
+                                    </wow-view-provider-details>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </ng-container>
+                </wow-tab-item>
+
+                <!-- 2nd Tab start -->
+                <wow-tab-item tabTitle="Staff">
+                    <ng-container *ngIf="selectedTabIndex === 1">
+                        <wow-provider-staff class="w-100" [businessId]="selectedProvider.businessId">
+                        </wow-provider-staff>
+                    </ng-container>
+                </wow-tab-item>
+                <!-- 2nd Tab end -->
+
+            </wow-tabs-group>
+        </div>
+    </div>
+
+</div>

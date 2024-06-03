@@ -1,0 +1,176 @@
+<div class="row" style="height: 100%; padding: 0;">
+
+    <div style="height: 100%; overflow: auto;" class="col-12 component-paddingRL content-box-mt">
+
+        <form [formGroup]="form">
+            <div class="">
+
+                <div class="row">
+                    <div class="col-md-6 text-left" style="padding: 0;">
+                        <h3>Add Staff</h3>
+                        <p>Add a staff member and assign services</p>
+                    </div>
+                    <div class="col-md-6" style="padding: 0;">
+                        <div class="text-right float-right mt-3">
+                            <button type="button" class="btn addbtn-size btnDownloadColor btn-properties-white mr-2"
+                                (click)="back()">Cancel</button>
+                            <button type="button" (click)="onSubmit()" class="btn addbtn-size btnAddColor">Save</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="linebar"></div>
+
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-row mt-2">
+
+                            <wow-file-picker [image]="form?.controls?.displayProfileImageUrl?.value"
+                                (change)="onChangeImage($event)" class="width-100"></wow-file-picker>
+
+                            <div class="form-group col-12 text-left inputMarginBot10">
+                                <label>First Name</label>
+                                <input autocomplete="nope" type="text" class="form-control" required
+                                    placeholder="e.g John" formControlName="staffFirstName"
+                                    [ngClass]="{ 'is-invalid': isControlValid('staffFirstName') || isControlValid('staffFirstName', 'maxlength') }"
+                                    maxlength="35">
+                                <div *ngIf="isControlValid('staffFirstName') || isControlValid('staffFirstName', 'maxlength')"
+                                    class="invalid-feedback">
+                                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                        [tooltip]="isControlValid('staffFirstName') ? 'First Name is required.' : 'Length cannot be greater than 35 characters'">
+                                    </i>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-12 text-left inputMarginBot10">
+                                <label>Last Name</label>
+                                <input autocomplete="nope" type="text" class="form-control" required
+                                    placeholder="e.g Doe" formControlName="staffLastName"
+                                    [ngClass]="{ 'is-invalid': isControlValid('staffLastName') || isControlValid('staffLastName', 'maxlength')}"
+                                    maxlength="35">
+                                <div *ngIf="isControlValid('staffLastName') || isControlValid('staffLastName', 'maxlength')"
+                                    class="invalid-feedback">
+                                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                        [tooltip]="isControlValid('staffLastName') ? 'Last Name is required.' : 'Length cannot be greater than 35 characters'">
+                                    </i>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-12 text-left inputMarginBot10">
+                                <label>Email</label>
+
+                                <input autocomplete="nope" type="text" class="form-control" name="email" required
+                                    placeholder="example@mail.com" formControlName="staffEmail" maxlength="50"
+                                    [ngClass]="{ 'is-invalid': isControlValid('staffEmail') || isControlValid('staffEmail', 'email') }">
+
+                                <div *ngIf="isControlValid('staffEmail') || isControlValid('staffEmail', 'email')"
+                                    class="invalid-feedback">
+                                    <i class="fa fa-info-circle fa-errorIcon" *ngIf="isControlValid('staffEmail')"
+                                        aria-hidden="true" tooltip="Email is required"> </i>
+
+                                    <i class="fa fa-info-circle fa-errorIcon"
+                                        *ngIf="isControlValid('staffEmail', 'email')" aria-hidden="true"
+                                        tooltip="Invalid Email"> </i>
+                                    <i class="fa fa-info-circle fa-errorIcon"
+                                        *ngIf="isControlValid('staffEmail', 'maxlength')" aria-hidden="true"
+                                        tooltip="Length cannot be greater than 50 characters"> </i>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-12 text-left inputMarginBot10">
+                                <label>Staff Type
+                                    <img class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple"
+                                        src="assets/images/shared-new-theme/tooltipIcon.svg"
+                                        tooltip="Providers are doctors, PAs, NPs etc. Nursing staff are
+                                            clinical like MAs, LPN, RN etc. Assistan(s) are non-clinical staff like secretary">
+                                </label>
+                                <select name="title" type="text" class="form-control" formControlName="staffType"
+                                    (change)="onStaffTypeChange($event.target.value)"
+                                    [ngClass]="{ 'is-invalid': isControlValid('staffType') }" required>
+                                    <option value=null>Select</option>
+                                    <option *ngFor="let opt of staffTypes" [value]="opt['value']">{{opt['title']}}
+                                    </option>
+                                    <!-- <option value="Nursing Staff">Nursing Staff</option>
+                                    <option value="Assistant">Assistant</option> -->
+                                </select>
+                                <div *ngIf="isControlValid('staffType')" class="invalid-feedback">
+                                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                        tooltip="Title is required."> </i>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-12 text-left inputMarginBot10" *ngIf="isProvider">
+                                <label>Staff Specialties
+                                    <img class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple"
+                                        src="assets/images/shared-new-theme/tooltipIcon.svg" tooltip="You can choose one or more specialties for Provider
+                                            like cardiology, anaology etc">
+                                </label>
+                                <ng-multiselect-dropdown [placeholder]="'Select Specialties'"
+                                    [settings]="dropdownSettings" [data]="specialities" name="speciality"
+                                    formControlName="selectedSpecialities" (onSelect)="onItemSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)">
+                                </ng-multiselect-dropdown>
+                                <!-- <div *ngIf="f.submitted && title.invalid" class="invalid-feedback">
+                                    <div *ngIf="title.errors.required">Title is required</div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="offset-md-1 col-md-6 mt-3" *ngIf="isProvider">
+                        <wow-assign-staffor-service [config]="assignStaffServiceConfig"
+                            (signals)="onAssignServices($event)">
+                        </wow-assign-staffor-service>
+                    </div>
+                </div>
+
+                <ng-container *ngIf="isProvider">
+                    <div class="linebar mt-3"></div>
+
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-row mt-2">
+                                <div class="col-md-12 text-left mt-4" style="padding: 0;">
+                                    <h3>Appointment Rules (Optional)</h3>
+                                    <p>Set Maximum Appointments per day and block times</p>
+                                </div>
+
+                                <div class="form-group row mt-3">
+                                    <div class="col-4 pl-0">
+                                        <label style="float: left;">Limit per Day
+                                            <img class="imgCustom ml-3 tooltipIconSize tooltipstylePurple"
+                                                src="assets/images/shared-new-theme/tooltipIcon.svg"
+                                                tooltip="Maximum number of appointments you get in a day">
+                                        </label>
+                                        <input autocomplete="off" id="limitPerDay" class="form-control w-75" formControlName="maximumNumberOfAppointmentsPerDay"
+                                            maxlength="3" type="text" wowOnlyNumbers [class.is-invalid]="isControlValid('maximumNumberOfAppointmentsPerDay', 'maxlength')">
+
+                                        <div *ngIf="isControlValid('maximumNumberOfAppointmentsPerDay', 'maxlength')"
+                                            class="invalid-feedback">
+                                            <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Max 3 digits allowed"> </i>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: left;" class="col-4 pr-0">
+                                        <label style="float: left;">Appointment Lead Time
+                                            <img class="imgCustom ml-3 tooltipIconSize tooltipstylePurple"
+                                                src="assets/images/shared-new-theme/tooltipIcon.svg"
+                                                tooltip="Advance notice you require before clients book an appointment">
+                                        </label>
+                                        <input style="display: inline-block;" autocomplete="off" class="form-control w-75" formControlName="appointmentLeadTimeInDays"
+                                            maxlength="3" type="text" wowOnlyNumbers [class.is-invalid]="isControlValid('appointmentLeadTimeInDays', 'maxlength')">
+                                        <label style="display: inline-block; align-items: flex-end;" class="col-1">Days</label>
+                                        <div *ngIf="isControlValid('appointmentLeadTimeInDays', 'maxlength')"
+                                                class="invalid-feedback">
+                                                <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Max 3 digits allowed"> </i>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+
+            </div>
+        </form>
+    </div>
+</div>

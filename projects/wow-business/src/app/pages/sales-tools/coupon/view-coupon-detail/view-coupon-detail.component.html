@@ -1,0 +1,44 @@
+<div class="container col-9 float-left content-box-mt component-paddingRL" style="min-width: 100% !important;">
+
+	<div class="p-0">
+		<div class="row">
+			<div class="col-md-6 text-left p-0">
+				<h3 class="text-overflow" style="width: 30ch;" [title]="this.couponName">
+					{{this.couponName}}</h3>
+
+			</div>
+			<div class="col-md-6 p-0">
+				<div class="text-right float-right mt-1">
+					<button type="button" class="btn mr-2" [title]="isActive ? 'Inactive Coupon' : 'Active Coupon'"
+						[ngClass]="isActive ? 'custom-danger-btn' : 'custom-success-btn'" (click)="onStatusChange()">
+						<i style="font-size: 17px;" class="fa mt-1" [ngClass]="isActive ? 'fa-ban' : 'fa-check'"></i>
+					</button>
+					<button class="btn addbtn-size btnDownloadColor btn-properties-white mr-2"
+						(click)="goBack()">Cancel</button>
+					<!-- <button type="button" class="btn btn-properties-gray" [disabled]="isFormDisabled"
+						[ngClass]="isFormDisabled ? 'btn-properties-gray' : 'btnAddColor'"
+						(click)="submitForm()">Save</button> -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<wow-tabs-group 
+		(selectedTabChange)="onSelectedTabChange($event)">
+
+		<wow-tab-item tabTitle="Details">
+			<wow-coupon-detail-form *ngIf="selectedTabIndex === 0" style="width: 100%" [couponId]="couponId"
+				[action]="action" >
+			</wow-coupon-detail-form>
+		</wow-tab-item>
+
+		<wow-tab-item tabTitle="Services">
+			<ng-container *ngIf="selectedTabIndex === 1">
+				<wow-view-coupon-service-detail style="width: 100%;" [couponId]="couponId"
+					>
+				</wow-view-coupon-service-detail>
+			</ng-container>
+		</wow-tab-item>
+
+	</wow-tabs-group>
+</div>

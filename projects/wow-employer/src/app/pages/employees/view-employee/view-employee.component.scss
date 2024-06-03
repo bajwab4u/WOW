@@ -1,0 +1,16 @@
+.imgsize
+{
+    width: 36px;
+    height: 36px;
+    float: left;
+}
+
+.btn-size
+{
+    margin-top: 0;
+}
+@media (min-width: 400px) and (max-width: 786px) {
+    .wow-float-left{
+        float: left  !important;
+    }
+}

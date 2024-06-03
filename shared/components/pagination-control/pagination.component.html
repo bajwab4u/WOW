@@ -1,0 +1,7 @@
+<div class="row" *ngIf="showPagination">
+	<div class="col-md-12 paginationBgColor"
+		[ngStyle]="{'margin' : previousLabel === '' ? '20px -1.2rem' : '20px -0.625rem'}">
+		<pagination-controls (pageChange)="onPageChange($event)" [previousLabel]="previousLabel"
+			[nextLabel]="nextLabel"></pagination-controls>
+	</div>
+</div>

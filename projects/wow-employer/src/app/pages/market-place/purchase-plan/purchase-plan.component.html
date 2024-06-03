@@ -1,0 +1,94 @@
+<ng-container *ngIf="!isCart">
+    <div class="row">
+        <div class="col-lg-9 text-left p-0">
+            <h2>Purchase Plan</h2>
+            <div class="subheading">Select the employee groups you want to enroll for this memberships and select your
+                preferred payment method.
+            </div>
+        </div>
+
+        <div class="col-lg-3 wow-mb-1rem">
+            <div class="text-right float-right mt-2">
+                <button class="btn addbtn-size btnDownloadColor btn-properties-white mr-2"
+                    (click)="onBack()">Back</button>
+                <button type="button" class="btn addbtn-size btnAddColor" (click)="onClick()">Next</button>
+            </div>
+        </div>
+
+    </div>
+    <hr />
+
+    <div class="row paddingTop10">
+        <div class="col-md-8 wow-purchase-plan-head">
+            <!-- <div class="row" *ngIf="planDetail?.mcs"> -->
+            <div class="row" *ngIf="planDetail.membershipType === 'EMPLOYER_PACKAGES_ONLY'">
+                <div class="col-md-8 " style="padding-left: 0px !important;">
+                    <div class="text-left">
+                        <label class="cartLabel">Select IUA *
+                            <img class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple"
+                                src="assets/images/shared-new-theme/tooltipIcon.svg"
+                                tooltip="The IUA for each member’s medical need is the responsibility of each member, based on your choice of IUA. This is the amount that you need to pay before the community is eligible to share in your medical expenses.">
+                        </label>
+                    </div>
+
+                    <div class="dropdown-iua">
+
+                        <select class="form-control" name="iuaPlanTitle"
+                            required #iuaPlanTitle="ngModel" [(ngModel)]="IUAPlanTitle"
+                            [ngClass]="{ 'is-invalid': isFormSubmitted && iuaPlanTitle.invalid }">
+
+                            <option value="null" selected disabled>Select</option>
+                            <option value="IUA1000">$1000 IUA</option>
+                            <option value="IUA2500">$2500 IUA</option>
+                            <option value="IUA5000">$5000 IUA</option>
+                        </select>
+                        <div *ngIf="isFormSubmitted && iuaPlanTitle.invalid" class="invalid-feedback">
+                            <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                tooltip="please select IUA Plan"> </i>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row paddingTop10">
+                <div class="col-md-10" style="padding-left: 0px !important;">
+                    <div class="text-left">
+                        <label class="cartLabel">Select Employee Groups *
+                            <img class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple"
+                                src="assets/images/shared-new-theme/tooltipIcon.svg"
+                                tooltip="Add employee groups you want to give this membership.">
+                        </label>
+                        <div class="keywords form-control">
+                            <tag-input class="tags m-2" ngModel [ngModel]="selectGroup" [theme]="'dark'"
+                                [modelAsStrings]="false" (onSelect)="onSelected($event)"
+                                (onRemove)="onItemRemoved($event)" (onAdd)="onItemAdded($event)" [editable]="true"
+                                [onlyFromAutocomplete]="true">
+                                <tag-input-dropdown [showDropdownIfEmpty]="true" [identifyBy]="'employeeGroupId'"
+                                    [displayBy]="'employeeGroupName'" [autocompleteItems]="groups">
+                                </tag-input-dropdown>
+                            </tag-input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="selectGroups.length > 0">
+                <wow-groups-emp-info [groups]="selectGroups" style="width: 90%;"></wow-groups-emp-info>
+            </div>
+
+        </div>
+
+        <div class="col-md-4 wow-receipt-view">
+            <wow-receipt-view [packgCost]="planDetail?.price" [name]="planDetail?.name" [totalEmployees]="noOfEmplyees"
+                [cartTotals]="[{key: 'Subtotal', value: totalCost},
+                    {key: 'Total', value: totalCost}]">
+            </wow-receipt-view>
+        </div>
+
+    </div>
+
+</ng-container>
+
+<ng-container *ngIf="isCart">
+    <wow-checkout [planDetail]="planDetail" (previousPage)="onViewChange($event)"></wow-checkout>
+</ng-container>

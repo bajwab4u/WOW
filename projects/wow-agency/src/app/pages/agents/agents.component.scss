@@ -1,0 +1,14 @@
+.wow-ag-root{
+    overflow-y: auto;
+    height: 100%;
+    .wow-ag-header-wrapper{
+        font-family: Poppins;
+        text-align: left;
+    }
+}
+@media (max-width: 800px){
+  table td:first-child {
+    display: none !important;
+  }
+}
+

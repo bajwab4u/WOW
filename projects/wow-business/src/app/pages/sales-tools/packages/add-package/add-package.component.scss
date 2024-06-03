@@ -1,0 +1,47 @@
+/* *{ */
+/* font-size: 0.8rem !important; */
+/* } */
+.form-control:focus {
+  border-color: #8055805e;
+  box-shadow: 0 0 0 1px #b9b2ba;
+  outline: none;
+}
+.form-control::-webkit-input-placeholder {
+  color: #707070b3;
+  font-size: 13px;
+}
+
+.float-right {
+  height: 548px;
+  overflow: auto;
+}
+.checkboxLabel {
+  text-align: left;
+  letter-spacing: 0px;
+  color: #575757;
+  opacity: 1;
+  font-size: 14px !important;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.responsive-image {
+  height: 82px;
+  width: 82px;
+  border-radius: 51px;
+}
+.wow-pkg-margin{
+  margin: 0 11px;
+ }
+ @media (min-width: 400px) and (max-width: 786px) {
+	.wow-resp-pkg-margin{
+		margin-left: 0 !important;
+	}
+  .wow-rm-min-width{
+    &::before{
+      display: none !important;
+    }
+  }
+ }

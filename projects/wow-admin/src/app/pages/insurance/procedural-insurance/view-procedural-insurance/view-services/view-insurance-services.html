@@ -1,0 +1,41 @@
+<div class="container float-left col-12" style="padding:0 !important; height: 100%;">
+    <ng-container *ngIf="activeState === 'TABLE'">
+        <div class="col-md-12 p-0">
+            <div>
+                <div class="nav-item dropdown float-right mb-3 ">
+
+                    <button type="button" class="btn btn-size btnAddColor" (click)="openAddServiceModal()">
+                        <i class="fa pr-2" [ngClass]="config?.addBtnIconClass"></i>
+                        Add Service</button>
+                </div>
+                <wow-table class="w-100" [config]="config" [actions]="action" (signals)="onTableSignals($event)">
+                    <!-- <ng-template dataTableCell="image" let-row="row" let-col="col">
+                        <div class="imgsize">
+                            <img class="imgsize responsive-image" (click)="alertDeleteService(row.serviceId)"
+                                src="assets/images/shared-new-theme/deleteicon.svg" width="20px" height="36px"
+                                onError="this.src='assets/images/services-dash.svg'" alt="">
+                        </div>
+                    </ng-template> -->
+
+                    <ng-template dataTableCell="name" let-row="row" let-col="col">
+                        <p class="m-0 text-overflow-20ch wow-clients-cellwidth" [title]="row?.serviceName">
+                            {{row?.serviceName}}
+                        </p>
+                    </ng-template>
+
+                    <ng-template dataTableCell="category" let-row="row" let-col="col">
+                        <p class="m-0 text-overflow text-overflow-20ch" [title]="row?.insuranceAmount">
+                           {{row?.insuranceAmount}}
+                        </p>
+                    </ng-template>
+
+                    <ng-template dataTableCell="description" let-row="row" let-col="col" let-i="index">
+                        <span class="col-width">
+                            {{row?.coverageAmount}}
+                        </span>
+                    </ng-template>
+                </wow-table>
+            </div>
+        </div>
+    </ng-container>
+</div>

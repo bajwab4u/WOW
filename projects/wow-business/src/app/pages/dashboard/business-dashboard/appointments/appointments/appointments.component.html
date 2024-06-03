@@ -1,0 +1,78 @@
+<div class="row mt-4 mb-5">
+
+<!------------------------ Unscheduled appointments Card  ------------------------>
+
+    <div class="col-md-8 mt-4 pl-0">
+        <div class="card " style="height:400px">
+            <h4 class="card-header text-left pt-4 pb-4">
+                Unscheduled Appointments
+            </h4>
+            <div class="card-body" #unscheduleAppointmentsContainer>
+
+                <div *ngIf="unscheduledAppointment.length === 0" class="no-appointment">
+                    <img src="assets/images/no_unschedule.svg"/>
+                    <h5 class="no-appointment-title">No Unscheduled Appointments</h5>
+                    <p>You have no unscheduled <br/> appointments to appear here</p>
+                </div>
+                
+                <div class="row" *ngFor="let item of unscheduledAppointment; let idx=index">
+                    <div class="col-md-1 dateCustom horizontalLine" 
+                        style="padding-left: 0px;">
+                            <span *ngIf="displayDate(unscheduledAppointment, item, idx)" 
+                                [innerHTML]="formatDate(item.appointmentCreationTimeStamp)"></span>
+                        </div>
+                    <div class="col-md-11">
+                        <h5 class="card-title text-left">{{item.patientFirstName}} {{item.patientLastName}}</h5>
+                        <p>
+                            <span class="appointmentCustomText" style="float: left;">{{item.serviceName}} with {{item.staffMemberFirstName}} {{item.staffMemberLastName}}</span>
+                            <span style="float: right;">
+                                <a class="btn btn-link" [ngbPopover]="popContent"  placement="right"
+                                    #popover="ngbPopover" container="body"
+                                    popoverClass="my-custom-class"  style="color: red;"> 
+                                    Unscheduled
+                                </a>
+
+                                <ng-template #popContent>
+                                    <appointment-detail-comp [appointmentId]="item.appointmentId" 
+                                        [isFromDashboard]="true" (signals)="onHandleSignals($event)"></appointment-detail-comp>
+                                </ng-template>
+                            </span>
+                        </p>
+                        <div>
+                        </div>
+                        <hr class="mt-5">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!------------------------ Upcoming appointments Card  ------------------------>
+
+    <div class="col-md-4 mt-4 pr-0">
+        <div class="card" style="height:400px">
+            <h4 class="card-header text-left pt-4 pb-4">
+                Upcoming Appointments
+            </h4>
+            
+            <div class="card-body" style="padding-left: 0px;" #upcomingAppointmentsContainer>
+
+                <div *ngIf="data.length === 0" class="no-appointment">
+                    <img src="assets/images/no_upcoming.svg"/>
+                    <h5 class="no-appointment-title">No Upcoming Appointments</h5>
+                    <p>You have no upcoming <br/> appointments to appear here</p>
+                </div>
+                
+                <div class="row no-gutters mb-2" *ngFor="let item of data; let idx=index">
+                    <div class="col-md-3 dateCustom"> <span 
+                        [innerHTML]="formatDate(item.appointmentCreationTimeStamp)"></span></div>
+                    <div class="col-md-9 text-left">
+                        <p class="mb-0 appointmentCustomText">{{formatTime(item.scheduleTimestamp)}}, {{item.appointmentDurationInMinutes}} mins</p>
+                        <h5 class="mb-0 patientName">{{item.patientFirstName}} {{item.patientLastName}}</h5>
+                        <p class="appointmentCustomText">{{item.serviceName}} with {{item.staffMemberFirstName}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

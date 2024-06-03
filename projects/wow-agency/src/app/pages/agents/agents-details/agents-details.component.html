@@ -1,0 +1,98 @@
+<div class="wow-agdc-root">
+    <div class="wow-agdc-parent">
+        <div class="wow-agdc-subparent">
+            <div class="wow-agdc-wrapper">
+                <div class="row">
+                    <div class="col-md-12 p-0">
+                        <div class="wow-agdc-header">
+
+                            <div class="wow-dh-root">
+                                <div class="wow-dh-parent">
+                                    <div class="wow-dh subparent">
+                                        <div class="wow-dh-wrapper ">
+                                            <div class="wow-dh-left-parent">
+                                                <div class="wow-dh-left-heading">
+                                                    <h2>{{ selectedAgent.firstName + ' ' + selectedAgent.lastName }}
+                                                    </h2>
+                                                </div>
+                                            </div>
+                                            <div class="wow-dh-right-parent">
+                                                <div class="wow-dh-action-btns-wrapper">
+                                                    <div class="wow-dh-action-btn">
+                                                        <button type="button" class="btn mr-2"
+                                                            [title]="selectedAgent.active ? 'Inactive Agent' : 'Active Agent'"
+                                                            [ngClass]="selectedAgent.active ? 'custom-danger-btn' : 'custom-success-btn'"
+                                                            (click)="onChangeStatus()">
+                                                            <i style="font-size: 17px;" class="fa mt-1 fa-ban"
+                                                                [ngClass]="selectedAgent.active ? 'fa-ban' : 'fa-check'"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="wow-dh-action-btn">
+                                                        <button type="button"
+                                                            class="btn btn-space btn-properties-white mr-2"
+                                                            (click)="onGoBack()">Cancel</button>
+                                                    </div>
+                                                    <div class="wow-dh-action-btn">
+                                                        <button type="button" class="btn btn-properties-gray"
+                                                            [disabled]="isFormDisabled"
+                                                            [ngClass]="isFormDisabled ? 'btn-properties-gray' : 'btnAddColor'"
+                                                            (click)="onSubmit()">Save</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 p-0">
+                        <wow-tabs-group 
+                            (selectedTabChange)="onSelectedTabChange($event)">
+                            
+                            <wow-tab-item tabTitle="Details">
+
+                                <ng-container *ngIf="selectedTabIndex === 0">
+                                    <div class="row">
+                                        <div class="col-12 p-0">
+                                            <div class="wow-adg-content">
+                                                <wow-agents-detail-form 
+                                                    [selectedAgent]="selectedAgent"
+                                                    [action]="action"
+                                                    (signals)="onHandleSignals($event)">
+                                                </wow-agents-detail-form>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                </ng-container>
+                            </wow-tab-item>
+
+                            <!-- 2nd Tab start -->
+                            <wow-tab-item tabTitle="Stats">
+                                <ng-container *ngIf="selectedTabIndex === 1">
+                                    <wow-stats-tab class="w-100" [agentId]="selectedAgent.agentID"></wow-stats-tab>
+                                </ng-container>
+                            </wow-tab-item>
+                            <!-- 2nd Tab end -->
+
+                            <!-- 3rd tab start -->
+                            <wow-tab-item tabTitle="Clients">
+                                <ng-container *ngIf="selectedTabIndex === 2">
+                                    <wow-clients-tab class="w-100" [agentId]="selectedAgent.agentID">
+                                    </wow-clients-tab>
+                                </ng-container>
+                            </wow-tab-item>
+                        </wow-tabs-group>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

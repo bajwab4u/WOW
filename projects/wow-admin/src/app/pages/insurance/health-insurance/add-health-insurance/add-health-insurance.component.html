@@ -1,0 +1,74 @@
+<div class="container col-9 float-left content-box-mt component-paddingRL" style="min-width: 100% !important;">
+    <form name="from" [formGroup]="form" autocomplete="off">
+        <div class="row">
+            <div class="col col-sm-12 col-md-7 text-left p-0">
+                <h3>Add Insurance</h3>
+                <div class="subheading">Add the required details of the insurance plan
+                </div>
+            </div>
+            <div class="col col-sm-12 col-md-5 text-align-l text-right mt-2 p-0">
+                <button type="button" class="btn addbtn-size btnDownloadColor btn-properties-white mr-2"
+                    (click)="onGoBack()">Cancel</button>
+                <button type="button" class="btn addbtn-size btn-properties-gray" (click)="submitForm()"
+                    [ngClass]="!form.dirty ? 'btn-properties-gray': 'btnAddColor'"
+                    [disabled]="!form.dirty ">Save</button>
+            </div>
+        </div>
+        <hr />
+        <div class="col-6 float-left p-0">
+            <div class="row inputLabelText ml-5">
+                <div class="col-10 p-0">
+
+                    <div class="">
+                        <div class="form-group form-row mr-0 ml-0">
+                            <div class="col-md-10 col-sm-12 p-0">
+                                <label class="float-left">Insurance Company</label>
+                                <input type="text" class="form-control" formControlName="txtCompany"
+                                    placeholder="e.g Wow Care" [ngClass]="{ 'is-invalid': isControlValid('txtCompany', 'required') ||
+                                isControlValid('txtCompany', 'maxlength')}" maxlength="45" required>
+                                <div *ngIf="isControlValid('txtCompany', 'required') || isControlValid('txtCompany', 'maxlength')"
+                                    class="invalid-feedback">
+                                    <div><i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" [tooltip]="form.controls.txtCompany.errors.required ? 
+                                            'Company Name is required' : 'Name can contain upto 45 characters only'">
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-row mr-0 ml-0">
+                            <div class="col-md-10 col-sm-12 p-0">
+                                <label class="float-left">Plan Name</label>
+                                <input type="text" class="form-control" formControlName="txtName"
+                                    placeholder="e.g Wow Care" [ngClass]="{ 'is-invalid': isControlValid('txtName', 'required') ||
+                                isControlValid('txtName', 'maxlength')}" maxlength="45" required>
+                                <div *ngIf="isControlValid('txtName', 'required') || isControlValid('txtName', 'maxlength')"
+                                    class="invalid-feedback">
+                                    <div><i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" [tooltip]="form.controls.txtName.errors.required ? 
+                                            'Plan Name is required' : 'Name can contain upto 45 characters only'">
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group form-row mr-0 ml-0">
+                            <div class="col-md-10 col-sm-12 p-0 text-right">
+                                <label class="float-left">Plan Description</label>
+                                <textarea class="form-control" type="text" rows="4" formControlName="txtDescription" maxlength="1000" #txtDescription
+                                    placeholder="Plan Description">
+                                </textarea>
+                                <span class="pull-right label label-default" id="count_message">{{txtDescription.value.length
+                                    || 0}}/1000
+                                    char.</span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>

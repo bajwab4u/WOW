@@ -1,0 +1,35 @@
+<div class="row" style="height: 100%; position: relative; display: flex">
+
+    <div class="service-sub-menu p-0" [ngClass]="{'col-md-3': !removecss, 'col-auto': removecss}">
+        <wow-sub-menu 
+            [showPopUp]="true"
+            [config]="subMenuConfig" 
+            [selectedItemName]="selectedItemName" 
+            (signal)="handleSignal($event)">
+        </wow-sub-menu>
+    </div>
+
+    <div class="layout-blank p-0" [ngClass]="{'col-md-9':!removecss,'col-md-12':removecss}">
+        <div class="container float-left  col-12" style="padding: 0 !important; height: 100%;">
+            <div style="height: 100%">
+                <div class="col-md-12 p-0">
+                    <div class="content-box-mt component-paddingRL">
+
+                        <ng-container *ngIf="selectedMenu.name === 'Agency Details'">
+                            <wow-agency-details></wow-agency-details>
+                        </ng-container>
+
+                        <ng-container *ngIf="selectedMenu.name === 'Billing History'">
+                            <wow-agency-billing-history></wow-agency-billing-history>
+                        </ng-container>
+
+                        <ng-container *ngIf="selectedMenu.name === 'Profile Settings'">
+                            <wow-shared-profile-settings></wow-shared-profile-settings>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

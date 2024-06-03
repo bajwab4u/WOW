@@ -1,0 +1,88 @@
+<div class="modal-body">
+	<div class="row">
+		<div class="col-lg-10">
+			<h3>Invite Employees
+				<img class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple tbltooltip"
+					src="assets/images/shared-new-theme/tooltipIcon.svg" placement="bottom"
+					tooltip="Enter the email account of the employee you want to sent an invite to. Your employee will create WoW Account using this email.">
+			</h3>
+			<p>Invite at least one employee and assign a group. Invitation to join WoW Health will
+				be sent to your employees. You can always edit or create more employees later.</p>
+
+			<form class="form-group" [formGroup]="employeeForm">
+				<table class="table table-borderless px-3 business_staff"
+					style="border-spacing: 0; padding: 0 !important;">
+					<tbody>
+						<tr formArrayName="employeeFormItems" style="height: 40px;"
+							*ngFor="let item of employeeForm.get('employeeFormItems')['controls']; let i = index">
+							
+							<td [formGroupName]="i" style="width: 30%; padding: 0px;">
+								<input type="email" formControlName="email" class="form-control " required name="email"
+									placeholder="example@mail.com"
+									[ngClass]="{ 'is-invalid': isEmailInvalid(item, i) }"
+									[tooltip]="" 
+									(input)="onSetValue(item.get('email').value, 'email', i)"
+									 
+									[isDisabled]="!isFormSubmitted"
+									autocomplete="off" maxlength="50">
+								
+								<!-- <div *ngIf="item.get('email').hasError('mustMatch')"
+									class="fa fa-info-circle fa-errorIcon"
+									tooltip="You are not allowed to add multiple staff members with same email">
+
+								</div> -->
+
+								<!-- <div *ngIf="isFormSubmitted && item.get('email').invalid"
+									class="fa fa-info-circle fa-errorIcon"
+									[tooltip]="item.get('email').hasError('required') ? 'Email is required' : ">
+
+								</div> -->
+
+								<div class="invalid-feedback"
+									*ngIf="isEmailValid(item, i)">
+
+									<i aria-hidden="true" class="fa fa-info-circle fa-errorIcon"
+										[tooltip]="isEmailValid(item, i)">
+									</i>
+								</div>
+								
+							</td>
+							<td [formGroupName]="i" style="width: 30%; padding: 0px 0px 0px 10px;">
+								<select formControlName="groupId" class="form-control " required
+									[ngClass]="{ 'is-invalid': isFormSubmitted && item.get('groupId').invalid }"
+									tooltip="" [isDisabled]="!isFormSubmitted">
+									<option value=null selected disabled>Select Employee Group</option>
+									<option *ngFor="let opt of empGroups" [value]="opt.employeeGroupId">
+										{{opt.employeeGroupName}}</option>
+								</select>
+
+								<div class="invalid-feedback" *ngIf="isFormSubmitted && !item.get('groupId').valid">
+
+									<i aria-hidden="true" style="right: 10px; top: 2px;"
+										class="fa fa-info-circle fa-errorIcon" tooltip="Employee Group Type is required">
+									</i>
+								</div>
+							</td>
+
+							<td style="padding: 10px;">
+								<div *ngIf="employeeForm.get('employeeFormItems')['controls'].length > 1">
+									<img src="assets/images/shared-new-theme/deleteicon.svg" alt=""
+										(click)="deleteItem(i)" style="cursor: pointer;">
+								</div>
+							</td>
+						</tr>
+
+						<tr style="height: 40px;">
+							<td class="text-style" style="text-align: left; padding: 0px;">
+								<a (click)="addEmployeeItem()" style="cursor: pointer;">
+									<i class="fa fa-plus mr-2" style="font-size:15px;font-weight: bold;"></i>
+									Add another Employee</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</form>
+		</div>
+	</div>
+</div>

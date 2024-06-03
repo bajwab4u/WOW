@@ -1,0 +1,59 @@
+<div class="row">
+	<div class="row mb-4" style="gap: 15px; display: flex; align-items: center;">
+
+		<div class="col-5" style="padding: 0;">
+			<wow-auto-complete [config]="serviceConfig" (change)="onChange()" [(ngModel)]="selectedService"></wow-auto-complete>
+		</div>
+
+		<button type="button" class="btn savebtn-size btnAddColor float-left search-new-btn"
+			(click)="onChangeStaffService()">Add Service
+		</button>
+		<img class="imgCustom infoIcon tooltipIconSize tooltipstylePurple" style="margin-left: -6px !important;"
+			src="assets/images/shared-new-theme/tooltipIcon.svg" tooltip="Select the service offered by this staff">
+	</div>
+
+	<div class="col-md-12 pl-0 pr-0 mb-3">
+		<wow-table [config]="config" [actions]="tableAction" (signals)="onTableSignals($event)" #serviceDetailRef>
+
+			<ng-template dataTableCell="serviceName" let-row="row" let-col="col">
+				{{row?.serviceName}}
+			</ng-template>
+
+			<ng-template dataTableCell="serviceDurationInMinutes" let-row="row" let-col="col" let-i="index">
+
+				<select name="duration" class="form-control detailInput" #duration="ngModel"
+					[disabled]="serviceDiabled(item)" [(ngModel)]="row.serviceDurationInMinutes"
+					[ngModelOptions]="{standalone: true}" (input)="inputChange(row)"
+					[required]="serviceControlRequired(row, 'serviceDurationInMinutes')" [type]="item" wowInputBehaviour
+					[ngClass]="index === i ? 'hoveronfield' : 'regularfield'">
+
+					<option value=null disabled selected>Duration</option>
+					<option *ngFor="let item of serviceDuration" [value]="item"> {{item}} </option>
+				</select>
+			</ng-template>
+
+			<ng-template dataTableCell="servicePrice" let-row="row" let-col="col" let-i="index">
+
+				<input type="text" [name]="'service_price'+i" [(ngModel)]="row.servicePrice"
+					[ngModelOptions]="{standalone: true}" maxlength="12" [attr.id]="'service_price_id_' + i"
+					[wowOnlyNumbers]="true" class="form-control detailInput col-md-10" required
+					(focus)="getServiceDisplayPrice($event, row, i)" (input)="inputChange(row)" [type]="item"
+					wowInputBehaviour [ngClass]="index === i ? 'hoveronfield' : 'regularfield'">
+
+				<i *ngIf="row.servicePrice == null || ''" class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+					tooltip="Service Price is required.">
+				</i>
+			</ng-template>
+
+			<ng-template dataTableCell="serviceListedPrice" let-row="row" let-col="col" let-i="index">
+
+				<input type="text" [name]="'display_price_' + i" [(ngModel)]="row.serviceListedPrice"
+					[ngModelOptions]="{standalone: true}" class="form-control detailInput col-md-10" disabled
+					style="border: none;" [type]="item" wowInputBehaviour
+					[ngClass]="index === i ? 'hoveronfield' : 'regularfield'">
+			</ng-template>
+
+		</wow-table>
+
+	</div>
+</div>

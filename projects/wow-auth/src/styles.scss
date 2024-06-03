@@ -1,0 +1,80 @@
+
+// @import "shared-styles/scss/core";
+// @import "shared-styles/scss/partials/page-layouts";
+// @import "shared-styles/scss/partials/table";
+// @import "shared-styles/scss/partials/general-styles";
+@import "shared-styles/scss/partials/typography";
+@import "shared-styles/scss/partials/button";
+@import "shared-styles/scss/partials/form";
+
+
+.row {
+  width: 100%;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.headingColor
+{
+    color: #524456;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.textBox
+{
+    color: #575757;
+    font-size: 14px;
+    /* line-height: 160%; */
+}
+
+.card {
+  /* width: 23rem; */
+  width: 400px;
+  min-height: 400px;
+  border-radius: 1%;
+  box-shadow: 0px 3px 15px #57575775;
+}
+
+.text-style
+{
+    font-size: 14px;
+    margin-bottom: 35px;
+}
+// input {
+//     font-size: 1em;
+//     height: 36.8125px !important;
+//     /* width: 150px; */
+//   }
+
+  .btn-properties
+{
+    background-color: #524456;
+    font-size: 13px;
+    border: none;
+    padding-bottom: 10px;
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+    padding-top: 8px !important;
+    border-radius: 5px;
+}
+.forgotLink
+{
+  color: #524456;
+  cursor: pointer;
+}
+
+.iconBox
+{
+  min-width: 40% !important; 
+  min-height: 40px;
+  background-color: #524456;
+}
+.logoimg
+{
+  cursor: pointer;
+}
+
+.usrNot{
+  border: 1px solid red;
+}

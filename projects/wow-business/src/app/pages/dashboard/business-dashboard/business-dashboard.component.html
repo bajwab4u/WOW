@@ -1,0 +1,63 @@
+<div style="height: 100%; overflow: hidden; padding-bottom: 1rem;">
+
+	<div class="row layout-blank content-box-mt component-paddingRL">
+		<!-- <wow-loader style="width: 100%;" [type]="'bar'" [showLoader]="true"></wow-loader> -->
+
+		<div class="col-12 p-0">
+			<div class="float-left">
+				<select name="" id="" class="tbldropdown mr-2" (change)="onChangeStatusFilter($event.target.value)">
+					<option value="WEEK">This Week</option>
+					<option value="MONTH">This Month</option>
+					<option value="YEAR">This Year</option>
+				</select>
+			</div>
+
+
+			<ng-container *ngIf="userRole === 'BUSINESS_ADMIN'">
+				<div class="nav-item dropdown float-right">
+					<button type="button" class="btn btn-properties-inner profileImageContainer"
+						data-toggle="dropdown"><i class="fa fa-plus pr-2"></i>Add</button>
+					<ul class="dropdown-menu  dropdown-menu-right ">
+						<div class="dropdown-container">
+
+							<li class="menu-item status-content" *ngFor="let nav of navigationLinks">
+								<a [routerLink]="nav.url"
+									[state]="nav.state">
+									<span class="mr-4">
+										<img [src]="'assets/images/dashboard/'+nav.icon" alt="">
+									</span>
+									{{nav.title}}
+								</a>
+							</li>
+							
+						</div>
+					</ul>
+				</div>
+			</ng-container>
+		</div>
+
+		<!------------------------ Dashboard Statistics Divs  ------------------------>
+
+		<div class="row pt-5">
+			<div [ngClass]=" userRole === 'PROFESSIONAL' ? 'col-lg-6' : 'col-lg-3'" *ngFor="let item of stats">
+				<div class="card">
+					<h4 class="card-title pt-4">{{item.title}}</h4>
+					<div class="card-body mt-0 pt-0 pl-0 pr-0">
+						<p class="statsName" [ngStyle]="{'font-weight': item.textBold}"> {{item.name}} </p>
+					</div>
+					<hr class="firstDiv" [ngStyle]="{'color': item.bordercolor, 'background-color': item.bordercolor}">
+				</div>
+			</div>
+		</div>
+
+		<!------------------------ Dashboard Appointments component  ------------------------>
+
+		<div class="row">
+			<div class="col-12 p-0">
+				<wow-appointments></wow-appointments>
+
+			</div>
+		</div>
+
+	</div>
+</div>

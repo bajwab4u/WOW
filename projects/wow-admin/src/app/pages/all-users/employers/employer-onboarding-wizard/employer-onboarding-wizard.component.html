@@ -1,0 +1,211 @@
+<div class="layout-blank component-paddingRL content-box-mt">
+  <div class="row">
+    <div class="col-12 p-0">
+      <div class="wow-dh-wrapper">
+        <div class="wow-dh-left-parent text-left">
+          <div class="wow-dh-left-heading">
+            <h3 class="mb-0">
+              <span (click)="onGoBack()" style="cursor: pointer" class="mr-2">
+                <img src="assets/images/details-back-btn.svg" height="12px" />
+              </span>
+              Onboarding for: {{ selectedEmployer?.name ? selectedEmployer.name : 'Employer' }}
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!------------------------ the list for the onboardings ---------------------->
+  <div class="row" *ngIf="ACTIVE_STATE == 'onboarding_list'">
+    <table class="table table-hover mt-5">
+      <thead>
+        <tr>
+          <th scope="col">Onboarding Id</th>
+          <th scope="col">Date</th>
+          <th scope="col">State</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of ONBOARDING_LIST">
+          <td>{{item.serEmployerEmployeeOnboardingId}}</td>
+          <td>{{item.dteModifiedDate}}</td>
+          <td>{{item.txtStatus}}</td>
+          <td>
+            <button *ngIf="item.txtStatus != 'COMPLETED'" class="btn btn-outline-secondary" (click)="resumeOnboardingProcess(item)" >Resume</button>
+            <span *ngIf="item.txtStatus == 'COMPLETED'">Completed</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+  <div class="row" *ngIf="ACTIVE_STATE == 'wizard'">
+    <div class="col-md-12 p-0">
+      <div class="wizard-steps mt-4">
+        <button class="btn step-button" [disabled]="switch != 'EMPLOYEE_UPLOAD'">
+          On Boarding
+        </button>
+        <span class="seprator px-1">>></span>
+        <button
+          class="btn step-button"
+          (click)="switch = 'MEMBERSHIP_UPLOAD'"
+          [disabled]="switch != 'MEMBERSHIP_UPLOAD'"
+        >
+          Memberships Subscription
+        </button>
+        <span class="seprator px-1">>></span>
+        <button
+          class="btn step-button"
+          (click)="switch = 'THIRD_PARTY_ENROLLMENT'"
+          [disabled]="switch != 'THIRD_PARTY_ENROLLMENT'"
+        >
+          Third Party Enrollment
+        </button>
+        <span class="seprator px-1">>></span>
+        <button class="btn step-button"
+        (click)="switch = 'SENT_ONBOARDING_EMAIL'"
+        [disabled]="switch != 'SENT_ONBOARDING_EMAIL'"
+        >
+          Email
+        </button>
+        <span class="seprator px-1">>></span>
+        <button class="btn step-button"
+        (click)="switch = 'COMPLETE'"
+        [disabled]="switch != 'COMPLETE'">
+          Complete
+        </button>
+      </div>
+
+      <div class="linebar tab-body mt-2"></div>
+      <div [ngSwitch]="switch">
+        <div class="row">
+          <div class="col-12">
+            <div *ngSwitchCase="'EMPLOYEE_UPLOAD'" class="py-5">
+              <!-- the onboarding secion starts -->
+              <div class="row">
+                <div class="col-12">
+                  <div >
+                      <input type='file' accept=".csv" (change)="readURL($event.target);" />
+                      <img id="imgPlaceholder" [src]="imgSrc" alt="file" />
+                  </div>
+                  <button class="btn btn-outline-warning float-right ml-2 px-5"  (click)="switchTo('MEMBERSHIP_UPLOAD')">Next</button>
+                </div>
+              </div>
+              <!-- the onboarding secion ends -->
+            </div>
+
+            <div *ngSwitchCase="'MEMBERSHIP_UPLOAD'" class="py-5">
+              <!-- the membershipsubscription secion starts -->
+              <div class="row">
+                <div class="col-12">
+                  <div >
+                      <input type='file' accept=".csv" (change)="readURL($event.target);" />
+                      <img id="imgPlaceholder" [src]="imgSrc" alt="file" />
+                  </div>
+                  <button class="btn btn-outline-warning float-right ml-2 px-5"  (click)="switchTo('THIRD_PARTY_ENROLLMENT')">Next</button>
+                  <button class="btn btn-outline-warning float-left px-4"  (click)="switchTo('EMPLOYEE_UPLOAD')">Previous</button>
+                </div>
+              </div>
+              <!-- the membershipsubscription secion ends -->
+            </div>
+
+            <div *ngSwitchCase="'THIRD_PARTY_ENROLLMENT'" class="py-5">
+              <!-- the thirdpartyenrollment secion starts -->
+              <div class="row">
+                <div class="col-12">
+                  <div >
+                      <input type='file' accept=".csv" (change)="readURL($event.target);" />
+                      <img id="imgPlaceholder" [src]="imgSrc" alt="file" />
+                  </div>
+                  <button class="btn btn-outline-warning float-right ml-2 px-5"  (click)="switchTo('SENT_ONBOARDING_EMAIL')">Next</button>
+                  <button class="btn btn-outline-warning float-left px-4"  (click)="switchTo('MEMBERSHIP_UPLOAD')">Previous</button>
+                </div>
+              </div>
+              <!-- the thirdpartyenrollment secion ends -->
+            </div>
+
+            <div *ngSwitchCase="'SENT_ONBOARDING_EMAIL'" class="py-5 emailsDiv">
+              <!-- the email secion starts -->
+              <div class="row">
+                <div class="col-12">
+                  <div class="row">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th scope="col">Employee Name</th>
+                          <th scope="col">info A</th>
+                          <th scope="col">info B</th>
+                          <th scope="col">info C</th>
+                          <!-- <th scope="col">Actions</th> -->
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of ONBOARDING_LIST">
+                          <td>{{item.employeeName}}</td>
+                          <td>xyz</td>
+                          <td>abc</td>
+                          <td>zxy</td>
+                          <!-- <td>
+                            <div class="btn-group d-flex justify-content-start align-items-center">
+                              <button type="button" class="btn more-btn" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false" (click)="null;">
+                                <span class="more-dot"></span>
+                                <span class="more-dot"></span>
+                                <span class="more-dot"></span>
+                              </button>
+                              <div class="dropdown-menu">
+                                <a class="dropdown-item">Edit</a>
+                                <a class="dropdown-item">Remove</a>
+                              </div>
+                            </div>
+                          </td> -->
+                        </tr>
+                      </tbody>
+                    </table>
+
+
+                  </div>
+                  <button class="btn btn-outline-warning float-right ml-2 px-5"  (click)="switchTo('COMPLETE')">Next</button>
+                  <button class="btn btn-outline-warning float-left px-4"  (click)="switchTo('THIRD_PARTY_ENROLLMENT')">Previous</button>
+                </div>
+              </div>
+              <!-- the email secion ends -->
+            </div>
+
+            <div *ngSwitchCase="'COMPLETE'" class="py-5">
+              <!-- the complete secion starts -->
+              <div class="row">
+                <div class="col-12">
+
+
+                  <div class="success-checkmark">
+                    <div id="animation" class="check-icon">
+                      <span class="icon-line line-tip"></span>
+                      <span class="icon-line line-long"></span>
+                      <div class="icon-circle"></div>
+                      <div class="icon-fix"></div>
+                    </div>
+                  </div>
+                  <div class="m-auto">
+                    <h5>Onboarding process completed!</h5>
+                    <button (click)="restartAnimation()">restart</button>
+                  </div>
+
+
+                  <button class="btn btn-outline-danger float-right px-5"  (click)="onGoBack()">Close</button>
+                  <button class="btn btn-outline-warning float-left px-4"  (click)="switchTo('SENT_ONBOARDING_EMAIL')" >Previous</button>
+                </div>
+              </div>
+              <!-- the complete secion ends -->
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

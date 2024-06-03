@@ -1,0 +1,126 @@
+<div class="modal-body">
+	<form class="form-group w-auto row modal-margin text-style pl-5" 
+		#wizardAddressForm="ngForm"
+		(ngSubmit)="wizardAddressForm.valid && onNextBtnclick()">
+		
+		<div class="col-lg-8 mt-3">
+			<label for="exampleInputEmail1" 
+				class="control-label float-left labelTextStyle">How do your customer recognize you?</label>
+			<input type="text" autocomplete="off" class="form-control" name="bussinessName" required #bussinessName="ngModel"
+				placeholder="What is your business name?" [(ngModel)]="businessAddress.businessName" maxlength="45"
+				[class.is-invalid]="wizardAddressForm.submitted && bussinessName.invalid">
+
+			<div *ngIf="wizardAddressForm.submitted && bussinessName.invalid" class="invalid-feedback">
+
+				<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+					[tooltip]="bussinessName.errors.required ? 'Business Name is required.' : 'Max 45 character(s) allowed.'">
+				</i>
+			</div>
+
+			<div class="form-group">
+				<label for="exampleInputEmail1" class="float-left labelTextStyle mt-2">Where are you located?</label>
+				<div class="input-group mb-2">
+					<div class="input-group-prepend">
+						<div class="input-group-text"> 
+							<img src="assets/images/business-setup/business_icon.svg"
+								class="responsive-image" alt="Null">
+						</div>
+					</div>
+					<input type="text" class="form-control" name="Address" #Address="ngModel" required
+						placeholder="Address" [(ngModel)]="businessAddress.address" maxlength="35"
+						[class.is-invalid]="wizardAddressForm.submitted && Address.invalid">
+
+					<div *ngIf="wizardAddressForm.submitted && Address.invalid" class="invalid-feedback">
+						<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+							[tooltip]="Address.errors.required ? 'Business Address is required.' : 'Max 35 character(s) allowed.'">
+						</i>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group form-row ">
+				<div class="col-12">
+					<input class="form-control" name="city" type="text" required placeholder="City" #city="ngModel"
+						[(ngModel)]="businessAddress.city" maxlength="45"
+						[class.is-invalid]="wizardAddressForm.submitted && city.invalid">
+					<div *ngIf="wizardAddressForm.submitted && city.invalid" class="invalid-feedback">
+						<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+							[tooltip]="city.errors.required ? 'City is required.' : 'Max 45 character(s) allowed.'">
+						</i>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group form-row ">
+				<div class="col-6">
+					<input class="form-control" list="states" name="state" type="text" required placeholder="State"
+						#state="ngModel" [(ngModel)]="businessAddress.state" maxlength="45"
+						[class.is-invalid]="wizardAddressForm.submitted && state.invalid"
+						(change)="fetchCitiesOfSelectedState(state.value)" autocomplete="off">
+					<datalist id="states">
+						<option [value]="" disabled>Choose State</option>
+						<option *ngFor="let state of states" [ngValue]="state.stateName"> {{ state.stateName }}
+						</option>
+					</datalist>
+					<div *ngIf="wizardAddressForm.submitted && state.invalid" class="invalid-feedback">
+						<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+							[tooltip]="state.errors.required ? 'State is required.' : 'Max 45 character(s) allowed.'">
+						</i>
+					</div>
+				</div>
+				<div class="col-6">
+					<input class="form-control" name="zipcode" type="text" minlength="5" maxlength="5"
+						required placeholder="Zip code" #zipcode="ngModel" [(ngModel)]="businessAddress.zipCode"
+						[class.is-invalid]="wizardAddressForm.submitted && zipcode.invalid"
+						wowOnlyNumbers autocomplete="nope">
+					<div *ngIf="wizardAddressForm.submitted && zipcode.invalid" class="invalid-feedback">
+						<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" 
+							[tooltip]="zipcode.errors.required ? 'Zipcode is required.' : 'Zipcode must be atleast 5 digits long.'"> </i>
+
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label for="exampleInputEmail1" class="float-left labelTextStyle">What is your time zone?</label>
+				
+				<input id="inputState" class="form-control" list="timzone" type="search" required #timzon="ngModel"
+					style="width: 100%;margin: 0;" (change)="setTimeZone(timzon.value)"
+					[(ngModel)]="businessAddress.timeZone" name="timzon" placeholder="Type in to select time zone"
+					maxlength="45" [ngClass]="{ 'is-invalid': wizardAddressForm.submitted && timzon.invalid }">
+				<datalist id="timzone">
+					<option value=null selected disabled> Choose Time Zone </option>
+					<option *ngFor="let time of timeZoneArray" [value]="time.value"> {{ time.value }}
+					</option>
+				</datalist>
+
+				<!-- <div class="input-group">
+					<wow-auto-complete style="width: 100%;"
+						name="timzon"
+						[required]="true"
+						[config]="timeConfig"
+						#timzon="ngModel"
+						[options]="timeZoneArray"
+						[(ngModel)]="businessAddress.timeZone"
+						[invalid]="wizardAddressForm.submitted && timzon.invalid"></wow-auto-complete>
+
+					<div *ngIf="wizardAddressForm.submitted && timzon.invalid" class="invalid-feedback">
+						<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+							[tooltip]="timzon.errors.required ? 'Time zone is required.' : 'Max 45 character(s) allowed.'">
+						</i>
+					</div>
+				</div> -->
+
+				<div *ngIf="wizardAddressForm.submitted && timzon.invalid" class="invalid-feedback">
+					<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+						[tooltip]="timzon.errors.required ? 'Time zone is required.' : 'Max 45 character(s) allowed.'">
+					</i>
+				</div>
+
+			</div>
+		</div>
+
+		<div id="submit-btn-cont" style="display: none;"></div>
+
+	</form>
+</div>

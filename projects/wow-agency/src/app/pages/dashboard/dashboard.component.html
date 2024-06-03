@@ -1,0 +1,34 @@
+<div class="wow-dash-root">
+    <div class="container component-paddingRL content-box-mt">
+        <div class="row">
+            <div class="col-md-12 p-0">
+                <div class="wow-dash-header-wrapper">
+
+                    <ng-container *ngIf="userRole === 'AFFILIATE'">
+                        <!-- NOTE: currently agency is implemented on employer portal change userRole once agency portal is implemented separately -->
+
+                        <div class="nav-item dropdown float-right">
+                            <button class="btn btn-properties-inner profileImageContainer" type="button"
+                                data-toggle="dropdown">
+                                <i class="fa fa-plus pr-2"></i>Add
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right ">
+                                <div class="dropdown-container">
+                                    <li class="menu-item status-content" *ngFor="let nav of navigationLinks">
+                                        <a [routerLink]="nav.url" [state]="nav.state" class="dropdown-text">
+                                            <span class="mr-4">
+                                                <img [src]="'assets/images/'+nav.icon" alt="">
+                                            </span>
+                                            {{nav.title}}
+                                        </a>
+                                    </li>
+
+                                </div>
+                            </ul>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

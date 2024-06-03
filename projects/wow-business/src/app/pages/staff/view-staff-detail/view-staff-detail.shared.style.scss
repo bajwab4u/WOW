@@ -1,0 +1,27 @@
+table td, th {
+    text-align: left;
+}
+
+:host::ng-deep.multiselect-dropdown .dropdown-btn
+{
+    min-height: 42px;
+    align-items: center;
+    display: flex !important;
+    justify-content: space-between;
+}
+
+.search-new-btn
+{
+    outline: none;
+    max-height: 42px;
+    height: 42px;
+    margin-top: 1px;
+}
+
+.service-tbtooltip
+{
+    ::ng-deep.tooltip
+    {
+        top: -55px !important;
+    }
+}

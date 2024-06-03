@@ -1,0 +1,158 @@
+<div
+  style="
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow-y: auto;
+    padding-right: 2px;
+    padding-top: 5px;
+  "
+>
+  <ng-container *ngFor="let card of data; let last = last; let idx = index">
+    <ng-container *ngIf="isEmpWallet(card) && showWallet">
+      <wow-employer-wallet
+        style="width: 100%"
+        [card]="card"
+        [width]="width"
+        [allSelection]="allSelection"
+        [showMakeDefault]="showMakeDefault"
+        [showDelete]="showDelete"
+        [idx]="idx"
+        [isFromMarketPlace]="isFromMarketPlace"
+        (signals)="onHandleWalletActions($event)"
+      ></wow-employer-wallet>
+    </ng-container>
+
+    <ng-container *ngIf="!isEmpWallet(card)">
+      <ng-container *ngIf="!isFromMarketPlace; else marketPlaceRef">
+        <div
+          class="d-flex wow-saved-card mb-3 p-3 mt-3"
+          style="background-color: #5244560a; align-items: center"
+          [style.width.%]="width"
+          [class.selected-card]="card['selected'] && allSelection"
+          (click)="onSelectCard(card, idx)"
+        >
+          <img
+            *ngIf="allSelection && card['selected']"
+            src="assets/images/check.svg"
+            style="position: absolute; right: -3px; top: -6px"
+          />
+
+          <div class="py-2 px-3">
+            <img
+              [src]="cardImage(card)"
+              onerror="this.src='assets/images/cards/visa.svg';"
+              class="image-pointer"
+              alt="Null"
+              style="padding: 0px !important"
+            />
+          </div>
+          
+          <div class="p-2">
+            <h5>{{ card?.cardType }} {{ getTitle(card) }}</h5>
+            <span style="font-size: 13px; color: #575757"
+              >Expiry Date: {{ getExpDate(card) }}</span
+            >
+          </div>
+
+          <div *ngIf="showMakeDefault" class="ml-auto p-2 pr-5">
+            <!-- <span style="color: #3b7496; cursor: pointer;" (click)="onMakeDefault(card)" *ngIf="!card?.defaultCard">Make Default</span>
+						<span style="color: #707070E6; font-size: 12px;" *ngIf="card?.defaultCard">(Default)</span> -->
+          </div>
+
+          <div *ngIf="showDelete" class="p-2 pr-4">
+            <img
+              (click)="onDeleteCard(card)"
+              src="assets/images/delete_icon.svg"
+              class="image-pointer pb-1"
+              alt="Null"
+            />
+          </div>
+        </div>
+
+        <div
+          *ngIf="last && showAddBtn"
+          style="
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            max-width: 49%;
+            flex: 1 1 49%;
+          "
+        >
+          <button
+            type="submit"
+            class="btn btn-properties-gray"
+            (click)="onAddNewCard()"
+            style="outline: none"
+          >
+            <!-- <img _ngcontent-yov-c181="" src="assets/images/shared-new-theme/addicon.svg" style="height: 22px; padding-right: 10px;"> -->
+            <i class="fa fa-plus pr-2"></i>
+            Add New Card
+          </button>
+        </div>
+      </ng-container>
+
+      <ng-template #marketPlaceRef>
+        <div
+          style="width: 100%"
+          [ngStyle]="{ 'margin-top': idx === 0 ? '3px' : '0px' }"
+        >
+          <div
+            [ngClass]="
+              card['selected'] && allSelection
+                ? 'selectSavePaymentCard'
+                : 'savePaymentCard'
+            "
+            (click)="onSelectCard(card, idx)"
+          >
+            <img
+              src="assets/images/check_sm.svg"
+              *ngIf="allSelection && card['selected']"
+              class="smallIcon"
+              alt="Null"
+            />
+            <img [src]="cardImage(card)" class="image-Size" alt="Null" />
+            <div class="card-detail">
+              <label class="cartName" for=""
+                >{{ card?.cardType }} {{ getTitle(card) }}</label
+              >
+              <small class="expiryCard"
+                >Expiry Date: {{ getExpDate(card) }}</small
+              >
+            </div>
+
+            <!-- <div class="card-detail" style="padding-right: 20px; flex: 1; text-align: right;">
+							<span style="color: #3b7496; font-size: 12px; cursor: pointer;"
+							(click)="onMakeDefault(card)" *ngIf="!card?.defaultCard">Make Default</span>
+							<span style="color: #707070E6; font-size: 12px;" *ngIf="card?.defaultCard">(Default)</span>
+						</div> -->
+          </div>
+        </div>
+      </ng-template>
+    </ng-container>
+  </ng-container>
+  <div
+        class="form-group form-check mt-3 text-left"
+        *ngIf="isMSC"
+      >
+        <input
+          type="checkbox"
+          class="form-check-input mr-2"
+          required
+          name="termsConditions"
+          [(ngModel)]="termsConditions"
+          #checkbox="ngModel"
+          (change)="emitTermsAndConditions()"
+        />
+
+        <label class="form-check-label marginTop" for="exampleCheck1">
+          By checking, you agree to our
+          <a
+            style="text-decoration: underline; color: blue; cursor: pointer"
+            (click)="showConditions()"
+            >Terms of Use & Privacy Policy</a
+          >
+        </label>
+      </div>
+</div>

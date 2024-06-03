@@ -1,0 +1,60 @@
+<div class="modal-header modal-title">
+	<img [src]="img" class="responsive-image mt-10" alt="Null">
+</div>
+
+<!-- <wow-loader class="wizrad-loader" [type]="'bar'" [showLoader]="loading"></wow-loader> -->
+<div class="modal-body signup-wizard-container">
+	
+	<div class="row">
+
+		<ng-container *ngIf="next === 'ADDRESS_DETAIL'">
+			<wizard-address-detail [action]="action" 
+				(signals)="updateLoadingStatus($event)"
+				(stepChanged)="loadStep($event)"></wizard-address-detail>
+		</ng-container>
+
+		<div [ngStyle]="{ 'display': next === 'ADD_SCHEDULE' ? 'block' : 'none' }">
+			<wizard-business-hours [action]="action" 
+				(signals)="updateLoadingStatus($event)"
+				(stepChanged)="loadStep($event)"> </wizard-business-hours>
+		</div>
+
+		<ng-container *ngIf="next === 'ADD_SERVICES'">
+			<wizard-add-services [action]="action" 
+				(signals)="updateLoadingStatus($event)"
+				(stepChanged)="loadStep($event)"></wizard-add-services>
+		</ng-container>
+
+		<ng-container *ngIf="next === 'ADD_STAFF'">
+			<wizard-add-staff [profileDetail]="profileDetail" [action]="action" 
+				(signals)="updateLoadingStatus($event)"
+				(stepChanged)="loadStep($event)">
+			</wizard-add-staff>
+		</ng-container>
+		
+	</div>
+
+</div>
+
+<div class="modal-footer dlg-footer">
+
+	<div style="flex: 1;">
+		<a *ngIf="showBack" style="float: left; cursor: pointer;"
+			class="text-style" (click)="onGoBack()">
+			<i class="fa fa-angle-left mr-2" style="font-size:15px;font-weight: bold;"></i>
+			Back
+		</a>
+	</div>
+
+	<div style="flex: 1;">
+		<button style="float: right;" type="button" 
+			[disabled]="isSubmitted"
+			class="btn btn-properties" (click)="onHandleAction()">
+			{{ next === 'ADD_STAFF' ? 'Finish' : 'Next'}} 
+			
+			<wow-loader [type]="'btn-spinner'" 
+				[showLoader]="isSubmitted"></wow-loader>
+		</button>
+	</div>
+
+</div>

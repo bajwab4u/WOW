@@ -1,0 +1,26 @@
+<div class="modal-body" style="padding: 30px;">
+	<div style="justify-content: center;display: flex;padding-bottom:1rem" *ngIf="data.config?.showImg">
+		<img src="assets/images/alert-triangle.svg" alt="assets/images/alert-triangle.svg">
+		{{data.config.alertImg}}
+
+	</div>
+	<p style="text-align: center;">
+		<strong>{{data?.title}}</strong>
+	</p>
+	<p style="text-align: center;" *ngIf="data?.message"> {{data?.message}} </p>
+
+
+	<div style="height: 15px;"></div>
+	<div style="height: 15px;"></div>
+	<div class="confirm-dialog-actions">
+		<button type="button" (click)="onHandlePostiveAction(false)" ngbAutofocus
+			class="btn btn-outline-secondary actions-btn">{{data.config.negBtnTxt? data.config.negBtnTxt :
+			"No"}}</button>
+		<button type="button" (click)="onHandlePostiveAction(true)"
+			[style.backgroundColor]="data?.config.positiveBtnBgColor"
+			[style.borderColor]="data?.config.positiveBtnBgColor" [ngClass]="'btn-danger'"
+			class="btn   actions-btn">{{data.config.positiveBtnTxt? data.config.positiveBtnTxt
+			:
+			"Yes"}}</button>
+	</div>
+</div>

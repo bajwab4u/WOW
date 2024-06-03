@@ -1,0 +1,82 @@
+.CharacterContainer {
+  text-align: center;
+  font-size: 13px;
+  /* line-height: 2em; */
+  background-color: #F8F8F8;
+  color: #524456;
+  cursor: pointer;
+  height: 305px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  line-height: 16px;
+}
+
+.ListContainer {
+  text-align: left;
+  font-size: 1.4em;
+  line-height: 3em;
+  background-color: #FFFFFF;
+  color: #575757;
+  height: 345px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: 1px solid #EDEDED9E;
+}
+
+.CharacterElement {
+  margin-right: 10px;
+}
+
+.Inactive {
+  color: grey;
+  cursor: default;
+}
+
+.AppElement {
+  font-size: 2em;
+  border: 1px solid #000;
+  text-align: center;
+  line-height: 14em;
+  background-color: #ffffdd;
+}
+.cursorPointer{
+  cursor: pointer;
+}
+.backgroung-colorbody{
+  background-color: black;
+  color: white;
+}
+
+.selected
+{
+  /* background-color: #dadada; */
+  /* color: #524456; */
+  color: blue;
+  font-weight: 600;
+}
+
+.comp-container
+{
+  padding: 8px 0 !important;
+  margin-bottom: 0px !important;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.ellipse 
+{   
+    width: 20ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.no-rec-class
+{
+  font-size: 13px; 
+  padding: 0; 
+  margin: 0; 
+  text-align: center;
+	font-weight: 600;
+}

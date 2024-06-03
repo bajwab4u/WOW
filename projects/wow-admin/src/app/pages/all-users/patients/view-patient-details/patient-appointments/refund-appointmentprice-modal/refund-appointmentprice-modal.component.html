@@ -1,0 +1,49 @@
+<div class="container col-9 float-left content-box-mt component-paddingRL" style="min-width: 100% !important;">
+  <form name="from" [formGroup]="form" autocomplete="off">
+    <div class="row">
+      <div class="col col-sm-12 col-md-12 text-left p-0">
+        <h3>Refund</h3>
+      </div>
+    </div>
+    <div class="col-12 float-left p-0">
+      <div class="row inputLabelText ml-5">
+        <div class="col-12 p-0">
+          <div class="form-group form-row mr-0 ml-0">
+            <div class="col-md-12 col-sm-12 p-0">
+              <label class="float-left">Re-enter the refund amount i.e. <strong>{{data?.price}}</strong></label>
+              <input type="text" class="form-control" formControlName="amount" placeholder="$$$" [wowOnlyNumbers]="true"
+                [ngClass]="{ 'is-invalid': form.dirty && form.get('amount').value != data?.price}" required>
+              <div *ngIf="form.get('amount').value != data?.price" class="invalid-feedback">
+                <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Amount is invalid">
+                </i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-start align-items-center">
+        <div class="form-check">
+          <input class="form-check-input" formControlName="walletRefund" type="radio" name="exampleRadios" id="exampleRadios1" [value]="false" checked>
+          <label class="form-check-label" for="exampleRadios1">
+            Refund to card
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" formControlName="walletRefund" type="radio" name="exampleRadios" id="exampleRadios2" [value]="true">
+          <label class="form-check-label" for="exampleRadios2">
+            Refund to wallet
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-sm-12 col-md-12 text-align-l text-right mt-4 p-0">
+        <button type="button" class="btn addbtn-size btnDownloadColor btn-properties-white mr-2"
+          (click)="closeModal()">Cancel</button>
+        <button type="button" class="btn addbtn-size btn-properties-gray" (click)="onSubmit(data)"
+          [ngClass]="(form.get('amount').value != data?.price) ? 'btn-properties-gray': 'btnAddColor'"
+          [disabled]="form.get('amount').value != data?.price">Refund</button>
+      </div>
+    </div>
+  </form>
+</div>

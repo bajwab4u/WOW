@@ -1,0 +1,77 @@
+.backiconsize{
+  width: 26px;
+  height: 19px;
+}
+.iconsize{
+  width: 10px;
+  height: 19px;
+}
+.revericonsize{
+  width: 10px;
+  height: 19px;
+  margin-top: -3px;
+  transform: rotate(180deg);
+  
+}
+.sidebar-wrapper{
+  background-color: #EDEDED9E;
+  height: 88vh;
+  font-size: 0.8rem;
+}
+.sidebar-wrapper .navlist{
+  display: grid;
+}
+.sidebarmenuitems{
+  border: 3px solid;
+  background-color: #fff;
+  display: inline-block;
+  color: #575757;
+  margin: 5px 10px;
+  border-radius: 5px;
+  list-style: none;
+  padding: 12px;
+  border-top: transparent;
+  border-bottom: transparent;
+  border-right: transparent;
+  font-size: 13px;
+  font-weight: 400;
+  font: normal normal normal 14px/21px Poppins;
+}
+.sidebarmenuitems:hover{
+  background-color: #dadada;
+  color: #4c4a4a;
+  cursor: pointer;
+  list-style: none;
+}
+.sidebarmenuitems a:hover {
+  text-decoration: none;
+}
+.selected{
+  background-color: #dadada;
+  color: #4c4a4a;
+}
+.backgroung-colorbody{
+  background-color: #575757 !important;
+  color: #fff !important;
+}
+.cursorPointer{
+  cursor: pointer;
+}
+
+.layout-blank
+{
+  height: 100%;
+  overflow: auto;
+}
+
+.count {
+  color: white;
+  border-radius: 50%;
+  padding-top: 1px;
+  margin-left: 10px;
+
+  height: 23px;
+  width: 23px;
+  font-size: 12px;
+  display: inline-block;
+}

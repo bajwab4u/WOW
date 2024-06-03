@@ -1,0 +1,99 @@
+<div class="row">
+
+   <form #workingHourForm="ngForm">
+      <div class="col-12 col-0ffset-1" style="padding-left: 0px; padding-right: 0px;">
+
+         <div class="row wow-apply-all-resp">
+            <div class="col-12 text-right">
+               <a class="apply-to-all " (click)="onApplyAll()" >Apply All</a>
+
+            </div>
+         </div>
+         <ng-container *ngFor="let day of staffWorkingSchedules; let i=index">
+            <div style="align-items: center;" class="form-group row field-style input-space">
+
+               <div class="col-lg-2" style="padding-left: 0px; padding-right: 0px;">
+                  <div style="display: flex;" class="form-check float-left">
+                     <input type="checkbox" [name]="getControlName(day.dayName, 'check', i, null)"
+                        class="form-check-input" (change)="onChange(i)"
+                        id="exampleCheck1" [(ngModel)]="day.check">
+                     <label class="form-check-label ml-3 mb-0 labelTextStyle text-style">{{day.dayName | titlecase}}</label>
+                  </div>
+               </div>
+
+               <ng-container *ngFor="let schedule of day.schedules; let j=index">
+
+                  <div class="col-lg-2" *ngIf="j > 0" [class.mt-2]="j > 0"
+                     style="padding-left: 0px; padding-right: 0px;"></div>
+
+                  <div class="col-lg-4 p-0" style="display: flex; align-items: center;" [class.mt-2]="j > 0">
+                     <div class="md-form" (click)="day.check = true">
+
+                        <wow-time-picker [width]="'100%'"
+                           [required]="day.check"
+                           [isFormSubmitted]="isFormSubmitted"
+                           placeHolder='Start Time'
+                           [controlName]="getControlName(day.dayName, 'start', i, j)"
+                           [value]="schedule.startTime"
+                           [inValidErrMsg]="messageTooltip(i, j, 'startTime')"
+                           [inValid]="isTimeInValid(i, j, 'startTime')"
+                           (signals)="onChangeValue($event, 'startTime', i, j)">
+                        </wow-time-picker>
+                     </div>
+                     <div class="px-4 mx-2 text-style">
+                        To
+                     </div>
+                     <div class="md-form" (click)="day.check = true">
+
+                        <wow-time-picker [width]="'100%'"
+                           [required]="day.check"
+                           [isFormSubmitted]="isFormSubmitted"
+                           placeHolder='End Time'
+                           [inValidErrMsg]="messageTooltip(i, j, 'endTime')"
+                           [inValid]="isTimeInValid(i, j, 'endTime')"
+                           [controlName]="getControlName(day.dayName, 'end', i, j)"
+                           [value]="schedule.endTime"
+                           (signals)="onChangeValue($event, 'endTime', i, j)">
+                        </wow-time-picker>
+                     </div>
+                  </div>
+
+                  <div class="col-lg-3 col-sm-6 wow-p0" [class.mt-2]="j > 0">
+                     <div class="md-form" (click)="day.check = true">
+
+                        <select style="font-size: 13px;" class="form-control " (change)="onChangeLocation(i, j)"
+                           [required]="day.check"
+                           [name]="getControlName(day.dayName, 'schedule_location', i, j)"
+                           [(ngModel)]="schedule.providerStaffLocationId"
+                           [class.is-invalid]="isFormSubmitted && day.check && !schedule.providerStaffLocationId">
+                           <option value=null disabled>Select Location</option>
+                           <option *ngFor="let opt of staffLocations" [value]="opt['providerStaffLocationId']">
+                              {{opt['locationName']}}
+                           </option>
+                        </select>
+
+                        <div *ngIf="isFormSubmitted && day.check && !schedule.providerStaffLocationId" class="invalid-feedback">
+                           <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                              tooltip="Location is required."> </i>
+                        </div>
+
+                     </div>
+                  </div>
+
+                  <div class="col-lg-1 col-sm-2 p-0 wow-mt-1rem" [class.mt-2]="j > 0">
+                     <img (click)="onHandleAction('INCREMENT', i, j)" class="inc-dec-icon" src="assets/images/inc_icon.svg">
+                     <img (click)="onHandleAction('DECREMENT', i, j)" class="inc-dec-icon" src="assets/images/dec_btn.svg">
+                  </div>
+
+                  <div style="font-size: 13px;" class="col-lg-2">
+                     <a class="apply-to-all wow-apply-all-none" (click)="onApplyAll()" *ngIf="i === 0 && j === 0">Apply All</a>
+                  </div>
+
+               </ng-container>
+            </div>
+         </ng-container>
+
+      </div>
+   </form>
+
+</div>

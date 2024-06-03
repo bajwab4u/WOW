@@ -1,0 +1,173 @@
+<div class="container float-left col-12" style="height: 100%; overflow-y: auto;" [class.bg]="showImageTitle"
+	[ngClass]="isMarketPlace && !showImageTitle ? 'p-4' : ' component-paddingRL content-box-mt'">
+	<form [formGroup]="createCardProfile" autocomplete="off">
+
+		<ng-container *ngIf="showHeader">
+			<div class="row">
+				<div class="col-lg-8 col-md-7 col-sm-12 text-left p-0">
+					<h3>Add payment Method</h3>
+					<div class="subheading">Add a payment method for easier transactions.</div>
+				</div>
+				<div class="col-lg-4 col-md-5 col-sm-12 text-right text-align-l wow-mt-1rem p-0">
+					<button type="button" class="btn btn-space btn-properties-white mr-2"
+						(click)="goBack()">Cancel</button>
+					<button type="button" (click)="addCard()" class="btn btn-properties-gray btnAddColor"
+						style="outline: none; padding-bottom: 12px !important;">
+						Save</button>
+				</div>
+			</div>
+			<hr />
+		</ng-container>
+
+		<div class="d-flex justify-content-between wow-resp-add-card-header">
+			<div *ngIf="showImageTitle">
+				<h2>Add New Card</h2>
+			</div>
+
+			<div *ngIf="!isMarketPlace">
+				<img src="assets/images/cards/cards-group.svg" class="image-pointer pb-4 mr-4 wow-resp-cards-img"
+					alt="Null">
+			</div>
+		</div>
+
+		<div class="form-row">
+			<div class="col-md-6 mb-3">
+				<label class="labelStyling">Card Holder's Name</label>
+				<input type="text" class="form-control" formControlName="fullName" placeholder="e.g John Doe" required
+					[class.is-invalid]="isFormSubmitted && createCardProfile.get('fullName').invalid" minlength="1"
+					maxlength="100">
+
+				<div *ngIf="isFormSubmitted && createCardProfile.get('fullName').invalid" class="invalid-feedback">
+					<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+						[tooltip]="isControlValid('fullName') ? 'Full Name is required.' : 'Length cannot be greater than 1000 characters'">
+					</i>
+				</div>
+			</div>
+
+			<ng-container *ngIf="showImageTitle">
+				<ng-container [ngTemplateOutlet]="cardNoRef"></ng-container>
+			</ng-container>
+
+		</div>
+
+		<div class="form-row" *ngIf="!showImageTitle">
+			<ng-container [ngTemplateOutlet]="cardNoRef"></ng-container>
+		</div>
+
+		<div class="form-row">
+			<div class="mb-3" [ngClass]="showImageTitle ? 'col-md-6' : 'col-md-3'">
+				<label class="labelStyling">Expiry Date</label>
+
+				<wow-month-picker [required]="true" [tooltipIconMR]="18" [isFormSubmitted]="isFormSubmitted"
+					[selectedDate]="createCardProfile?.controls?.expDate?.value" placeHolder="Expiry Date"
+					controlName="card-expiration-date" (signals)="onSelectedDate($event)">
+				</wow-month-picker>
+
+			</div>
+
+			<div class="mb-3" [ngClass]="showImageTitle ? 'col-md-6' : 'col-md-3'">
+				<label class="labelStyling">CVV/CVC</label>
+				<input type="text" class="form-control" formControlName="cardCode" placeholder="Card Code"
+					wowOnlyNumbers minlength="3" maxlength="4" required (focusOut)="creditCardValueCheck('cardCode')"
+					[class.is-invalid]="isFormSubmitted && createCardProfile.get('cardCode').invalid">
+
+				<div *ngIf="isFormSubmitted && createCardProfile.get('cardCode').invalid" class="invalid-feedback">
+					<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" [tooltip]="CVVErr"> </i>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- <p *ngIf="isMarketPlace && !showImageTitle" class="text-left mt-3">**You will be charged $30 per month per employee</p> -->
+
+		<!-- <ng-container *ngIf="showImageTitle" class="text-left"> -->
+
+		<div style="display: flex; align-items: start;" class="form-group form-check mt-3 text-left p-0 col-md-6">
+			<img class="pt-1 mr-2" src="assets/images/info-icon-2.svg">
+			<label style="font-size: 10px !important;" class="form-check-label marginTop" for="exampleCheck1">
+				We will charge $0.05 from your card for verification purpose. This payment will be reverted within
+				24hrs.
+			</label>
+		</div>
+		<div class="">
+
+
+			<div *ngIf="showImageTitle" class="form-group form-check mt-3 text-left">
+				<input type="checkbox" class="form-check-input" [ngModelOptions]="{standalone: true}"
+					name="saveCardDetails" [(ngModel)]="addcard" required>
+
+				<label class="form-check-label marginTop" for="exampleCheck1">
+					Save card details for faster checkout
+				</label>
+
+			</div>
+
+			<div class="form-group form-check mt-3 text-left">
+
+				<input type="checkbox" class="form-check-input mr-2" [ngModelOptions]="{standalone: true}"
+					name="saveCardDetails" [(ngModel)]="defaultCard" required>
+
+				<label class="form-check-label marginTop" for="exampleCheck1">
+					Make default
+				</label>
+			</div>
+      <div
+        class="form-group form-check mt-3 text-left"
+        *ngIf="isMSC"
+      >
+        <input
+          type="checkbox"
+          class="form-check-input mr-2"
+          required
+          name="termsConditions"
+          formControlName="termsConditions"
+          (change)="emitTermsAndConditions()"
+        />
+
+        <label class="form-check-label marginTop" for="exampleCheck1">
+          By checking, you agree to our
+          <a
+            style="text-decoration: underline; color: blue; cursor: pointer"
+            (click)="showConditions()"
+            >Terms of Use & Privacy Policy</a
+          >
+        </label>
+      </div>
+		</div>
+		<!-- </ng-container> -->
+
+		<!-- footer -->
+		<div class="row mt-4" *ngIf="showImageTitle">
+			<div class="col-lg-12 col-md-12 col-sm-12 p-0" [ngClass]="showImageTitle ? 'text-left' : 'text-right'">
+				<button *ngIf="isMarketPlace" type="button" class="btn btn-space btn-properties-white mr-2"
+					(click)="goBack()">Cancel</button>
+				<button type="button" (click)="addCard()" #submitBtn class="btn btn-properties-gray btnAddColor mr-2 inVisible"
+					style="outline: none;">
+					{{showImageTitle ? 'Save' : 'Enroll'}}</button>
+
+				<button *ngIf="showImageTitle" type="button" class="btn btn-space btn-properties-white inVisible"
+					(click)="goBack()">Cancel</button>
+			</div>
+		</div>
+		<!-- footer end -->
+
+		<!-- input field temp ref -->
+		<ng-template #cardNoRef>
+			<div class="col-md-6 mb-3">
+				<label class="labelStyling">Card Number</label>
+				<input type="text" class="form-control" formControlName="cardNumber" placeholder="xxxx xxxx xxxx xxxx"
+					mask="0000 0000 0000 0000||0000 0000 0000 000" required
+					(focusOut)="creditCardValueCheck('cardNumber')"
+					[class.is-invalid]="isFormSubmitted && createCardProfile.get('cardNumber').invalid">
+
+				<div *ngIf="isFormSubmitted && createCardProfile.get('cardNumber').invalid" class="invalid-feedback">
+
+					<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+						[tooltip]="createCardProfile.get('cardNumber').errors.required ? 'Card Number is required.' : createCardProfile.get('cardNumber').errors?.mask ? 'Card Number should be of required format' : 'Card Number is not valid.'">
+					</i>
+				</div>
+			</div>
+		</ng-template>
+
+	</form>
+</div>

@@ -1,0 +1,167 @@
+.item1 {
+    grid-column: 2 / end;
+    grid-row: 1;
+}
+
+.item2 {
+    grid-column: 0 / 1;
+    grid-row: 1 / end;
+}
+
+.item3 {
+    grid-column: 2 / end;
+    grid-row: 2 / end;
+}
+
+.wow-body-container {
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+}
+
+.expanded-side-menu-wow {
+    width: 220px;
+    max-width: 220px;
+}
+
+.expanded-wow-side-menu-wow {
+    width: 220px;
+    max-width: 220px;
+}
+
+.collapse-wow-side-menu {
+    width: 80px;
+    max-width: 80px;
+}
+
+.collapse-wow-content-area {
+    width: calc(100vw - 81px);
+}
+
+.expanded-wow-content-area {
+    width: calc(100vw - 220px);
+}
+
+.grid-container {
+    height: 100vh;
+    box-sizing: border-box;
+    display: grid;
+    /* grid-template-columns: 16vw auto;                  commented because the content was overlapping  */
+    grid-template-rows: 75px auto;
+    grid-gap: 0;
+    transition: all 0.5s ease 0s;
+}
+
+.grid-container-half {
+    height: 100vh;
+    box-sizing: border-box;
+    display: grid;
+    /* grid-template-columns: 5.9vw auto;                  commented because the content was overlapping  */
+    grid-template-rows: 65px auto;
+    grid-gap: 0;
+    transition: all 0.5s ease 0s;
+}
+
+.grid-container > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+}
+
+.grid-container-half > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+}
+
+.backColor {
+    background-color: #f0dcff !important;
+    margin-left: 0;
+    padding-left: 0;
+    margin-right: 0;
+    padding-right: 0;
+    padding-top: 0;
+    width: 100%;
+    height: 100% !important;
+    margin-top: 20px;
+}
+
+.listunordered {
+    font-family: "Open sans", sans-serif;
+    list-style-type: disc !important;
+    padding-right: 40px !important;
+}
+
+.listunordered li {
+    display: list-item;
+    font-size: 14px;
+}
+
+.listunordered li ol {
+    padding-right: 40px !important;
+}
+
+.listunordered li ol li {
+    list-style-type: circle !important;
+    font-size: 14px;
+}
+
+.imgSize2 {
+    width: 23px;
+    margin-right: 8px;
+}
+
+.cursorPointer {
+    cursor: pointer;
+}
+
+.backbtn {
+    height: 35px !important;
+    width: 25px !important;
+    margin-top: 11px !important;
+    cursor: pointer;
+}
+
+.floatleft {
+    float: left;
+}
+
+.content-width20 {
+    width: 20%;
+}
+
+.transcriber {
+    background-color: #faf8ff !important;
+    margin-left: 0;
+    padding-left: 0;
+    margin-right: 0;
+    padding-right: 0;
+    margin-top: 0;
+    padding-top: 0;
+    width: 100%;
+    height: 94%;
+}
+
+.content-width {
+    width: 100%;
+}
+
+.height100 {
+    height: 100% !important;
+}
+
+@media only screen and (max-width: 768px) {
+    .modal-dialog {
+        margin: 30px auto !important;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .modal-dialog {
+        margin: 30px auto !important;
+    }
+}
+
+
+::ng-deep .app-login-dev-modal .modal-dialog { 
+    max-width: 95%;
+    width: 95%;
+}

@@ -1,0 +1,17 @@
+
+ <div class="wow-ags-graph-header">
+    <div class="wow-ags-graph-heading">
+        <h5>Onboarding 2021</h5>
+    </div>
+    <div class="wow-ags-graph-filter">
+        <select (change)="graphFilterSelected()"  [(ngModel)]="graphFilterValue"
+        name="graphFilter">
+            <option *ngFor="let option of graphFilterOptions">
+                {{option.value}}
+            </option>
+        </select>
+    </div>
+</div>
+<div class="wow-ags-graph">
+    <div id="chartdiv"></div>
+</div>

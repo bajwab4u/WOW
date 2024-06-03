@@ -1,0 +1,52 @@
+<div class="sidebar-wrapper m-0 p-0" *ngIf="!togglebutton">
+
+	<div class="col-12 m-0 p-0" style="position: absolute; z-index: 1; height: 22px;" 
+		(click)="toggleSubmenuWidth()">
+		<div class="bg-color-primary backiconsize float-right m-0 p-0 cursorPointer">
+			<img src="assets/images/shared-subMenu/arrow.svg" 
+				*ngIf="!togglebutton" alt="" class="iconsize">
+		</div>
+	</div>
+
+	<div class="col-12 content-box-pt">
+		<h2 class="col-12 text-justify text-center mb-4">{{config?.heading}}</h2>
+	</div>
+
+	<div class="row" style="padding: 0px 12px;" *ngIf="config.showSearch">
+		<search-control 
+			[showOnlyBottomBorder]="true" style="width: 100%;" 
+			palceHolder="Search" (signal)="signal.emit({action: 'SEARCH_SUBMENU', data: $event})">
+		</search-control>
+	</div>
+
+	<div style="overflow-y: auto; height: calc(100% - 23vh)" class="mt-2">
+		<ul class="navlist m-0 p-0">
+			<li *ngFor="let menuItem of config.menuList let i = index" class="sidebarmenuitems" wowLeftborderColored
+				[borderleftcolor]="menuItem?.bordercolor" 
+				[class.selected]="menuItem?.name === selectedItem?.name"
+				(click)="selectMenu(menuItem)">
+
+				<span class="align-middle float-left p-0">{{menuItem.name}}
+
+					<span *ngIf="menuItem?.showCount && menuItem?.count" 
+						[style.background-color]="menuItem?.countColor ? menuItem?.countColor : '#F99829'"
+						[title]="menuItem?.count" class="count"> {{count(menuItem)}}
+					</span>
+
+					<img *ngIf="menuItem.tooltipcontent !== 'none' && menuItem.tooltipcontent !== '' "
+						class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple" 
+						[placement]="palcement(menuItem)"
+						[tooltip]="menuItem.tooltipcontent" src="assets/images/shared-new-theme/tooltipIcon.svg">
+				</span>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div *ngIf="togglebutton" (click)="toggleSubmenuWidth()">
+	<div style="position: absolute; z-index: 1;"
+		class="backiconsize float-right m-0 p-0 cursorPointer bg-color-primary">
+		<img src="assets/images/shared-subMenu/arrow.svg" style="z-index: 1100" alt="" 
+			class="revericonsize ">
+	</div>
+</div>

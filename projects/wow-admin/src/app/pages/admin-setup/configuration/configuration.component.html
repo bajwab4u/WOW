@@ -1,0 +1,83 @@
+<ng-container [ngSwitch]="activeState">
+    <div class="container col-12 float-left  content-box-mt" *ngSwitchCase="'TABLE'">
+
+        <div class="row">
+            <h2 class="mb-0">
+                Configuration
+                <span *ngIf="totalItems > 0">({{totalItems}})</span>
+            </h2>
+        </div>
+
+        <div class="row margnTblTop">
+            <div class="col-md-4" style="padding-left: 0px !important;">
+
+                <wow-auto-complete [config]="configurationsConfig" [(ngModel)]="id"
+                    (change)="onInputChange($event)">
+                </wow-auto-complete>
+            </div>
+
+            <div class="col-md-8 text-right" style="padding-right: 0;">
+                <div class="text-right dropdown">
+                    <button class="btn btn-size btnAddColor  dropbtn">
+                        <img style="height: 22px;" src="assets/images/shared-new-theme/addicon.svg">
+                        Create
+                    </button>
+                    <div class="dropdown-content" style="right:1px">
+                        <a *ngFor="let option of options" (click)="activeState = option.value">
+                            {{option.name}}
+                        </a>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12 pl-0 pr-0">
+                <wow-table class="w-100" [config]="config" [actions]="action" (signals)="onTableSignals($event)">
+                    <ng-template dataTableCell="image" let-row="row" let-col="col">
+                        <div class="imgsize">
+                            <img class="imgsize responsive-image rounded-circle" src="assets/images/configs-sm-icon.png"
+                                width="36px" onError="this.src='assets/images/configs-sm-icon.png'" alt="">
+                        </div>
+                    </ng-template>
+
+                    <ng-template dataTableCell="name" let-row="row" let-col="col">
+                        <p class="m-0  wow-clients-cellwidth" [title]="row?.name">
+                            {{row?.name}}
+                        </p>
+                    </ng-template>
+                </wow-table>
+            </div>
+        </div>
+    </div>
+
+    <div *ngSwitchCase="'ADD_ROLE'">
+        <div class="container col-md-12 float-left content-box-mt" style="min-width: 100% !important;padding: 0px;">
+            <wow-add-role (signals)="handleSignals($event)">
+
+            </wow-add-role>
+        </div>
+    </div>
+    <div *ngSwitchCase="'ADD_POLICY'">
+        <div class="container col-md-12 float-left " style="min-width: 100% !important;padding: 0px;">
+            <wow-add-policy (signals)="handleSignals($event)">
+
+            </wow-add-policy>
+        </div>
+    </div>
+    <div *ngSwitchCase="'ADD_RESOURCE'">
+        <div class="container col-md-12 float-left " style="min-width: 100% !important;padding: 0px;">
+            <wow-add-resource (signals)="handleSignals($event)">
+
+            </wow-add-resource>
+        </div>
+    </div>
+
+    <div id="comp-render" *ngSwitchCase="'DETAIL'">
+        <div class="container col-md-10 float-left " style="min-width: 100% !important;padding: 0px;">
+            <wow-view-config-details (signals)="handleSignals($event)" [selectedPolicy]="selectedPolicy"></wow-view-config-details>
+        </div>
+    </div>
+</ng-container>

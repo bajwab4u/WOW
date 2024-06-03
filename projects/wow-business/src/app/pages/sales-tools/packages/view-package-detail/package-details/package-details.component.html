@@ -1,0 +1,85 @@
+<form name="from" autocomplete="off" #f="ngForm" class="text-right" (mouseover)="item='focused'"
+    (mouseout)="item='none'">
+    <ng-container>
+        <div class="row inputLabelText p-0 mt-4">
+            <div class="col-md-2 text-align-c text-right">
+
+                <img src="assets/images/coupondetail/couponIcon.svg" height="80">
+                <!-- <wow-file-picker [image]="imageUrl" [defaultImg]="'assets/images/business-setup/business_details_icon.svg'" (change)="onChangeImage($event)"></wow-file-picker> -->
+            </div>
+            <div class="col-md-5 text-left">
+                <input class="form-control" name="packageTitle" [type]='item' wowInputBehaviour
+                    [(ngModel)]="packageDetail.title" #packageTitle="ngModel" maxlength="200" required
+                    placeholder="Title" [ngClass]="{ 'is-invalid': !isFormValid && packageTitle.invalid }">
+
+                <div *ngIf="!isFormValid && packageTitle.invalid" class="invalid-feedback">
+                    <div *ngIf="packageTitle.errors.required">
+                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                            [tooltip]="packageTitle.errors.required ? 'Package Title is required.' : 'Max 200 characters allowed'">
+                        </i>
+                    </div>
+                </div>
+
+                <textarea placeholder="Package Description" [type]='item' wowInputBehaviour class="form-control mt-3"
+                    style="height: 94px !important;" name="Description" [(ngModel)]="packageDetail.description"
+                    #Description="ngModel" maxlength="500"
+                    [ngClass]="{ 'is-invalid': !isFormValid && Description.invalid }"></textarea>
+
+                <div *ngIf="!isFormValid && Description.invalid" class="invalid-feedback">
+                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Max 500 characters allowed">
+                    </i>
+                </div>
+            </div>
+
+            <div style="display: flex; align-items: flex-end;" class="row mt-3">
+                <div class="col-md-2 text-right text-align-l">
+                    <label>Duration</label>
+                </div>
+                <div class="col-md-5 text-left text-align-l">
+                    <select class="form-control" name="duration" [(ngModel)]="packageDetail.duration"
+                        #duration="ngModel" [ngClass]="{ 'is-invalid': !isFormValid && duration.invalid }" required
+                        [type]='item' wowInputBehaviour (focus)="item='focusout'">
+                        <option value=null disabled>Months</option>
+                        <option *ngFor="let item of mounthDurtion" [value]=item>{{item}}</option>
+                    </select>
+
+                    <div *ngIf="!isFormValid && duration.invalid" class="invalid-feedback">
+                        <div *ngIf="duration.errors.required"><i class="fa fa-info-circle fa-errorIcon"
+                                aria-hidden="true" tooltip="Duration is required.">
+                            </i>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div style="display: flex; align-items: flex-end;" class="row mt-3 text-align-l">
+                <div class="col-md-2 text-right text-align-l">
+                    <label>Package Price</label>
+                </div>
+
+                <div class="col-md-5 text-left">
+                    <input [type]='item' wowInputBehaviour class="form-control" name="servicePrice"
+                        [wowOnlyNumbers]="true" maxlength="9" #servicePrice="ngModel"
+                        [(ngModel)]="packageDetail.servicePrice" (focus)="getServiceDisplayPrice($event)"
+                        [ngClass]="{ 'is-invalid': !isFormValid && servicePrice.invalid }">
+
+                    <div *ngIf="!isFormValid && servicePrice.invalid" class="invalid-feedback">
+                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                            tooltip="Service Price is required.">
+                        </i>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; align-items: flex-end;" class="row mt-2">
+                <div class="col-md-2 text-right text-align-l">
+                    <label>Display Price</label>
+                </div>
+                <div class="col-md-5 text-left">
+                    <input [type]='item' wowInputBehaviour placeholder="Display Price" disabled class="form-control"
+                        name="displayprice" [(ngModel)]="packageDetail.displayPrice" #displayprice="ngModel" required
+                        [ngClass]="{ 'is-invalid': !isFormValid && displayprice.invalid }">
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</form>

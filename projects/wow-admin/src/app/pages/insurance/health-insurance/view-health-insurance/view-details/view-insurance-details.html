@@ -1,0 +1,71 @@
+<div class="container col-9 float-left content-box-mt p-0" style="min-width: 100% !important;">
+    <form name="from" [formGroup]="form" autocomplete="off">
+        <div class="form-group row inputLabelText  details-flex">
+
+            <div class="col-md-2">
+                <div class="form-group text-right text-align-c mb-0">
+                    <div class="wow-agc-profile col-form-label">
+
+                        <img src="assets/images/insurance-detail.png"/>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5 col-sm-12 form-field">
+                <div class="text-area-tooltip-wrapper">
+                    <div class="agc-text-area text-right">
+
+                        <input type="text" class="form-control" formControlName="txtCompany" wowInputBehaviour
+                            placeholder="e.g Wow Care" [ngClass]="{ 'is-invalid': isControlValid('txtCompany', 'required') ||
+                    isControlValid('txtCompany', 'maxlength')}" maxlength="45" required>
+                        <div *ngIf="isControlValid('txtCompany', 'required') || isControlValid('txtCompany', 'maxlength')"
+                            class="invalid-feedback">
+                            <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" [tooltip]="form.controls.txtCompany.errors.required ? 
+                                'Company Name is required' : 'Name can contain upto 45 characters only'">
+                            </i>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-area-tooltip-wrapper mt-2">
+                    <div class="agc-text-area text-right">
+                        <input type="text" class="form-control" formControlName="txtName" wowInputBehaviour
+                            placeholder="e.g Wow Care" [ngClass]="{ 'is-invalid': isControlValid('txtName', 'required') ||
+                    isControlValid('txtName', 'maxlength')}" maxlength="45" required>
+                        <div *ngIf="isControlValid('txtName', 'required') || isControlValid('txtName', 'maxlength')"
+                            class="invalid-feedback">
+                            <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" [tooltip]="form.controls.txtCompany.errors.required ? 
+                                'Plan Name is required' : 'Name can contain upto 45 characters only'">
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+            <div class="form-group-label text-right col-md-2 col-lg-2 col-sm-12 text-align-l ">
+                <label class="col-form-label col-form-label-sm">
+                    Description
+                </label>
+            </div>
+
+            <div class="col-md-5 col-sm-12 form-field text-right">
+                <textarea class="form-control" type="text" rows="4" formControlName="txtDescription"
+                placeholder="Plan Description" #txtDescription maxlength="1000" wowInputBehaviour>
+            </textarea>
+            <span class="pull-right label label-default" id="count_message">{{txtDescription.value.length
+                || 0}}/1000
+                char.</span>
+                <div *ngIf="isControlValid('txtDescription')" class="invalid-feedback">
+                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Description is required.">
+                    </i>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>

@@ -1,0 +1,102 @@
+<div class="container col-9 float-left content-box-mt px-0" style="min-width: 100% !important;">
+    <form name="from" [formGroup]="form" autocomplete="off">
+        <div class="row">
+            <div class="col-12 p-0">
+                <div class="wow-dh-wrapper ">
+                    <div class="wow-dh-left-parent text-left">
+                        <div class="wow-dh-left-heading ">
+                            <h3 class="mb-0">Payout</h3>
+                        </div>
+                    </div>
+                    <div class="wow-dh-right-parent">
+                        <div class="wow-dh-action-btns-wrapper">
+                            <div class="wow-dh-action-btn">
+                                <button type="button" class="btn btn-space btn-properties-white mr-2"
+                                    (click)="goBack()">Cancel</button>
+                            </div>
+                            <div class="wow-dh-action-btn">
+                                <button type="button" class="btn btn-properties-gray m-0" [disabled]="isFormDisabled"
+                                    (click)="submitForm()"
+                                    [ngClass]="isFormDisabled ? 'btn-properties-gray' : 'btnAddColor'">Generate</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="col-6 float-left p-0">
+            <div class="row inputLabelText ml-5">
+                <div class="col-10 p-0">
+                    <div class="">
+                        <div class="form-group form-row mr-0 ml-0 w-100">
+                            <div class="col-md-10 col-sm-12 p-0">
+                                <label class="float-left">Payout For</label>
+                                <select class="form-control" required formControlName="type"
+                                    [ngClass]="{'is-invalid':isControlValid('type', 'required')}"
+                                    (change)="changeClientType()">
+                                    <option [ngValue]="null" disabled [selected]="true">Select</option>
+                                    <option *ngFor="let type of clientTypes" [value]="type.value">
+                                        {{type.name}}
+                                    </option>
+                                </select>
+                                <div *ngIf="isControlValid('type', 'required')" class="invalid-feedback">
+                                    <div>
+                                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                            tooltip="Client Type  is required.">
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group form-row mr-0 ml-0 w-100" *ngIf="isAgencyOrBusiness">
+                            <div class="col-md-10 col-sm-12 p-0">
+                                <label class="float-left">Payout Date</label>
+                                <select class="form-control" required formControlName="payoutDate"
+                                    (change)="onSelectDate()"
+                                    [ngClass]="{'is-invalid':isControlValid('payoutDate', 'required')}">
+                                    <option [ngValue]="null" disabled [selected]="true">Select</option>
+                                    <option *ngFor="let days of payoutDays" [value]="days">
+                                        {{days}}
+                                    </option>
+                                </select>
+                                <div *ngIf="isControlValid('payoutDate', 'required')" class="invalid-feedback">
+                                    <div>
+                                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                            tooltip="Category  is required.">
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group form-row mr-0 ml-0" *ngIf="isAgencyOrBusiness">
+                            <div class="col-md-10 col-sm-12 p-0">
+                                <label class="float-left">Billing Period-Start Date</label>
+                                <input type="text" class="form-control" formControlName="startDate"
+                                    placeholder="Start Date" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-row mr-0 ml-0">
+                            <div class="col-md-10 col-sm-12 p-0">
+                                <label class="float-left">Billing Period-End Date</label>
+                                <input *ngIf="isAgencyOrBusiness" type="text" class="form-control"
+                                    formControlName="endDate" placeholder="End Date" readonly>
+
+                                <input *ngIf="!isAgencyOrBusiness" autocomplete="off" class="form-control"
+                                    daterangepicker id="datefilter" style="position: relative;"
+                                    [options]="dateFilterConfig" #dateFilter placeholder="End Date"
+                                    (selected)="setFilterValue($event)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>

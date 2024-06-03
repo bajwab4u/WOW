@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="row mb-4" style="gap: 15px; display: flex; align-items: center;">
+
+        <div class="col-5" style="padding: 0;">
+            <wow-auto-complete
+                [config]="serviceConfig"
+                [(ngModel)]="selectedServiceId"
+                (change)="onInputChange($event)"></wow-auto-complete>
+        </div>
+
+        <button type="button" class="btn savebtn-size btnAddColor float-left search-new-btn" 
+            (click)="onAddService()">Add Service
+        </button>
+        <img  class="imgCustom infoIcon tooltipIconSize tooltipstylePurple"
+            style="margin-left: -6px !important;" 
+            src="assets/images/shared-new-theme/tooltipIcon.svg"
+            tooltip="Select the service offered by this staff">
+    </div>
+
+    <div class="col-md-12 pl-0 pr-0">
+        <div class="table-responsive table-border-radius">
+            <table class="table table-striped table-hover ">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 70px;"></th>
+                        <th scope="col" style="width: 250px;">Service Name</th>
+                        <th scope="col" style="width: 100px;">Limit</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf=" packageDetail?.services.length === 0">
+                        <td style="text-align: center !important;" colspan="100%">
+                            Currently there are no services in this package. </td>
+                    </tr>
+
+                    <tr *ngFor="let item of packageDetail?.services; let i = index;">
+                        
+                        <td label="image">
+                            <div>
+                                <img style="height: 12px; width: 15px;cursor: pointer;"
+                                    (click)="onRemoveService(item, i)"
+                                    src="assets/images/shared-new-theme/deleteicon.svg" alt="">
+                            </div>
+                        </td>
+                        <td label="Service Name">{{item.name}}</td>
+                        <td label="Limit">
+                            <input type="text" style="text-align: center;" 
+                                (keyup)="updateList(i)" [name]="i+'_service_limit_ctrl'"
+                                wowOnlyNumbers maxlength="2"
+                                [(ngModel)]="item.limit" min="0"  (input)="onChangeValue()"
+                                class="form-control detailInput">
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                
+            </table>
+        </div>
+    </div>
+</div>

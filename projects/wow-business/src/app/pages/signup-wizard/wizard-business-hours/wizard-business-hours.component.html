@@ -1,0 +1,68 @@
+<div class="modal-body">
+
+	<div class="row">
+		<h6 class="headingColor pl-5 ml-3 mb-5" style="width: 100%; text-align: left;">
+			Add business hours to let your customer know your timings
+			<div *ngIf="showatleastonescheduleerror"  class="row alert error-alert alert-danger" >
+				Atleast one schedule is required.
+			</div>
+		</h6>
+	</div>
+
+	<div class="row schedule-textStyle">
+		<div class="col-12 col-0ffset-1">
+			<form name="from" autocomplete="off" class="form-margin" 
+				#wizardScheduleForm="ngForm" 
+				(ngSubmit)="wizardScheduleForm.valid && onNextBtnclick('third')">
+				
+				<ng-container *ngFor="let day of businessSchedule.schedule; let i=index">
+					<div style="align-items: center;" class="form-group row field-style input-space">
+						<div class="col-lg-2 col-md-4 col-sm-6">
+							<div style="display: flex;" class="form-check float-left">
+								<input type="checkbox" [name]="getControlName(day.dayName, 'check', i)" class="form-check-input" 
+									(change)=" onChange(i)"
+									id="exampleCheck1" [(ngModel)]="day.check">
+								<label class="form-check-label" 
+									class="ml-3 mb-0 labelTextStyle">{{day.dayName | titlecase}}</label>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-3 col-sm-4 ml-5 mr-2 px-2">
+							<div class="md-form" (click)="day.check = true">
+								
+								<wow-time-picker [width]="'100%'" 
+									[required]="day.check"
+									[isFormSubmitted]="wizardScheduleForm.submitted"
+									placeHolder='Start Time'
+									[controlName]="getControlName(day.dayName, 'start', i)"
+									[value]="day.startTime"
+									(signals)="onChangeValue($event, 'startTime', i)">
+								</wow-time-picker>
+							</div>
+						</div>
+						To
+						<div class="col-lg-2 col-md-3 col-sm-4 ml-2 px-2">
+							<div class="md-form" (click)="day.check = true">
+
+								<wow-time-picker [width]="'100%'"
+									[required]="day.check"
+									[isFormSubmitted]="wizardScheduleForm.submitted"
+									placeHolder='End Time'
+									inValidErrMsg='End time should be greater than start time.'
+									[inValid]='!isTimeValid(i)'
+									[controlName]="getControlName(day.dayName, 'end', i)"
+									[value]="day.endTime"
+									(signals)="onChangeValue($event, 'endTime', i)">
+								</wow-time-picker>
+							</div>
+						</div> 
+						<a class="apply-to-all" (click)="onSetSchedule()" *ngIf="i === 0">Apply to all</a>
+					</div>
+				</ng-container>
+
+				<div id="submit-add-hr-btn-cont" style="display: none;"></div>
+				
+			</form>
+		</div>
+	</div>
+
+</div>

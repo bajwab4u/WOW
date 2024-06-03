@@ -1,0 +1,21 @@
+<ng-container *ngIf="type === 'spinner'">
+	<div class="d-flex justify-content-center">
+		<div class="spinner-border spinner-loader" role="status">
+			<span class="sr-only">Loading...</span>
+		</div>
+	</div>
+</ng-container>
+
+<ng-container *ngIf="type === 'bar' && showLoader">
+	<progressbar class="progress-striped active wow-progress-bar"
+		[animate]="true" [striped]="true" max="100" value="100"
+		type="secondary">
+	</progressbar>
+</ng-container>
+
+<ng-container *ngIf="type === 'btn-spinner' && showLoader">
+	&nbsp;&nbsp;<span class="spinner-border text-secondary" role="status" 
+		style="width: 20px; height: 20px;"> 
+		<span class="sr-only"></span>
+	</span>
+</ng-container>

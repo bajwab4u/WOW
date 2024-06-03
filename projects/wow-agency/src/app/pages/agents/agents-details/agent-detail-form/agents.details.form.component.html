@@ -1,0 +1,125 @@
+<div style="width: 100%; height: 100%;" class="mt-4">
+    <form [formGroup]="form" autocomplete="off">
+        <div class="form-group">
+            <div class="row">
+
+                <div class="col-md-2 wow-ta-right">
+                    <div class="wow-adgd-img">
+                        <img src="assets/images/profile_icon.svg" alt=""
+                            width="82px">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <input type="text" readonly wowInputBehaviour
+                        required class="form-control" placeholder="0000-0000-0000"
+                        formControlName="wowId">
+                </div>
+                    <div class="form-group">
+                        <input type="text" wowInputBehaviour maxlength="45" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)"
+                            required class="form-control" placeholder="John"
+                            formControlName="firstName" [ngClass]="{'is-invalid': isControlValid('firstName','required')
+                            || isControlValid('firstName', 'maxlength')}">
+                        <div class="invalid-feedback"
+                            *ngIf="isControlValid('firstName') || isControlValid('firstName', 'maxlength')">
+                            <i aria-hidden="true"
+                                class="fa fa-info-circle fa-errorIcon"
+                                [tooltip]="form.controls.firstName.errors.required ? 'First Name is required'
+                                         : (form.controls.firstName.errors.firstName ? 'Invalid Name' : 'Max 35 characters allowed')">
+                            </i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" wowInputBehaviour maxlength="45" onkeypress="return /[0-9a-zA-Z]/i.test(event.key)"
+                            required class="form-control" placeholder="Doe"
+                            formControlName="lastName" [ngClass]="{'is-invalid': isControlValid('lastName','required')
+                            || isControlValid('lastName', 'maxlength')}">
+                        <div class="invalid-feedback"
+                            *ngIf="isControlValid('lastName') || isControlValid('lastName', 'maxlength')">
+                            <i aria-hidden="true"
+                                class="fa fa-info-circle fa-errorIcon"
+                                [tooltip]="form.controls.lastName.errors.required ? 'Last Name is required'
+                                         : (form.controls.lastName.errors.lastName ? 'Invalid Name' : 'Max 35 characters allowed')">
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" form-group">
+          <div class="row wow-ai-baseline">
+              <div class="col-md-2 wow-ta-right">
+                  <label>Email</label>
+              </div>
+              <div class="col-md-5">
+                <div class="form-group">
+                  <input type="email" wowInputBehaviour
+                  class="form-control" maxlength="50" required
+                  placeholder="example@gmail.com"
+                  formControlName="email" readonly>
+                </div>
+              </div>
+
+          </div>
+      </div>
+        <div class=" form-group">
+            <div class="row wow-ai-baseline">
+                <div class="col-md-2 wow-ta-right">
+                    <label>Phone Number</label>
+                </div>
+                <div class="col-md-5">
+                    <div class="row">
+                        <div
+                            class="col-md-1 wow-agd-light-bg py-2 px-0 margin-left-1rem wow-country-img">
+                            <img src="assets/images/country-flag.svg"
+                                class="responsive-image" alt="USA">
+                        </div>
+                        <div class="col-md-11 pr-0 wow-adg-phone">
+                            <div class="form-group">
+                                <input type="text" wowInputBehaviour
+                                    class="form-control pr-0" required
+                                    placeholder="000-000-0000" [mask]="maskedFormat"
+                                    formControlName="phoneMobile"
+                                    [ngClass]="{'is-invalid': isControlValid('phoneMobile') || isControlValid('phoneMobile','inValidFormat')}">
+
+                                <div class="invalid-feedback"
+                                    *ngIf="isControlValid('phoneMobile') || isControlValid('phoneMobile','inValidFormat')">
+                                    <i aria-hidden="true"
+                                        class="fa fa-info-circle fa-errorIcon"
+                                        [tooltip]="form.controls.phoneMobile.errors.required ? 'Phone number is required'
+                                            : isControlValid('phoneMobile','inValidFormat') ? 'Phone is not of required format' : 'Invalid phone'">
+                                    </i>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class=" form-group">
+            <div class="row wow-ai-baseline">
+                <div class="col-md-2 wow-ta-right">
+                    <label>Clients Onboarding</label>
+                </div>
+
+                <div class="col-md-5 pr-0">
+                    <div class="form-group wow-agd-link-btn-wrapper">
+                        <button class="btn btn-size btnAddColor"
+                            type="button" (click)="sendOnboardingLinks()">
+                            Send Links
+                        </button>
+                        <img class="imgCustom ml-3 tooltipIconSize tooltipstylePurple wow-agd-links-tooltip"
+                            src="assets/images/shared-new-theme/tooltipIcon.svg"
+                            tooltip="All the onboarding links will be sent to agents email.">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>

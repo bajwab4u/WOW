@@ -1,0 +1,64 @@
+<div class="row" style="height: 430px">
+
+	<div class="col-12">
+		<h4 class="float-left mt-4 ml-5">{{config?.heading}}
+			<img class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple" 
+				src="assets/images/shared-new-theme/tooltipIcon.svg"
+				[tooltip]="config?.tooltip" *ngIf="config.tooltip">
+		</h4>
+		<div *ngIf="isServiceSelected">
+			<i class="fa fa-info-circle fa-errorIcon mt-4 mr-3 float-right" style="font-size: 1.2rem; padding-top: 4px;" aria-hidden="true" tooltip="Select at least one service.">
+		  </i>
+		</div>
+	</div>
+
+	<div class="col-12">
+		<div class="col-2 p-0 m-0 float-left" 
+			(mouseover)="createNavigationList()"
+			(mouseleave)="removeNavigationLinks()">
+
+			<div class="col-12 float-left text-center p-0 m-0" (click)="onRemoveFilter()"
+				style="height: 40px;background-color: #F8F8F8; position: relative" >
+				<div class="text-center cursorPointer" 
+					style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);">
+					#
+				</div>
+			</div>
+			<div style="width: 100%; padding: 0;" id="nav" class="col-12 CharacterContainer float-left" 
+				[ngStyle]="{'visibility': showNavigation ? 'visible' : 'hidden'}">
+				<ng-container *ngFor="let c of lettersActive">
+					<div id="CharacterElement" style="cursor: pointer; width: 100%;" 
+						class="CharacterElement Inactive"
+						[class.selected]="config.selectedCharacter === c"
+						(click)="onApplyFilter(c)">{{c}}</div>
+				</ng-container>
+			</div>
+		</div>
+
+		<div class="col-10 p-0 m-0 ListContainer float-left">
+			<ul class="list-unstyled p-4 comp-container">
+				<ng-container *ngIf="data.length > 0; else noRecTemp">
+					
+					<ng-container *ngFor="let item of data; let idx=index">
+						<li  *ngIf="isVisible(item)"
+							style="line-height: 0.8;margin: 0 32px;" class="mb-2">
+
+							<input 
+								type="checkbox" 
+								class="form-check-input" 
+								id="exampleCheck1" 
+								[name]="controlName(idx)"
+								[(ngModel)]="item.selected"
+								(change)="onChange(item)">
+							<label class="form-check-label ml-4 ellipse" for="exampleCheck1" [title]="getValue(item)">{{getValue(item)}}</label>
+						</li>
+					</ng-container>
+				</ng-container>
+			</ul>
+
+			<ng-template #noRecTemp>
+				<div class="no-rec-class">no data found!</div>
+			</ng-template>
+		</div>
+	</div>
+</div>

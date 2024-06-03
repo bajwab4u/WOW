@@ -1,0 +1,68 @@
+<div class="wow-ag-root component-paddingRL content-box-mt">
+
+    <ng-container [ngSwitch]="activeState">
+        <ng-container *ngSwitchCase="'TABLE'">
+            <div class="row">
+                <div class="col-md-12 p-0">
+                    <div class="wow-ag-data-table-wrapper">
+                        <div class="wow-ag-table">
+                            <wow-table style="width: 100% !important;" [config]="agentsConfig" [actions]="action"
+                                (signals)="onTableSignals($event)">
+
+                                <ng-template dataTableCell="image" let-row="row" let-col="col">
+                                    <div class="imgsize">
+                                        <img class="imgsize responsive-image rounded-circle"
+                                            src="assets/images/profile_icon.svg" width="36px">
+                                    </div>
+                                </ng-template>
+
+                                <ng-template dataTableCell="wowId" let-row="row" let-col="col">
+                                  <p class="m-0 text-overflow text-overflow-30ch"
+                                      title="{{row?.wowId}}">
+                                      {{row?.wowId}}
+                                  </p>
+                              </ng-template>
+
+                                <ng-template dataTableCell="name" let-row="row" let-col="col">
+                                    <!-- <span>John Doe</span> -->
+                                    <p class="m-0 text-overflow text-overflow-30ch"
+                                        title="{{row?.firstName + ' ' + row?.lastName}}">
+                                        {{row?.firstName + ' ' + row?.lastName}}
+                                    </p>
+                                </ng-template>
+
+                                <ng-template dataTableCell="email" let-row="row" let-col="col">
+
+                                    <span class="m-0 text-overflow text-overflow-30ch"
+                                        title="{{row?.email}}">
+                                        {{row?.email}}
+                                    </span>
+                                </ng-template>
+
+                                <ng-template dataTableCell="phoneMobile" let-row="row" let-col="col">
+                                    {{row?.phoneMobile |  mask: maskedFormat }}
+
+                                </ng-template>
+
+                                <ng-template dataTableCell="status" let-row="row" let-col="col">
+                                    {{row?.active === false ? 'In Active' : 'Active'}}
+                                </ng-template>
+
+                            </wow-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'ADD'">
+            <wow-add-agent (signals)="onGoBack($event)"></wow-add-agent>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'DETAIL'">
+            <wow-agents-details (signals)="onGoBack($event)" [selectedAgent]="selectedAgent"></wow-agents-details>
+        </ng-container>
+
+    </ng-container>
+
+</div>

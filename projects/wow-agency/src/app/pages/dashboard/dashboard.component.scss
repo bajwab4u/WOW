@@ -1,0 +1,62 @@
+.wow-dash-root {
+    overflow-y: auto;
+    height: 100%;
+    .wow-dash-header-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        .dropdown-menu{
+            // right: 0 !important;
+            left: unset !important;
+            top: 2px !important;
+            width: 200px;
+            border-radius: 6px;
+          }
+          .dropdown-menu li>a{
+           font-size: 12px !important;
+           padding: 6px;;
+           text-decoration: none;
+        
+          }
+          .dropdown-menu li{
+            width: 200px !important;
+            padding: 0.6rem;
+            // margin: 0 15px;
+          }
+    }
+}
+
+.btn-properties-inner
+  {
+      color: white;
+      background-color: #524456;
+      border-color: #524456;
+      width : max-content;
+      padding: 8px 23px;
+
+      .fa-plus 
+      {
+        color: white;
+      }
+  }
+
+  .show>.btn-properties-inner.profileImageContainer
+  {
+    background-color: white;
+    color: #524456;
+    font-weight: 400 ;
+    border: none !important; 
+    box-shadow: 0px 0px 10px #C9C9C9 !important;
+    padding : 8px 23px !important;
+    border-radius: 6px;
+
+    .fa-plus 
+      {
+        color: #524456;
+      }
+}
+
+.dropdown-text {
+  color: #524456;
+}
+
+

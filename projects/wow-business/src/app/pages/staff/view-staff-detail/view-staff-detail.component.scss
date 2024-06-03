@@ -1,0 +1,98 @@
+.detailInput {
+	width: 100%;
+	border: none !important;
+	opacity: 1;
+	height: 37px;
+	border-radius: 6px !important;
+	background: #f8f8f8 !important;
+	color: #575757;
+	margin-bottom: 7px;
+	outline: transparent !important;
+	box-shadow: none !important;
+}
+
+.detailInput:focus {
+	background: transparent !important;
+	border: 1px solid !important;
+	border-color: #660066 !important;
+}
+
+label {
+	color: #a1a1a1;
+	margin-top: 5px;
+}
+
+.btn-space {
+	margin-right: 5px;
+	border: 1px solid #8055805e;
+}
+
+.padding-left {
+	padding-left: 30px;
+}
+
+.form-control::-webkit-input-placeholder {
+	color: #707070b3;
+	font-size: 13px;
+}
+.form-control:disabled,
+.form-control[readonly] {
+	background-color: #faf9f9;
+	opacity: 1;
+	outline: none !important;
+	border-color: Transparent;
+}
+// .col-lg-1half {
+// 	width: 60px;
+// 	margin-left: 19px;
+// }
+
+.staff-form-container {
+	height: 100%;
+	overflow: auto;
+}
+
+.remove-date-btn {
+	font-size: 16px;
+	cursor: pointer;
+	position: absolute;
+	transform: translate(-50%, -50%);
+	top: 50%; // put the proper position of that cross from top
+	right: 15px; // put the proper position of that cross from right
+}
+
+.text-align-r {
+	text-align: right;
+}
+
+.btn-properties-gray:disabled {
+	cursor: not-allowed;
+}
+
+.add-list {
+	background-color: #fff;
+	text-align: justify;
+	font-size: 12px;
+
+	textarea {
+		border: none;
+		resize: vertical;
+	}
+}
+
+.delete-list {
+	cursor: pointer;
+	position: absolute;
+	right: 4px;
+	top: 2px;
+}
+
+.add-btn {
+	text-align: left;
+	font-size: 12px;
+
+	a {
+		text-decoration: none;
+		color: #524456;
+	}
+}

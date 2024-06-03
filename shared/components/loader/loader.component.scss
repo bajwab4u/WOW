@@ -1,0 +1,39 @@
+.loader {
+	margin: 0 auto;
+	width: 60px;
+	position: absolute;
+	display: block;
+	z-index: 1200;
+	-webkit-transform: translate3d(0, -50%, 0);
+	-moz-transform: translate3d(0, -50%, 0);
+	-o-transform: translate3d(0, -50%, 0);
+	-ms-transform: translate3d(0, -50%, 0);
+	transform: translate3d(0, -50%, 0);
+	top: 50%;
+}
+
+.loader:before {
+	content: "";
+	display: block;
+	padding-top: 100%;
+}
+
+.spinner-border {
+	color: #524456;
+	z-index: 2;
+}
+
+.spinner-loader
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+}
+
+.wow-progress-bar {
+	height: .5rem; 
+	border-radius: 0px; 
+	margin: 0px !important;
+	width: 99% !important;
+	padding: 1px;
+}

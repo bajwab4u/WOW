@@ -1,0 +1,388 @@
+<form [formGroup]="form">
+    <div class="" (mouseover)="item='focused'" (mouseout)="item='none'">
+
+
+        <div class="form-group row inputLabelText mt-3 details-top-fields">
+            <div class="col-md-3">
+                <div class="form-group text-right text-align-c">
+                    <div class="wow-agc-profile col-form-label">
+
+                        <wow-file-picker [image]="imageUrl" (change)="onChangeImage($event)"></wow-file-picker>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 mt-3">
+                <div class="form-group">
+                    <div class="text-area-tooltip-wrapper">
+                        <div class="agc-text-area text-right">
+                            <input type="text" name="affiliateName" formControlName="affiliateName" #name
+                                wowInputBehaviour class="form-control" placeholder="Name" />
+
+                            <div *ngIf="isControlValid('affiliateName') || isControlValid('affiliateName','maxlength')"
+                                class="invalid-feedback">
+                                <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" [tooltip]="
+                                                                form.controls.affiliateName.errors.maxlength?
+                                                                'Name can contain upto 45 characters only':
+                                                                'Invalid value'">
+                                </i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="text-area-tooltip-wrapper">
+                        <div class="agc-text-area text-right">
+                            <input type="text" name="email" formControlName="email" readonly #email wowInputBehaviour
+                                class="form-control" placeholder="Email" />
+
+
+                            <div *ngIf="isControlValid('email') || isControlValid('email','maxlength')"
+                                class="invalid-feedback">
+                                <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" [tooltip]="
+                                                    form.controls.email.errors.maxlength?
+                                                    'Name can contain upto 45 characters only':
+                                                    'Invalid value'">
+                                </i>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- <div class="col-md-4 mt-3">
+                        <div>
+                            <a>Resend Link</a>
+                        </div>
+                    </div> -->
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+
+        <div class="form-group row">
+            <div class="form-group-label text-right col-lg-3 col-md-3 col-sm-12 text-align-l ">
+                <label class="col-form-label col-form-label-sm">
+                    Contact Person
+                </label>
+            </div>
+            <div class="col-md-5 col-sm-12 form-field">
+                <input type="text" wowInputBehaviour [type]="item" name="contactPerson" formControlName="contactPerson"
+                    class="form-control"
+                    [ngClass]="{ 'is-invalid': isControlValid('contactPerson') ||  isControlValid('contactPerson') }"
+                    placeholder="John Doe" required maxlength="200">
+                <div *ngIf="isControlValid('contactPerson')" class="invalid-feedback">
+                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Contact Person is required.">
+                    </i>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-lg-3 col-md-3 col-sm-12 form-group-label text-right text-align-l ">
+                <label class="col-form-label col-form-label-sm">
+                    Agency WoW ID
+                </label>
+            </div>
+
+            <div class="col-md-5 col-sm-12 form-field">
+                <input type="text" class="form-control" mask="0000-0000-0000" name="wowId" formControlName="wowId"
+                    wowInputBehaviour [type]="item" [ngClass]="{ 'is-invalid': isControlValid('wowId') }"
+                    placeholder="WOW ID" readonly>
+
+                <div *ngIf="isControlValid('wowId')" class="invalid-feedback">
+                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Wow ID is required."> </i>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <img class=" infoIcon  tooltipIconSize tooltipstylePurple"
+                    tooltip="This ID is your unique identification"
+                    src="assets/images/shared-new-theme/tooltipIcon.svg">
+            </div>
+
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-12 col-md-3 col-lg-3 mobile-input-label form-group-label text-right text-align-l ">
+                <label class="text-right col-form-label col-form-label-sm">
+                    Mobile
+                </label>
+            </div>
+            <div class="col-md-6 col-sm-12 p-0 ">
+                <div class="row">
+                    <div class="col-md-10 pL-1rem display-flex">
+                        <div class=" customWidth flex-country-icon">
+                            <input type="text" wowInputBehaviour [type]="item" class="form-control" placeholder="">
+                            <img src="assets/images/country-flag.svg" class=" fa-errorIcon" height="22px" width="38px"
+                                alt="Null">
+                        </div>
+                        <div class="flex-mobile-input">
+                            <input type="text" [mask]=maskedFormat name="phoneMobile" formControlName="phoneMobile"
+                                wowInputBehaviour [type]="item" class="form-control"
+                                [ngClass]="{ 'is-invalid': isControlValid('phoneMobile', 'required') || isControlValid('phoneMobile', 'mask')  }"
+                                placeholder="Mobile">
+                            <div *ngIf="isControlValid('phoneMobile', 'required') || isControlValid('phoneMobile', 'mask')"
+                                class="invalid-feedback">
+                                <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                    tooltip="Invalid Mobile number format."> </i>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-12 col-md-3 col-lg-3  form-group-label text-right mobile-input-label text-align-l ">
+                <label class=" col-form-label col-form-label-sm">
+                    Phone
+                </label>
+            </div>
+            <div class="col-md-6 col-sm-12 p-0">
+                <div class="row">
+                    <div class="col-md-10 pL-1rem display-flex">
+                        <div class=" customWidth flex-country-icon">
+                            <input type="text" wowInputBehaviour [type]="item" class="form-control " placeholder="">
+                            <img src="assets/images/country-flag.svg" class=" fa-errorIcon" height="22px" width="38px"
+                                alt="Null">
+                        </div>
+                        <div class="flex-mobile-input">
+                            <input type="text" [mask]="maskedFormat" name="phonePhone" formControlName="phonePhone"
+                                wowInputBehaviour [type]="item" class="form-control"
+                                [ngClass]="{ 'is-invalid': isControlValid('phonePhone', 'mask')}" placeholder="Phone">
+                            <div *ngIf="isControlValid('phonePhone', 'mask')" class="invalid-feedback">
+                                <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                    tooltip="Invalid Phone number format."> </i>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="form-group-label text-right col-lg-3 col-md-3 col-sm-12 text-align-l ">
+                <label class="col-form-label col-form-label-sm">
+                    Address
+                </label>
+            </div>
+            <div class="col-md-5 col-sm-12">
+                <div class="form-group m-0">
+                    <input type="text" maxlength="45" name="agencyAddress" formControlName="agencyAddress"
+                        wowInputBehaviour [type]="item" class="form-control" required
+                        [ngClass]="{ 'is-invalid': isControlValid('agencyAddress') }" placeholder="Address">
+                    <div *ngIf="isControlValid('agencyAddress')" class="invalid-feedback">
+                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Address is required.">
+                        </i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="form-group-label text-right col-lg-3 col-md-3 col-sm-12 text-align-l ">
+                <label class=" col-form-label col-form-label-sm">
+                    City
+                </label>
+            </div>
+
+            <div class="col-md-5 col-sm-12 form-field">
+                <div class="form-group">
+                    <input type="text" maxlength="45" name="cityName" autocomplete="nope" formControlName="cityName"
+                        wowInputBehaviour [type]="item" class="form-control" required
+                        [ngClass]="{ 'is-invalid': isControlValid('cityName') }" placeholder="City">
+                    <div *ngIf="isControlValid('cityName')" class="invalid-feedback">
+                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="City is required."> </i>
+                    </div>
+                </div>
+                <div class="form-group  row">
+                    <div class="col-md-6 col-sm-12 p-0">
+                        <input class="form-control" type="search" list="states" placeholder="State" #State
+                            autocomplete="none" wowInputBehaviour [type]="item" style="padding-right: 2px;" name="state"
+                            formControlName="state" required [ngClass]="{ 'is-invalid': isControlValid('state') }"
+                            (change)="setstate(State.value)">
+                        <datalist id="states">
+                            <option [value]="" disabled>Choose State</option>
+                            <option *ngFor="let state of states" [ngValue]="state.stateName"> {{ state.stateName
+                                }}</option>
+                        </datalist>
+                        <div *ngIf="isControlValid('state')" class="invalid-feedback">
+                            <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="State is required.">
+                            </i>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12 p-0">
+                        <input class="form-control" type="text" name="zipCode" formControlName="zipCode" maxLength="5"
+                            wowInputBehaviour [type]="item" minlength="5" maxlength="5" wowOnlyNumbers
+                            autocomplete="off" required [ngClass]="{ 'is-invalid': isControlValid('zipCode') }"
+                            placeholder="Zip Code">
+                        <div *ngIf="isControlValid('zipCode')" class="invalid-feedback">
+                            <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                tooltip="Zip code is required.">
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="form-group-label text-right col-lg-3 col-md-3 col-sm-12 text-align-l ">
+                <label class="col-form-label col-form-label-sm">
+                    Parent
+                </label>
+            </div>
+            <div class="col-md-5 text-left  wow-p0">
+                <select name="affiliateParentId" type="text" class="form-control" wowInputBehaviour
+                    formControlName="affiliateParentId"
+                    [ngClass]="{ 'is-invalid': isControlValid('affiliateParentId', 'required')}">
+                    <option [ngValue]="null" disabled>Select</option>
+                    <option *ngFor="let type of parentAgencies" [value]="type.affiliateId"> {{ type.affiliateName }}
+                    </option>
+                </select>
+                <div *ngIf="isControlValid('affiliateParentId', 'required')" class="invalid-feedback">
+                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Parent Agency is required.">
+                    </i>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <div class="form-group-label text-right col-lg-3 col-md-3 col-sm-12 text-align-l ">
+                <label class="col-form-label col-form-label-sm">
+                    Parent Share
+                </label>
+            </div>
+            <div class="col-md-5 col-sm-12 form-field">
+                <input type="text" wowInputBehaviour [type]="item" name="affiliateParentShare"
+                    formControlName="affiliateParentShare" class="form-control" [dropSpecialCharacters]="false"
+                    mask="percent" suffix="%" placeholder="20%" maxlength="200"
+                    [ngClass]="{ 'is-invalid': isControlValid('affiliateParentShare', 'required')}">
+                <div *ngIf="isControlValid('affiliateParentShare')" class="invalid-feedback">
+                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Parent Share is required.">
+                    </i>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="form-group-label text-right col-lg-3 col-md-3 col-sm-12 text-align-l ">
+                <label class="col-form-label col-form-label-sm">
+                    Employer Share
+                </label>
+            </div>
+            <div class="col-md-5 col-sm-12 form-field">
+                <input type="text" wowInputBehaviour [type]="item" name="affiliateEmployerShare"
+                    formControlName="affiliateEmployerShare" class="form-control" [dropSpecialCharacters]="false"
+                    mask="percent" suffix="%"
+                    [ngClass]="{ 'is-invalid': isControlValid('affiliateEmployerShare') ||  isControlValid('affiliateEmployerShare') }"
+                    placeholder="30%" required maxlength="200">
+                <div *ngIf="isControlValid('affiliateEmployerShare')" class="invalid-feedback">
+                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Employer Share is required.">
+                    </i>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="form-group-label text-right col-lg-3 col-md-3 col-sm-12 text-align-l ">
+                <label class="col-form-label col-form-label-sm">
+                    Provider Share
+                </label>
+            </div>
+            <div class="col-md-5 col-sm-12 form-field">
+                <input type="text" wowInputBehaviour [type]="item" name="affiliateProviderShare"
+                    formControlName="affiliateProviderShare" class="form-control" [dropSpecialCharacters]="false"
+                    mask="percent" suffix="%"
+                    [ngClass]="{ 'is-invalid': isControlValid('affiliateProviderShare') ||  isControlValid('affiliateProviderShare') }"
+                    placeholder="10%" required maxlength="200">
+                <div *ngIf="isControlValid('affiliateProviderShare')" class="invalid-feedback">
+                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Provider Share is required.">
+                    </i>
+                </div>
+            </div>
+        </div>
+        <hr />
+
+        <!--       Account details  -->
+        <div class="row profile-heading">
+            <div class="col-lg-10 text-left">
+                <h4>Bank Details</h4>
+
+            </div>
+        </div>
+        <br>
+        <div class="row inputLabelText">
+            <div class="col-md-12 p-0">
+                <div class="form-group row">
+                    <div class="text-right form-group-label col-lg-3 col-md-3 col-sm-6 text-align-l  ">
+                        <label class="col-form-label col-form-label-sm">
+                            Tax ID
+                        </label>
+                    </div>
+                    <div class="col-md-5 col-sm-12 form-field">
+                        <input type="text" minlength="9" maxlength="10" name="taxId" mask="00-0000000"
+                            formControlName="taxId" wowInputBehaviour [type]="item" class="form-control" required
+                            [ngClass]="{ 'is-invalid': isControlValid('taxId') ||
+										isControlValid('taxId', 'maxlength') || isControlValid('taxId','minlength') }" placeholder="xx-xxxxxxx">
+                        <div *ngIf="isControlValid('taxId') || isControlValid('taxId','minlength') || isControlValid('taxId','maxlength')"
+                            class="invalid-feedback">
+                            <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" [tooltip]="form.controls.taxId.errors.taxId ? 'Tax ID is required.' :
+										form.controls.taxId.errors.minlength? 'Tax ID should contain at least 9 digits.' :
+										form.controls.taxId.errors.maxlength? 'Tax ID can have maximum 9 digits.': 'Invalid Tax ID'">
+                            </i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="text-right form-group-label col-lg-3 col-md-3 col-sm-6 text-align-l  ">
+                        <label class="col-form-label col-form-label-sm">
+                            Routing Number
+                        </label>
+                    </div>
+                    <div class="col-md-5 col-sm-12 form-field">
+                        <input type="text" minlength="9" maxlength="9" wowInputBehaviour [type]="item"
+                            [wowOnlyNumbers]="true" class="form-control" name="routingNumber"
+                            formControlName="routingNumber" required [ngClass]="{ 'is-invalid': isControlValid('routingNumber')
+							|| isControlValid('routingNumber','minlength')
+							|| isControlValid('routingNumber','maxlength') }" placeholder="xxxxxxxxx">
+                        <div *ngIf="isControlValid('routingNumber') || isControlValid('routingNumber','minlength')
+							|| isControlValid('routingNumber','maxlength')" class="invalid-feedback">
+                            <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                [tooltip]="form.controls.routingNumber.errors.routingNumber? 'Routing Number is required.'
+											: form.controls.routingNumber.errors.maxlength? 'Routing number can contain 9 digits only' :
+											form.controls.routingNumber.errors.minlength? 'Routing number should contain at least 9 digits.':'Invalid Number'">
+                            </i>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="text-right form-group-label col-lg-3 col-md-3 col-sm-6 text-align-l ">
+                        <label class="col-form-label col-form-label-sm">
+                            Account Number
+                        </label>
+                    </div>
+                    <div class="col-md-5 col-sm-12 form-field">
+                        <!-- [mask]=accountNumberFormat -->
+                        <input type="text" maxlength="50"  wowInputBehaviour [type]="item"
+                            class="form-control" name="accountNumber" formControlName="accountNumber" required
+                            [ngClass]="{ 'is-invalid': isControlValid('accountNumber') || isControlValid('accountNumber', 'mask')
+							|| isControlValid('accountNumber','maxlength') }" placeholder="Account Number">
+                        <div *ngIf="isControlValid('accountNumber') || isControlValid('accountNumber', 'mask')
+							|| isControlValid('accountNumber','maxlength')" class="invalid-feedback">
+                            <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" [tooltip]="form.controls.accountNumber.errors.accountNumber? 'Account Number is required.'
+											: form.controls.accountNumber.errors.maxlength? 'Account number can contain upto 50 digits' :
+											'Invalid Number'">
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,39 @@
+<div class="input-container" style="width: 100%;">
+    <div class="input" #panelTemRef>
+        <div (click)="onOpenPanel()">
+            <img *ngIf="config?.showSearch" class="search-icon" src="assets/images/search-icon.svg">
+            <input #searchInput class="form-control input-control"
+                [ngStyle]="{'padding-left' : config?.showSearch ? '35px' : '0.75rem'}"
+                [class.tbldropdown]="config?.showSearch" [placeholder]="config?.placeholder"
+                [disabled]="config?.disable" [required]="config?.required" [value]="displayValue" autocomplete="off"
+                 (blur)="onTouched()" [class.is-invalid]="invalid">
+
+            <img class="dropdown-icon" [ngStyle]="{'top' : config?.showSearch ? '18px' : '13px'}"
+                src="assets/images/select-dropdown.svg" *ngIf="!invalid">
+        </div>
+
+
+        <ng-template cdk-portal="">
+            <div class="options-container">
+
+                <ng-container *ngIf="options.length === 0">
+                    <option>no record!</option>
+                </ng-container>
+
+                <ng-container *ngFor="let opt of options; let i=index">
+                    <option [style.width]="optWidth" class="opt-cont" [value]="opt[config?.key]"
+                        [class.selected-option]="getSelectedOption(opt)" (click)="onSelectOption(opt)"
+                        [attr.id]="'c_opt_'+i">
+
+                        {{displayOpt(opt)}}
+                        <ng-container *ngIf="config?.mode !== 'single' && config?.columns.length > 1">
+                            <span>({{opt[config?.columns[1]]}})</span>
+                        </ng-container>
+
+                    </option>
+                </ng-container>
+            </div>
+        </ng-template>
+
+    </div>
+</div>

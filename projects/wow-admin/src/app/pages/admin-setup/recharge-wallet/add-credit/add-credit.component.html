@@ -1,0 +1,108 @@
+<div class="container col-9 float-left content-box-mt px-0" style="min-width: 100% !important;">
+    <form name="from" [formGroup]="form" autocomplete="off">
+        <div class="row">
+            <div class="col-12 p-0">
+                <div class="wow-dh-wrapper ">
+                    <div class="wow-dh-left-parent text-left">
+                        <div class="wow-dh-left-heading ">
+                            <h3 class="mb-0">Add Credit</h3>
+                        </div>
+                    </div>
+                    <div class="wow-dh-right-parent">
+                        <div class="wow-dh-action-btns-wrapper">
+                            <div class="wow-dh-action-btn">
+                                <button type="button" class="btn btn-space btn-properties-white mr-2"
+                                    (click)="goBack()">Cancel</button>
+                            </div>
+                            <div class="wow-dh-action-btn">
+                                <button type="button" class="btn btn-properties-gray m-0" [disabled]="!form.dirty"
+                                    (click)="submitForm()"
+                                    [ngClass]="!form.dirty ? 'btn-properties-gray' : 'btnAddColor'">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="col-6 float-left p-0">
+            <div class="row inputLabelText ml-5">
+                <div class="col-10 p-0">
+
+                    <div class="">
+                        <div class="form-group form-row mr-0 ml-0">
+                            <div class="col-md-10 col-sm-12 p-0">
+                                <label class="float-left">Wow ID</label>
+                                <input type="text" class="form-control" formControlName="wowID"
+                                    placeholder="0000-0000-0000"
+                                    [ngClass]="{ 'is-invalid': isControlValid('wowID', 'required')}"
+                                    mask="0000-0000-0000" required>
+                                <div *ngIf="isControlValid('wowID', 'required')" class="invalid-feedback">
+                                    <div><i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                            tooltip="Wow ID is required">
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-row mr-0 ml-0">
+                            <div class="col-md-10 col-sm-12 p-0">
+                                <label class="float-left">Amount</label>
+                                <input type="text" class="form-control" formControlName="amount" placeholder="Amount"
+                                    wowOnlyNumbers [ngClass]="{ 'is-invalid': isControlValid('amount', 'required')}"
+                                    maxlength="45" required>
+                                <div *ngIf="isControlValid('amount', 'required')" class="invalid-feedback">
+                                    <div><i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                            tooltip="Amount is required">
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-row mr-0 ml-0 w-100">
+                            <div class="col-md-10 col-sm-12 p-0">
+                                <label class="float-left">Transaction Type</label>
+                                <select class="form-control" required formControlName="instrument"
+                                    [ngClass]="{'is-invalid':isControlValid('instrument', 'required')}">
+                                    <option [ngValue]="null" disabled [selected]="true">Select</option>
+                                    <option *ngFor="let type of transactionTypes" [value]=type.value>
+                                        {{ type.name }}
+                                    </option>
+
+                                    <div *ngIf="isControlValid('instrument', 'required')" class="invalid-feedback">
+                                        <div>
+                                            <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                                tooltip="Transaction type is required  is required.">
+                                            </i>
+                                        </div>
+                                    </div>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group form-row mr-0 ml-0">
+                            <div class="col-md-10 col-sm-12 p-0">
+                                <label class="float-left">Attach Receipt</label>
+                                <div class="text-left upload-btn">
+                                    <!-- <wow-file-picker (change)="handleInputChangeImg($event)">
+                                    </wow-file-picker> -->
+                                    <button type="button" (click)="uploadFile()" [disabled]="isUploaded"
+                                        class="btn addbtn-size btnAddColor m-0">
+                                        {{ isUploaded ? file : 'Upload a file'}}
+                                        <i class="fas fa-link pl-2" *ngIf="!isUploaded"></i> </button> <br>
+
+                                    <input style="display: none;" type="file" accept="image/*" id="upload-receipt" name="file"
+                                        (change)="handleInputChangeImg($event)" />
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

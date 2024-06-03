@@ -1,0 +1,41 @@
+.wow-agdc-header-wrapper {
+  display: flex;
+  width: 100%;
+  .wow-agdc-header-left {
+    flex-basis: 40%;
+    select {
+      width: 200px;
+      padding: 10px;
+      border: 1px solid #8055805e !important;
+    }
+  }
+  .wow-agdc-header-right {
+    display: flex;
+    align-items: center;
+    vertical-align: baseline;
+  }
+  input {
+    text-align: center;
+  }
+}
+.wow-agc-patients {
+  max-width: 75%;
+}
+@media (min-width: 400px) and (max-width: 786px) {
+  .wow-agdc-header-wrapper {
+    display: block !important;
+    .wow-agdc-header-left {
+      select {
+        width: 100%;
+      }
+    }
+    .wow-stats-df-wrapper {
+      margin-top: 1rem;
+    }
+  }
+  .tblcolorDivGreen,
+  .tblcolorDivRed {
+    height: 3px !important;
+    width: 100% !important;
+  }
+}

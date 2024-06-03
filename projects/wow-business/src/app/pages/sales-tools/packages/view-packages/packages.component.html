@@ -1,0 +1,75 @@
+<ng-container [ngSwitch]="activeState">
+
+	<ng-container *ngSwitchCase="'TABLE'">
+		<div class="container col-12 float-left component-paddingRL content-box-mt" style="min-width: 100% !important;">
+			<div class="row">
+				<h2>Packages <span *ngIf="totalItems > 0"> ({{totalItems}})</span> </h2>
+			</div>
+
+			<div class="row margnTblTop">
+				<div class="col-md-4" style="padding-left: 0px !important;">
+
+					<search-control palceHolder="Search Package" (signal)="onSearchValueChange($event)">
+					</search-control>
+				</div>
+
+				<div class="col-md-8 wow-res-header-btns">
+					<div class="text-right float-right">
+						<select name="" id="" class="tbldropdown mr-2"
+							(change)="onChangeStatusFilter($event.target.value)">
+							<option *ngFor="let opt of packageStatus" [value]="opt?.value">{{opt?.title}}</option>
+						</select>
+
+						<a class="btn btn-size btnAddColor mr-2" (click)="addPackage()">
+							<img style="height: 22px;" src="assets/images/shared-new-theme/addicon.svg">
+							Add Packages
+						</a>
+
+					</div>
+				</div>
+
+			</div>
+
+			<div class="row">
+
+				<wow-table style="width: 100%;" [config]="config" [actions]="action" (signals)="onTableSignals($event)">
+
+					<ng-template dataTableCell="logo" let-row="row" let-col="col">
+						<img class="imgsize responsive-image rounded-circle"
+							src="assets/images/coupondetail/couponIcon.svg"
+							onError="this.src='assets/images/coupondetail/couponIcon.svg'">
+					</ng-template>
+
+					<ng-template dataTableCell="title" let-row="row" let-col="col">
+						<p [ngClass]="isExpanded ? 'text-overflow-30ch' : 'text-overflow-20ch'"
+							class="m-0 text-overflow" [title]="row?.title">
+							{{row?.title}}
+						</p>
+					</ng-template>
+
+					<ng-template dataTableCell="status" let-row="row" let-col="col" let-i="index">
+						<span (click)="$event.stopPropagation(); onActivateDactivePackage(row)">
+							{{getPackageStstus(row) | titlecase}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+							<i [ngStyle]="{'visibility': isDisplay && index === i ? 'visible' : 'hidden'}"
+								class="fa fa-angle-right ml-2" style="font-size:16px;font-weight: bold;">
+							</i>
+						</span>
+					</ng-template>
+
+				</wow-table>
+			</div>
+		</div>
+	</ng-container>
+
+	<ng-container *ngSwitchCase="'DETAIL'">
+		<wow-view-package-detail (previousPage)="onGoBack($event)" [packageId]="packageId"
+			>
+		</wow-view-package-detail>
+	</ng-container>
+
+	<ng-container *ngSwitchCase="'ADD'">
+		<wow-add-package (previousPage)="onGoBack($event)"></wow-add-package>
+	</ng-container>
+
+</ng-container>

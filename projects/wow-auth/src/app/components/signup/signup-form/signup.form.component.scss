@@ -1,0 +1,103 @@
+
+.textBoxHeading
+{
+    color: #191919;
+    /* color: #575757; */
+    /* font-size: 28px; */
+}
+.signUpForm
+{
+    /* padding-right: 10%; */
+    height: 100%;
+}
+
+.btn-properties
+{
+    background-color: #524456;
+    font-size: 13px;
+    border: none;
+    padding-bottom: 10px;
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+    padding-top: 8px !important;
+    border-radius: 5px;
+} 
+
+.formText
+{
+    color: #575757;
+    font-size: 13px;
+    font-weight: 470;
+}
+
+input {
+    font-size: 1em;
+    /* height: 36.8125px !important; */
+    /* width: 150px; */
+  }
+  
+  input:placeholder-shown {
+    font-size: 1em;
+    color: #70707063;
+  }
+  
+.form-control{
+    background-image: none !important;
+}
+.form-control::-webkit-input-placeholder {
+    color: #70707063;
+  }
+.marginTop
+{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.cursorPointer:hover
+{
+    cursor: pointer;
+
+}
+.poppins-semi-bold {
+    font-family: 'Poppins';
+    font-weight: 500;
+}
+.hasborder { border:1px solid #F00; }
+.customError{
+    font-weight: 500;
+    font-size: 10px;
+    color: #dc3545;
+    padding: 0 0 10px;
+}
+
+.paragraphfont{
+    font-size: 1rem;
+    line-height: 1.25;
+    text-align: justify;
+}
+
+.modal-content{
+    padding: 20px;
+    font-size: 1rem;
+    font-family: 'calibri';
+}
+
+.form-check input[type='checkbox'] .ng-invalid .ng-touched {
+    border: 1px solid red !important;
+  }
+
+//   .iconsettings{
+//     position: relative;
+//     float: right;
+//     margin-top: -30px;
+//     /* margin-right: 27px; */
+//   }
+  
+  .infoIcon{
+      width: 14px;
+      height: 14px;
+  }
+
+  .text-indent
+  {
+      text-indent: 0px;
+  }

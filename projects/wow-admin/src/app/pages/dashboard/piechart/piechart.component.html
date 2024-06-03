@@ -1,0 +1,23 @@
+
+
+<div class="pie-chart-wrapper">
+    <div class="wow-ags-graph" *ngIf="isDataAvailable">
+        <span class="float-left mt-3 pl-2 font-weight-bold" style="margin-bottom: 10vh;">Memberships</span><br>
+        <div id="piechartdiv"  >
+        </div>
+        <div class="boxColorsContainer">
+        <span *ngIf="chartData?.dentalSubscriptions"> <span class="box dentalBoxColor">-.-</span>Dental</span>
+        <span *ngIf="chartData?.pharmacySubscriptions"> <span class="box pharmacyBoxColor">-.-</span>Pharmacy</span>
+        <span *ngIf="chartData?.telemedSubscriptions"> <span class="box telemeteryBoxColor">-.-</span>Telemedicine</span>
+        </div>
+    </div>
+    <div class="card " >
+        <div *ngIf="!isDataAvailable">
+         
+            <div class="no-data-card">
+                <h5>No Data Available!</h5>
+            </div>
+        </div>
+    </div>
+    
+</div>

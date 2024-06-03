@@ -1,0 +1,84 @@
+<div class="wow-agdc-root">
+    <div class="wow-agdc-parent">
+        <div class="wow-agdc-subparent">
+            <div class="wow-agdc-wrapper">
+                <div class="wow-agdc-container p-0">
+                    <div class="row">
+                        <div class="col-md-12 p-0">
+                            <div class="wow-agdc-header-wrapper">
+                                <div class="wow-agdc-header-left">
+                                    <select (change)="onChangeClientsFilter()" [(ngModel)]="clientFilterValue"
+                                        name="clientFilter">
+                                        <option *ngFor="let type of clientTypes" value="{{type.name}}">
+                                            {{type.value}}
+                                        </option>
+                                    </select>
+
+                                </div>
+                                <!-- <div class="wow-agdc-header-right">
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="col-md-12 p-0 flex-basis20">
+                                            <div class="wow-stats-df-wrapper">
+                                                <input autocomplete="off" class="form-control wow-ta-center" readonly
+                                                    daterangepicker id="datefilter" style="position: relative;"
+                                                    [options]="dateFilterConfig" #dateFilter placeholder="MMM DD, YYYY"
+                                                    (selected)="setFilterValue($event)">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-4">
+                        <div class="col-md-12 p-0">
+                            <div *ngIf="clientFilterValue === 'Patient'">
+                                <wow-agent-details-client-patients [patientRow]="patientRow" [agentId]="agentId">
+                                </wow-agent-details-client-patients>
+                            </div>
+                            <div class="wow-agdc-tbl-wrapper" *ngIf="clientFilterValue !== 'Patient'">
+                                <div class="wow-agdc-tbl">
+                                    <wow-table style="width: 100% !important;" [config]="agentsClientConfig"
+                                        [actions]="action" (signals)="onTableSignals($event)">
+                                        <ng-template dataTableCell="sideBorder" let-row="row" let-col="col"
+                                            class="side-border-responsive">
+                                            <div class="tblcolorDivGreen" [style.background]="borderColor(row)"></div>
+                                        </ng-template>
+
+                                        <ng-template dataTableCell="image" let-row="row" let-col="col">
+                                            <div class="imgsize">
+                                                <img class="imgsize responsive-image rounded-circle"
+                                                    src="assets/images/profile_icon.svg">
+                                            </div>
+                                        </ng-template>
+
+                                        <ng-template dataTableCell="name" let-row="row" let-col="col">
+                                            <span>{{ row?.firstName + ' ' + row?.lastName}}</span>
+                                        </ng-template>
+
+                                        <ng-template dataTableCell="email" let-row="row" let-col="col">
+
+                                            {{ row?.email }}
+                                        </ng-template>
+
+                                        <ng-template dataTableCell="phone" let-row="row" let-col="col">
+                                           {{row?.phone |  mask: maskedFormat }}
+                                        </ng-template>
+
+                                        <ng-template dataTableCell="serviceFeeShare" let-row="row" let-col="col">
+                                            {{ row?.serviceFeeShare }}
+                                        </ng-template>
+
+                                    </wow-table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

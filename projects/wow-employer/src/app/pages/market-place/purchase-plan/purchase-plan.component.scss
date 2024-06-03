@@ -1,0 +1,50 @@
+.cartLabel {
+    font-size: 18px !important;
+    color: #191919;
+    font-weight: 500;
+}
+
+::ng-deep .ng2-tag-input__text-input:placeholder-shown {
+    width: 490px !important;
+    font-size: 13px;
+}
+::ng-deep .tag-input{
+    border-bottom: none !important;
+}
+
+::ng-deep .dark.ng2-tag-input{
+    border-bottom: none !important;
+}
+
+.paddingTop10 {
+    padding-top: 10px;
+}
+
+.wow-purchase-plan-head {
+    height: 357px;
+    padding-left: 0px !important;
+
+    .dropdown-iua {
+        text-align: left;
+        width: 60%;
+        select {
+            // width: 60%;
+            height: 305px;
+            background: #F8F8F8 0% 0% no-repeat padding-box;
+            border-radius: 4px;
+            height: 3rem;
+            padding: 0 10px;
+            border: 1px solid #F8F8F8;
+        }
+    }
+}
+
+@media (min-width: 400px) and (max-width: 786px) {
+    .wow-purchase-plan-head{
+        height: 31vh;
+    }
+
+    .wow-receipt-view {
+        padding-left: 0;
+    }
+}

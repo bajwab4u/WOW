@@ -1,0 +1,75 @@
+.modal-body
+{
+    background-color: #F6F3F6;
+    text-align: center;
+	display: flex;
+	justify-content: center;
+}
+
+.plansCard {
+	position: relative;
+	width: fit-content;
+	height: 100%;
+	background: #ffffff 0% 0% no-repeat padding-box;
+	box-shadow: 0px 2px 4px #51515112;
+	border-radius: 6px;
+	opacity: 1;
+	padding-left: 25px;
+	padding-top: 35px;
+	padding-right: 25px;
+	padding-bottom: 17px;
+}
+
+.product-badge {
+	position: absolute;
+	z-index: 1;
+	left: -9px;
+    top: -9px;
+}
+
+.planDetail {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin-top: 25px;
+}
+
+.planItems {
+	display: flex;
+	flex-direction: row;
+	align-content: space-between;
+	justify-items: normal;
+	justify-content: stretch;
+	margin-bottom: 10px;
+	align-items: inherit;
+}
+.planItems p {
+	font: normal normal 300 12px/18px Poppins;
+	letter-spacing: 0px;
+	color: #191919;
+	opacity: 1;
+	margin-bottom: 0px !important;
+	font-size: 12px !important;
+	margin-left: 11px;
+	/* display: contents; */
+	word-break: break-word;
+	/* line-height: 9px; */
+	text-align: left;
+}
+.planItems img {
+	margin-top: 4px;
+}
+
+.membershipCardHeading {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.membershipCardHeading img {
+	margin-bottom: 15px;
+}
+.membershipCardHeading h2 {
+	font-size: 20px !important;
+	margin-bottom: 0px !important;
+	color: #191919 !important;
+}

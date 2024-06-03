@@ -1,0 +1,26 @@
+  <ng-container>
+    <wow-table style="width: 100%" class="w-100" [actions]="actions" [config]="config">
+
+
+      <ng-template dataTableCell="appointmentType" let-row="row" let-col="col">
+        <span
+          class="m-0">{{sharedService.getAppointmentTypes(row.appointmentType)}}
+        </span>
+      </ng-template>
+
+
+
+      <ng-template dataTableCell="actions" let-row="row" let-col="col">
+          <span style="cursor: pointer;" (click)="RefundAppointmentPrice(row)" *ngIf="isAppointmentRefundable(row)">
+              <img style="display: block; margin: auto;" src="assets/images/cashback.svg" alt="cashback">
+              <a class="pl-2 pt-1 ml-2">Refund</a>
+          </span>
+          <span *ngIf="row?.blnRefunded == 1">
+              <a class="pl-2 pt-1 ml-2">Refunded</a>
+          </span>
+      </ng-template>
+
+
+
+    </wow-table>
+  </ng-container>

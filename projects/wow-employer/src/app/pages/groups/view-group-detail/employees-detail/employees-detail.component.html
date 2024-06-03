@@ -1,0 +1,47 @@
+<div class="row">
+    <!-- <div class="row mb-4" style="gap: 15px"> -->
+
+    <!-- <div class="p-0"> -->
+    <!-- <img style="position: absolute; left: 13px; top: 15px;" src="assets/images/search-icon.svg"> -->
+    <!-- <select class="tbldropdown" style="width: 100%; padding-left: 35px;"
+                name="add-emp-to-group-ctrl" [(ngModel)]="selectedEmployeeId">
+                <option value=null disabled selected>Search Employee</option>
+                <option *ngFor="let e of allEmployees" [value]="e.employeeId">{{e.firstName}} {{e.lastName}}</option>
+            </select> -->
+
+    <!-- <wow-auto-complete [config]="employeeConfig" [(ngModel)]="selectedEmployeeId"></wow-auto-complete> -->
+    <!-- </div> -->
+
+    <!-- <button type="button" class="btn savebtn-size btnAddColor float-left search-new-btn"
+            (click)="onAddNewEmployee()">
+            Add Employee
+        </button> -->
+    <!-- </div> -->
+    <div class="col-md-12 pl-0 pr-0">
+
+        <wow-table [config]="empConfig" [actions]="action" (signals)="onTableSignals($event)">
+
+            <ng-template dataTableCell="image" let-row="row" let-col="col">
+                <div class="imgsize">
+                    <img class="imgsize responsive-image rounded-circle" src="assets/images/profile_icon.svg">
+                </div>
+            </ng-template>
+
+            <ng-template dataTableCell="firstName" let-row="row" let-col="col">
+                {{row.firstName}} {{row.lastName}}
+            </ng-template>
+
+            <ng-template dataTableCell="email" let-row="row" let-col="col">
+                <i class="fa fa-envelope mr-2" style="display: inline-block; color: #524456;"></i>
+                {{row.email}}
+            </ng-template>
+
+            <ng-template dataTableCell="phoneMobile" 
+                let-row="row" let-col="col">
+                {{row?.phoneMobile |  mask: maskedFormat }}
+            </ng-template>
+
+        </wow-table>
+
+    </div>
+</div>

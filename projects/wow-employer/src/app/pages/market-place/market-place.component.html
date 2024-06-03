@@ -1,0 +1,65 @@
+<div class="row component-paddingRL content-box-mt layout-blank">
+    <div class="container float-left col-12 p-0">
+
+        <ng-container *ngIf="activeState === 'PLANS'">
+
+            <div class="row">
+                <h2>Plans & Packages </h2>
+            </div>
+
+            <div class="row plansContainer">
+                <div *ngFor="let item of plans" class="col-md-4 col-sm-6 col-xs-12 divheight">
+                    <div class="plansCard">
+                        <img [src]="previewImage(item)" onError="this.src='assets/images/packages/platinum.svg'"
+                            class="product-badge">
+
+                        <div class="planTitle">
+                            <h2>{{item?.name}}</h2>
+                            <span *ngIf="item?.mcs" class="mt-2 wow-mp-sf-font-size">Starting from</span>
+                            <h5 class="colored-text mt-1">{{item.price | currency}}/mo</h5>
+                        </div>
+
+                        <div class="planDetail">
+                            <div *ngFor="let item of item.packageDetails" class="planItems">
+                                <img *ngIf="item?.available" src="assets/images/ic_done_24px.svg" alt="">
+                                <img *ngIf="!item?.available" src="assets/images/ic_close_24px.svg" alt="">
+                                <p>{{item.label}}</p>
+
+                            </div>
+
+                            <!-- <div class="costDiv">
+                                <label class="costLabel">{{item?.price | currency}}/mo</label>
+                            </div> -->
+
+                            <div *ngIf="item?.mcs"  class="costDiv mt-3">
+                                <h6 style="color: #660066; cursor: pointer;" (click)="showConditions()">Terms and
+                                    conditions</h6>
+                            </div>
+
+                            <div class="btnDiv">
+                                <a class="btn btn-size btnAddColor" (click)="onClickBuyBtn(item)">Get Started</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row membershiptTitle">
+                <h2 class="py-2 my-4">Memberships </h2>
+            </div>
+
+            <wow-membership-plan [memberships]="memberships" (signals)="onClickBuyBtn($event)"></wow-membership-plan>
+
+            <!-- <wow-membership-plan [memberships]="membershipPlan?.EMPLOYER_ONEDENTAL" (signals)="onClickBuyBtn($event)"></wow-membership-plan>
+            <wow-membership-plan [memberships]="membershipPlan?.EMPLOYER_PHARMACY" (signals)="onClickBuyBtn($event)"></wow-membership-plan>
+            <wow-membership-plan [memberships]="membershipPlan?.EMPLOYER_TELEMEDICINE" (signals)="onClickBuyBtn($event)"></wow-membership-plan> -->
+
+        </ng-container>
+
+        <ng-container *ngIf="activeState === 'PURCHASEPLAN'">
+            <wow-purchase-plan [planDetail]="plan" (signals)="onSingle($event)"></wow-purchase-plan>
+        </ng-container>
+
+    </div>
+</div>

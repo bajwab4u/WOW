@@ -1,0 +1,75 @@
+.cartDiv 
+{
+    background: #F5EEF599 0% 0% no-repeat padding-box;
+    border-radius: 4px;
+    opacity: 1;
+    // max-height: 450px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+
+    .content-pd {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+    .cartLabel {
+        font-size: 18px !important;
+        color: #191919;
+        font-weight: 500;
+    }
+
+    .cartTotal {
+        width: 100%; 
+        display: flex; 
+        flex-wrap: wrap;
+        padding-bottom: 10px;
+    }
+
+    .monthlyCheckbox {
+        float: left;
+        width: 100%;
+    }
+
+    .margn10 {
+        margin-top: 10px;
+    }
+    
+    .NoOfEmpDiv {
+        width: 66px;
+        height: 36px;
+        background: #EDEDED9E 0% 0% no-repeat padding-box;
+        border-radius: 4px;
+        opacity: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .CostDiv {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        border-top: 1px solid #E0E0E0;
+        padding-top: 25px;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .cartHeadingItem {
+        font-size: 16px;
+        color: #191919;
+        font-weight: 500;
+        height: fit-content;
+        flex: 1;
+    }
+
+    .cartInfoTxt {
+        padding-bottom: 30px;
+        font-size: 12px;
+        padding-left: 25px;
+        padding-right: 25px;
+        text-align: left;
+    }
+}
+

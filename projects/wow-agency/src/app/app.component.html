@@ -1,0 +1,34 @@
+<div [ngClass]="{'grid-container':isSidebarCollapsed===false,'grid-container-half':isSidebarCollapsed===true}">
+
+
+	<div class="item1" style="height: 75px;">
+		<wow-navbar>
+
+			<!-- <div navbar-type="actions">
+				<li class="nav-item approvals">
+					<a class="nav-link dropdown-toggle pl-4 pr-2" routerLink="./approvals">
+						<img class="notificationIcon" title="Approvals"
+							src="assets/images/request-approvals.svg" />
+					</a>
+				</li>
+			</div> -->
+
+		</wow-navbar>
+	</div>
+
+	<div class="item2" style="height: 100vh;"
+		[ngClass]="isSidebarCollapsed ? 'collapse-wow-side-menu' : 'expanded-wow-side-menu-wow'">
+		<wow-sidebar 
+			(sidenavState)="changesider($event)"></wow-sidebar>
+	</div>
+	
+	<div class="item3" style="height: calc(100vh - 75px);"
+		[ngStyle]="{ 'margin-top': isSidebarCollapsed ? '10px' : '0px' }"
+		[ngClass]="isSidebarCollapsed ? 'collapse-wow-content-area' : 'expanded-wow-content-area'">
+		<router-outlet></router-outlet>
+	</div>
+</div>
+
+<div *ngIf="loadingState" style="z-index: 1200">
+  	<wow-loader></wow-loader>
+</div>

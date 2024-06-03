@@ -1,0 +1,41 @@
+<div style="height: 100%; overflow-y: auto;">
+
+	<ng-container *ngIf="activeState === 'TABLE'">
+        <div class="col-md-12 layout-blank component-paddingRL content-box-mt">
+
+            <wow-table  
+                [config]="membershipConfig" 
+                [actions]="action"
+                (signals)="onTableSignals($event)">
+
+                <ng-template dataTableCell="activationDate" 
+                    let-row="row" let-col="col">
+                    {{row['activationDate'] | date: 'MMM dd, yyyy'}}
+                </ng-template>
+
+                <ng-template dataTableCell="expiryDate"
+                    let-row="row" let-col="col">
+                    {{row['expiryDate'] | date: 'MMM dd, yyyy'}}
+                </ng-template>
+
+                <ng-template dataTableCell="price" 
+                    let-row="row" let-col="col">
+                    {{row?.price | currency}}
+                </ng-template>
+
+                <ng-template dataTableCell="status" 
+                    let-row="row" let-col="col">
+                    {{row?.status === 'IN_ACTIVE' ? 'In Active' : 'Active'}}
+                </ng-template>
+
+            </wow-table>
+
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="activeState === 'DETAIL'">
+        <wow-view-membership-details [data]="membership" (signals)="onGoback($event)">
+        </wow-view-membership-details>
+    </ng-container>
+
+</div>

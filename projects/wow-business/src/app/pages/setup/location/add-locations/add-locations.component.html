@@ -1,0 +1,154 @@
+<div class="container col-9 float-left component-paddingRL content-box-mt" style="min-width: 100% !important;">
+	<form name="from" autocomplete="off" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
+		<div class="row">
+			<div class="col col-md-7 col-sm-12 text-left p-0">
+				<h3>Add Location</h3>
+				<div class="subheading">Add details such as name, address and time zone of this location
+				</div>
+			</div>
+			<div class="col col-md-5 col-sm-12 text-align-l text-right mt-2 p-0">
+				<button type="button" class="btn btn-space btn-properties-white" (click)="goBack()">Cancel</button>
+				<button type="submit" class="btn btn-properties ">Save</button>
+			</div>
+		</div>
+		<hr />
+
+		<div class="row inputLabelText ml-5">
+			<div class="col-lg-5 p-0">
+
+				<div class="form-group">
+					<label  class="float-left mb-2">Location Name</label>
+					<input type="text" class="form-control " name="locationName" [(ngModel)]="payload.locationName"
+						#locationName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && locationName.invalid }"
+						required placeholder="Location">
+					<div *ngIf="f.submitted && locationName.invalid" class="invalid-feedback">
+						<div *ngIf="locationName.errors.required"><i class="fa fa-info-circle fa-errorIcon"
+								aria-hidden="true" tooltip="Location Name is required.">
+							</i>
+						</div>
+					</div>
+					<label  class="float-left mt-3">Contact Number</label>
+					<input type="text" class="form-control" name="ContactNumber"
+						[(ngModel)]="payload.locationContactNumber" #ContactNumber="ngModel" [mask]="maskedFormat"
+						[ngClass]="{ 'is-invalid': f.submitted && ContactNumber.invalid }" placeholder="Contact Number"
+						autocomplete="nope">
+					<div *ngIf="f.submitted && ContactNumber.invalid" class="invalid-feedback">
+
+						<div *ngIf="ContactNumber.errors?.mask"><i class="fa fa-info-circle fa-errorIcon"
+								aria-hidden="true" tooltip="Contact number should be of required format">
+							</i>
+						</div>
+
+					</div>
+					<label  class="float-left mt-3">Email</label>
+					<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+						autocomplete="off" name="email" [(ngModel)]="payload.locationEmail" #email="ngModel"
+						pattern="^(\s*[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9}\s*)$"
+						[ngClass]="{ 'is-invalid': f.submitted && email.invalid }" placeholder="example@mail.com">
+					<div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+
+						<div *ngIf="email.errors.pattern"><i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+								tooltip=" Email is not valid.">
+							</i>
+						</div>
+					</div>
+
+					<label class="float-left mt-3">Time Zone
+					</label>
+
+					<div class="input-group">
+						<wow-auto-complete style="width: 100%;" name="timeZone" [required]="true" [config]="timeConfig"
+							#timeZone="ngModel" [options]="timeZones" [(ngModel)]="payload.locationTimeZone"
+							[invalid]="f.submitted && timeZone.invalid"></wow-auto-complete>
+					</div>
+
+					<div *ngIf="f.submitted && timeZone.invalid" class="invalid-feedback">
+						<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Time Zone is required.">
+						</i>
+					</div>
+				</div>
+
+				<div class="input-group mb-3">
+					<label  class="float-left">Address<img
+							class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple"
+							src="assets/images/shared-new-theme/tooltipIcon.svg"
+							tooltip="Please type in your location in the map below for directions"></label>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text"> <img src="assets/images/business-setup/business_icon.svg"
+									class="responsive-image" alt="Null">
+							</div>
+						</div>
+						<input type="text" class="form-control" id="recipient-name" name="Address"
+							[(ngModel)]="payload.address" #Address="ngModel"
+							[ngClass]="{ 'is-invalid': f.submitted && Address.invalid }" required placeholder="Address">
+						<div *ngIf="f.submitted && Address.invalid" class="invalid-feedback">
+							<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Address is required.">
+							</i>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="form-group form-row ">
+					<div class="col-4">
+						<input class="form-control " id="ex1" type="text" name="city" [(ngModel)]="payload.city"
+							#city="ngModel" [ngClass]="{ 'is-invalid': f.submitted && city.invalid }" required
+							placeholder="City">
+						<div *ngIf="f.submitted && city.invalid" class="invalid-feedback">
+							<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="City is required.">
+							</i>
+						</div>
+					</div>
+
+					<div class="col-4">
+						<input class="form-control" list="states" type="text" name="state" [(ngModel)]="payload.state"
+							#state="ngModel" [ngClass]="{ 'is-invalid': f.submitted && state.invalid }" required
+							placeholder="State">
+						<datalist id="states">
+							<option [value]="" disabled>Choose State</option>
+							<option *ngFor="let state of states" [ngValue]="state.stateName"> {{ state.stateName }}
+							</option>
+						</datalist>
+						<div *ngIf="f.submitted && state.invalid" class="invalid-feedback">
+							<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="State is required.">
+							</i>
+						</div>
+					</div>
+
+					<div class="col-4">
+						<input class="form-control" type="text" name="zipCode" [(ngModel)]="payload.zipCode"
+							#zipCode="ngModel" [ngClass]="{ 'is-invalid': f.submitted && zipCode.invalid }" required
+							placeholder="Zip Code" minlength="5" maxlength="5" wowOnlyNumbers>
+						<div *ngIf="f.submitted && zipCode.invalid" class="invalid-feedback">
+							<div *ngIf="zipCode.errors.required"><i class="fa fa-info-circle fa-errorIcon"
+									aria-hidden="true" tooltip="zipCode is required.">
+								</i>
+							</div>
+							<div *ngIf="zipCode.errors.minlength || zipCode.errors.mazlength"><i
+									class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+									tooltip="Zip code should be 5 digits">
+								</i>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="offset-md-1 col-lg-6 p-0">
+				<wow-assign-staffor-service [config]="assignStaffServiceConfig" (signals)="onAssignServices($event)">>
+				</wow-assign-staffor-service>
+			</div>
+
+		</div>
+		<!-- <div class="form-group form-row">
+			<div class="col-md-12">
+				<wow-shared-map [mapAccessToken]="mapAccessToken" (addressEvent)="payload.address=$event" (zipcodeEvent)="getzipcode($event)"
+					(cityEvent)="payload.city=$event" (stateEvent)="payload.state=$event"
+					(coordinatesEvent)="getCoordinates($event)"></wow-shared-map>
+			</div>
+		</div> -->
+	</form>
+</div>

@@ -1,0 +1,29 @@
+.date {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+
+    .date-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .date-arrow-icon {
+        color: #524456;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .disabled-icon {
+        color: lightgray;
+        cursor: not-allowed;
+    }
+}
+
+.form-control[readonly]
+{
+    background-color: #fff !important;
+}

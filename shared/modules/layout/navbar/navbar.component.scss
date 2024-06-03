@@ -1,0 +1,466 @@
+.navbar {
+  width: 100%;
+  background-color: #E0E0E0;
+  /*opacity: 100%;*/
+  overflow: auto;
+  overflow: visible;
+}
+
+/* Navbar links */
+.navbar a {
+  float: left;
+  text-align: center;
+  padding: 10px;
+  color: #403244;
+  text-decoration: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+.dropdown-menu{
+  right: 0 !important;
+  left: unset !important;
+  margin-top:0.5rem;
+}
+.dropdown-menu li>a{
+ font-size: 12px;
+}
+.dropdown-menu li{
+  width: 170px !important;
+  margin: 0 15px;
+}
+.dropdown-toggle::after{
+  border: none;
+  content: none;
+  margin: 0;
+}
+/* Navbar links on mouse-over */
+.navbar a:hover {
+  /*background-color: #393939;*/
+}
+
+/* Current/active navbar link */
+.active {
+  columns: #524456;
+}
+.notificationIcon{
+  width: 14px;
+  height: 17px;
+}
+.profileIcon{
+  width: 40px;
+  height: 40px;
+}
+.profileImageContainer{
+  border: 1px solid transparent;
+  border-radius: 20px;
+  padding: 0 !important;
+  overflow: hidden;
+}
+.cursorstyle{
+  cursor: text !important;
+}
+
+/* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
+@media screen and (max-width: 500px) {
+  .navbar a {
+    float: none;
+    display: block;
+  }
+}
+
+/*!*md-toolbar {*/
+/*	font-family: Open, sans-serif;*/
+/*}*/
+/*.toolbar-icon {*/
+/*	height: 40px;*/
+/*	width: 40px;*/
+/*}*/
+/*.toolbar-title {*/
+/*	display: flex;*/
+/*	flex-wrap: wrap;*/
+/*	align-content: center;*/
+/*}*/
+/*h6, p {*/
+/*	!*color:  #504c4c*/
+/*}*/
+/**!*/
+/*!* ul {*/
+/*	margin-top: 0.4em;*/
+/*} *!*/
+/*::-webkit-scrollbar {*/
+/*  width: 0.4em;*/
+/*}*/
+/*.content-width66{*/
+/*  width: 315px;*/
+/*  margin-top: 60px;*/
+/*}*/
+/*.textcolor{*/
+/*  color: black;*/
+/*}*/
+
+/*!* Track *!*/
+/*::-webkit-scrollbar-track {*/
+/*  box-shadow: inset 0 0 5px #ddd;*/
+/*  border-radius: 10px;*/
+/*}*/
+
+/*!* Handle *!*/
+/*::-webkit-scrollbar-thumb {*/
+/*  background: #ccc;*/
+/*  border-radius: 10px;*/
+/*  height: 18px;*/
+/*}*/
+/*.cardstyle{*/
+/*  background-color: #FFFBF8;*/
+/*  margin-right: 0px;*/
+/*  margin-top: 1px;*/
+/*  margin-left: -322px;*/
+/*  width: 364px;*/
+/*  !* float: left; *!*/
+/*  !* padding: 20px; *!*/
+/*  border-radius: 5px;*/
+/*  padding-top: 2px;*/
+/*  padding-bottom: 2px;*/
+/*  height: 540px;*/
+/*  !* overflow-y: scroll; *!*/
+/*  !* overflow-x: hidden; *!*/
+/*}*/
+/*.ulstyles{*/
+/*  background-color: #FFFBF8;*/
+/*  margin-right: 0px;*/
+/*  margin-top: 1px;*/
+/*  !* margin-left: -322px; *!*/
+/*  width: 361px;*/
+/*  !* float: left; *!*/
+/*  !* padding: 20px; *!*/
+/*  border-radius: 5px;*/
+/*  padding-top: 2px;*/
+/*  padding-bottom: 2px;*/
+/*  height: 496px;*/
+/*  overflow-y: scroll;*/
+/*  overflow-x: hidden;*/
+/*  !*background-color: #FFFBF8;*!*/
+/*  !*margin-right: 0px;*!*/
+/*  !*margin-top: 1px;*!*/
+/*  !*margin-left: -322px;*!*/
+/*  !*width: 364px;*!*/
+/*  !*float: left;*!*/
+/*  !*padding: 20px;*!*/
+/*  !*border-radius: 5px;*!*/
+/*  !*padding-top: 2px;*!*/
+/*  !*padding-bottom: 2px;*!*/
+/*  !*height: 540px;*!*/
+/*  !*overflow-y: scroll;*!*/
+/*  !*overflow-x: hidden;*!*/
+/*}*/
+/*.ulstyless{*/
+/*  background-color: #FFFBF8;*/
+/*  margin-right: 0px;*/
+/*  margin-top: 1px;*/
+/*  margin-left: -322px;*/
+/*  width: 364px;*/
+/*  float: left;*/
+/*  padding: 20px;*/
+/*  border-radius: 5px;*/
+/*  padding-top: 2px;*/
+/*  padding-bottom: 2px;*/
+/*  height: fit-content;*/
+/*  overflow-y: scroll;*/
+/*}*/
+/*.colormark{*/
+/*  color: #660066;*/
+/*  font-family: inherit;*/
+/*  font-size: inherit;*/
+/*  font-weight: inherit;*/
+/*}*/
+/*.colormark:hover{*/
+/*  color: #f60*/
+/*}*/
+/*.textweight{*/
+/*  font-weight: lighter;*/
+/*  font-size: inherit;*/
+/*}*/
+/*.bgcolorread{*/
+/*  background-color: #FFFBF8;*/
+/*}*/
+/*.bgcolorchangeread{*/
+/*  background-color: #FFD1B3;*/
+/*}*/
+/*.marginlft{*/
+/*  margin: -19px 6px;*/
+/*}*/
+/*.listyles{*/
+/*  height: 75px;*/
+/*  color: #36323d;*/
+/*  width: 354px;*/
+/*  font-family: inherit;*/
+/*  border-bottom: 1px solid #CCCCCC;*/
+/*  display: block;*/
+/*  font-size: inherit;*/
+/*  font-weight: 600;*/
+/*  margin: 1px -21px;*/
+/*  padding: 8px;*/
+/*  border-radius: 5px;*/
+/*}*/
+/*.elementdatastyle{*/
+/*  font-size: inherit;*/
+/*  font-style: inherit;*/
+/*  font-family: inherit;*/
+/*  font-weight: 600;*/
+/*}*/
+/*.listyless{*/
+/*  background-color: #fff;*/
+/*  color: #36323d;*/
+/*  height: 30px;*/
+/*  width: 354px;*/
+/*  font-family: inherit;*/
+/*  display: block;*/
+/*  font-size: inherit;*/
+/*  font-weight: 600;*/
+/*  margin: 1px -21px;*/
+/*  line-height: 8px;*/
+/*  !* padding: 8px; *!*/
+/*  border-radius: 5px;*/
+/*}*/
+/*.cross{*/
+/*	background: #660066;*/
+/*    width: 25px;*/
+/*    height: 25px;*/
+/*    border-radius: 15px;*/
+/*    color: #fff !important;*/
+/*}*/
+
+/*.cross:hover{*/
+/*	background: #f60;*/
+/*}*/
+/*.cros{*/
+/*  background: #fff;*/
+/*  width: 25px;*/
+/*  height: 25px;*/
+/*  border-radius: 15px;*/
+/*  color: #000 !important;*/
+/*}*/
+
+/*.cros:hover{*/
+/*  background: #f60;*/
+/*}*/
+
+/*!* a{*/
+/*	margin: -0.5em 0.42em;*/
+/*}*/
+/*a:hover{*/
+/*	background: #ff6600 !important;*/
+/*} *!*/
+
+/*.a-margin-top7{*/
+/*	margin-top: 35px;*/
+/*}*/
+
+
+/*.glyphicon-subtitles {*/
+/*	margin-bottom: -0.3em !important;*/
+/*}*/
+/*.glyphicon-subtitles:before {*/
+/*	display: none*/
+/*}*/
+/*.icon {*/
+/*	height: 20px !important;*/
+/*	top: -1px !important;*/
+/*	margin: 0 !important;*/
+/*}*/
+
+/*.profileImgBorder{*/
+/*	border: 1px solid #ddd;*/
+/*	border-radius: 5px;*/
+/*}*/
+
+/*.iconLi{*/
+/*	width: 5em;*/
+/*}*/
+
+/*.navbar-right {*/
+/*	margin-top: -1px;*/
+/*	!*border-bottom: 0.3em solid #00bfa5;*!*/
+/*    position: relative;*/
+/*    top: 0.1em;*/
+/*    background-color: #660066;*/
+/*}*/
+/*.navbar-right li a {*/
+/*	padding-top: 0.7em !important;*/
+/*	padding: 0;*/
+/*	!*border-bottom: 2px solid #999;*!*/
+/*}*/
+/*.greenbar ul li h5 {*/
+/*    margin-top: 0px;*/
+/*    margin-bottom: -23px;*/
+/*}*/
+
+/*.logoAdjust {*/
+/*    width: 50%;*/
+/*	height: 54px;*/
+/*	margin-top: -25px;*/
+/*	margin-left: 5px;*/
+/*	padding: 5px;*/
+/*}*/
+
+/*.navHeight{*/
+/*	height: 55px; */
+/*}*/
+
+/*.color-black{	*/
+/*    color: black !important;*/
+/*}*/
+
+/*.iconPadding{*/
+/*    padding: 5px !important;*/
+/*}*/
+/*.navbarsetting*/
+/*{*/
+/*	background-color:#e0e0e0;*/
+/*	width: 100%*/
+
+/*}*/
+/*.logosetting*/
+/*{*/
+/*	margin-left: 34px;*/
+/*	margin-bottom: 10px;*/
+/*	margin-top: 10px;*/
+/*	width: 20%;*/
+/*}*/
+/*.logoimg*/
+/*{*/
+/*	width: 210.5px;*/
+/*	height: 35px;*/
+/*	float: left;*/
+/*}*/
+/*.leftFloat{*/
+/*  float: left;*/
+/*}*/
+/*.rightFloat{*/
+/*  float: right;*/
+/*}*/
+/*.editLogo{*/
+/*  height: 13px;*/
+/*  width: 13px;*/
+/*}*/
+/*.mrgntop{*/
+/*	margin-top: -43px ;*/
+/*}*/
+/*.content-width*/
+/*{*/
+/*	width: 100%;*/
+/*}*/
+/*.content-width90*/
+/*{*/
+/*	width: 90%;*/
+/*}.content-width10*/
+/*{*/
+/*	width: 10%;*/
+/*}*/
+/*.content-width_noth*/
+/*{*/
+/*	width:40px;*/
+/*	margin-top: 19px;*/
+/*	margin-bottom: 10px;*/
+/*	margin-right: 34px;*/
+/*	margin-left: 15px;*/
+/*}*/
+/*.navcolor*/
+/*{*/
+/*	background-color: #e0e0e0 !important;*/
+/*	height: 55px;*/
+/*}*/
+/*.row*/
+/*{*/
+/*	margin-right: none !important;*/
+/*	margin-left: -15px !important*/
+
+/*}*/
+/*.divcap*/
+/*{*/
+/*	width: 70%;*/
+/*	float: right;*/
+/*	margin-right: -15px !important;	*/
+/*}*/
+/*.divlog*/
+/*{*/
+/*	width: 20%;*/
+/*	float: left;*/
+/*	margin-top: 10px;*/
+/*	margin-left: 34px;*/
+/*	margin-bottom: 10px;*/
+/*}*/
+/*.narbarbtn*/
+/*{*/
+/*	width: 10%;*/
+/*	float: right;*/
+/*}*/
+/*.navNotifications*/
+/*{*/
+/*	margin-left: 9px;*/
+/*	margin-right: -40px !important;*/
+/*	padding-top: 8px !important;*/
+/*	height: 55px !important;*/
+/*	width: 40px !important;*/
+/*}*/
+/*.notificationsimg*/
+/*{*/
+/*	width: 32px !important;*/
+/*	height: 26px !important;*/
+/*}*/
+/*.navprofile*/
+/*{*/
+/*	width: 50px;*/
+/*	height: 55px;*/
+/*	margin-left: 15px;*/
+/*}*/
+/*.profileimg*/
+/*{*/
+/*width: 45px !important;*/
+/*	height: 35px !important;*/
+/*	border: none !important;*/
+/*}*/
+/*.a-mrgnleft*/
+/*{*/
+/*	margin-left: 6px;*/
+/*}*/
+/*.profilename*/
+/*{*/
+/*	height: 55px;*/
+/*	font-size: 12pt;*/
+/*	padding-top: 4px;*/
+
+/*}*/
+/*.mrgnbtn*/
+/*{*/
+/*    margin-top: 14px;*/
+/*    margin-right: -5px;*/
+/*}*/
+/*.modalTitle*/
+/*{*/
+/*  height: 19px;*/
+/*  font-size: 14pt;*/
+/*  color: #333333;*/
+/*  !* font-family: 'Open Sans '!important; *!*/
+/*}*/
+/*.modalTitles*/
+/*{*/
+/*  height: 19px;*/
+/*  font-size: 14pt !important;*/
+/*  color: #333333 !important;*/
+/*  font-weight: bold !important;*/
+/*  font-family: "Open sans" !important;*/
+/*  !* font-family: 'Open Sans '!important; *!*/
+/*}*/
+$tabletBreakpoint : 740px;
+$smallScreenBreakpoint: 400px;
+$desktopStandard: 1024px;
+
+@media (min-width: $smallScreenBreakpoint) and (max-width: $tabletBreakpoint) {
+  .component-paddingRL{
+    padding: 7px 1.2rem !important;
+  }
+  .navbar a{
+    font-size: 1.2rem !important;
+  }
+}

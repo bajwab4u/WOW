@@ -1,0 +1,104 @@
+<div class="container float-left col-12" [ngClass]="!isMarketPlace ? 'component-paddingRL content-box-mt' : 'px-4'">
+    <div class="row" *ngIf="!isMarketPlace">
+        <div class="col-lg-8 col-md-10 col-sm-12 text-left p-0">
+            <h3>Add Bank Account Information</h3>
+            <div class="subheading">Add your bank account details so that we can transfer you funds.</div>
+        </div>
+        <div class="col-lg-4 col-md-2 col-sm-12 text-right text-align-l wow-mt-1rem p-0">
+            <button type="reset" (click)="onCancel()"
+                class="btn addbtn-size btnDownloadColor btn-properties-white mr-2">Cancel</button>
+            <button type="button" (click)="onSubmit()" [disabled]="!form.dirty" class="btn btn-properties-gray"
+                [ngClass]="form.dirty ? 'btnAddColor' :'btn-properties-gray'">Save</button>
+        </div>
+    </div>
+    <hr *ngIf="!isMarketPlace" />
+
+    <form [formGroup]="form" autocomplete="off">
+        <div class="col-md-12 p-0 mt-4">
+
+            <div class="form-group row">
+                <div class="col-md-6 p-0">
+                    <label class="labelStyling">Account Number</label>
+                    <!-- [mask]="maskedAccountFormat" -->
+                    <input type="text"  class="form-control"  maxlength="45" name="accountNo"
+                        formControlName="accountNo" required [ngClass]="{ 'is-invalid': isControlValid('accountNo')
+                        || isControlValid('accountNo','mask') }" placeholder="Account Number">
+                    <div *ngIf="isControlValid('accountNo')
+                        || isControlValid('accountNo','mask')" class="invalid-feedback">
+                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" [tooltip]="isControlValid('accountNo') ? 'Account Number is required.' : isControlValid('accountNo', 'mask') ? 'Account number should be of required format' : 'Account number is invalid'">
+                        </i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-6 p-0">
+                    <label class="labelStyling">Routing Number</label>
+                    <input type="text" minlength="9" maxlength="9" mask="000000000" oninput="if(!this.value.match('^[0-9]*$'))this.value='';" class="form-control"
+                        name="routingNo" formControlName="routingNo" required [ngClass]="{ 'is-invalid': isControlValid('routingNo','required')
+                        || isControlValid('routingNo','minlength')
+                        || isControlValid('routingNo','maxlength') }" placeholder="xxxxxxxxx">
+
+                    <div *ngIf="isControlValid('routingNo') || isControlValid('routingNo','minlength')
+                        || isControlValid('routingNo','maxlength')" class="invalid-feedback">
+                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                            [tooltip]="form.controls.routingNo.errors.required? 'Routing Number is required.'
+                                        : form.controls.routingNo.errors.maxlength? 'Routing number can contain 9 digits only' :
+                                        form.controls.routingNo.errors.minlength? 'Routing number should contain at least 9 digits.':'Invalid Number'">
+                        </i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-6 p-0">
+                    <label class="labelStyling">Tax ID</label>
+                    <input type="text" pattern="[0-9]*" minlength="9" maxlength="10" name="taxId" mask="00-0000000"
+                        formControlName="taxId" class="form-control" required [ngClass]="{ 'is-invalid': isControlValid('taxId','required') ||
+                                    isControlValid('taxId', 'maxlength') || isControlValid('taxId','minlength') }"
+                        placeholder="xx-xxxxxxx">
+                    <div *ngIf="isControlValid('taxId') || isControlValid('taxId','minlength') || isControlValid('taxId','maxlength')"
+                        class="invalid-feedback">
+                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                            [tooltip]="form.controls.taxId.errors.required ? 'Tax ID is required.' :
+                                    form.controls.taxId.errors.minlength? 'Tax ID should contain at least 9 digits.' :
+                                    form.controls.taxId.errors.maxlength? 'Tax ID can have maximum 9 digits.': 'Invalid Tax ID'">
+                        </i>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="isMarketPlace" class="form-group form-check mt-3 text-left">
+
+                <input type="checkbox" class="form-check-input mr-2" formControlName="defaultCard">
+
+                <label class="form-check-label marginTop">
+                    Make default
+                </label>
+            </div>
+            <div
+        class="form-group form-check mt-3 text-left"
+        *ngIf="isMSC"
+      >
+        <input
+          type="checkbox"
+          class="form-check-input mr-2"
+          required
+          name="termsConditions"
+          formControlName="termsConditions"
+          (change)="emitTermsAndConditions()"
+        />
+
+        <label class="form-check-label marginTop" for="exampleCheck1">
+          By checking, you agree to our
+          <a
+            style="text-decoration: underline; color: blue; cursor: pointer"
+            (click)="showConditions()"
+            >Terms of Use & Privacy Policy</a
+          >
+        </label>
+      </div>
+        </div>
+    </form>
+
+</div>

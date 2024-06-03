@@ -1,0 +1,59 @@
+<form [formGroup]="form">
+    <div class="" (mouseover)="item='focused'" (mouseout)="item='none'">
+
+
+        <div class="form-group row inputLabelText mt-3 details-top-fields mb-0"
+            style="display:flex; align-items: center">
+            <div class="col-md-2 pl-0 specialityImg">
+                <div class="form-group text-right text-align-c">
+                    <div class="wow-agc-profile col-form-label">
+
+                        <img src="assets/images/speciality2x.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-12 form-field">
+                <textarea type="text" wowInputBehaviour name="description" formControlName="description"
+                    class="form-control" placeholder="Speciality Description" rows="5" [type]="item">
+                            </textarea>
+                <!-- <div *ngIf="isControlValid('description')" class="invalid-feedback">
+                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Description is required.">
+                    </i>
+                </div> -->
+            </div>
+
+
+
+        </div>
+
+
+        <div class="form-group row">
+            <div class="form-group-label text-right col-lg-2 col-md-3 col-sm-12 text-align-l pl-0 "
+                style="display:flex; align-items: center;justify-content: right;">
+                <label class="col-form-label col-form-label-sm">
+                    Specialty Name
+                </label>
+            </div>
+            <div class="col-md-5 specialityNameInput mt-3">
+                <div class="form-group">
+                    <div class="text-area-tooltip-wrapper">
+                        <div class="agc-text-area text-right">
+                            <input type="text" [type]="item" name="name" formControlName="name" #name wowInputBehaviour
+                                class="form-control" placeholder="Name" />
+
+                            <div *ngIf="isControlValid('name') || isControlValid('name','maxlength')"
+                                class="invalid-feedback">
+                                <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" [tooltip]="
+                                                                            form.controls.name.errors.maxlength?
+                                                                            'Name can contain upto 45 characters only': 
+                                                                            'Invalid value'">
+                                </i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>

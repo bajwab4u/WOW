@@ -1,0 +1,74 @@
+<input [attr.id]="controlName+'_pckr_id'" 
+	[name]="controlName" 
+	class="form-control"
+	[required]="required"
+	[style.width]="width" 
+	[(ngModel)]="formatedValue"
+	[placeholder]="placeHolder"  
+	[popover]="popMonthPicker" 
+	container="body"
+	[outsideClick]="true" 
+	placement="bottom"
+	[class.is-invalid]="!valid" readonly>
+
+<div class="invalid-feedback" *ngIf="isRequired || invalid">
+
+	<i aria-hidden="true" [style.margin-right]="'calc(102% - ' + width +')'"
+		class="fa fa-info-circle fa-errorIcon invalid-err-state" 
+		[tooltip]="tooltipMsg">
+	</i>
+</div>
+
+
+<ng-template #popMonthPicker>
+	<div class="row date">
+
+		<!-- <ng-container *ngIf="!disablePrev"> -->
+			<i tabindex="-1"  
+				[class.disabled-icon]="disablePrev"
+				class="fa fa-chevron-left date-arrow-icon" (click)="onUpdateDate('PREVIOUS')"></i>
+			&nbsp;&nbsp;&nbsp;
+		<!-- </ng-container> -->
+
+		<!-- Month field -->
+		<div class="date-section">
+
+			<div style="margin: 5px 0;">
+
+				<select class="form-control" style="width: 75px;"
+					[name]="controlName+'_picker_month'" tabindex="1" [(ngModel)]="month"
+					(change)="onChangeDate('month')">
+					
+					<option value=null disabled selected>MM</option>
+					<option *ngFor="let opt of monthCalendar" [value]="opt.key">{{opt.key}}</option>
+				</select>
+
+			</div>
+		</div>&nbsp;&nbsp;
+	
+		<!-- Year field -->
+		<div class="date-section">
+		
+			<div style="margin: 5px 0;">
+
+				<select class="form-control" style="width: 75px;"
+					[name]="controlName+'_picker_year'" tabindex="1" [(ngModel)]="year"
+					(change)="onChangeDate('year')">
+					
+					<option value=null disabled selected>YYYY</option>
+					<option *ngFor="let opt of yearCalendar" [value]="opt">{{opt}}</option>
+				</select>
+
+			</div>
+		</div>
+
+		<!-- <ng-container *ngIf="!disableNext"> -->
+			&nbsp;&nbsp;&nbsp;
+			<i tabindex="-1" 
+				[class.disabled-icon]="disableNext"
+				class="fa fa-chevron-right date-arrow-icon" (click)="onUpdateDate('NEXT')"></i>
+		<!-- </ng-container> -->
+
+	</div>
+	
+</ng-template>

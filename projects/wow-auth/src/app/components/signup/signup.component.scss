@@ -1,0 +1,73 @@
+// .signup-bg
+// {
+//     background-image: url(assets/images/signup-bg1.svg), url(assets/images/signup-bg2.svg);
+//     background-position: left bottom,  right bottom; /* this positions the second image */
+//     background-repeat: no-repeat;
+// }
+
+.signup-container
+{
+    align-items: stretch;
+    justify-content: center;
+    display: flex;
+    height: 100%;
+    // background-image: url("src/assets/images/signup/signup-background.svg");
+    background-position: 0% -75px;
+    background-repeat: no-repeat;
+    gap: 38px;
+
+    .actors
+    {
+        box-shadow: 0px 3px 15px #57575721;
+        border: 1px solid #80558029;
+        border-radius: 30px;
+        opacity: 1;
+        padding: 32px 30px;
+        height: 100%;
+        margin-top: 37px;
+        margin-bottom: 10px;
+    }
+
+    .title-divider
+    {
+        border: 2px solid #660066; 
+        width: 20%; 
+        margin-bottom: 20px; 
+        margin-top: 10px;
+    }
+
+    ul {
+        padding: 0px !important;
+        margin: 0;
+    }
+    ul.dashed {
+        list-style-type: none;
+    }
+    ul.dashed > li {
+        text-indent: -5px;
+    }
+    ul.dashed > li:before {
+        content: "-";
+        text-indent: -5px;
+        margin-right: 5px;
+    }
+
+    li {
+        margin-bottom: 10px;
+    }
+
+    .btnProvider {
+        box-shadow: 0px 3px 16px #CCCCCC29;
+        border: 1px solid #524456;
+        border-radius: 4px;
+        opacity: 1;
+    }
+
+    .btnEmployer {
+        background: #524456 0% 0% no-repeat padding-box;
+        color: #fff;
+        box-shadow: 0px 3px 16px #CCCCCC29;
+        border-radius: 4px;
+        opacity: 1;
+    }
+}

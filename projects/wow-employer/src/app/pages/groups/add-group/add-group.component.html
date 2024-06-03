@@ -1,0 +1,108 @@
+<div class="row" style="height: 100%;">
+	
+	<div class="component-paddingRL content-box-mt col-12">
+
+		<form [formGroup]="groupsForm" (ngSubmit)="onSubmit()">
+			<div class="">
+				<div class="row">
+					<div class="col-md-6 text-left p-0">
+						<h3>Add Group</h3>
+						<p class="subheading">Create and assign employees and budge to that group.</p>
+					</div>
+					<div class="col-md-6 mt-2 p-0 wow-mb-1rem">
+						<div class="text-right float-right mt-2">
+							<button class="btn addbtn-size btnDownloadColor btn-properties-white mr-2"
+								(click)="onGoBack()">Cancel</button>
+							<button type="submit" class="btn addbtn-size btnAddColor">Save</button>
+						</div>
+					</div>
+				</div>
+				<div class="linebar"></div>
+				<div class="row">
+					<div class="col-md-4 p-0">
+						<div class="form-row mt-3 mr-0 ml-0">
+							
+							<div class="form-group col-12 text-left inputMarginBot10 p-0">
+								<label>Name</label>
+								<input type="text" class="form-control" placeholder="e.g Managers" 
+									formControlName="name" required autocomplete="off" maxlength="35"
+									[ngClass]="{ 'is-invalid': (isControlValid('name') || isControlValid('name', 'maxlength'))}"/>
+
+								<div class="invalid-feedback"
+									*ngIf="isFormSubmitted && (isControlValid('name') || isControlValid('name', 'maxlength'))">
+
+									<i aria-hidden="true" class="fa fa-info-circle fa-errorIcon" 
+										[tooltip]="!isControlValid('name') ? 'Group Name is required' : 'Max 35 characters allowed'">
+									</i>
+								</div>
+							</div>
+                            <div class="form-group col-12 text-left inputMarginBot10 p-0">
+								<label>Select Color</label>
+
+								<img style="position: absolute; left: 8px; top: 38px; z-index: 1000;" class="" src="assets/images/color-picker.svg">
+								<input readonly type="text" class="form-control  ml-2"
+									required formControlName="color" placeholder="Pick a Color" autocomplete="off" 
+									style="padding-left: 25px; position: relative; margin-left: 0px !important;"
+									[ngClass]="{ 'is-invalid': isControlValid('color')}">
+								
+								<input type="color" class="color-picker-field" readonly 
+									[ngStyle]="{'right': isFormSubmitted && isControlValid('color') ? '30px' : '10px'}"
+									style="top: 32px;" formControlName="selectedColor" (change)="onColorChange()" >
+								
+								<div class="invalid-feedback" *ngIf="isFormSubmitted && isControlValid('color')">
+									<i aria-hidden="true" class="fa fa-info-circle fa-errorIcon" 
+										tooltip="Group color is required">
+									</i>
+								</div>
+
+							</div>
+
+                            <div class="form-group col-12 text-left inputMarginBot10 p-0">
+								<label>Budget<img
+									class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple tbltooltip"
+									src="assets/images/shared-new-theme/tooltipIcon.svg"
+									tooltip="Enter amount for this group. This amount will be for each employee of this group. Your employees can use this amount to avail WoW Health benefits."></label>
+								<input type="text" [wowOnlyNumbers]="true" class="form-control" 
+									placeholder="e.g $1000" required formControlName="budget" maxlength="8"
+									[ngClass]="{ 'is-invalid': isFormSubmitted &&  groupsForm.controls['budget'].invalid}"/>
+								
+								<div class="invalid-feedback" *ngIf="isFormSubmitted && groupsForm.controls['budget'].invalid">
+									<i aria-hidden="true" class="fa fa-info-circle fa-errorIcon" 
+										[tooltip]="isControlValid('budget') ? 'Budget is required' : 'Max 8 digits allowed'">
+									</i>
+								</div>
+							</div>
+
+                            <div class="form-group col-12 text-left inputMarginBot10 p-0">
+								<label>Monthly/Yearly<img
+									class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple tbltooltip"
+									src="assets/images/shared-new-theme/tooltipIcon.svg"
+									tooltip="Select the dispersion frequency of the budget assigned to this group. This is applicable for each employee in this group."></label>
+								<select type="text" class="form-control" required formControlName="duration"
+									[ngClass]="{ 'is-invalid': isControlValid('duration')}">
+                                    <option value=null disabled selected>Select</option>
+                                    <option value="MONTH">Monthly</option>
+                                    <option value="YEAR">Yearly</option>
+                                </select>
+
+								<div class="invalid-feedback" *ngIf="isFormSubmitted && isControlValid('duration')">
+									<i aria-hidden="true" class="fa fa-info-circle fa-errorIcon" 
+										tooltip="Duration is required">
+									</i>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+
+					<div class="col-md-1"></div>
+
+					<!-- <div class="offset-md-2 col-md-5 mt-3 p-0">
+						<wow-assign-staffor-service [config]="assignEmployeeConfig"
+							(signals)="onAssignGroup($event)"></wow-assign-staffor-service>
+					</div> -->
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

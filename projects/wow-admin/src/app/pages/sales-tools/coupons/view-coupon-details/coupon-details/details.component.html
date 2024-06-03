@@ -1,0 +1,140 @@
+<form [formGroup]="form">
+    <div class="">
+        <div class="form-group row inputLabelText mt-3 details-top-fields">
+            <div class="col-md-3">
+                <div class="form-group text-right text-align-c">
+                    <div class="wow-agc-profile col-form-label">
+
+                        <img src="assets/images/couponIcon.svg" alt="">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5 mt-3">
+                <div class="form-group">
+                    <div class="text-area-tooltip-wrapper">
+                        <div class="agc-text-area text-right">
+                            <input type="text" name="couponName" formControlName="couponName" #couponName
+                                wowInputBehaviour class="form-control" placeholder="Coupon Title" readonly />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="text-area-tooltip-wrapper">
+                        <div class="agc-text-area text-right">
+                            <input type="text" name="couponCode" formControlName="couponCode" readonly #couponCode
+                                wowInputBehaviour class="form-control" placeholder="Coupon Code" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <div class="form-group-label text-right col-lg-3 col-md-3 col-sm-12 text-align-l ">
+                <label class="col-form-label col-form-label-sm">
+                    Discount Type
+                </label>
+            </div>
+            <div class="col-md-5 text-left  wow-p0">
+                <select name="parent" type="text" class="form-control" wowInputBehaviour            formControlName="couponType"
+                    readonly disabled>
+                    <option value="a" >Amount</option>
+                    <option value="p" >Percentage</option>
+
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-lg-3 col-md-3 col-sm-12 form-group-label text-right text-align-l ">
+                <label class="col-form-label col-form-label-sm">
+                    Discount
+                </label>
+            </div>
+
+            <div class="col-md-5 col-sm-12 form-field">
+                <input type="text" class="form-control" name="couponDiscount" formControlName="couponDiscount"
+                    wowInputBehaviour placeholder="Discount" readonly>
+
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+            <div class="col-lg-3 col-md-3 col-sm-12 form-group-label text-right text-align-l ">
+                <label class="col-form-label col-form-label-sm">
+                    Effective Date
+                </label>
+            </div>
+
+            <div class="col-md-5 col-sm-12 form-field">
+                <input type="text" class="form-control" name="couponStartDate" formControlName="couponStartDate"
+                    wowInputBehaviour placeholder="Effective Date" readonly>
+
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+            <div class="col-lg-3 col-md-3 col-sm-12 form-group-label text-right text-align-l ">
+                <label class="col-form-label col-form-label-sm">
+                    Expiration Date
+                </label>
+            </div>
+
+            <div class="col-md-5 col-sm-12 form-field">
+                <input type="text" class="form-control" name="couponEndDate" formControlName="couponEndDate"
+                    wowInputBehaviour placeholder="Expiration Date" readonly>
+
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+            <div class="col-lg-3 col-md-3 col-sm-12 form-group-label text-right text-align-l ">
+                <label class="col-form-label col-form-label-sm">
+                    Minimum Amount
+                </label>
+            </div>
+
+            <div class="col-md-5 col-sm-12 form-field">
+                <input type="text" class="form-control" name="couponMinDiscount" formControlName="couponMinDiscount"
+                    wowInputBehaviour placeholder="Minimum Amount" readonly>
+
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-lg-3 col-md-3 col-sm-12 form-group-label text-right text-align-l ">
+                <label class="col-form-label col-form-label-sm">
+                    Total Use Limit
+                </label>
+            </div>
+
+            <div class="col-md-5 col-sm-12 form-field">
+                <input type="text" class="form-control" name="couponTotalUses" formControlName="couponTotalUses"
+                    wowInputBehaviour placeholder="Total Uses" readonly>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+            <div class="col-lg-3 col-md-3 col-sm-12 form-group-label text-right text-align-l ">
+                <label class="col-form-label col-form-label-sm">
+                    Per Patient Use Limit
+                </label>
+            </div>
+
+            <div class="col-md-5 col-sm-12 form-field">
+                <input type="text" class="form-control" name="couponPatientUses" formControlName="couponPatientUses"
+                    wowInputBehaviour placeholder="Patient uses limit" readonly>
+            </div>
+
+        </div>
+
+    </div>
+</form>

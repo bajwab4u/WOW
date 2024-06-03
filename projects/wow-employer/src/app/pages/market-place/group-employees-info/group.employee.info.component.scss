@@ -1,0 +1,94 @@
+
+.group-info-details-wrapper {
+
+    .group-name {
+        color: #191919;
+        size: 14px;
+        font-family:'Poppins' !important;
+    }
+
+    .table {
+        border: 1px solid #7070703D;
+
+        tr {
+            border-radius: 3px;
+
+            th {
+                text-align: start;
+                font-weight: 500;
+                size: 14px;
+                color: #575757;
+                font-family: 'Poppins';
+
+            }
+        }
+        
+        .group-info-checkbox {
+            width: 10%;
+            padding-top:1rem;
+        }
+
+        .group-info-email {
+            width: 41%;
+        }
+    }
+    
+    .card {
+        border: none !important;
+
+        .card-body {
+            padding: 0;
+        }
+    }
+
+    .card-header {
+        display:flex;
+        padding-left: 0.8rem;
+        border-radius: 3px;
+        border: 1px solid #7070703D;
+        background-color: #80558012;
+       
+        .accordion-icon {
+            text-align: start;
+            flex-basis: 8%;
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    .group-record-single-wrapper {
+        border: 1px solid #7070703D;
+
+        .group-record-single {
+            padding: 1rem;
+            border-radius: 3px;
+            height: 63px;
+
+            .single-record-row {
+                display:flex;
+                align-items: center;
+            }
+
+            .record-email {
+                text-align: start;
+                padding-left: 0;
+            }
+
+            .record-package {
+                width: 100%;
+                padding: 5px 5px;
+                height: 2.5rem
+            }
+        }
+
+        .group-record-single:not(:last-child) {
+            border-bottom: 1px solid #7070703D;
+        }
+
+        .apply-all-link {
+            text-decoration: underline;
+            color: #524456;
+            cursor: pointer;
+        }
+    }
+}

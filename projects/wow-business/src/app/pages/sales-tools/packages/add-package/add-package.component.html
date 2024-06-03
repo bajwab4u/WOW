@@ -1,0 +1,170 @@
+<div class="container col-9 float-left component-paddingRL content-box-mt" style="min-width: 100% !important;">
+	<form name="from" autocomplete="off" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
+		<div class="row">
+			<div class="col text-left p-0 col-sm-12 col-md-7">
+				<h3>Add Package</h3>
+				<div class="subheading">Add the name, price and general details of this package.
+				</div>
+			</div>
+			<div class="col text-right mt-2 p-0 col-sm-12 text-align-l col-md-5">
+				<button type="button" class="btn addbtn-size btnDownloadColor btn-properties-white mr-2"
+					(click)="goBack()">Cancel</button>
+				<button type="submit" class="btn addbtn-size btnAddColor">Save</button>
+			</div>
+		</div>
+		<hr />
+
+		<div class="row inputLabelText ml-5">
+			<div class="col-lg-5 p-0 text-align-c">
+				<div class="row">
+					<div class="col-md-12 text-left text-align-c col-12">
+
+						<img src="assets/images/coupondetail/couponIcon.svg" height="80">
+
+						<!-- <wow-file-picker 
+							defaultImg="assets/images/business-setup/business_details_icon.svg"
+							(change)="onChangeImage($event)"></wow-file-picker> -->
+					</div>
+				</div>
+
+				<div class="form-group mt-3">
+					<label for="name" class="float-left">Package Title</label>
+					<input type="text" class="form-control " name="packageTitle" [(ngModel)]="formData.title"
+						#packageTitle="ngModel" [ngClass]="{ 'is-invalid': f.submitted && packageTitle.invalid }" 
+						maxlength="200" required placeholder="Package Title">
+
+					<div *ngIf="f.submitted && packageTitle.invalid" class="invalid-feedback">
+
+						<i class="fa fa-info-circle fa-errorIcon"
+							aria-hidden="true" [tooltip]="packageTitle.errors.required ? 'Package Title is required.' : 'Max 200 characters allowed'">
+						</i>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="address" class="float-left">Package Description</label>
+					<textarea style="height: 93px;" type="text" class="form-control" name="Description"
+						[(ngModel)]="formData.description" #Description="ngModel" maxlength="500"
+						[ngClass]="{ 'is-invalid': f.submitted && Description.invalid }"
+						placeholder="Let your customers know why they should buy this."></textarea>
+					
+					<div *ngIf="f.submitted && Description.invalid" class="invalid-feedback">
+
+						<i class="fa fa-info-circle fa-errorIcon"
+							aria-hidden="true" tooltip="Max 500 characters allowed">
+						</i>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="col-lg-12 p-0">
+				<div class="form-row form-group mt-4">
+					<div class="col-md-2 col-sm-12">
+						<label for="location" class="float-left">Duration <sub>(Months)</sub></label>
+						<select name="title" class="form-control" name="duration" 
+							[(ngModel)]="formData.duration" required #duration="ngModel"
+							[ngClass]="{ 'is-invalid': f.submitted && duration.invalid }" >
+							<option value=null disabled>Months</option>
+							<option *ngFor="let item of mounthDurtion" [value]=item>{{item}}</option>
+						</select>
+						<div *ngIf="f.submitted && duration.invalid" class="invalid-feedback">
+							<div *ngIf="duration.errors.required">
+								<i class="fa fa-info-circle fa-errorIcon"
+									aria-hidden="true" tooltip="Duration is required.">
+								</i>
+							</div>
+				
+						</div>
+					</div>
+
+					<div  class="col-md-2 col-sm-12 offset-0 wow-resp-pkg-margin wow-pkg-margin">
+						<label for="location" class="float-left">Package Price</label>
+						<input class="form-control" id="ex1" name="servicePrice" 
+							[wowOnlyNumbers]="true" maxlength="9"
+							[(ngModel)]="formData.servicePrice" #servicePrice="ngModel"
+							[ngClass]="{ 'is-invalid': f.submitted && servicePrice.invalid }"
+							(focus)="getServiceDisplayPrice($event)" type="text">
+						<div *ngIf="f.submitted && servicePrice.invalid" class="invalid-feedback">
+
+							<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" 
+								[tooltip]="servicePrice.errors.required ? 'Service Price is required.' : 'Max 9 characters allowed'">
+							</i>
+						</div>
+					</div>
+					<div class="col-md-2 col-sm-12 offset-0">
+						<label for="location" class="float-left">Display Price</label>
+						<input disabled class="form-control" id="ex1" type="text" name="displayPrice"
+							[(ngModel)]="formData.displayPrice" #displayPrice="ngModel"
+							[ngClass]="{ 'is-invalid': f.submitted && displayPrice.invalid }">
+					</div>
+					<div class="col-md-5 col-sm-12">
+						<div class="form-check float-left pl-1" style="margin-top: 30px;">
+							<input type="checkbox" name="isEmail" [(ngModel)]="formData.expiryEmail" #isEmail="ngModel"
+								[ngClass]="{ 'is-invalid': f.submitted && isEmail.invalid }"
+								class=" form-check-input ml-1" id="exampleCheck1">
+							<label class="form-check-label label-style checkboxLabel checkboxText ml-2"
+								for="exampleCheck1">Send
+								customer email prior to expiration</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group row no-gutters mt-4" style="display: flex;align-items: center;">
+					<div class="col-12">
+						<label for="name" class="float-left mb-2">Include Services</label>
+					</div>
+					<div class="col-4">
+
+						<wow-auto-complete
+							[config]="serviceConfig"
+							[(ngModel)]="selectedServiceId"
+							(change)="onInputChange($event)"></wow-auto-complete>
+
+					</div>
+					<div class="col-2 pl-3 text-right">
+						<button type="button" (click)="onAddService()" class="btn btn-size btnAddColor">
+							<img style="height: 22px;" src="assets/images/shared-new-theme/addicon.svg"> Add
+								Service</button>
+					</div>
+				</div>
+				<div style="padding-right: 3.1rem; border-radius: 3px;" class="col-7 pl-0 mt-4">
+					<table class="table table-striped table-hover">
+						<thead>
+							<tr>
+								<th></th>
+								<th scope="col" style="width: 240px;">Service Name</th>
+								<th scope="col" style="width: 120px;">Limit <img
+										class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple"
+										src="assets/images/shared-new-theme/tooltipIcon.svg"
+										tooltip="Maximum times this service is allowed"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngIf="formData.services.length === 0">
+								<td style="text-align: center !important;" class="wow-rm-min-width" colspan="100%">Currently there are no services in this package. </td>
+							</tr>
+							<tr *ngFor="let item of formData.services; let i = index;">
+								<td>
+									<div style="text-align: center;">
+										<img style="height: 12px; width: 15px;cursor: pointer;"
+											(click)="onRemoveService(i)"
+											src="assets/images/shared-new-theme/deleteicon.svg" alt="">
+									</div>
+								</td>
+								<td label="Service Name">{{item?.name}}</td>
+								<td label="Limit">
+									<input type="text" style="text-align: center;" 
+									     min="0" maxlength="2" 
+										(keyup)="updateList(i)" [name]="i+'_service_limit_ctrl'"
+										wowOnlyNumbers
+										[(ngModel)]="item.limit" 
+										class="form-control detailInput">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,7 @@
+@media (min-width: 400px) and (max-width: 786px) {
+    .wow-rm-min-width{
+      &::before{
+        min-width: unset !important;
+      }
+      }
+  }

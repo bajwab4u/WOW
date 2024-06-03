@@ -1,0 +1,155 @@
+
+.btn-space {
+    margin-right: 5px;
+    border: 1px solid #8055805E}
+
+.profile-heading
+{
+    margin-top: 20px;
+}
+.padding-left
+{
+    padding-left: 30px;
+}
+// .subheading
+// {
+//     color: #575757;
+//     font-size: 14px;;
+// }
+
+// .regularfield 
+// {
+//     /* background-color: #faf9f9; */
+//     opacity: 1;
+//     outline: none !important;
+//     border-color: Transparent; 
+//     border-radius: 4px;
+// }
+// .hoveronfield
+// {
+//     background-color: #faf9f9;
+//     opacity: 1;
+//     outline: none !important;
+//     border-color: Transparent; 
+//     border-radius: 4px;
+// }
+// .focusedfield
+// {
+//     background-color: white;
+//     opacity: 1;
+  
+//     border-color: #8055805E; 
+//     border-radius: 4px;
+// }
+.form-control::-webkit-input-placeholder {
+    color: #707070B3;
+    font-size: 13px;
+  }
+  .form-control:disabled, .form-control[readonly] {
+    background-color: #faf9f9;
+    opacity: 1;
+    outline: none !important;
+    border-color: Transparent;     
+}
+// .col-lg-1half
+// {
+//     width: 60px;
+//     margin-left: 19px ;
+// }
+//   .tooltip-inner {
+//     color: #fff !important;
+//     background-color: #707070B3 !important;
+// }
+// .bs-tooltip-auto[x-placement^=top] .arrow::before, .bs-tooltip-top .arrow::before {
+//     border-top-color: #707070B3;
+// }
+// .bs-tooltip-auto[x-placement^=right] .arrow::before, .bs-tooltip-right .arrow::before {
+//     border-right-color:  #707070B3;
+// }
+// .bs-tooltip-auto[x-placement^=bottom] .arrow::before, .bs-tooltip-bottom .arrow::before {
+//     border-bottom-color:  #707070B3;
+// }
+// .bs-tooltip-auto[x-placement^=left] .arrow::before, .bs-tooltip-left .arrow::before {
+//     border-left-color:  #707070B3;
+// }
+
+input[type="file"] {
+    display: none;
+  }
+    
+
+  .responsive-image{
+      height: 82px;
+      width: 82px;
+      border-radius: 51px;
+  }
+  .btn-properties-gray:disabled{
+    cursor: not-allowed;
+  }
+  .btn-properties-gray:hover{
+    background: #C9C9C978 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 16px #CCCCCC29;
+    border-radius: 6px;
+  }
+  .btn-properties-active
+{
+    background-color: #524456;
+    border: none;
+    color: #fff;
+    padding : 12px 42px !important;
+    font-size: 13px;
+    border-radius: 6px;
+    outline: 0 !important;
+
+    /* width: 20%; */
+}
+.btn-properties-active:hover{
+    background: #524456 !important;
+    box-shadow: 0px 3px 16px #CCCCCC29 !important;
+    border-radius: 6px !important;
+}
+
+// .inputWidth{
+//     width: 305px !important;
+// }
+  .float-left{
+    height: 100%;
+    overflow: auto;
+  }
+  label{
+    color: #A1A1A1;
+    margin-top: 5px;
+  }
+  // .fullHeigth{
+  //    height: 100%;
+  // }
+  // .paddingClassForName{
+  //   padding-left: 15px;
+  //   padding-right: 12px;
+  // }
+  // .paddingClassForManger
+  // {
+  //     padding-left: 0px;
+  //     padding-right: 7px;
+  // }
+  // .paddingClassForEmail
+  // {
+  //   padding-right: 15px;
+  //   padding-left: 15px;
+  // }
+  // .paddingClassForAccountNumber
+  // {
+  //   padding-left: 8px;
+  //   padding-right: 12px;
+  // }
+  // .paddingClassForRoutingNumber
+  // {
+  //   padding-left: 4px;
+  //   padding-right: 12px;
+  // }
+  // #count_message {
+  //   color: #A1A1A1;
+  //   margin-top: -20px;
+  //   margin-right: 5px;
+  //   font-size: xx-small;
+  // }

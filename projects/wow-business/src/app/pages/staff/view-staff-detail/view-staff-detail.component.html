@@ -1,0 +1,72 @@
+<div style="height: 100%; padding: 0;">
+
+	<div class="col-12 staff-form-container component-paddingRL content-box-mt">
+		<!-- <form name="form" [formGroup]="form"> -->
+		<div class="">
+
+			<div class="row ">
+				<div class="col-md-6 text-left" style="padding: 0;">
+					<h3>{{title}}</h3>
+				</div>
+				<div class="col-md-6" style="padding: 0;">
+					<div class="text-right float-right mt-1">
+						<button type="button" class="btn mr-2" [title]="isActive ? 'Inactive Staff' : 'Active Staff'"
+							[ngClass]="isActive ? 'custom-danger-btn' : 'custom-success-btn'"
+							(click)="onDeactiveStaff()">
+							<i style="font-size: 17px;" class="fa mt-1"
+								[ngClass]="isActive ? 'fa-ban' : 'fa-check'"></i>
+						</button>
+						<button type="button" class="btn btn-space btn-properties-white mr-2"
+							(click)="back()">Cancel</button>
+						<button type="button" class="btn btn-properties-gray" [disabled]="isFormDisabled"
+							[ngClass]="isFormDisabled ? 'btn-properties-gray' : 'btnAddColor'"
+							(click)="onSubmit()">Save</button>
+					</div>
+				</div>
+			</div>
+
+			<wow-tabs-group (selectedTabChange)="onSelectedTabChange($event)">
+
+				<!-- Ist Tab start -->
+				<wow-tab-item tabTitle="Details">
+					<wow-staff-details *ngIf="selectedTabIndex === 0" [staffId]="staffId" [action]="action"
+						style="width: 100% !important;" >
+					</wow-staff-details>
+
+				</wow-tab-item>
+
+				<!-- 2nd Tab start -->
+				<wow-tab-item tabTitle="Services">
+					<wow-staff-services-detail *ngIf="selectedTabIndex === 1" [staffId]="staffId"
+						[isExpanded]="isExpanded" [action]="action"
+						style="width: 100% !important;">
+					</wow-staff-services-detail>
+				</wow-tab-item>
+
+				<!-- 3rd Tab start -->
+				<wow-tab-item tabTitle="Specialties">
+					<wow-staff-sepeciality-detail *ngIf="selectedTabIndex === 2" [staffId]="staffId"
+						style="width: 100% !important;">
+					</wow-staff-sepeciality-detail>
+				</wow-tab-item>
+
+				<!-- 4th Tab start -->
+				<wow-tab-item tabTitle="Locations">
+					<wow-staff-locations-detail *ngIf="selectedTabIndex === 3" [staffId]="staffId"
+						[isExpanded]="isExpanded" [locations]="locations" style="width: 100% !important;">
+					</wow-staff-locations-detail>
+				</wow-tab-item>
+
+				<!-- 5th Tab start -->
+				<wow-tab-item tabTitle="WorkingHours">
+					<wow-staff-working-hours-detail *ngIf="selectedTabIndex === 4" [staffId]="staffId"
+						[isExpanded]="isExpanded" [action]="action"
+						style="width: 100% !important;">
+					</wow-staff-working-hours-detail>
+				</wow-tab-item>
+			</wow-tabs-group>
+
+		</div>
+		<!-- </form> -->
+	</div>
+</div>

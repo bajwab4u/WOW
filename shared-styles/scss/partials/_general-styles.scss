@@ -1,0 +1,475 @@
+/* table x axis scroll removong by scroll x hidden */
+.overflowxhidden {
+    overflow-x: hidden;
+  }
+
+   /* Subheading/ second heading after main title on multiple pages */
+   .subheading
+   {
+       color: #575757;
+       font-size: 14px;;
+   }
+
+
+  /* custom css for ngx pagination start  */
+  .ngx-pagination{
+    float: left !important;
+    padding-left: 0px !important;
+  }
+
+  .ngx-pagination .current{
+    width: 23px;
+  height: 23px;
+  background: #524456 !important;
+  box-shadow: 0px 2px 15px #DCDCDC5C;
+  border-radius: 3px;
+  opacity: 1;
+  padding: 0px !important;
+  padding-top: 2px !important;
+  }
+
+  .ngx-pagination .pagination-next a::after {
+    content: none !important;
+  }
+  .ngx-pagination .pagination-next.disabled::after {
+    content: none !important;
+  }
+  .ngx-pagination .pagination-previous.disabled::before{
+    content: none !important;
+  }
+  .ngx-pagination .pagination-previous a::before{
+    content: none !important;
+  }
+  .ngx-pagination a:hover {
+   background-color: transparent !important;
+  }
+  .ngx-pagination a:focus{
+    outline: none !important;
+  }
+  .wow-apply-all-resp{
+    display: none;
+  }
+
+
+  /* custom css for ngx pagination end  */
+
+
+//  drop downw
+
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  text-align: right !important;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #FFFFFF;
+  min-width: 155px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border: 1px solid #8055805E; 
+  border-radius: 6px;
+
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  border-bottom: 1px solid #8055805E;
+  cursor: pointer;
+}
+
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+
+
+  /* Media quries for submenu  responsiveness*/
+  .customWidth
+  {
+      width: 220px;
+  }
+  @media only screen and (min-width:320px)
+  {
+  .customWidth
+  {
+      width: 533px;
+  }
+  }
+  @media only screen and (min-width:768px)
+  {
+  .customWidth
+  {
+      width: 160px;
+  }
+  }
+  @media only screen and (min-width:1200px)
+  {
+  .customWidth
+  {
+      width: 240px;
+  }
+  }
+  @media only screen and (min-width:1824px)
+  {
+  .customWidth
+  {
+      width: 360px;
+  }
+  }
+
+
+  .mapboxgl-canvas{
+    position: relative !important;
+    /* height: 300px !important; */
+  }
+
+
+  .my-custom-class {
+    min-width: 350px;
+    border-color: #C9C9C94A;
+    border-radius: 5px;
+    box-shadow: 0px 3px 15px #60606033 !important;
+    padding-bottom: 15px;
+    z-index: 1000 !important;
+  }
+
+  .popover-header {
+    background-color: white;
+    border-bottom: 2px solid #8055805E;
+    padding: 15px;
+  }
+  .popover-body{
+    padding: 0px;
+  }
+
+  .colored-text {
+    color: #524456;
+  }
+
+
+  .default-appointment
+  {
+    background: lightgray;
+  }
+
+  .by-request-appointment
+  {
+    background: #98CCFF 0% 0% no-repeat padding-box;
+  }
+
+  .direct-appointment
+  {
+    background: #E282AF 0% 0% no-repeat padding-box;
+  }
+
+  .unscheduled {
+    background-color: #ffe978;
+  }
+
+  .scheduled {
+    background-color: #00bb51;
+  }
+
+  .confirmed {
+    background-color: #00bb51;;
+  }
+
+  .cancelled {
+    background-color: #bc0303;
+    color: #fff;
+  }
+
+  .missed {
+    background-color: #ff4a36;
+    color: #fff;
+  }
+
+  .in-progress {
+    background-color: #48c7ff;
+  }
+
+  .complete {
+    background-color: light gray 3;
+  }
+
+  .signup-login-heading {
+    font-size: 24px !important;
+    font-weight: 500 !important;
+  }
+
+  .image-pointer{
+    cursor: pointer;
+  }
+
+
+  #wow-portals-ss {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #524454;
+    /* z-index: 99999; */
+    pointer-events: none;
+  }
+
+  #wow-portals-ss .center {
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  #wow-portals-ss .logo {
+    width: 128px;
+    margin: 0 auto;
+  }
+
+  #wow-portals-ss .logo img {
+    filter: drop-shadow(0px 10px 6px rgba(0, 0, 0, 0.2))
+  }
+
+  #wow-portals-ss .spinner-wrapper {
+    display: block;
+    position: relative;
+    width: 100%;
+    min-height: 100px;
+    height: 100px;
+  }
+
+  #wow-portals-ss .spinner-wrapper .spinner {
+    position: absolute;
+    overflow: hidden;
+    left: 50%;
+    margin-left: -50px;
+    animation: outer-rotate 2.91667s linear infinite;
+  }
+
+  #wow-portals-ss .spinner-wrapper .spinner .inner {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    animation: sporadic-rotate 5.25s cubic-bezier(0.35, 0, 0.25, 1) infinite;
+  }
+
+  #wow-portals-ss .spinner-wrapper .spinner .inner .gap {
+    position: absolute;
+    left: 49px;
+    right: 49px;
+    top: 0;
+    bottom: 0;
+    border-top: 10px solid;
+    box-sizing: border-box;
+  }
+
+  #wow-portals-ss .spinner-wrapper .spinner .inner .left,
+  #wow-portals-ss .spinner-wrapper .spinner .inner .right {
+    position: absolute;
+    top: 0;
+    height: 100px;
+    width: 50px;
+    overflow: hidden;
+  }
+
+  #wow-portals-ss .spinner-wrapper .spinner .inner .left .half-circle,
+  #wow-portals-ss .spinner-wrapper .spinner .inner .right .half-circle {
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+    border: 10px solid #4285F4;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+  }
+
+  #wow-portals-ss .spinner-wrapper .spinner .inner .left {
+    left: 0;
+  }
+
+  #wow-portals-ss .spinner-wrapper .spinner .inner .left .half-circle {
+    left: 0;
+    border-right-color: transparent;
+    animation: left-wobble 1.3125s cubic-bezier(0.35, 0, 0.25, 1) infinite;
+    -webkit-animation: left-wobble 1.3125s cubic-bezier(0.35, 0, 0.25, 1) infinite;
+  }
+
+  #wow-portals-ss .spinner-wrapper .spinner .inner .right {
+    right: 0;
+  }
+
+  #wow-portals-ss .spinner-wrapper .spinner .inner .right .half-circle {
+    right: 0;
+    border-left-color: transparent;
+    animation: right-wobble 1.3125s cubic-bezier(0.35, 0, 0.25, 1) infinite;
+    -webkit-animation: right-wobble 1.3125s cubic-bezier(0.35, 0, 0.25, 1) infinite;
+  }
+.disabled{
+    pointer-events: none;
+    cursor: not-allowed !important;
+    &:before{
+      cursor: not-allowed !important;  
+    }
+}
+.enabled{
+    pointer-events: all;
+    cursor: pointer !important;
+    &:before{
+      cursor: pointer !important;  
+    }
+}
+  @keyframes outer-rotate {
+    0% {
+        transform: rotate(0deg) scale(0.5);
+    }
+    100% {
+        transform: rotate(360deg) scale(0.5);
+    }
+  }
+
+  @keyframes left-wobble {
+    0%, 100% {
+        transform: rotate(130deg);
+    }
+    50% {
+        transform: rotate(-5deg);
+    }
+  }
+
+  @keyframes right-wobble {
+    0%, 100% {
+        transform: rotate(-130deg);
+    }
+    50% {
+        transform: rotate(5deg);
+    }
+  }
+
+  @keyframes sporadic-rotate {
+    12.5% {
+        transform: rotate(135deg);
+    }
+    25% {
+        transform: rotate(270deg);
+    }
+    37.5% {
+        transform: rotate(405deg);
+    }
+    50% {
+        transform: rotate(540deg);
+    }
+    62.5% {
+        transform: rotate(675deg);
+    }
+    75% {
+        transform: rotate(810deg);
+    }
+    87.5% {
+        transform: rotate(945deg);
+    }
+    100% {
+        transform: rotate(1080deg);
+    }
+}
+
+.fontuser {
+  position: relative;
+
+  i{
+    position: absolute;
+    left: 15px;
+    top: 10px;
+    color: #524456;
+  }
+
+  input {
+    padding-left: 45px;
+  }
+}
+@media (min-width: 400px) and (max-width: 786px) {
+  .wow-profile-responsive-img{
+    text-align: center !important;
+  }
+  .width-100{
+    width: 100% !important;
+  }
+  .text-align-l{
+    text-align: left !important;
+  }
+  .text-align-c{
+    text-align: center !important;
+  }
+  .wow-offset-0{
+    margin-left: 0 !important;
+  }
+  .wow-offset-1{
+    margin-left: 0.6rem !important;
+  }
+  .wow-p0{
+    padding: 0 !important;
+    margin-top: 1rem;
+  }
+  .wow-pr-0{
+    padding-right: 0 !important;
+  }
+  .wow-pl-0{
+    padding-left: 0 !important;
+  }
+  .wow-resp-tooltip{
+    display: flex;
+    align-items: center;
+  }
+  
+  .wow-mt-1rem{
+    margin-top: 1rem;
+  }
+  .wow-mb-1rem{
+    margin-bottom: 1rem;
+  .wow-mb{
+    margin-bottom: 0.5rem !important;
+  }
+  .wow-rm-min-width{
+    &::before{
+      min-width: unset !important;
+    }
+	}
+  .wow-apply-all-resp{
+    display: block;
+  }
+  .wow-apply-all-none{
+    display: none;
+  }
+  
+   .float-right{
+     float: left !important;
+   }
+   
+
+ 
+  
+ 
+}
+@media (min-width: 786px) and (max-width: 990px){
+  // .wow-p0{
+  //   padding: 0 !important;
+  //   margin-top: 1rem;
+  // }
+}
+}
+
+::ng-deep .app-image-cropper-modal .modal-dialog {
+  max-width: 50%;
+  width: 50%;
+}

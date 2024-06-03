@@ -1,0 +1,147 @@
+@import "shared-styles/scss/core";
+.color-picker-field
+{
+    width: 25px;
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    padding: 0;
+    margin: 0;
+    padding: 0;
+    border-radius: 0px;
+}
+
+.viewD{
+    text-decoration: underline !important;
+  }
+
+  .viewD:hover{
+    color: #660066 !important;
+    cursor: pointer;
+  }
+
+.status-content{
+  text-align: left;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 5px;
+}
+
+.dropdown-menu {
+  width: 200px !important
+}
+
+
+.labelStyling{
+  float: left;
+  font-size: 13px;
+}
+
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #666;
+}
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: #fff;
+}
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: #524456;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+[type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+.marginRadioBtn {
+    margin-right: 50px;
+}
+.radioLabel {
+    color: #191919;
+    font-size: 12px !important;
+}
+
+.wow-dh-wrapper{
+  display: flex;
+
+  .wow-dh-left-parent{
+      flex-basis: 77%;
+      display: flex;
+      align-items: center;
+  }   
+  .wow-dh-right-parent{
+      // flex-basis: 50%;
+      .wow-dh-action-btns-wrapper{
+          display: flex;
+      }
+  }
+}
+
+.customBadge{
+	background-color: #A1A1A1;
+	font-weight: normal;
+}
+
+.col-lg-1half
+{
+    width: 50px;
+    margin-left: 15px ;
+}
+.flex-mobile-input{
+  flex-basis: 90%;
+}
+.flex-country-icon{
+  flex-basis: 10%;
+}
+.mobile-input-label{
+  text-align: right;
+}
+.display-flex{
+    display: flex;
+}
+.details-top-fields{
+      margin-bottom: 0;
+    max-height: 116px
+}
+
+.statusBtn{
+  display: flex;
+  align-items: center;
+}
+
+ 
+

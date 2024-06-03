@@ -1,0 +1,11 @@
+label {
+	color: #575757;
+	padding-right: 40px;
+	text-align: right;
+}
+
+@media (min-width: 400px) and (max-width: 786px) {
+	.wow-pl-1 {
+		padding-left: 1rem !important;
+	}
+}

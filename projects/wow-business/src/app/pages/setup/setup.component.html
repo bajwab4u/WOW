@@ -1,0 +1,413 @@
+<div class="container float-left  col-12" style="padding: 0;">
+	<form name="from" autocomplete="off" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" class="text-right">
+		<div class="row">
+			<div class="col-lg-8 col-md-10 col-sm-12 text-left p-0">
+				<h3>Business Details</h3>
+				<div class="subheading"> Add details about your business and setup your business account</div>
+			</div>
+			<div class="col-lg-4 col-md-2 col-sm-12 text-align-l text-right p-0">
+				<!-- <button type="button" class="btn btn-space btn-properties-white px-4 mr-2">Cancel</button> -->
+				<button type="submit" class="btn btn-properties-gray " [disabled]="!f.dirty"
+					[ngClass]="f.dirty ? 'btn-properties-active' :'btn-properties-gray'"
+					style="outline: none;">Save</button>
+			</div>
+		</div>
+		<hr />
+		<div class="row inputLabelText" (focus)="item='focusout'" (mouseover)="item='focused'" (mouseout)="item='none'">
+			<div class="col-12 p-0">
+
+				<div class="form-group row">
+					<label for="exampleInputEmail1"
+						class="text-align-r col-lg-3 col-md-6 col-sm-12 text-align-l  col-form-label col-form-label-sm">
+
+						<wow-file-picker [image]="imageUrl"
+							defaultImg="assets/images/business-setup/business_details_icon.svg"
+							(change)="onChangeImage($event)"></wow-file-picker>
+
+					</label>
+					<div class="col-lg-5 col-md-6 col-sm-11 mt-3">
+						<textarea type="text" rows="3" maxlength="1000" name="detail"
+							[(ngModel)]="businessDetails.businessDetails.description" #detail="ngModel"
+							[ngClass]="{ 'is-invalid': f.submitted && detail.invalid }" [type]='item' wowInputBehaviour
+							(input)="onchange()" class="form-control" placeholder="Business Description">
+                </textarea>
+						<span class="pull-right label label-default"
+							id="count_message">{{businessDetails.businessDetails.description?.length || 0}}/1000
+							char.</span>
+					</div>
+					<img class=" infoIcon mt-5 tooltipIconSize tooltipstylePurple"
+						tooltip="Let your customers know about yourself"
+						src="assets/images/shared-new-theme/tooltipIcon.svg">
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputEmail1"
+						class="text-align-r col-lg-3 col-md-6 col-sm-12 text-align-l  col-form-label col-form-label-sm">
+						Business Name
+					</label>
+					<div class="col-md-5 col-sm-11">
+						<input type="email" class="form-control" maxlength="45" (input)="onchange()" name="bName"
+							[(ngModel)]="businessDetails.businessDetails.name" #bName="ngModel"
+							[ngClass]="{ 'is-invalid': f.submitted && bName.invalid }" required wowInputBehaviour
+							[type]='item' placeholder="Business Name">
+						<div *ngIf="f.submitted && bName.invalid" class="invalid-feedback">
+							<div *ngIf="bName.errors.required"><i class="fa fa-info-circle fa-errorIcon"
+									aria-hidden="true" tooltip="Business Name is required.">
+								</i>
+							</div>
+
+						</div>
+					</div>
+					<img class=" infoIcon mt-2 tooltipIconSize tooltipstylePurple" tooltip="Legal Name"
+						src="assets/images/shared-new-theme/tooltipIcon.svg">
+				</div>
+
+				<div class="form-group row">
+					<label for="exampleInputEmail1"
+						class="text-align-r col-lg-3 col-md-6 col-sm-12 text-align-l col-form-label col-form-label-sm">
+						DBA
+					</label>
+					<div class="col-md-5 col-sm-11">
+						<input type="email" maxlength="45" (input)="onchange()" name="dba"
+							[(ngModel)]="businessDetails.businessDetails.dba" #dba="ngModel"
+							[ngClass]="{ 'is-invalid': f.submitted && dba.invalid }" wowInputBehaviour [type]='item'
+							class="form-control " placeholder="Doing Business As">
+						<div *ngIf="f.submitted && dba.invalid" class="invalid-feedback">
+							<div *ngIf="dba.errors.required"><i class="fa fa-info-circle fa-errorIcon"
+									aria-hidden="true" tooltip="DBA is required.">
+								</i>
+							</div>
+
+						</div>
+
+					</div>
+					<img class=" infoIcon mt-2 tooltipIconSize tooltipstylePurple"
+						tooltip="Name shown to your customers" src="assets/images/shared-new-theme/tooltipIcon.svg">
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputEmail1"
+						class="text-align-r col-lg-3 col-md-6 col-sm-12 text-align-l col-form-label col-form-label-sm">
+						Business Manager
+					</label>
+					<div class="col-md-5 col-sm-12">
+						<input type="email" maxlength="45" (input)="onchange()" name="businessManager"
+							[(ngModel)]="businessDetails.businessDetails.manager" #businessManager="ngModel"
+							[ngClass]="{ 'is-invalid': f.submitted && businessManager.invalid }" wowInputBehaviour
+							[type]='item' class="form-control " placeholder="Business Manager">
+						<div *ngIf="f.submitted && businessManager.invalid" class="invalid-feedback">
+							<div *ngIf="businessManager.errors.required"><i class="fa fa-info-circle fa-errorIcon"
+									aria-hidden="true" tooltip="Business Manager is required.">
+								</i>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputEmail1"
+						class="text-align-r col-lg-3 col-md-6 col-sm-12 text-align-l col-form-label col-form-label-sm">
+						Business Email
+					</label>
+					<div class="col-md-5 col-sm-12">
+						<input type="email" (input)="onchange()" name="email"
+							[(ngModel)]="businessDetails.businessDetails.email"
+							pattern="^(\s*[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9}\s*)$"
+							#email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required
+							disabled wowInputBehaviour [type]='item' class="form-control " placeholder="Business Email">
+						<div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+							<div *ngIf="email.errors.required"><i class="fa fa-info-circle fa-errorIcon"
+									aria-hidden="true" tooltip="Email is required.">
+								</i>
+							</div>
+							<div *ngIf="email.errors.pattern"><i class="fa fa-info-circle fa-errorIcon"
+									aria-hidden="true" tooltip=" Email is not valid.">
+								</i>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="form-group row" style="width: 97% !important;">
+					<label
+						class="text-align-r col-lg-3 col-md-6 col-sm-12 text-align-l col-form-label col-form-label-sm">
+						Mobile
+					</label>
+					<div class="col-lg-1half customWidth wow-offset-0">
+						<input type="text" wowInputBehaviour disabled [type]='item' class="form-control "
+							placeholder="">
+						<img src="assets/images/country-flag.svg" class=" fa-errorIcon" height="22px" width="38px"
+							alt="Null">
+
+					</div>
+					<div class="col-md-4 col-sm-10 wow-pr-0">
+						<input type="text" [mask]="maskedFormat" name="mobile"
+							[(ngModel)]="businessDetails.businessDetails.mobile" #mobile="ngModel" (input)="onchange()"
+							[ngClass]="{ 'is-invalid': f.submitted && mobile.invalid }" wowInputBehaviour [type]='item'
+							class="form-control " placeholder="Mobile" autocomplete="nope">
+
+						<div *ngIf="f.submitted && mobile.invalid" class="invalid-feedback">
+							<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" [tooltip]="mobile.errors.required ? 'Mobile is required.'
+										: mobile.errors?.mask ? 'Mobile number should be of required format' : 'Invalid Mobile number'">
+							</i>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label
+						class="text-align-r col-lg-3 col-md-6 col-sm-12 text-align-l col-form-label col-form-label-sm">
+						Phone
+					</label>
+					<div class="col-md-5 col-sm-12">
+						<input type="text" [mask]="maskedFormat" name="phone"
+							[(ngModel)]="businessDetails.businessDetails.phone" #phone="ngModel" (input)="onchange()"
+							[ngClass]="{ 'is-invalid': f.submitted && phone.invalid }" wowInputBehaviour [type]='item'
+							class="form-control " placeholder="Phone" autocomplete="nope">
+
+						<div *ngIf="f.submitted && phone.invalid" class="invalid-feedback">
+							<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" [tooltip]="phone.errors.required ? 'Phone is required.'
+										: phone.errors?.mask ? 'Phone number should be of required format' : 'Invalid Phone number'">
+							</i>
+						</div>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label
+						class="text-align-r col-lg-3 col-md-6 col-sm-12 text-align-l col-form-label col-form-label-sm">
+						Address
+					</label>
+					<div class="col-md-5 col-sm-12">
+						<div class="form-group m-0">
+							<input type="text" maxlength="45" name="address"
+								[(ngModel)]="businessDetails.businessDetails.address" #address="ngModel"
+								(input)="onchange()" [ngClass]="{ 'is-invalid': f.submitted && address.invalid }"
+								required wowInputBehaviour [type]='item' class="form-control " placeholder="Address">
+							<div *ngIf="f.submitted && address.invalid" class="invalid-feedback" autocomplete="nope">
+								<div *ngIf="address.errors.required"><i class="fa fa-info-circle fa-errorIcon"
+										aria-hidden="true" tooltip="Address is required.">
+									</i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label
+						class="text-align-r col-lg-3 col-md-6 col-sm-12 text-align-l col-form-label col-form-label-sm">
+						City
+					</label>
+					<div class="col-md-5 col-sm-12">
+						<div class="form-group">
+							<div class="">
+								<input type="text" maxlength="45" name="city" autocomplete="off"
+									[(ngModel)]="businessDetails.businessDetails.city" #city="ngModel"
+									(input)="onchange()" [ngClass]="{ 'is-invalid': f.submitted && city.invalid }"
+									required wowInputBehaviour [type]='item' class="form-control " placeholder="City">
+								<div *ngIf="f.submitted && city.invalid" class="invalid-feedback">
+									<div *ngIf="city.errors.required"><i class="fa fa-info-circle fa-errorIcon"
+											aria-hidden="true" tooltip="City is required.">
+										</i>
+									</div>
+									<div *ngIf="city.errors.minlength && !city.errors.pattern">
+										<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+											tooltip="Atleast 4 characters.">
+										</i>
+									</div>
+									<div *ngIf="city.errors.pattern">
+										<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+											tooltip="City is invalid.">
+										</i>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group form-row ">
+
+							<div class="col-6">
+								<input type="text" class="form-control" list="states" type="search" (input)="onchange()"
+									#State="ngModel" placeholder="State" (change)="setstate(State.value)"
+									autocomplete="none" [ngClass]="{ 'is-invalid': f.submitted && State.invalid }"
+									[type]="item" wowInputBehaviour style="padding-right: 2px;"
+									[(ngModel)]="businessDetails.businessDetails.state" name="State" required>
+								<datalist id="states">
+									<option [value]="" disabled>Choose State</option>
+									<option *ngFor="let state of states" [ngValue]="state.stateName"> {{ state.stateName
+										}}</option>
+								</datalist>
+								<div *ngIf="f.submitted && State.invalid" class="invalid-feedback">
+									<div *ngIf="State.errors.required"><i class="fa fa-info-circle fa-errorIcon"
+											aria-hidden="true" tooltip="State is required.">
+										</i>
+									</div>
+								</div>
+							</div>
+							<div class="col-6">
+								<input class="form-control" type="text" name="zipCode" maxLength="5" wowInputBehaviour
+									[type]='item' (input)="onchange()"
+									[(ngModel)]="businessDetails.businessDetails.zipCode" #zipCode="ngModel"
+									minlength="5" maxlength="5" wowOnlyNumbers autocomplete="off"
+									[ngClass]="{ 'is-invalid': f.submitted && zipCode.invalid }" required
+									placeholder="Zip Code">
+								<div *ngIf="f.submitted && zipCode.invalid" class="invalid-feedback">
+									<div *ngIf="zipCode.errors.required"><i class="fa fa-info-circle fa-errorIcon"
+											aria-hidden="true" tooltip="zipCode is required.">
+										</i>
+									</div>
+									<div *ngIf="zipCode.errors.minlength || zipCode.errors.mazlength"><i
+											class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+											tooltip="Zip code should be 5 digits">
+										</i>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="container col-8 float-left"> -->
+		<hr />
+		<div class="row profile-heading">
+			<div class="col-lg-10 text-left">
+				<h4>Bank Details</h4>
+				<div class="subheading">Add your bank account details so that we can transfer you funds
+				</div>
+			</div>
+		</div>
+		<br>
+		<div class="row inputLabelText" (focus)="item='focusout'" (mouseover)="item='focused'" (mouseout)="item='none'">
+			<div class="col-12">
+				<!-- <form name="from" autocomplete="off" class="text-right"> -->
+				<div class="form-group row">
+					<label for="exampleInputEmail1"
+						class="text-align-r col-lg-3 col-md-6 col-sm-12 text-align-l col-form-label col-form-label-sm">
+						Tax ID
+					</label>
+					<div class="col-md-5 col-sm-12">
+						<input type="text" mask="00-0000000" name="taxId"
+							[(ngModel)]="businessDetails.bankDetailsDTO.taxId" #taxId="ngModel"
+							[ngClass]="{ 'is-invalid': f.submitted && taxId.invalid }" wowInputBehaviour [type]='item'
+							class="form-control " placeholder="xx-xxxxxxx">
+						<div *ngIf="f.submitted && taxId.invalid" class="invalid-feedback">
+							<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" [tooltip]="taxId.errors.required ? 'Tax ID is required.'
+										: taxId.errors?.mask ? 'Tax ID can have maximum 9 digits.' : 'Tax ID is not valid.'">
+							</i>
+						</div>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputEmail1"
+						class="text-align-r col-lg-3 col-md-6 col-sm-12 text-align-l col-form-label col-form-label-sm">
+						Routing Number
+					</label>
+					<div class="col-md-5 col-sm-12">
+						<input type="text" minlength="9" maxlength="9" (input)="onchange()" name="routingNumber"
+							[(ngModel)]="businessDetails.bankDetailsDTO.routingNumber" #routingNumber="ngModel"
+							[ngClass]="{ 'is-invalid': f.submitted && routingNumber.invalid }" wowInputBehaviour
+							[type]='item' class="form-control " placeholder="xxxxxxxxx">
+						<div *ngIf="f.submitted && routingNumber.invalid" class="invalid-feedback">
+							<div *ngIf="routingNumber.errors.required"><i class="fa fa-info-circle fa-errorIcon"
+									aria-hidden="true" tooltip="Routing Number is required.">
+								</i>
+							</div>
+							<div *ngIf="routingNumber.errors.pattern"><i class="fa fa-info-circle fa-errorIcon"
+									aria-hidden="true" tooltip="Routing Number is not valid.">
+								</i>
+							</div>
+							<div *ngIf="routingNumber.errors.minlength && !routingNumber.errors.pattern"><i
+									class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="9 digits long.">
+								</i>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputEmail1"
+						class="text-align-r col-lg-3 col-md-6 col-sm-12 text-align-l col-form-label col-form-label-sm">
+						Account Number
+					</label>
+					<div class="col-md-5 col-sm-12">
+						<!-- mask="0000 0000 0000 0000" -->
+						<input type="text" pattern="[0-9]*"  maxlength="50"
+							(input)="onchange()" name="accountingNumber"
+							[(ngModel)]="businessDetails.bankDetailsDTO.accountingNumber" #accountingNumber="ngModel"
+							[ngClass]="{ 'is-invalid': f.submitted && accountingNumber.invalid }" wowInputBehaviour
+							[type]='item' class="form-control " placeholder="Account Number">
+						<div *ngIf="f.submitted && accountingNumber.invalid" class="invalid-feedback">
+							<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+								[tooltip]="accountingNumber.errors.required ? 'Account Number is required.'
+										: accountingNumber.errors?.mask ? 'Account Number should be of required format' : 'Account Number is not valid.'">
+							</i>
+						</div>
+					</div>
+				</div>
+
+				<!-- </form> -->
+			</div>
+		</div>
+		<!-- </div> -->
+		<hr />
+		<div class="row profile-heading">
+			<div class="col-lg-10 text-left">
+				<h4>Regional Settings</h4>
+				<div class="subheading">Manage settings such as time zone, time and date formats </div>
+			</div>
+		</div>
+		<br>
+		<div class="row inputLabelText" (focus)="item='focusout'" (mouseover)="item='focused'" (mouseout)="item='none'">
+			<div class="col-12">
+				<div class="form-group row">
+					<label for="exampleInputEmail1"
+						class="text-align-r col-lg-3 col-md-6 col-sm-12 text-align-l col-form-label col-form-label-sm">
+						Country
+					</label>
+					<div class="col-md-5 col-sm-12">
+						<input type="text" class="form-control" name="country"
+							[(ngModel)]="businessDetails.regionalSettings.country" disabled #country="ngModel"
+							wowInputBehaviour [type]='item' placeholder="United States">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputEmail1"
+						class="text-align-r col-lg-3 col-md-6 col-sm-12 text-align-l col-form-label col-form-label-sm">
+						Currency
+					</label>
+					<div class="col-md-5 col-sm-12">
+						<input type="email" class="form-control" name="curency"
+							[(ngModel)]="businessDetails.regionalSettings.curency" disabled #curency="ngModel"
+							wowInputBehaviour [type]='item' placeholder="USD">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="exampleInputEmail1"
+						class="text-align-r col-lg-3 col-md-6 col-sm-12 text-align-l col-form-label col-form-label-sm">
+						Timezone
+					</label>
+					<div class="col-md-5 col-sm-12">
+
+						<wow-auto-complete style="width: 100%;" wowInputBehaviour [type]="item" name="timeZone"
+							[required]="true" [config]="timeConfig" #timeZone="ngModel" [options]="timeZones"
+							[(ngModel)]="businessDetails.regionalSettings.timezone"
+							[invalid]="f.submitted && timeZone.invalid"></wow-auto-complete>
+
+						<!-- <select name="title" class="form-control" name="timeZone" (change)="onchange()"
+							[(ngModel)]="businessDetails.regionalSettings.timezone" #timeZone="ngModel"
+							[ngClass]="{ 'is-invalid': f.submitted && timeZone.invalid }">
+							<option value=null>TimeZone</option>
+							<option *ngFor="let item of timeZones" [value]="item.value">{{item.value}}</option>
+						</select> -->
+						<div *ngIf="f.submitted && timeZone.invalid" class="invalid-feedback">
+							<div *ngIf="timeZone.errors.required"><i class="fa fa-info-circle fa-errorIcon"
+									aria-hidden="true" tooltip="Time Zone is required.">
+								</i>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

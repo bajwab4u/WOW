@@ -1,0 +1,156 @@
+<div class="modal-body">
+	<div class="row">
+		<div class="col-lg-10">
+			<p class="headingColor text-left pl-5 mb-3">Who works at your business?</p>
+			<p *ngIf="!isProviderSelected && isFormSubmitted" style="top: 0px !important"
+				class="headingColor text-left pl-5 mb-3 alert error-alert alert-danger">Atleast one provider must be
+				selected.</p>
+
+			<form class="form-group" [formGroup]="staffForm">
+				<table class="table table-borderless px-3 business_staff" style="border-spacing: 0;">
+					<thead class="thead-light">
+						<tr class="headingColor">
+							<th scope="col">First Name</th>
+							<th scope="col">Last Name</th>
+							<th scope="col">Email</th>
+							<th scope="col">Type <img class="imgCustom ml-3 infoIcon tooltipstylePurple"
+									src="assets/images/shared-new-theme/tooltipIcon.svg"
+									tooltip="Providers are doctors, PAs, NPs, etc. Nursing staff are clinical staff like MAs, LPN, RN, etc. Assistant are non-clinical staff like secretary. ">
+							</th>
+							<th scope="col">Service</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr formArrayName="staffFormItems"
+							*ngFor="let item of staffForm.get('staffFormItems')['controls']; let i = index">
+							<td [formGroupName]="i">
+								<input type="text" name="staffFirstName" formControlName="staffFirstName" required
+									class="form-control  ml-2" style="width: 135px" placeholder="First Name"
+									[ngClass]="{ 'is-invalid': isFormSubmitted && item.get('staffFirstName').invalid }"
+									tooltip="" [isDisabled]="!isFormSubmitted" maxlength="35" autocomplete="off">
+
+								<div class="invalid-feedback"
+									*ngIf="isFormSubmitted && !item.get('staffFirstName').valid">
+
+									<i aria-hidden="true" *ngIf="item.get('staffFirstName').hasError('required')"
+										class="fa fa-info-circle fa-errorIcon" tooltip="First Name is required">
+									</i>
+
+									<i aria-hidden="true" *ngIf="item.get('staffFirstName').hasError('maxlength')"
+										class="fa fa-info-circle fa-errorIcon" tooltip="Max 35 characters allowed">
+									</i>
+								</div>
+
+							</td>
+							<td [formGroupName]="i">
+								<input formControlName="staffLastName" type="text" class="form-control  ml-2"
+									style="width: 135px" required name="staffLastName" placeholder="Last Name"
+									[ngClass]="{ 'is-invalid': isFormSubmitted && item.get('staffLastName').invalid }"
+									tooltip="" [isDisabled]="!isFormSubmitted" maxlength="35" autocomplete="off">
+
+								<div class="invalid-feedback"
+									*ngIf="isFormSubmitted && !item.get('staffLastName').valid">
+
+									<i aria-hidden="true" *ngIf="item.get('staffLastName').hasError('required')"
+										class="fa fa-info-circle fa-errorIcon" tooltip="Last Name is required">
+									</i>
+
+									<i aria-hidden="true" *ngIf="item.get('staffLastName').hasError('maxlength')"
+										class="fa fa-info-circle fa-errorIcon" tooltip="Max 35 characters allowed">
+									</i>
+								</div>
+
+							</td>
+							<td [formGroupName]="i">
+								<input type="email" formControlName="staffEmail" class="form-control "
+									style="width: 190px" required name="email" placeholder="Email" [ngClass]="{ 'is-invalid': (isFormSubmitted && item.get('staffEmail').invalid) || item.get('staffEmail').hasError('mustMatch') 
+									|| item.get('staffEmail').hasError('duplicateEmail')}" [tooltip]="" (focusout)="onValidateEmail(item, i)"
+									[isDisabled]="!isFormSubmitted" autocomplete="off" maxlength="50">
+
+								<div *ngIf="item.get('staffEmail').hasError('mustMatch')"
+									class="fa fa-info-circle fa-errorIcon"
+									tooltip="You are not allowed to add multiple staff members with same email">
+								</div>
+								<div *ngIf="item.get('staffEmail').hasError('duplicateEmail')"
+									class="fa fa-info-circle fa-errorIcon" tooltip="This user already exists">
+
+								</div>
+
+
+								<div class="invalid-feedback"
+									*ngIf="(!item.get('staffEmail').hasError('mustMatch') && isFormSubmitted && isEmailValid(item) != '')">
+									<i aria-hidden="true" class="fa fa-info-circle fa-errorIcon"
+										[tooltip]="isEmailValid(item)">
+									</i>
+								</div>
+							</td>
+
+							<td [formGroupName]="i">
+								<select name="staffType" formControlName="staffType" class="form-control " required
+									style="width: 135px" name="stafftype"
+									[ngClass]="{ 'is-invalid': isFormSubmitted && item.get('staffType').invalid }"
+									tooltip="" [isDisabled]="!isFormSubmitted" (change)="onChangeStaffType(i, item)">
+									<option value="" selected disabled>Select</option>
+									<option value="PROVIDER_STAFF">Provider</option>
+									<option value="NURSING_STAFF">Nursing Staff</option>
+									<option value="ASSISTANT_STAFF">Assistant</option>
+									<option value="BUSINESS_MANAGER">Business Manager</option>
+								</select>
+
+								<div class="invalid-feedback" *ngIf="isFormSubmitted && !item.get('staffType').valid">
+
+									<i aria-hidden="true" class="fa fa-info-circle fa-errorIcon"
+										tooltip="Staff Type is required">
+									</i>
+								</div>
+							</td>
+
+							<td [formGroupName]="i">
+								<input type="text" list="servicenamelist" [required]="servicetypeRequired(item)"
+									class="form-control" name="serviceType" style="width: 135px"
+									placeholder="Service Name" formControlName="serviceType"
+									[disabled]="!servicetypeRequired(item)"
+									[ngClass]="{ 'is-invalid': isFormSubmitted && item.get('serviceType').invalid }"
+									tooltip="{{item.get('serviceType').valid ? '' : 'Service Name is required.'}}"
+									tooltip-trigger="focus" [isDisabled]="!isFormSubmitted" autocomplete="nope"
+									maxlength="45" autocomplete="off">
+								<datalist id="servicenamelist">
+									<option value=null selected disabled> Choose Service </option>
+									<option *ngFor="let service of servicesList" [value]="service.serviceName">
+									</option>
+								</datalist>
+
+								<div class="invalid-feedback" *ngIf="isFormSubmitted && !item.get('serviceType').valid">
+
+									<i aria-hidden="true" *ngIf="item.get('serviceType').hasError('required')"
+										class="fa fa-info-circle fa-errorIcon" tooltip="Service Name is required">
+									</i>
+
+									<i aria-hidden="true" *ngIf="item.get('serviceType').hasError('maxlength')"
+										class="fa fa-info-circle fa-errorIcon" tooltip="Max 45 characters allowed">
+									</i>
+
+								</div>
+							</td>
+							<td>
+								<div *ngIf="staffForm.get('staffFormItems')['controls'].length > 1">
+									<img src="assets/images/shared-new-theme/deleteicon.svg" alt=""
+										(click)="deleteItem(i)">
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="text-style" style="text-align: left;">
+								<a (click)="addStaffItem()"> <i class="fa fa-plus mr-2"
+										style="font-size:15px;font-weight: bold;"></i>
+									Add Staff</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</form>
+		</div>
+	</div>
+</div>

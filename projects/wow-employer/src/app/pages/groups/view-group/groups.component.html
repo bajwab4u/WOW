@@ -1,0 +1,43 @@
+<div style="height: 100%; overflow-y: auto;">
+
+	<ng-container [ngSwitch]="activeState">
+
+		<ng-container *ngSwitchCase="'TABLE'">
+			<div class="col-md-12 layout-blank component-paddingRL content-box-mt">
+
+				<wow-table 
+					[config]="groupConfig" 
+					[actions]="action"
+					(signals)="onTableSignals($event)">
+
+					<ng-template dataTableCell="sideBorder" 
+						let-row="row" let-col="col">
+						<div class="tblcolorDivRed" 
+							[style.background]="borderColor(row)"></div>
+					</ng-template>
+					
+					<ng-template dataTableCell="limitAmountForEachEmployee" 
+						let-row="row" let-col="col">
+						{{row?.groupLimit?.limitAmountForEachEmployee}}
+					</ng-template>
+
+					<ng-template dataTableCell="status" 
+						let-row="row" let-col="col">
+						{{row?.status === 'IN_ACTIVE' ? 'In Active' : 'Active'}}
+					</ng-template>
+
+				</wow-table>
+			</div>
+		</ng-container>
+
+		<ng-container *ngSwitchCase="'ADD'">
+			<wow-add-group (signals)="onGoback($event)"></wow-add-group>
+		</ng-container>
+
+		<ng-container *ngSwitchCase="'DETAIL'">
+			<wow-view-group-detail [data]="selectedGroup" (signals)="onGoback($event)"></wow-view-group-detail>
+		</ng-container>
+
+	</ng-container>
+
+</div>

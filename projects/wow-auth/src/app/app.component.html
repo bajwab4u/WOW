@@ -1,0 +1,20 @@
+<div style="width: 100%; height: 100%;">
+
+	<nav class="navbar col-12 mb-4 background-color-nav" 
+		style="min-height: 75px; height: 75px;">
+		<span class="navbar-text ml-5 font-weight-bold">
+			<a href="#">
+				<img src="assets/images/landing-navbar/nav-bar-logo.svg" alt="">
+			</a>
+		</span>
+	</nav>
+	
+	<div *ngIf="loadingState | async">
+		<wow-loader></wow-loader>
+	</div>
+	
+	<div class="auth-container">
+		<router-outlet></router-outlet>
+	</div>
+
+</div>

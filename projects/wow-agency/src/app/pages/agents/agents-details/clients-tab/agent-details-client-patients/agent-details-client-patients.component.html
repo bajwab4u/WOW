@@ -1,0 +1,43 @@
+<div class="wow-agdc-tbl-wrapper">
+  <div class="wow-agdc-tbl">
+    <wow-table
+      style="width: 100% !important"
+      [config]="config"
+      [actions]="action"
+      (signals)="onTableSignals($event)"
+    >
+      <ng-template
+        dataTableCell="sideBorder"
+        let-row="row"
+        let-col="col"
+        class="side-border-responsive"
+      >
+        <div
+          class="tblcolorDivGreen"
+          [style.background]="borderColor(row)"
+        ></div>
+      </ng-template>
+
+      <ng-template dataTableCell="image" let-row="row" let-col="col">
+        <div class="imgsize">
+          <img
+            class="imgsize responsive-image rounded-circle"
+            src="assets/images/profile_icon.svg"
+          />
+        </div>
+      </ng-template>
+
+      <ng-template dataTableCell="name" let-row="row" let-col="col">
+        <span>{{ row?.firstName + " " + row?.lastName }}</span>
+      </ng-template>
+
+      <ng-template dataTableCell="email" let-row="row" let-col="col">
+        {{ row?.email }}
+      </ng-template>
+
+      <ng-template dataTableCell="phone" let-row="row" let-col="col">
+        {{ row?.phone }}
+      </ng-template>
+    </wow-table>
+  </div>
+</div>

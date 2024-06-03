@@ -1,0 +1,95 @@
+<div style="height: 100%">
+
+	<div class="col-md-12 layout-blank component-paddingRL">
+		<div class="content-box-mt">
+
+			<div class="row">
+				<h2>{{title | titlecase}}
+					<span *ngIf="totalItems > 0">({{totalItems}})</span>
+				</h2>
+			</div>
+
+			<div class="row margnTblTop">
+				<div class="col-md-4" style="padding-left: 0px !important;">
+
+					<search-control palceHolder="Search Staff Member" (signal)="onSearchValueChange($event)">
+					</search-control>
+				</div>
+				<div class="col-md-8 wow-res-header-btns" style="padding-right: 0;">
+					<div class="text-right float-right">
+						<select name="" id="" class="tbldropdown mr-2"
+							(change)="onChangeStatusFilter($event.target.value)">
+							<option value="All">All</option>
+							<option value="ACTIVE">Active</option>
+							<option value="DISABLED ">Inactive</option>
+						</select>
+						<!-- <button class="btn btn-size btnDownloadColor mr-2">Download<img style="padding-left: 5px;" src="assets/images/shared-new-theme/downloadiocn.svg"></button> -->
+						<a class="btn btn-size btnAddColor" (click)="addStaff()"><img style="height: 22px;"
+								src="assets/images/shared-new-theme/addicon.svg"> Add Staff</a>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="row" style="width: 100%;">
+				
+				<wow-table style="width: 100%;"
+					[config]="config" 
+					[actions]="action"
+					(signals)="onTableSignals($event)">
+
+					<ng-template dataTableCell="sideBorder" 
+						let-row="row" let-col="col">
+						<div class="tblcolorDivRed" 
+							[style.background]="borderColor(row)"></div>
+					</ng-template>
+
+					<ng-template dataTableCell="image" 
+						let-row="row" let-col="col">
+						<div class="imgsize">
+							<img class="imgsize responsive-image rounded-circle"
+								[src]="profileImg(row)"
+								onError="this.src='assets/images/profile_icon.svg'">
+						</div>
+					</ng-template>
+
+					<ng-template dataTableCell="staffFirstName" 
+						let-row="row" let-col="col">
+						<p [ngClass]="isExpanded ? 'text-overflow-30ch' : 'text-overflow-20ch'" class="m-0 text-overflow"
+							title="{{row?.staffFirstName}} {{row?.staffLastName}}">
+							{{row?.staffFirstName}} {{row?.staffLastName}}
+						</p>
+					</ng-template>
+
+					<ng-template dataTableCell="contactNumber1" 
+						let-row="row" let-col="col">
+						{{row?.contactNumber1 |  mask: maskedFormat }}
+					</ng-template>
+
+					<ng-template dataTableCell="staffEmail" 
+						let-row="row" let-col="col">
+						<p [ngClass]="isExpanded ? 'text-overflow-30ch' : 'text-overflow-20ch'" class="m-0 text-overflow" 
+							[title]="row?.staffEmail"><i class="fa fa-envelope mr-2"
+							style="display: inline-block; color: #524456;"></i>{{row?.staffEmail}}
+						</p>
+					</ng-template>
+
+					<ng-template dataTableCell="staffMemberStatus" 
+						let-row="row" let-col="col" let-i="index">
+						<span class="col-width"
+							(click)="$event.stopPropagation(); onActivateDActiveStaff(row)">
+							{{status(row)}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+							<i [ngStyle]="{'visibility': isDisplay && index === i ? 'visible' : 'hidden'}"
+								class="fa fa-angle-right ml-2"
+								style="font-size:16px;font-weight: bold;">
+							</i>
+						</span>
+					</ng-template>
+
+				</wow-table>
+			</div>
+		</div>
+	</div>
+
+</div>

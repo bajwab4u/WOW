@@ -1,0 +1,31 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLongTitle"><strong>Update Limit</strong></h5>
+    <button type="button" class="btn py-0" (click)="closeModal()" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true"><i class="fa fa-times"></i></span>
+    </button>
+</div>
+<div class="modal-body">
+    <form name="form" (ngSubmit)="f.valid && onSubmit()" #f="ngForm">
+        <div class="form-group row pt-5 pb-3 px-4">
+            <label class="col-lg-4 col-md-6 col-sm-12 px-0 col-form-label">
+                Enter Amount *
+            </label>
+    
+            <div class="col-lg-8 col-md-6 col-sm-12 pr-0">
+                <input type="text"  [wowOnlyNumbers]="true" name="add-credit-limit"
+                    #createCredit="ngModel" required maxlength="8"
+                    [class.is-invalid]="f.submitted && createCredit.invalid"
+                    [(ngModel)]="amount" class="form-control" placeholder="$100" />
+
+                <div *ngIf="f.submitted && createCredit.invalid" class="invalid-feedback">
+                    <i class="fa fa-info-circle fa-errorIcon" style="padding-right: 12px;" aria-hidden="true"
+                        [tooltip]="createCredit.errors.required ? 'Amount is required' : 'Max 8 digits allowed'"> </i>
+                </div>
+            </div>
+
+            <div class="col text-center mt-5">
+                <button class="btn addbtn-size btnAddColor" type="submit">Update Amount</button>
+            </div>
+        </div>
+    </form>
+</div>

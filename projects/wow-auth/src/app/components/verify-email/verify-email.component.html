@@ -1,0 +1,30 @@
+<div class="container-fluid p-4">
+	<div class="row no-gutters">
+		<div class="col-lg-7 pl-3 pr-3 pt-0 mt-3 ml-3 mb-3">
+			<h1 style="font-weight: 500;" class="textBoxHeading mb-4 poppins-semi-bold">
+				{{title}}
+			</h1>
+			<div class="w-75">
+				<div class="textBox" [innerHTML]="content"></div>
+			</div>
+		</div>
+		<div class="col-lg-4 signUpForm mt-3 mr-5">
+			<div class="card shadow  bg-white rounded">
+				<div class="card-body" style="min-height: 478px; min-width: 404px !important;">
+					<i class="fas fa-arrow-left" (click)="goBack()" style="font-size: 20px; cursor: pointer;"></i>
+					<div class="text-center">
+						<img class="logoimg center" src="assets/images/verifyEmail_icon.jpg">
+					</div>
+					<h2 class="mt-5 mb-4 signup-login-heading" style="text-align: center;">Verify Email</h2>
+					<p class="mx-4 headingColor text-center mb-5"><b>Hi {{userMetaData.firstName}}! </b>We have sent a
+						link to your email. Please click the link to start using WoW Health's Provider Portal.</p>
+					<p class="text-center linkTextStyle">Haven't recieved the link?</p>
+					<button style="padding: 8px 23px !important;" type="button"
+						class="btn btn-properties customBtn mx-auto d-block" (click)="sendLinkagain()">Resend Email
+						Link</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

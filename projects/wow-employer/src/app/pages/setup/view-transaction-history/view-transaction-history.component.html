@@ -1,0 +1,41 @@
+<div class="container float-left  col-12 component-paddingRL content-box-mt">
+	<div class="row">
+		<div class="col-lg-8 col-md-10 col-sm-10 text-left p-0">
+			<h2>All Transactions <span *ngIf="totalItems > 0">({{totalItems}})</span></h2>
+		</div>
+	</div>
+	<br>
+
+	<div class="row mb-3">
+		<div class="col col-12 col-sm-5 col-lg-12 col-sm-12 calendar-date-view">
+
+			<span class="fa fa-caret-left" aria-hidden="true" style="cursor: pointer;" mwlCalendarPreviousView
+				[view]="view" [(viewDate)]="viewDate" (viewDateChange)="onBackBtnChange(viewDate)"></span>&nbsp;&nbsp;
+			<span style="font-weight: 600; cursor: pointer;" mwlCalendarToday [(viewDate)]="viewDate"
+				(viewDateChange)="viewDateChange.next(viewDate)" (click)="onTodayBtn(viewDate)">Today</span>
+			&nbsp;&nbsp;
+			<span>{{ viewDate | calendarDate: view + 'ViewTitle':locale }}</span> &nbsp;&nbsp;
+			<span class="fa fa-caret-right" aria-hidden="true" style="cursor: pointer;" mwlCalendarNextView
+				[ngClass]="disableNextBtn ? 'disabled': 'enabled'" [view]="view" [(viewDate)]="viewDate"
+				(viewDateChange)="onNextBtnChange($event)"></span>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12 pl-0 pr-0">
+
+			<wow-table [config]="config" [actions]="action" (signals)="onTableSignals($event)">
+
+				<ng-template dataTableCell="image" let-row="row" let-col="col">
+					<img src="assets/images/Group 4606.svg" class="responsive-image" alt="Null">
+				</ng-template>
+
+				<ng-template dataTableCell="amount" let-row="row" let-col="col">
+					{{row?.amount | currency}}
+				</ng-template>
+
+			</wow-table>
+
+		</div>
+	</div>
+</div>

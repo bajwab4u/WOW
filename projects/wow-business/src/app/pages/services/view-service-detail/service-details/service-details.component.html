@@ -1,0 +1,173 @@
+<form name="form" autocomplete="off" #f="ngForm">
+    <div class="row" (focus)="item='focusout'" (mouseover)="item='focused'" (mouseout)="item='none'">
+        <div class="col-md-2 text-right wow-profile-responsive-img p-0">
+            <wow-file-picker [image]="serviceEvent?.logoPathURL"
+                defaultImg="assets/images/business-setup/business_details_icon.svg" (change)="onChangeImage($event)">
+            </wow-file-picker>
+        </div>
+        <div class="col-md-5 text-left pl-5 wow-p0">
+            <input type="text" name="firstName" #firstName="ngModel" placeholder="Endoscopy" [type]="item"
+                style="font-size: 15px; font-weight: 500;" wowInputBehaviour class="form-control"
+                [(ngModel)]="serviceEvent.serviceName" [ngClass]="{ 'is-invalid': !isFormValid && firstName.invalid}"
+                maxlength="35" required>
+            <div *ngIf="!isFormValid && firstName.invalid" class="invalid-feedback">
+                <div *ngIf="firstName.errors.required">
+                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Service name is required.">
+                    </i>
+                </div>
+            </div>
+            <br>
+            <h4>
+                <div class="badge badge-primary customBadge mr-2 mb-2"
+                    *ngFor="let item of serviceEvent.keywords; let i=index">
+                    {{item}}
+                </div>
+            </h4>
+            <div class="keywords form-group" [type]="item" wowInputBehaviour>
+                <tag-input class="tags m-2" name="users" #users="ngModel" [(ngModel)]='serviceEvent.keywords'
+                    [theme]="'dark'" [modelAsStrings]="true" [editable]="true">
+                </tag-input>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-2 text-right text-align-l p-0">
+                <label class="inputLabelText pt-2">Category</label>
+            </div>
+            <div class="col-md-5 text-left  pl-5 wow-p0">
+                <select name="servicetype" type="text" class="form-control" (change)="onchange(servicetype.value)"
+                    [type]="item" wowInputBehaviour [(ngModel)]="servicetypes" #servicetype="ngModel"
+                    [ngClass]="{ 'is-invalid': !isFormValid && servicetype.invalid}" required>
+                    <option [ngValue]="null" disabled>Select</option>
+                    <option *ngFor="let type of serviceCategory" [value]="type"> {{ type }}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-2 text-right text-align-l p-0">
+                <label class="inputLabelText pt-2">Service Price</label>
+            </div>
+            <div class="col-md-5 text-left pl-5 wow-p0">
+                <input type="text" name="serviceprice" #serviceprice="ngModel" placeholder="Service Price" [type]="item"
+                    wowInputBehaviour maxlength="12" (input)="onPriceChange()" class="form-control detailInput"
+                    [(ngModel)]="serviceEvent.servicePrice" [wowOnlyNumbers]="true"
+                    [ngClass]="{ 'is-invalid': !isFormValid && serviceprice.invalid}" required>
+                <div *ngIf="!isFormValid && serviceprice.invalid" class="invalid-feedback">
+                    <div *ngIf="serviceprice.errors.required">
+                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                            tooltip="Service price is required."> </i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-2 text-right p-0 text-align-l">
+                <label class="inputLabelText pt-2">Display Price</label>
+            </div>
+            <div class="col-md-5 text-left pl-5 wow-p0">
+                <input type="text" [type]="item" wowInputBehaviour name="displayprice" disabled #displayprice="ngModel"
+                    placeholder="Display Price" class="form-control detailInput"
+                    [(ngModel)]="serviceEvent.serviceListedPrice" style="border: none;"
+                    [ngClass]="{ 'is-invalid': !isFormValid && displayprice.invalid}" required>
+                <div *ngIf="!isFormValid && displayprice.invalid" class="invalid-feedback">
+                    <div *ngIf="displayprice.errors.required">
+                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                            tooltip="Display price is required."> </i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-2 text-right p-0 text-align-l">
+                <label class="inputLabelText pt-2">Returning Discount (%)</label>
+            </div>
+            <div class="col-md-5 col-sm-11 text-left pl-5 wow-p0">
+                <input type="text" [type]="item" [wowOnlyNumbers]="true" name="returningDiscount"
+                    [(ngModel)]="serviceEvent.returningDiscount" wowInputBehaviour
+                    [ngClass]="{ 'is-invalid': !isFormValid && returningDiscount?.errors?.customMax}"
+                    #returningDiscount="ngModel" class="form-control" placeholder="0" [customMax]="maxVal"
+                    maxlength="5">
+
+                <div *ngIf="f.form.get('returningDiscount')?.errors?.customMax" class="invalid-feedback">
+                    <i class="fa fa-info-circle fa-errorIcon mb-1" aria-hidden="true"
+                        tooltip="Number between 1-100 with up to two decimal places.">
+                    </i>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-1 text-left wow-resp-tooltip">
+                <img class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple"
+                    src="assets/images/shared-new-theme/tooltipIcon.svg" tooltip="Discount for established customers">
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-2 text-right p-0 text-align-l">
+                <label class="inputLabelText pt-2">Duration</label>
+            </div>
+            <div class="col-md-5 text-left pl-5 wow-p0">
+                <select name="duration" type="number" disabled="{{buttonDisabled}}" class="form-control" 
+                    [type]="item" wowInputBehaviour required [(ngModel)]="serviceEvent.serviceDurationInMinutes"
+                    #duration="ngModel" [ngClass]="{ 'is-invalid': !isFormValid && duration.invalid}">
+                    <option value=null>Select</option>
+                    <option *ngFor="let item of serviceDuration" [ngValue]="item"> {{item}}
+                    </option>
+                </select>
+
+                <div *ngIf="!isFormValid && duration.invalid" class="invalid-feedback">
+                    <div *ngIf="duration.errors.required">
+                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                            tooltip="Duration is required."></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-2 text-right p-0 text-align-l">
+                <label class="inputLabelText pt-2">Eligible For</label>
+            </div>
+            <div class="col-md-5 text-left pl-5 wow-p0">
+                <div class="pl-3" style="width: 50%; display: inline-block;">
+                    <div class="form-check pl-1">
+                        <input type="checkbox" name="HSA" class=" form-check-input"
+                            [(ngModel)]="serviceEvent.hsaeligible" id="check2HSA">
+                        <label class="form-check-label label-style font-weight-normal checkboxText"
+                            for="check2HSA">HSA</label>
+                    </div>
+                </div>
+                <div class="pl-3" style="width: 50%; display: inline-block;">
+                    <div class="form-check pl-1">
+                        <input type="checkbox" name="HRA" class=" form-check-input"
+                            [(ngModel)]="serviceEvent.hraeligible" id="check2HRA" s>
+                        <label class="form-check-label label-style font-weight-normal checkboxText"
+                            for="check2HRA">HRA</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-2 text-right p-0 text-align-l">
+                <label class="inputLabelText pt-2">Visit</label>
+            </div>
+            <div class="col-md-5 pl-5 wow-p0">
+                <div class="pl-3" style="width: 50%; display: inline-block;">
+                    <div class="form-check pl-1" style="text-align:left ;">
+                        <input type="checkbox" name="inperson" class=" form-check-input"
+                            [(ngModel)]="serviceEvent.inPersonAppointmentAllowed" id="check2Inperson">
+                        <label class="form-check-label label-style font-weight-normal checkboxText"
+                            for="check2Inperson">Person</label>
+                    </div>
+                </div>
+                <div class="pl-3" style="width: 50%; display: inline-block;">
+                    <div class="form-check pl-1" style="text-align:left ;">
+                        <input type="checkbox" name="video" class=" form-check-input"
+                            [(ngModel)]="serviceEvent.videoAllowed" id="check2Video">
+                        <label class="form-check-label label-style font-weight-normal checkboxText"
+                            for="check2Video">Video/Online</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

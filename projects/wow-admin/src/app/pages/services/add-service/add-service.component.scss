@@ -1,0 +1,26 @@
+::ng-deep .ng2-tag-input__text-input:placeholder-shown {
+  font-size: 13px;
+}
+::ng-deep .tag-input{
+  border-bottom: none !important;
+}
+
+::ng-deep .dark.ng2-tag-input{
+  border-bottom: none !important;
+}
+
+// .keywords{
+//   /* border-radius: 10px ; */
+//   width: 100% !important;
+//   min-height: 60px;
+//   height: auto;
+//   overflow:auto;
+//   border: 1px solid #ced4da;
+//   border-radius: 4px;
+//   padding: 1px;
+// }
+// .customBadge{
+//   background-color: #A1A1A1;
+//   font-weight: normal;
+// }
+

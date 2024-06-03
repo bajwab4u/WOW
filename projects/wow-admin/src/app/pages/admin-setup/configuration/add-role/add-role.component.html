@@ -1,0 +1,82 @@
+<div class="content-box-mt ">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+        <div class="row">
+            <div class="col-md-12 p-0">
+                <div class="wow-adg-header pb-3">
+                    <div class="wow-adg-header-left">
+                        <div class="wow-adg-heading">
+                            <h2>
+                                <span (click)="onGoBack()" style="cursor: pointer">
+                                    <img src="assets/images/details-back-btn.svg" height="12px">
+                                </span>
+                                Add Role
+                            </h2>
+                        </div>
+
+                    </div>
+                    <div class="wow-adg-header-right">
+                        <button class="btn addbtn-size btnDownloadColor btn-properties-white" (click)="onGoBack()"
+                            type="button">
+                            Cancel
+                        </button>
+                        <button class="btn addbtn-size" [disabled]="!form.dirty"
+                            [ngClass]="!form.dirty ? 'btn-properties-gray' : 'btnAddColor'">
+                            Save
+                        </button>
+                    </div>
+
+                </div>
+                <div class="linebar"></div>
+
+            </div>
+        </div>
+
+
+        <div class="row pt-4">
+            <div class="col-md-10 p-0">
+                <div class="wow-adg-form-fields-wrapper">
+                    <div class="form-group row">
+                        <div class="form-group-label col-12  pl-0" style="text-align: left;">
+                            <label class="col-form-label col-form-label-sm">
+                                Actors
+                            </label>
+                        </div>
+                        <div class="col-md-5 col-sm-12 pl-0 form-field">
+                            <select name="id" type="text" class="form-control" required wowInputBehaviour
+                                formControlName="id"
+                                [ngClass]="{ 'is-invalid': isControlValid('id', 'required') }">
+                                <option [ngValue]="null" disabled>Select</option>
+                                <option *ngFor="let type of roles" [value]="type.id"> {{ type.name }}
+                                </option>
+                                <div *ngIf="isControlValid('id', 'required')" class="invalid-feedback">
+                                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                        tooltip="Please select an actor.">
+                                    </i>
+                                </div>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="form-group-label col-12 pl-0" style="text-align: left;">
+                            <label class="col-form-label col-form-label-sm">
+                                Role Name
+                            </label>
+                        </div>
+                        <div class="col-md-5 col-sm-12 pl-0 form-field">
+                            <input type="text" wowInputBehaviour name="name" formControlName="name" class="form-control"
+                                maxlength="45"
+                                [ngClass]="{ 'is-invalid': isControlValid('name', 'required') ||  isControlValid('name', 'maxlength') }"
+                                placeholder="Name" required>
+                            <div *ngIf="isControlValid('name', 'required') ||
+                                                isControlValid('name', 'maxlength')" class="invalid-feedback">
+                                <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" [tooltip]="isControlValid('name', 'required') ? 'Role Name is required.'
+                                                        : 'Role Name can contain upto 45 characters only.'">
+                                </i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

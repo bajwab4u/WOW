@@ -1,0 +1,57 @@
+<div class="p-5">
+    <div class="mb-2">
+        <h5 class="modal-title" id="exampleModalLongTitle"><strong>Add Service</strong></h5>
+    </div>
+    <form name="from" [formGroup]="form">
+        <div class="form-group form-row mr-0 ml-0 w-100">
+            <div class="col-md-12 col-sm-12 p-0 mb-2">
+                <label class="float-left">Service Name</label>
+                <select  class="form-control" formControlName="serviceId"
+                [ngClass]="{ 'is-invalid': isControlValid('serviceId', 'required')}">
+                    <option value="" disabled [selected]="true">Select Service</option>
+                    <option *ngFor="let service of services" [ngValue]="service.serviceId">
+                        {{service.serviceName}}</option>
+                </select>
+                <div *ngIf="isControlValid('serviceId', 'required')" class="invalid-feedback">
+                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" 
+                    tooltip="Please select a service">
+                    </i>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12 p-0 mb-2">
+                <label for="insuranceamount" class="float-left">Insurance Amount</label>
+                <input placeholder="e.g $20" class="form-control" type="text" name="insuranceamount"
+                [wowOnlyNumbers]="true" formControlName="insuranceAmount" maxlength="10"
+                [ngClass]="{ 'is-invalid': isControlValid('insuranceAmount', 'required')}"
+                    formControlName="insuranceAmount">
+                    <div *ngIf="isControlValid('insuranceAmount', 'required')" class="invalid-feedback">
+                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" 
+                        tooltip="Insurance Amount is required">
+                        </i>
+                    </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12 p-0 mb-2">
+                <label class="float-left">Coverage</label>
+                <input placeholder="e.g $15.00" class="form-control" type="text" name="coverage"
+                    formControlName="coverageAmount" maxlength="10"
+                [wowOnlyNumbers]="true" [ngClass]="{ 'is-invalid': isControlValid('coverageAmount', 'required')}">
+                    <div *ngIf="isControlValid('coverageAmount', 'required')" class="invalid-feedback">
+                        <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" 
+                        tooltip="Coverage Amount is required">
+                        </i>
+                    </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12 p-0 mb-2 mt-3">
+                <div class="float-right">
+                    <button class="btn btn-size btnDownloadColor  btn-properties-white"
+                        (click)="closeModal(false)">Cancel</button>
+                    <button [disabled]="!form.dirty" class="btn addbtn-size "
+                    [ngClass]="!form.dirty ? 'btn-properties-gray': 'btnAddColor'" (click)="submitForm()">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

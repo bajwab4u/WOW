@@ -1,0 +1,203 @@
+<div class="col-12  component-paddingRL content-box-mt">
+	<div class="row">
+		<div class="col-lg-7 text-left p-0">
+			<h3>{{location.locationName}}</h3>
+		</div>
+		<div class="col-md-5 text-right p-0">
+			<button type="button" class="btn mr-2 custom-danger-btn" title="Delete"
+				(click)="onClickDeleteLocationButton()">
+				<i style="font-size: 17px;" class="fa fa-trash"></i>
+			</button>
+			<button type="button" class="btn btn-space btn-properties-white" (click)="goBack()">Cancel</button>
+			<button type="button" class="btn btn-properties-gray" [disabled]="isFormDisable"
+				[ngClass]="isFormDisable ? 'btn-properties-gray' : 'btnAddColor'" (click)="onSubmit()">Save</button>
+		</div>
+	</div>
+
+	<wow-tabs-group (selectedTabChange)="onSelectedTabChange($event)">
+
+		<wow-tab-item tabTitle="Details">
+			<form name="from" autocomplete="off" #f="ngForm">
+				<ng-container *ngIf="selectedTabIndex === 0">
+					<div class="row inputLabelText ml-5">
+						<div class="col-12" (focus)="item='focusout'" (mouseover)="item='focused'"
+							(mouseout)="item='none'">
+							<div class="form-group row">
+								<label for="exampleInputEmail1" class="col-lg-2 col-md-6 col-sm-12 col-form-label">
+									<a>
+										<img src="assets/images/Group 4602.svg" class="responsive-image" alt="Null">
+									</a>
+								</label>
+								<div class="col-md-6 col-md-6 col-sm-12 mt-3">
+									<input type="text" class="form-control" name="locationName"
+										[(ngModel)]="location.locationName" #LocationName="ngModel"
+										[ngClass]="{ 'is-invalid': isFormSubmitted && LocationName.invalid }"
+										[type]='item' wowInputBehaviour required placeholder="Location">
+									<div *ngIf="isFormSubmitted && LocationName.invalid" class="invalid-feedback">
+										<div *ngIf="LocationName.errors.required"><i
+												class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+												tooltip="Location Name is required.">
+											</i>
+										</div>
+									</div>
+									<input type="text" class="form-control mt-3" id="exampleInputEmail1"
+										aria-describedby="emailHelp" [type]='item' wowInputBehaviour autocomplete="off"
+										name="email" [(ngModel)]="location.locationEmail" #email="ngModel"
+										pattern="^(\s*[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9}\s*)$"
+										[ngClass]="{ 'is-invalid': isFormSubmitted && email.invalid }"
+										placeholder="mail@example.com">
+									<div *ngIf="isFormSubmitted && email.invalid" class="invalid-feedback">
+
+										<div *ngIf="email.errors.pattern"><i class="fa fa-info-circle fa-errorIcon"
+												aria-hidden="true" tooltip=" Email is not valid.">
+											</i>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="address"
+									class="col-md-2 col-sm-12 text-align-l col-form-label col-form-label-sm px-2">Contact
+									Number</label>
+								<div class="col-md-6 col-sm-12">
+									<input type="text" class="form-control" name="ContactNumber"
+										[(ngModel)]="location.locationContactNumber"
+										[mask]="maskedFormat" [type]='item'
+										wowInputBehaviour #ContactNumber="ngModel"
+										[ngClass]="{ 'is-invalid': isFormSubmitted && ContactNumber.invalid }"
+										placeholder="Contact Number" autocomplete="nope">
+									<div *ngIf="isFormSubmitted && ContactNumber.invalid" class="invalid-feedback">
+
+										<div *ngIf="ContactNumber.errors?.mask"><i
+												class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+												tooltip="Contact number should be of required format">
+											</i>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="name"
+									class="col-md-2 col-sm-12 text-align-l col-form-label col-form-label-sm">Timezone
+
+								</label>
+								<div class="col-md-6 col-sm-12">
+
+									<wow-auto-complete style="width: 100%;" name="timeZone" [required]="true"
+										[config]="timeConfig" #timeZone="ngModel" [options]="timeZones"
+										[(ngModel)]="location.locationTimeZone"
+										[invalid]="isFormSubmitted && timeZone.invalid" [type]="item" wowInputBehaviour>
+									</wow-auto-complete>
+
+									<div *ngIf="isFormSubmitted && timeZone.invalid" class="invalid-feedback">
+										<div *ngIf="timeZone.errors.required"><i class="fa fa-info-circle fa-errorIcon"
+												aria-hidden="true" tooltip="Time Zone is required.">
+											</i>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="name"
+									class="col-md-2 col-sm-12 text-align-l col-form-label col-form-label-sm">Address</label>
+								<div class="col-md-6 col-sm-12">
+									<input type="text" class="form-control" id="recipient-name" name="Address"
+										[(ngModel)]="location.address" [type]='item' wowInputBehaviour
+										#Address="ngModel"
+										[ngClass]="{ 'is-invalid': isFormSubmitted && Address.invalid }" required
+										placeholder="Address">
+									<div *ngIf="isFormSubmitted && Address.invalid" class="invalid-feedback">
+										<div *ngIf="Address.errors.required"><i class="fa fa-info-circle fa-errorIcon"
+												aria-hidden="true" tooltip="Address is required.">
+											</i>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="name"
+									class="col-md-2 col-sm-12 text-align-l col-form-label col-form-label-sm"></label>
+								<div class="col-md-6 col-sm-12 text-left">
+									<div class="row"
+										style="padding-left: 0px !important;padding-right: 0px !important;">
+										<div class="col-md-4"
+											style="padding-left: 0px !important;padding-right: 0px !important;">
+											<input class="form-control " id="ex1" type="text" name="city"
+												[(ngModel)]="location.city" #city="ngModel" [type]='item'
+												wowInputBehaviour
+												[ngClass]="{ 'is-invalid': isFormSubmitted && city.invalid }" required
+												placeholder="City">
+											<div *ngIf="isFormSubmitted && city.invalid" class="invalid-feedback">
+												<div *ngIf="city.errors.required"><i
+														class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+														tooltip="City is required.">
+													</i>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-4 "
+											style="padding-left: 5px !important;padding-right: 0px !important;">
+											<input class="form-control pr-0" type="text" name="state" list="states"
+												[(ngModel)]="location.state" #state="ngModel" (focus)="item='focusout'"
+												(mouseover)="item='focused'" (mouseout)="item='none'" [type]='item'
+												wowInputBehaviour
+												[ngClass]="{ 'is-invalid': isFormSubmitted && state.invalid }" required
+												placeholder="State" (change)="setstate(state.value)">
+											<datalist id="states">
+												<option [value]="" disabled>Choose State</option>
+												<option *ngFor="let state of states" [ngValue]="state.stateName"> {{
+													state.stateName
+													}}</option>
+											</datalist>
+											<div *ngIf="isFormSubmitted && state.invalid" class="invalid-feedback">
+												<div *ngIf="state.errors.required"><i
+														class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+														tooltip="State is required.">
+													</i>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-4"
+											style="padding-left: 5px !important;padding-right: 0px !important;">
+											<input class="form-control" type="text" name="zipCode"
+												[(ngModel)]="location.zipCode" #zipCode="ngModel" minlength="5"
+												maxlength="5" wowOnlyNumbers (focus)="item='focusout'"
+												(mouseover)="item='focused'" (mouseout)="item='none'" [type]='item'
+												wowInputBehaviour
+												[ngClass]="{ 'is-invalid': isFormSubmitted && zipCode.invalid }"
+												required placeholder="Zipcode">
+											<div *ngIf="isFormSubmitted && zipCode.invalid" class="invalid-feedback">
+												<div *ngIf="zipCode.errors.required"><i
+														class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+														tooltip="zipCode is required.">
+													</i>
+												</div>
+												<div *ngIf="zipCode.errors.minlength || zipCode.errors.mazlength"><i
+														class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+														tooltip="Zip code should be 5 digits">
+													</i>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</ng-container>
+			</form>
+		</wow-tab-item>
+
+		<!-- 2nd Tab start -->
+		<wow-tab-item tabTitle="Staff">
+			<wow-staff-location *ngIf="selectedTabIndex === 1" [providerLocationId]="this.location.locationId"
+				style="width: 100% !important;">
+			</wow-staff-location>
+		</wow-tab-item>
+
+	</wow-tabs-group>
+</div>

@@ -1,0 +1,25 @@
+.labelStyling {
+	float: left;
+	font-size: 13px;
+}
+.column {
+	flex: 1;
+	height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	/* background-color: #B786B721; */
+	border-radius: 6px;
+	width: 50%;
+}
+.add-card-btn{
+    align-items: center; 
+    justify-content: center;
+    display: flex; 
+    max-width: 49%; 
+    flex: 1 1 49%;
+}
+@media (min-width: 400px) and (max-width: 786px) {
+    .add-card-btn{
+        flex: -1 1 49%;
+    }
+}

@@ -1,0 +1,195 @@
+
+<div class="container" style="min-width: 100% !important;">
+	<form [formGroup]="couponForm" style="width: 100%">
+		<div class="p-0 mt-4" (focus)="item='focusout'" (mouseover)="item='focused'" (mouseout)="item='none'">
+			<div class="row mt-2 inputLabelText display-flex">
+				<div class="col-md-3 col-sm-12 text-align-l text-right">
+					<img src="assets/images/coupondetail/couponIcon.svg" height="80">
+				</div>
+				<div class="col-md-5 col-sm-12 text-left">
+					<input type="text" [type]="item" wowInputBehaviour formControlName="couponName" class="form-control detailInput"
+						[ngClass]="{ 'is-invalid': isFormSubmitted && couponForm.get('couponName').invalid }"
+						maxlength="200" readonly disabled required>
+					<div *ngIf="isFormSubmitted && couponForm.get('couponName').invalid" class="invalid-feedback">
+						<div *ngIf="couponForm.get('couponName').errors.required"><i
+								class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+								tooltip="Coupon Title is required.">
+							</i>
+						</div>
+					</div>
+
+					<input type="text" [type]="item" wowInputBehaviour 
+						readonly disabled
+						formControlName="couponCode" class="form-control detailInput mt-2">
+				</div>
+			</div>
+
+			<div class="row mt-2 inputLabelText display-flex">
+				<div class="col-md-3 col-sm-12 text-align-l text-right">
+					<label>Discount Type</label>
+				</div>
+				<div class="col-md-5 col-sm-12 text-left">
+					<select formControlName="couponType" [type]="item" wowInputBehaviour readonly disabled required class="form-control">
+						<option value="a">Amount</option>
+						<option value="p">Percentage</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="row mt-2 inputLabelText display-flex">
+				<div class="col-md-3 col-sm-12 text-align-l text-right">
+					<label>Discount</label>
+				</div>
+				<div class="col-md-5 col-sm-12 text-left">
+					<ng-container *ngIf="couponForm.get('couponType').value != 'p'">
+						<input type="text"
+						[type]="item" wowInputBehaviour class="form-control detailInput" formControlName="couponDiscount"
+							[wowOnlyNumbers]="true"
+							[ngClass]="{ 'is-invalid': isFormSubmitted && couponForm.get('couponDiscount').invalid }"
+							min="0" maxlength="10" readonly disabled required step="any">
+					</ng-container>
+
+					<ng-container *ngIf="couponForm.get('couponType').value === 'p'">
+
+						<input type="text" [type]="item" wowInputBehaviour class="form-control detailInput" formControlName="couponDiscount"
+							[ngClass]="{ 'is-invalid': isFormSubmitted && couponForm.get('couponDiscount').invalid }"
+							[wowOnlyNumbers]="true" maxlength="5" placeholder="%" readonly disabled required>
+						<div *ngIf="isFormSubmitted && couponForm.get('couponDiscount').invalid"
+							class="invalid-feedback">
+							<div
+								*ngIf="couponForm.get('couponDiscount').errors.pattern || couponForm.get('couponDiscount').hasError('mustMatch')">
+								<i class="fa fa-info-circle fa-errorIcon mb-1" aria-hidden="true"
+									tooltip="Number between 1-100 with up to two decimal places.">
+								</i>
+							</div>
+						</div>
+					</ng-container>
+
+					<div *ngIf="isFormSubmitted && couponForm.get('couponDiscount').invalid"
+						class="invalid-feedback">
+						<div *ngIf="couponForm.get('couponDiscount').errors.required"><i
+								class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+								tooltip="Coupon Discount is required.">
+							</i>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row mt-2 display-flex">
+				<div class="col-md-3 col-sm-12 text-align-l text-right">
+					<label>Starting Date</label>
+				</div>
+				<div class="col-md-5 col-sm-12 text-left">
+					<input class="form-control detailInput" type="text" [type]="item" wowInputBehaviour formControlName="couponStartDate"
+						readonly disabled required
+						[ngClass]="{ 'is-invalid': isFormSubmitted && couponForm.get('couponStartDate').invalid }">
+					<div *ngIf="isFormSubmitted && couponForm.get('couponStartDate').invalid"
+						class="invalid-feedback">
+						<div *ngIf="couponForm.get('couponStartDate').errors.required"><i
+								class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+								tooltip="Coupon Start Date is required.">
+							</i>
+						</div>
+						<div *ngIf="couponForm.get('couponStartDate').errors.pattern"><i
+								class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+								tooltip="Coupon Start Date is not valid.">
+							</i>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row mt-2 display-flex">
+				<div class="col-md-3 col-sm-12 text-align-l text-right">
+					<label>End Date</label>
+				</div>
+				<div class="col-md-5 col-sm-12 text-left">
+					<input class="form-control detailInput" type="text" [type]="item" wowInputBehaviour formControlName="couponEndDate"
+						readonly disabled required
+						[ngClass]="{ 'is-invalid': isFormSubmitted && couponForm.get('couponEndDate').invalid }">
+					<div *ngIf="isFormSubmitted && couponForm.get('couponEndDate').invalid"
+						class="invalid-feedback">
+						<div *ngIf="couponForm.get('couponEndDate').errors.required"><i
+								class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+								tooltip="Coupon End Date is required.">
+							</i>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row mt-2 display-flex">
+				<div class="col-md-3 col-sm-12 text-align-l text-right">
+					<label>Minimum Amount</label>
+				</div>
+				<div class="col-md-5 col-sm-12 text-left">
+
+					<input type="text" [type]="item" wowInputBehaviour class="form-control detailInput" formControlName="couponMinDiscount"
+						[wowOnlyNumbers]="true"
+						[ngClass]="{ 'is-invalid': isFormSubmitted && couponForm.get('couponMinDiscount').invalid }"
+						min="0" maxlength="10" readonly disabled required step="any">
+
+					<div *ngIf="isFormSubmitted && couponForm.get('couponMinDiscount').invalid"
+						class="invalid-feedback">
+						<div *ngIf="couponForm.get('couponMinDiscount').errors.required"><i
+								class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+								tooltip="This field is required.">
+							</i>
+						</div>
+						<!-- <div *ngIf="couponForm.get('couponMinDiscount').hasError('mustMatch')"><i
+								class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+								tooltip="The discount must be higher than the minimum amount">
+							</i>
+						</div> -->
+					</div>
+				</div>
+			</div>
+
+			<div class="row mt-2 display-flex">
+				<div class="col-md-3 col-sm-12 text-align-l text-right">
+					<label>Total Use Limit</label>
+				</div>
+				<div class="col-md-5 col-sm-12 text-left">
+					<input type="text" [type]="item" wowInputBehaviour formControlName="couponTotalUses" placeholder="500"
+						class="form-control detailInput"
+						[ngClass]="{ 'is-invalid': isFormSubmitted && couponForm.get('couponTotalUses').invalid }"
+						maxlength="12" wowOnlyNumbers readonly disabled required>
+					<div *ngIf="isFormSubmitted && couponForm.get('couponTotalUses').invalid"
+						class="invalid-feedback">
+						<div *ngIf="couponForm.get('couponTotalUses').errors.required"><i
+								class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+								tooltip="Coupon Total uselimit is required.">
+							</i>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row mt-2 display-flex">
+				<div class="col-md-3 col-sm-12 text-align-l text-right">
+					<label>Per patient Use Limit</label>
+				</div>
+				<div class="col-md-5 col-sm-12 text-left">
+					<input type="text" [type]="item" wowInputBehaviour formControlName="couponPatientUses" placeholder="500"
+						class="form-control detailInput" (input)="onInputchange()"
+						[ngClass]="{ 'is-invalid': isFormSubmitted && couponForm.get('couponPatientUses').invalid }"
+						maxlength="12" wowOnlyNumbers readonly disabled required>
+					<div *ngIf="!couponForm.get('couponPatientUses').invalid && isError"><i
+							class="fa fa-info-circle fa-errorIcon" style="font-size: 1.2rem;" aria-hidden="true"
+							tooltip="Patient limit should be less than or equal to total usage Limit.">
+						</i>
+					</div>
+					<div *ngIf="isFormSubmitted && couponForm.get('couponPatientUses').invalid"
+						class="invalid-feedback">
+						<div *ngIf="couponForm.get('couponPatientUses').errors.required"><i
+								class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+								tooltip="Coupon per patient limit is required.">
+							</i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

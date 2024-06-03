@@ -1,0 +1,75 @@
+<div class="">
+    <div class="row">
+        <h2>All Employees ( <span bind-innerHtml="setTotalNUmberofRecords()"></span> )
+        </h2>
+    </div>
+
+    <div class="row margnTblTop">
+        <div class="col-md-4" style="padding-left: 0px !important;">
+            <search-control placeHolder="Search group" (signal)="onSearch($event)">
+            </search-control>
+        </div>
+        <div class="col-md-8 p-0">
+            
+            <div class="nav-item dropdown float-right wow-float-left wow-mt-1rem">
+                <button type="button" class="btn btn-size btnAddColor"
+                    data-toggle="dropdown"><i class="fa fa-plus pr-2"></i>Invite Employee</button>
+                <ul class="dropdown-menu  dropdown-menu-right ">
+                    <div class="dropdown-container">
+                        <li class="menu-item status-content pl-3"><a (click)="signals.emit({ type: 'SINGLE', data: null })">Single Employee</a></li>
+                        <div class="dropdown-divider"></div>
+                        <li class="menu-item status-content pl-3"><a (click)="signals.emit({ type: 'MULTIPLE', data: null })">Multiple Employees</a></li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <wow-table  
+        
+            style="width: 100% !important;"
+            [config]="empConfig" 
+            [actions]="action"
+            (signals)="onTableSignals($event)">
+
+            <ng-template dataTableCell="sideBorder" 
+                let-row="row" let-col="col">
+                <div class="tblcolorDivRed" 
+                    [style.background]="borderColor(row)"></div>
+            </ng-template>
+
+            <ng-template dataTableCell="image" 
+                let-row="row" let-col="col">
+                <div class="imgsize">
+                    <img class="imgsize responsive-image rounded-circle"
+                        src="assets/images/profile_icon.svg">
+                </div>
+            </ng-template>
+
+            <ng-template dataTableCell="firstName"
+                let-row="row" let-col="col">
+                {{row.firstName}} {{row.lastName}}
+            </ng-template>
+
+            <!-- <ng-template dataTableCell="email"
+                let-row="row" let-col="col">
+                <i *ngIf="row.email" class="fa fa-envelope mr-2" 
+                    style="display: inline-block; color: #524456;"></i>
+                {{row.email}}
+            </ng-template> -->
+
+            <ng-template dataTableCell="phoneMobile" 
+                let-row="row" let-col="col">
+                {{row?.phoneMobile |  mask: maskedFormat }}
+            </ng-template>
+
+            <ng-template dataTableCell="status"                
+                let-row="row" let-col="col" >
+                {{row?.status === 'IN_ACTIVE' ? 'In Active' : 'Active'}}
+            </ng-template>
+
+        </wow-table>
+
+    </div>
+</div>

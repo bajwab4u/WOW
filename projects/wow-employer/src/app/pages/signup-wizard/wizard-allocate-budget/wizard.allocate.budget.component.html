@@ -1,0 +1,67 @@
+<div class="modal-body">
+	<div class="row">
+		<div class="col-lg-10">
+			<h3>Allocate Budget<img
+				class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple tbltooltip"
+				src="assets/images/shared-new-theme/tooltipIcon.svg" placement="bottom"
+				tooltip="Enter amount for this group. This amount will be for each employee of this group. Your employees can use this amount to avail WoW Health benefits."></h3>
+			<p>Allocate monthly or yearly budget to employees in at least one group. You can always edit and 
+				allocate later.</p>
+
+			<form class="form-group" [formGroup]="form">
+				<table class="table table-borderless px-3 business_staff" 
+					style="border-spacing: 0; padding: 0 !important; width: 80% !important;">
+					<tbody>
+						<tr style="height: 40px;">
+							<td style="width: 22%; padding: 0px;">
+
+								<input type="text" autocomplete="off" class="form-control" required [wowOnlyNumbers]="true"
+									formControlName="limitAmountForEachEmployee" placeholder="Amount e.g $1000" maxlength="10"
+									[class.is-invalid]="isFormSubmitted && form.get('limitAmountForEachEmployee').invalid">
+
+								<div *ngIf="isFormSubmitted && form.get('limitAmountForEachEmployee').invalid" class="invalid-feedback">
+
+									<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+										[tooltip]="isControlValid('limitAmountForEachEmployee') ? 'Budget is required' : 'Max 10 digits allowed.'">
+									</i>
+								</div>
+							</td>
+
+							<td style="width: 28%; padding: 0px 0px 0px 10px;">
+								<select type="text" class="form-control" formControlName="employeeGroupId"
+									required [class.is-invalid]="isFormSubmitted && form.get('employeeGroupId').invalid">
+									<option value=null disabled selected>Select Employee Group</option>
+									<option *ngFor="let opt of empGroups" [value]="opt.employeeGroupId">{{opt.employeeGroupName}}</option>
+								</select>
+								<div *ngIf="isFormSubmitted && form.get('employeeGroupId').invalid" class="invalid-feedback">
+
+									<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+										tooltip="Group Type is required">
+									</i>
+								</div>
+							</td>
+
+							<td style="width: 28%; padding: 0px 0px 0px 10px;">
+								<select type="text" class="form-control" formControlName="budgetDuration"
+									required [class.is-invalid]="isFormSubmitted && form.get('budgetDuration').invalid">
+									<option value=null disabled selected>Monthly/Yearly</option>
+									<option value='MONTH'>Monthly</option>
+									<option value='YEAR'>Yearly</option>
+								</select>
+
+								<div *ngIf="isFormSubmitted && form.get('budgetDuration').invalid" class="invalid-feedback">
+
+									<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+										tooltip="Budget is required">
+									</i>
+								</div>
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+				
+			</form>
+		</div>
+	</div>
+</div>

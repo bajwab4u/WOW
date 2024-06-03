@@ -1,0 +1,34 @@
+<div class="row margnTblTop">
+
+  <wow-table style="width: 100%;" [config]="config" [actions]="action" (signals)="onTableSignals($event)">
+
+      <ng-template dataTableCell="image" let-row="row" let-col="col">
+          <div class="imgsize">
+              <img class="imgsize responsive-image rounded-circle" src="assets/images/invoice-icon.svg" width="36px"
+                  onError="this.src='assets/images/profile_icon.svg'">
+          </div>
+      </ng-template>  
+
+      <ng-template dataTableCell="startDate" let-row="row" let-col="col">
+          <p class="m-0 text-overflow-20ch wow-clients-cellwidth" [title]="row?.startDate">
+            {{row.startDate | date}}
+          </p>
+      </ng-template>
+
+      <ng-template dataTableCell="total" let-row="row" let-col="col">
+          <p class="m-0 text-overflow text-overflow-20ch" [title]="row?.total">
+            {{row.total + ' PKR'}}
+          </p>
+      </ng-template>
+
+      <ng-template dataTableCell="download" let-row="row" let-col="col" let-i="index">
+          <a href="" [id]="row.userDocId"></a>
+          <p    class="m-0 text-overflow text-overflow-20ch "  [title]="">
+            <img (click)="downloadInvoice(row.userDocId)" src="assets/images/Icon-download.svg" alt="download">  
+          </p>
+
+      </ng-template>
+
+
+  </wow-table>
+</div>

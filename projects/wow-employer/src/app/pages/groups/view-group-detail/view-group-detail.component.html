@@ -1,0 +1,56 @@
+<div style="height: 100%; padding: 0;">
+
+    <div class="col-12 form-container component-paddingRL content-box-mt">
+       
+        <div class="">
+
+            <div class="row">
+                <div class="col-md-6 text-left" style="padding: 0;">
+                    <h3>{{data?.employeeGroupName}}</h3>
+                </div>
+                <div class="col-md-6" style="padding: 0;">
+                    <div class="text-right float-right mt-1">
+                        
+                        <button type="button" class="btn mr-2" [title]="isActive ? 'Inactive Group' : 'Active Group'" 
+                            [ngClass]="isActive ? 'custom-danger-btn' : 'custom-success-btn'"
+							(click)="onGroupStatusChange()">
+							<i style="font-size: 17px;" class="fa mt-1"
+							    [ngClass]="isActive ? 'fa-ban' : 'fa-check'"></i>
+                            <!-- fa-trash -->
+						</button>
+
+                        <button type="button" class="btn btn-space btn-properties-white mr-2"
+                            (click)="onGoBack()">Cancel</button>
+                        <button type="button" class="btn btn-properties-gray" [disabled]="isFormDisabled"
+                            (click)="onSubmit()" [ngClass]="isFormDisabled ? 'btn-properties-gray' : 'btnAddColor'">Save</button>
+                    </div>
+                </div>
+            </div>
+
+            <wow-tabs-group
+                (selectedTabChange)="onSelectedTabChange($event)">
+
+                <wow-tab-item tabTitle="Details">
+                    <wow-group-detail-form *ngIf="selectedTabIndex === 0"
+                        [data]="data" style="width: 100% !important;"
+                        [action]="action"
+                       ></wow-group-detail-form>
+                </wow-tab-item>
+
+                <wow-tab-item tabTitle="Employees">
+                    <wow-employees-detail style="width: 100% !important;"
+                        *ngIf="selectedTabIndex === 1" [groupId]="data?.employeeGroupId">
+                    </wow-employees-detail>
+                </wow-tab-item>
+
+                <wow-tab-item tabTitle="Memberships">
+                    <wow-memberships-detail style="width: 100% !important;"
+                        *ngIf="selectedTabIndex === 2" [groupId]="data?.employeeGroupId">
+                    </wow-memberships-detail>
+                </wow-tab-item>
+
+            </wow-tabs-group>
+
+        </div>
+    </div>
+</div>

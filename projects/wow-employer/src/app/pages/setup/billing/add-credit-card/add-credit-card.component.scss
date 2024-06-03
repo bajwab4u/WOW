@@ -1,0 +1,40 @@
+.spanStyle {
+    font-size: 12px !important;
+    letter-spacing: 0px !important;
+    color: #575757 !important;
+    opacity: 1 !important;
+}
+.mrgnbottom10 {
+    margin-bottom: 10px;
+}
+.mrgnbottom50 {
+    margin-bottom: 50px;
+}
+
+.bg {
+    background-color: #5244560A;;
+}
+.card-footer-options{
+    display: flex;
+    gap: 20px;
+}
+
+@media (min-width: 400px) and (max-width: 786px) {
+    .wow-resp-add-card-header{
+        display: block !important;
+        text-align: left !important;
+    }
+    .wow-resp-cards-img{
+        width: 55vw;
+    }
+    .add-card-btn{
+        flex: -1 1 49%;
+    }
+    .card-footer-options{
+        display: block !important;
+    }
+}
+
+.inVisible{
+  visibility: hidden;
+}

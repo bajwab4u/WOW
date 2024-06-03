@@ -1,0 +1,89 @@
+<input [attr.id]="controlName+'_pckr_id'" 
+	[name]="controlName" 
+	class="form-control"
+	[required]="required"
+	[disabled]="disabled"
+	[style.width]="width" 
+	[(ngModel)]="formatedValue"
+	[placeholder]="placeHolder"
+	wowOnlyNumbers readonly  
+	[popover]="popTimePicker" 
+	container="body"
+	[outsideClick]="true" 
+	placement="bottom"
+	style="font-size: 12px; position: relative;"
+	[class.is-invalid]="!valid">
+
+	<!-- <img class="timepicker-dropdown" [style.left.px]="left"
+		src="assets/images/select-dropdown.svg"> -->
+
+<div class="invalid-feedback" *ngIf="isRequired || invalid">
+
+	<i aria-hidden="true" [style.margin-right]="'calc(102% - ' + width +')'"
+		class="fa fa-info-circle fa-errorIcon invalid-err-state" 
+		[tooltip]="tooltipMsg">
+	</i>
+</div>
+
+
+<ng-template #popTimePicker>
+	<div class="row time">
+
+		<!-- Hour field -->
+		<div class="time-section">
+
+			<i tabindex="-1" (click)="handleTime('hours', 'increment')"
+				class="fa fa-chevron-up time-arrow-icon"></i>
+
+			<div style="margin: 5px 0;">
+				<input type="text" class="form-control" [name]="controlName+'_picker_hour'" 
+					wowOnlyNumbers maxlength="2" tabindex="1" #istHoursField [(ngModel)]="hours"
+					autocomplete="off" style="width: 45px;" placeholder="HH" 
+					(keyup.arrowup)="handleTime('hours', 'increment')"
+					(keyup.arrowdown)="handleTime('hours', 'decrement')"
+					(keydown)="onInputTime($event, 'hours')" (focusout)="onValidateTime('hour')">
+			</div>
+
+			<i tabindex="-1" (click)="handleTime('hours', 'decrement')"
+				class="fa fa-chevron-down time-arrow-icon"></i>
+		</div>
+		
+		<span class="time-colon-separator">:</span>
+	
+		<!-- Minute field -->
+		<div class="time-section">
+		
+			<i tabindex="-1" (click)="handleTime('minutes', 'increment')"
+				class="fa fa-chevron-up time-arrow-icon"></i>
+	
+			<div style="margin: 5px 0;">
+				<input type="text" class="form-control" [name]="controlName+'_picker_mint'" 
+					wowOnlyNumbers maxlength="2" tabindex="1" #istMinutesField [(ngModel)]="minutes"
+					autocomplete="off" style="width: 45px;" placeholder="MM"
+					(keyup.arrowup)="handleTime('minutes', 'increment')"
+					(keyup.arrowdown)="handleTime('minutes', 'decrement')"
+					(keydown)="onInputTime($event, 'minutes')" (focusout)="onValidateTime('minute')">
+			</div>
+
+			<i tabindex="-1" (click)="handleTime('minutes', 'decrement')"
+				class="fa fa-chevron-down time-arrow-icon"></i>
+		</div>
+
+		<!-- AM-PM -->
+		<div class="time-section" style="margin-left: 10px;">
+			<i tabindex="-1" (click)="onChangeMeridiem()"
+				class="fa fa-chevron-up time-arrow-icon"></i>
+
+			<input type="text" class="form-control am-pm" 
+				(click)="onChangeMeridiem()" tabindex="1" 
+				[name]="controlName+'_picker_meridiem'"
+				(keyup.arrowup)="onChangeMeridiem()"
+				(keyup.arrowdown)="onChangeMeridiem()"
+				[(ngModel)]="meridiem" readonly placeholder="AM/PM">
+
+			<i tabindex="-1" (click)="onChangeMeridiem()"
+				class="fa fa-chevron-down time-arrow-icon"></i>
+		</div>
+	</div>
+	
+</ng-template>

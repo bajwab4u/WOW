@@ -1,0 +1,53 @@
+<div class="container float-left col-12" style="overflow: auto; height: 540px;">
+  <ng-container>
+    <div style="height: 100%" *ngIf="activeState === 'TABLE'">
+      <div class="col-md-12 layout-blank component-paddingRL">
+        <div class="content-box-mt">
+
+          <div class="row" style="width: 60%">
+            <h2 class="mb-0">
+              Refunded Appointments
+              <span *ngIf="totalItems > 0" class="red">({{totalItems}})</span>
+            </h2>
+          </div>
+
+          <div class="row margnTblTop" style="width: 60%;">
+            <div class="col-md-4" style="padding-left: 0px !important;">
+
+              <search-control [palceHolder]="'Search Wow ID'" (signal)="onSearchValueChange($event)">
+              </search-control>
+            </div>
+
+            <div class="col-md-4" style="padding-right: 0;">
+              <div class="wow-stats-df-wrapper p-0">
+                <input autocomplete="off" class="form-control" readonly daterangepicker id="datefilter"
+                  style="position: relative;" [options]="dateFilterConfig" #dateFilter placeholder="MMM DD, YYYY"
+                  (selected)="setFilterValue($event)">
+              </div>
+            </div>
+          </div>
+
+
+          <wow-table class="w-100" [config]="config" [actions]="action" (signals)="onTableSignals($event)">
+
+            Status
+            <ng-template dataTableCell="refunded" let-row="row" let-col="col">
+              <p class="m-0 text-overflow-20ch wow-clients-cellwidth">
+                {{row?.refunded == 1 ? 'Refunded' : 'Unrefunded'}}
+              </p>
+            </ng-template>
+
+
+            <ng-template dataTableCell="appointmentType" let-row="row" let-col="col">
+              <span class="m-0">{{sharedService.getAppointmentTypes(row.appointmentType)}}
+              </span>
+            </ng-template>
+
+          </wow-table>
+
+
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

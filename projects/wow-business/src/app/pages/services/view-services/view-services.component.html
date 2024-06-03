@@ -1,0 +1,54 @@
+<div class="col-md-12 layout-blank component-paddingRL content-box-mt">
+
+	<wow-table
+		[config]="config"
+		[actions]="action"
+		(signals)="onTableSignals($event)">
+
+		<ng-template dataTableCell="sideBorder"
+			let-row="row" let-col="col">
+			<div class="tblcolorDivRed"
+				[style.background]="borderColor(row)"></div>
+		</ng-template>
+
+		<ng-template dataTableCell="image"
+			let-row="row" let-col="col">
+			<img class="rounded-circle" [src]="row?.logoPathURL"
+				style="border-radius: 25px;"
+				onError="src='assets/images/service-list-icon.svg'"
+				class="imgsize img-responsive">
+		</ng-template>
+
+		<ng-template dataTableCell="serviceName"
+			let-row="row" let-col="col">
+			<p [ngClass]="isExpanded ? 'text-overflow-30ch' : 'text-overflow-20ch'"
+				class="m-0 text-overflow"
+				[title]="row?.serviceName">
+				{{row?.serviceName}}
+			</p>
+		</ng-template>
+
+		<ng-template dataTableCell="serviceDurationInMinutes"
+			let-row="row" let-col="col">
+			{{row?.serviceType == 'DIRECT_SERVICE' ? row?.serviceDurationInMinutes + ' mins' : '-----'}}
+		</ng-template>
+
+		<ng-template dataTableCell="servicePrice"
+			let-row="row" let-col="col">
+			{{row?.servicePrice | currency}}
+		</ng-template>
+
+		<ng-template dataTableCell="serviceListedPrice"
+			let-row="row" let-col="col" let-i=index>
+			{{row?.serviceListedPrice | currency}}
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+			<i [ngStyle]="{'visibility': isDisplay && index === i ? 'visible' : 'hidden'}"
+				class="fa fa-angle-right ml-2"
+				style="font-size:16px;font-weight: bold;">
+			</i>
+
+		</ng-template>
+
+	</wow-table>
+</div>

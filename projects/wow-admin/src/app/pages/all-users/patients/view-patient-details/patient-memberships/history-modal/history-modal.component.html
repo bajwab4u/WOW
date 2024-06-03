@@ -1,0 +1,24 @@
+<div class="container-fluid pb-5">
+
+<!-- Close Icon -->
+<div class="card-header">
+  <span class="closeIcon" (click)="activeModal.close()">
+    <i class="fa fa-window-close" aria-hidden="true" style="font-size: 18px;"></i>
+  </span>
+</div>
+<!-- Close Icon -->
+
+
+<div class="outerContainer">
+  <div class="HEADING_CONTAINER">
+    <h4 class="HEADING">
+      Membership History
+    </h4>
+  </div>
+  <ng-container>
+    <wow-table class="w-100" [actions]="actions" [config]="config">
+
+    </wow-table>
+  </ng-container>
+</div>
+</div>

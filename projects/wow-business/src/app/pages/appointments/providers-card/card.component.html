@@ -1,0 +1,37 @@
+<div class="card card-container" style="border: none;">
+	<div class="col-sm-12 card-footer p-card-body"
+		[ngStyle]="{'border-right': hideScrollBtns ? '1px solid lightgrey' : 'none'}">
+		
+		<div class="card-group fa fa-chevron-left overflow-content-icon" *ngIf="!hideScrollBtns"
+			style="box-shadow: 2px 1px 3px 2px rgba(0,0,0,.125);"
+			aria-hidden="true" (click)="onHandleActions('Previous')"></div>
+
+		<div class="card-group card-info-container" 
+			[attr.id]="infoCardId">
+
+			<div *ngIf="data.length === 0" class="card col-sm-2 card-container card-content" 
+				[style.min-width.px]="minCardWidth">
+				<div class="card-footer card-cont">
+					<div class="text-muted card-title p-no-data">no record found!</div>
+				</div>
+			</div>
+
+			<ng-container *ngFor="let item of data">
+				<div class="card col-sm-2 card-container card-content" 
+					[style.min-width.px]="minCardWidth" *ngIf="isVisible(item)"
+					(click)="onHandleActions('SelectCard', item)" >
+					<div class="card-footer card-cont"
+						[class.selected-card]="item?.selected">
+						<img [src]="getProfileImage(item)" class="float-left rounded-circle card-img">
+						<div class="text-muted card-title">{{item.staffFirstName}} {{item?.staffLastName}}</div>
+					</div>
+				</div>
+			</ng-container>
+		</div>
+
+		<div class="card-group fa fa-chevron-right overflow-content-icon" *ngIf="!hideScrollBtns"
+			style="box-shadow: -2px 0px 2px 0px #aaaaaa;"
+			aria-hidden="true" (click)="onHandleActions('Next')"></div>
+
+	</div>
+</div>

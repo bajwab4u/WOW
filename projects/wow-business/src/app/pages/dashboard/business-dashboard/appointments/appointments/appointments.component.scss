@@ -1,0 +1,64 @@
+table>th {
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #F3F3F3;
+  }
+  .card{
+    border-radius: 8px;
+    border-top: none;
+    box-shadow: 0px 0px 3px  #C9C9C9;
+    .card-body
+    {  overflow-y: auto;
+       width: 100%; 
+    }
+    .popover{
+      z-index: 9999;
+      position: fixed;   
+     }
+  
+  }
+  .appointmentCustomText
+  {
+    font-size: 13px;
+    color: #A1A1A1;
+    font-weight: 300;
+  }
+  .patientName{
+    color: #524456;
+    font-weight: 300;
+    font-size: 12px;
+    padding: 2px 0px;
+  }
+  .dateCustom{
+    font-size: 16px;
+    font-weight: 400;
+    color: #191919;
+  }
+  .card .card-header {
+    background-color: #F3F3F3; 
+    // height: 18%;
+    border-color: transparent;
+    color: #191919;
+    font-weight: 500;
+  }
+  ::ng-deep .app-detail-dialog .modal-dialog { 
+    max-width: 25%;
+    width: 25%;
+}
+.horizontalLine{
+  border-right:2px solid #C9C9C9;
+}
+
+.no-appointment
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  .no-appointment-title
+  {
+    margin: 1rem 0;
+  }
+}

@@ -1,0 +1,155 @@
+<div style="height: 100%; padding: 0;">
+
+    <div class="col-12 form-container component-paddingRL content-box-mt">
+
+        <div class="">
+
+            <div class="row">
+                <div class="col-md-6 text-left" style="padding: 0;">
+                    <h3>{{data?.membershipTitle}}</h3>
+                </div>
+                <div class="col-md-6" style="padding: 0;">
+                    <div class="text-right float-right mt-1">
+
+                        <button type="button" class="btn mr-2" [style.display]="disableActivation? 'none': 'inline'"
+                            [title]="isActive ? 'Inactive Membership' : 'Active Membership'"
+                            [ngClass]="isActive ? 'custom-danger-btn' : 'custom-success-btn'"
+                            (click)="onChangeStatus()">
+                            <i style="font-size: 17px;" class="fa mt-1"
+                                [ngClass]="isActive ? 'fa-ban' : 'fa-check'"></i>
+
+                        </button>
+
+                        <button type="button" class="btn btn-space btn-properties-white mr-2"
+                            (click)="back()">Cancel</button>
+                        <!-- <button type="button" class="btn btn-properties-gray" [disabled]="formDisabled"
+                            (click)="onSubmit()" [ngClass]="formDisabled ? 'btn-properties-gray' : 'btnAddColor'">Save</button> -->
+                    </div>
+                </div>
+            </div>
+
+            <wow-tabs-group (selectedTabChange)="onSelectedTabChange($event)">
+
+                <wow-tab-item tabTitle="Details">
+                    <ng-container *ngIf="selectedTabIndex === 0">
+
+                        <form [formGroup]="form" style="width: 100%;" (mouseover)="item='focused'"
+                            (mouseout)="item='none'">
+
+                            <div class="row inputLabelText">
+                                <div class="col-12">
+                                    <div class="form-group row">
+
+                                        <div class="col-lg-2 col-md-6 col-sm-12 col-form-label text-right text-align-c 
+                                            package-image-parent">
+                                            <img [src]="packageImage" class="product-badge"
+                                                onError="this.src='assets/images/packages/gold.svg'" alt="Null">
+                                            <img src="assets/images/package_img.svg" alt="Null" class="package-image"
+                                                onError="this.src='assets/images/pakcages/package_img.svg'">
+                                        </div>
+
+                                        <div class="col-lg-5 col-md-6 col-sm-12 mt-3">
+
+                                            <input wowInputBehaviour readonly [type]="item" class="form-control"
+                                                placeholder="Package Name" formControlName="membershipTitle" required
+                                                autocomplete="off" maxlength="50" />
+
+                                            <div class="invite-page mt-3">
+                                                <input wowInputBehaviour readonly [type]="item" class="form-control"
+                                                    placeholder="Health Plan" formControlName="membershipDescription">
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label
+                                            class="col-lg-2 col-md-6 col-sm-12 col-form-label text-right text-align-l">
+                                            Start Date
+                                        </label>
+
+                                        <div class="col-lg-5 col-md-6 col-sm-12 ">
+                                            <input wowInputBehaviour readonly [type]="item" class="form-control"
+                                                placeholder="Start Date" required formControlName="activationDate" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label
+                                            class="col-lg-2 col-md-6 col-sm-12 col-form-label text-right text-align-l">
+                                            End Date
+                                        </label>
+
+                                        <div class="col-lg-5 col-md-6 col-sm-12 ">
+                                            <input wowInputBehaviour readonly [type]="item" class="form-control"
+                                                placeholder="End Date" required formControlName="expiryDate" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label
+                                            class="col-lg-2 col-md-6 col-sm-12 col-form-label text-right text-align-l">
+                                            Price
+                                        </label>
+
+                                        <div class="col-lg-5 col-md-6 col-sm-12 ">
+                                            <input wowInputBehaviour readonly [type]="item" class="form-control"
+                                                placeholder="Price" required formControlName="price" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label
+                                            class="col-lg-2 col-md-6 col-sm-12 col-form-label text-right text-align-l">
+                                            Total Employees
+                                        </label>
+
+                                        <div class="col-lg-5 col-md-6 col-sm-12 ">
+                                            <input wowInputBehaviour readonly [type]="item" class="form-control"
+                                                placeholder="No. of employees" required
+                                                formControlName="totalEmployees" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label
+                                            class="col-lg-2 col-md-6 col-sm-12 col-form-label text-right text-align-l">
+                                            Services
+                                        </label>
+
+                                        <div class="col-lg-5 col-md-6 col-sm-12 text-left">
+                                            <a class="viewD" (click)="viewService()" style="padding-left: 11px;">
+                                                View Services
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+
+                    </ng-container>
+                </wow-tab-item>
+
+                <wow-tab-item tabTitle="Groups">
+
+                    <div style="display: flex; width: 100%; flex-wrap: wrap;" *ngIf="selectedTabIndex === 1">
+
+                        <div style="flex: 1 1 100%">
+                            <wow-table [config]="groupConfig" [actions]="action" (signals)="onTableSignals($event)">
+
+                                <ng-template dataTableCell="sideBorder" let-row="row" let-col="col">
+                                    <div class="tblcolorDivRed" [style.background]="borderColor(row)"></div>
+                                </ng-template>
+
+                            </wow-table>
+                        </div>
+                    </div>
+
+                </wow-tab-item>
+
+            </wow-tabs-group>
+
+        </div>
+    </div>
+</div>

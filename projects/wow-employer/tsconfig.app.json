@@ -1,0 +1,25 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../out-tsc/app",
+    "types": [],
+    "paths": {
+      "@shared/*": [
+        "./src/app/shared/"
+      ],
+      "@app/*": [
+        "./src/app"
+      ],
+      "charms-lib": [
+        "dist/charms-lib"
+      ]
+    }
+  },
+  "files": [
+    "src/main.ts",
+    "src/polyfills.ts"
+  ],
+  "include": [
+    "src/**/*.d.ts"
+  ]
+}

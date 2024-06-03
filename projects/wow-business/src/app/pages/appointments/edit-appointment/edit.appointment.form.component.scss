@@ -1,0 +1,97 @@
+.btn-properties-inner {
+	color: white;
+	background-color: #524456;
+	border-color: #524456;
+	width: max-content;
+}
+
+.modal-title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border: 0;
+	background-color: #dadada !important;
+	padding-top: 0.4rem !important;
+	padding-bottom: 0.4rem !important;
+}
+
+.dlg-footer {
+	justify-content: flex-start;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	margin-bottom: 0.7rem;
+}
+
+.attachments-btn {
+	padding: 0;
+	cursor: pointer;
+	text-align: right;
+	font-weight: 600;
+}
+
+.attachments-sec {
+	border: 1px solid #ddd;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-radius: 5px;
+	margin-bottom: 16px;
+	padding: 5px 10px;
+}
+
+.form-control::-webkit-input-placeholder {
+	color: #707070b3;
+	font-size: 13px;
+}
+
+// .regularfield {
+// 	opacity: 1;
+// 	outline: none !important;
+// 	border-color: Transparent;
+// 	border-radius: 4px;
+// 	background-color: transparent !important;
+// }
+
+// .hoveronfield {
+// 	background-color: #faf9f9;
+// 	opacity: 1;
+// 	outline: none !important;
+// 	border-color: Transparent;
+// 	border-radius: 4px;
+// }
+
+// .focusedfield {
+// 	background-color: white;
+// 	opacity: 1;
+// 	outline: none !important;
+// 	border-color: Transparent;
+// 	border-radius: 4px;
+// }
+
+input[type="file"] {
+	display: none;
+}
+
+.select {
+	outline: 0 !important;
+}
+
+.form-control:disabled {
+	background-color: #E2E2E2;
+}
+
+.update-appointment-contnet-padding {
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+
+:host ::ng-deep wow-time-picker .form-control {
+	font-size: 14px !important;
+	background-color: #faf9f9 !important;
+	opacity: 1;
+	outline: none !important;
+	border-color: Transparent;
+	border-radius: 4px;
+}

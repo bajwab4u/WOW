@@ -1,0 +1,55 @@
+<ng-container *ngIf="!isFromMarketPlace; else marketPlaceRef">
+	<div class="d-flex wow-saved-card mb-3 p-3 mt-3" 
+		style="background-color: #5244560A; align-items: center;" [style.width.%]="width"
+		[class.selected-card]="card['selected'] && allSelection" (click)="onSelectCard(card)">
+
+		<img *ngIf="allSelection && card['selected']" src="assets/images/check.svg"
+			style="position: absolute; right: -3px; top: -6px;">
+
+		<div class="py-2 px-3">
+			<img [src]="cardImage(card)" class="image-pointer" 
+				alt="Null" style="padding: 0px !important;">
+		</div>
+
+		<div class="p-2 ">
+			<h5 style="text-align: left;">{{getTitle(card)}}</h5>
+			<span style="font-size: 13px; color: #575757"
+				*ngIf="isWallet">Available Balance: ${{card?.balance}}</span>
+		</div>
+
+		<!-- <div *ngIf="showMakeDefault" class="ml-auto p-2 pr-5">
+			<span style="color: #3b7496; cursor: pointer;" (click)="onMakeDefault(card)" *ngIf="!card?.defaultCard">Make Default</span>
+			<span style="color: #707070E6; font-size: 12px;" *ngIf="card?.defaultCard">(Default)</span>
+		</div> -->
+
+		<div *ngIf="isBankAccount" class="p-2 pr-4 pay-del-icon">
+			<img (click)="onDelete(card)" src="assets/images/delete_icon.svg"
+				class="image-pointer pb-1" alt="Null">
+		</div>
+
+	</div>
+
+</ng-container>
+
+<ng-template #marketPlaceRef>
+	<div style="width: 100%;">
+		<div [ngClass]="card['selected'] && allSelection ? 'selectSavePaymentCard' : 'savePaymentCard'"
+			(click)="onSelectCard(card)">
+			<img src="assets/images/check_sm.svg" *ngIf="allSelection && card['selected']" class="smallIcon"
+				alt="Null">
+			<img [src]="cardImage(card)" class="image-Size" alt="Null">
+			<div class="card-detail">
+				<label class="cartName" for="">{{getTitle(card)}}</label>
+				<small *ngIf="card['paymentMethod'] === 'Wallet'" class="expiryCard">Available Balance: ${{card?.balance}}</small>
+			</div>
+
+			<!-- <div class="card-detail" style="padding-right: 20px; flex: 1; text-align: right;">
+				<span style="color: #3b7496; font-size: 12px; cursor: pointer;"
+				(click)="onMakeDefault(card)" *ngIf="!card?.defaultCard">Make Default</span>
+				<span style="color: #707070E6; font-size: 12px;" *ngIf="card?.defaultCard">(Default)</span>
+			</div> -->
+
+		</div>
+	</div>
+
+</ng-template>

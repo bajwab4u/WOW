@@ -1,0 +1,39 @@
+<ng-container [ngSwitch]="activeState">
+    <div class="container col-12 float-left component-paddingRL content-box-mt" style="
+    max-height: 100vh; overflow-y: scroll;
+    min-width: 100% !important;" *ngSwitchCase="'TABLE'">
+
+        <div class="row">
+            <div class="col-md-12 pl-0 pr-0">
+                <wow-table class="w-100" [config]="config" [actions]="action" (signals)="onTableSignals($event)">
+                    <ng-template dataTableCell="image" let-row="row" let-col="col">
+                        <div class="imgsize">
+                            <img class="imgsize responsive-image rounded-circle" src="assets/images/speciality.png"
+                                width="36px" onError="this.src='assets/images/speciality.png'" alt="">
+                        </div>
+                    </ng-template>
+
+                    <ng-template dataTableCell="name" let-row="row" let-col="col">
+                        <p class="m-0  wow-clients-cellwidth" [title]="row?.name">
+                            {{row?.name}}
+                        </p>
+                    </ng-template>
+                </wow-table>
+            </div>
+        </div>
+    </div>
+
+    <div *ngSwitchCase="'ADD'">
+        <div class="container col-md-12 float-left " style="min-width: 100% !important;padding: 0px;">
+            <wow-add-speciality (signals)="onHandleSignals($event)"></wow-add-speciality>
+        </div>
+    </div>
+
+    <div id="comp-render" *ngSwitchCase="'DETAIL'">
+        <div class="container col-md-10 float-left " style="min-width: 100% !important;padding: 0px;">
+
+            <wow-view-speciality-details (signals)="onHandleSignals($event)" [selectedSpeciality]="selectedSpeciality">
+            </wow-view-speciality-details>
+        </div>
+    </div>
+</ng-container>

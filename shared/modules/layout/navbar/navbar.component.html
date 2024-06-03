@@ -1,0 +1,54 @@
+<nav class="navbar component-paddingRL" style="height: 100%; box-shadow: 0px 3px 15px #BBBBBB3B;">
+    <h3 class="mt-2">
+        {{title}}
+    </h3>
+    <ul class="nav justify-content-end" style="display: flex; justify-content: center; align-items: center;">
+        <li class="nav-item">
+            <a class="nav-link font-weight-normal cursorstyle pl-2 pr-2">{{date}}</a>
+        </li>
+
+        <ng-content select="[navbar-type=actions]"></ng-content>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle pl-4 pr-4" data-toggle="dropdown">
+                <img class="notificationIcon" title="Notifications"
+                    src="assets/images/navbar/notificationIcon.svg" />
+                <!-- <sup>8</sup> -->
+            </a>
+            <wow-notifications></wow-notifications>
+        </li>
+        <li class="nav-item dropdown pl-2">
+            <a class="profileImageContainer mt-1 dropdown-toggle" data-toggle="dropdown"><img
+                    class="profileIcon img-fluid" src="assets/images/profile/profile_picture.svg" />
+            </a>
+            <!-- Dynamic Image source -->
+            <!-- src="{{user.profilePic}}" -->
+            <ul class="dropdown-menu">
+
+                <ng-container *ngFor="let opt of menu">
+                    <ng-container *ngIf="opt.visible && !opt.isUnAuthorizedFor.includes(USER_ROLE)">
+                        <li *ngIf="opt.isRouterLink">
+                            <a [routerLink]="opt.routerLink" [state]="opt.state">
+                                <span class="mr-4">
+                                    <img [src]="opt.icon" alt="">
+                                </span>
+                                {{opt.title}}
+                            </a>
+                        </li>
+
+                        <li *ngIf="!opt.isRouterLink">
+                            <a (click)="onHandleActions(opt)">
+                                <span class="mr-4">
+                                    <img [src]="opt.icon" alt="">
+                                </span>
+                                {{opt.title}}
+                            </a>
+                        </li>
+                    </ng-container>
+
+                </ng-container>
+
+            </ul>
+        </li>
+    </ul>
+</nav>

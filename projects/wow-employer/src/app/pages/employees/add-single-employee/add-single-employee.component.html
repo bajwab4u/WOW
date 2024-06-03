@@ -1,0 +1,78 @@
+<div class="row" style="height: 100%;">
+
+	<div style="overflow: auto;" class="col-12 p-0">
+
+		<form [formGroup]="form" (ngSubmit)="onSubmit()">
+			<div class="">
+				<div class="row">
+					<div class="col-md-6 text-left p-0">
+						<h3>Invite Single Employee</h3>
+						<p class="subheading">Send invite to a single employee and assign a group.</p>
+					</div>
+					<div class="col-md-6 mt-2 p-0 wow-mb-1rem">
+						<div class="text-right float-right mt-2">
+							<button class="btn addbtn-size btnDownloadColor btn-properties-white mr-2"
+								(click)="back()">Cancel</button>
+							<button type="submit" class="btn addbtn-size btnAddColor">Send Invite</button>
+						</div>
+					</div>
+				</div>
+				<div class="linebar"></div>
+				<div class="row">
+					<div class="col-md-5 p-0">
+						<div class="form-row mt-3 mr-0 ml-0">
+
+							<div class="form-group col-12 text-left inputMarginBot10 p-0">
+								<label>Email
+									<img
+										class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple tbltooltip"
+										src="assets/images/shared-new-theme/tooltipIcon.svg" placement="bottom"
+										tooltip="Enter the email account of the employee you want to sent an invite to. Your employee will create WoW Account using this email."></label>
+
+								<input type="email" class="form-control" formControlName="email" required maxlength="50"
+									[ngClass]="{'is-invalid': isFormSubmitted && form.controls['email'].invalid}" placeholder="example@mail.com" />
+
+								<div class="invalid-feedback" *ngIf="isFormSubmitted && form.controls['email'].invalid">
+
+									<i aria-hidden="true" class="fa fa-info-circle fa-errorIcon" 
+										[tooltip]="form.controls.email.errors.required ? 'Email is required' 
+										: (form.controls.email.errors.email ? 'Invalid Email' : 'Max 50 characters allowed')">
+									</i>
+								</div>
+
+							</div>
+
+							<div class="form-group col-12 text-left inputMarginBot10 p-0">
+								<label>Employee Group
+									<img
+										class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple tbltooltip"
+										src="assets/images/shared-new-theme/tooltipIcon.svg"
+										tooltip="Allocating a group will allow the user to acquire the benefits associated with the particular group."></label>
+								
+										<!-- <select type="text" class="form-control" formControlName="group" required
+									[ngClass]="{'is-invalid': isFormSubmitted && form.controls['group'].invalid}">
+									<option value=null selected disabled>Select</option>
+									<option *ngFor="let opt of empGroups" 
+										[value]="opt.employeeGroupId">{{opt.employeeGroupName}}</option>
+								</select> -->
+
+								<wow-auto-complete
+									[config]="groupConfig"
+									formControlName="group"
+									[invalid]="isFormSubmitted && form.controls['group'].invalid"></wow-auto-complete>
+
+								<div class="invalid-feedback" *ngIf="isFormSubmitted && form.controls['group'].invalid">
+
+									<i aria-hidden="true" class="fa fa-info-circle fa-errorIcon" 
+										tooltip="Group is required">
+									</i>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

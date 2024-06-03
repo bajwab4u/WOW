@@ -1,0 +1,75 @@
+<ng-container [ngSwitch]="activeState">
+  <div style="height: 100%" *ngSwitchCase="'TABLE'">
+<wow-table
+                style="width: 100%"
+                [config]="config"
+                [actions]="action"
+                (signals)="onTableSignals($event)"
+              >
+                <ng-template
+                  dataTableCell="sideBorder"
+                  let-row="row"
+                  let-col="col"
+                >
+                  <div
+                    class="tblcolorDivRed"
+                    [style.background]="borderColor"
+                  ></div>
+                </ng-template>
+
+                <ng-template dataTableCell="image" let-row="row" let-col="col">
+                  <div class="imgsize">
+                    <img
+                      class="imgsize responsive-image rounded-circle"
+                      src="assets/images/profile_icon.svg"
+                      width="36px"
+                      onError="this.src='assets/images/profile_icon.svg'"
+                    />
+                  </div>
+                </ng-template>
+
+                <ng-template dataTableCell="name" let-row="row" let-col="col">
+                  <p
+                    class="m-0 text-overflow-20ch wow-clients-cellwidth"
+                    title=""
+                  >
+                    {{row?.firstName + ' ' + row?.lastName}}
+                  </p>
+                </ng-template>
+
+                <ng-template dataTableCell="email" let-row="row" let-col="col">
+                  <p
+                    class="m-0 text-overflow text-overflow-20ch"
+                    [title]="row?.email"
+                  >
+                    {{row?.email}}
+                  </p>
+                </ng-template>
+
+                <ng-template
+                  dataTableCell="contact"
+                  let-row="row"
+                  let-col="col"
+                  let-i="index"
+                >
+                  <span class="col-width">
+                    {{row?.phoneNumber}}
+                  </span>
+                </ng-template>
+              </wow-table>
+  </div>
+  <ng-container *ngSwitchCase="'ADD'">
+    <wow-invite-clients
+      (signals)="onGoBack($event)"
+      [selectedItemName]="selectedMenu"
+    >
+    </wow-invite-clients>
+  </ng-container>
+  <ng-container *ngSwitchCase="'DETAIL'">
+    <wow-clients-patient-details
+      (signals)="onGoBack($event)"
+      [selectedRow]="selectedRow"
+    >
+    </wow-clients-patient-details>
+  </ng-container>
+</ng-container>

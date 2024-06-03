@@ -1,0 +1,33 @@
+<div class="row" style="height: 100%; position: relative;">
+
+	<div [ngClass]="{'col-md-3': !removecss, 'col-auto': removecss}"
+		style="padding-right: 0px !important;padding-left: 0px !important;">
+
+		<wow-sub-menu [config]="subMenuConfig" [showPopUp]="true" (signal)="handleSignal($event)">
+		</wow-sub-menu>
+	</div>
+
+	<div [ngClass]="{'col-md-9':!removecss,'col-md-12':removecss}" class="layout-blank" style="padding: 0;">
+
+		<ng-container [ngSwitch]="activeState">
+
+			<ng-container *ngSwitchCase="'TABLE'">
+				<wow-view-staff [activeStaffType]="activeStaffType" [title]="title" [isExpanded]="removecss"
+					(signals)="onHandleSignals($event)"></wow-view-staff>
+			</ng-container>
+
+			<ng-container *ngSwitchCase="'ADD'">
+				<wow-add-staff [isExpanded]="removecss" [activeStaffType]="activeStaffType"
+					(signals)="onGoBack($event)">
+				</wow-add-staff>
+			</ng-container>
+
+			<ng-container *ngSwitchCase="'DETAIL'">
+				<wow-view-staff-detail [isExpanded]="removecss" [staffId]="staffId" (signals)="onGoBack($event)">
+				</wow-view-staff-detail>
+			</ng-container>
+
+		</ng-container>
+
+	</div>
+</div>

@@ -1,0 +1,153 @@
+<div class="modal-body">
+	<div class="row mx-5 px-5 pt-3 mb-4">
+		<div class="headingColor">Create your first service
+			<img class="imgCustom ml-3 infoIcon tooltipstylePurple" src="assets/images/shared-new-theme/tooltipIcon.svg"
+				tooltip="Pick one from suggested list or create your own.">
+		</div>
+
+		<div class="row">
+			<form class="form-group" [formGroup]="servicesForm">
+				<table class="table table-borderless " style="border-spacing: 0; width: 100% !important;">
+					<thead class="thead-light">
+						<tr class="headingColor">
+							<th scope="col">Service Name</th>
+							<th scope="col">Service Type <img class="imgCustom ml-3 infoIcon tooltipstylePurple"
+									src="assets/images/shared-new-theme/tooltipIcon.svg"
+									tooltip="Allow patients to make direct appointments or request one.">
+							</th>
+							<th scope="col">Duration</th>
+							<th scope="col">Service Price <img class="imgCustom ml-3 infoIcon tooltipstylePurple"
+									src="assets/images/shared-new-theme/tooltipIcon.svg" tooltip="How much do you want to be paid?
+                  ">
+							</th>
+							<th scope="col">Display Price <img class="imgCustom ml-3 infoIcon tooltipstylePurple"
+									src="assets/images/shared-new-theme/tooltipIcon.svg" tooltip="This is what the patient pays.
+                "></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr formArrayName="servicesFormItems"
+							*ngFor="let item of servicesForm.get('servicesFormItems')['controls']; let i = index">
+							<td [formGroupName]="i">
+								<input type="text" list="servicenamelist" required class="form-control"
+									name="servicename" style="width: 135px" placeholder="Service Name"
+									formControlName="serviceName"
+									[ngClass]="{ 'is-invalid': (isFormSubmitted && item.get('serviceName').invalid) || item.get('serviceName').hasError('isError') }"
+									tooltip="" tooltip-trigger="focus" [isDisabled]="!isFormSubmitted"
+									autocomplete="off" maxlength="45" (focusout)="validateService(item, i)">
+								<datalist id="servicenamelist">
+									<option value=null selected disabled> Choose Service </option>
+									<option *ngFor="let service of servicesList" [value]="service.serviceName">
+									</option>
+								</datalist>
+
+								<div class="invalid-feedback" *ngIf="!item.get('serviceName').valid">
+
+									<i aria-hidden="true" *ngIf="isFormSubmitted && item.get('serviceName').hasError('required')"
+										class="fa fa-info-circle fa-errorIcon" tooltip="Service Name is required">
+									</i>
+
+									<i aria-hidden="true" *ngIf="isFormSubmitted && item.get('serviceName').hasError('maxlength')"
+										class="fa fa-info-circle fa-errorIcon" tooltip="Max 45 characters allowed">
+									</i>
+
+									<i aria-hidden="true" *ngIf="item.get('serviceName').hasError('isError')"
+										class="fa fa-info-circle fa-errorIcon" tooltip="You are not allowed to add multiple services with same name">
+									</i>
+
+									<!-- <i aria-hidden="true" *ngIf="item.get('serviceName').hasError('isValid')"
+										class="fa fa-info-circle fa-errorIcon" tooltip="Service with same name not allowed">
+									</i> -->
+								</div>
+							</td>
+							<td [formGroupName]="i">
+								<select class="form-control" required style="width: 135px" formControlName="serviceType"
+									[ngClass]="{ 'is-invalid': isFormSubmitted && item.get('serviceType').invalid }"
+									tooltip="" [isDisabled]="!isFormSubmitted" (change)="onServiceTypeChange(i)">
+									<option value="" selected disabled>Select</option>
+									<option value="BY_REQUEST_SERVICE">By Request</option>
+									<option value="DIRECT_SERVICE">Directly</option>
+								</select>
+
+								<div class="invalid-feedback" *ngIf="isFormSubmitted && !item.get('serviceType').valid">
+
+									<i aria-hidden="true" 
+										class="fa fa-info-circle fa-errorIcon" tooltip="Service Type is required">
+									</i>
+								</div>
+
+							</td>
+							<td [formGroupName]="i">
+								<select class="form-control" [required]="!serviceTypeByRequest(i)" style="width: 135px"
+									[disabled]="serviceTypeByRequest(i)" formControlName="serviceDurationInMinutes"
+									[ngClass]="{ 'is-invalid': isControlValid('serviceDurationInMinutes', i) }"
+									[tooltip]="isControlValid('serviceDurationInMinutes', i) ? '' : 'Select Duration'"
+									[isDisabled]="!isFormSubmitted">
+									<option value="" selected disabled>Select</option>
+									<option value="10">10 mins</option>
+									<option value="20">20 mins</option>
+									<option value="30">30 mins</option>
+									<option value="40">40 mins</option>
+									<option value="50">50 mins</option>
+									<option value="60">60 mins</option>
+								</select>
+
+								<div class="invalid-feedback"
+									*ngIf="isFormSubmitted && isControlValid('serviceDurationInMinutes', i)">
+
+									<i aria-hidden="true"
+										class="fa fa-info-circle fa-errorIcon" tooltip="Duration is required">
+									</i>
+								</div>
+							</td>
+							<td [formGroupName]="i">
+								<input type="text" class="form-control " name="servicPrice" required
+									placeholder="Service Price" style="width: 135px" formControlName="servicePrice"
+									[ngClass]="{ 'is-invalid': isFormSubmitted && item.get('servicePrice').invalid }"
+									[wowOnlyNumbers]="true" maxlength="12" tooltip=""
+									[isDisabled]="!isFormSubmitted" (focus)="getServiceDisplayPrice($event, i)"
+									autocomplete="nope">
+
+								<div class="invalid-feedback"
+									*ngIf="isFormSubmitted && !item.get('servicePrice').valid">
+
+									<i aria-hidden="true" class="fa fa-info-circle fa-errorIcon"
+										tooltip="Service Price is required">
+									</i>
+								</div>
+
+								<div *ngIf="isControlValid('servicePrice', i, 'maxlength')" class="invalid-feedback">
+									<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+										tooltip="Service price should not be greater than 12 digits"> </i>
+								</div>
+							</td>
+							<td [formGroupName]="i">
+								<input type="text" class="form-control" name="servicedisplaprice"
+									placeholder="Display Price" style="width: 135px"
+									formControlName="serviceListedPrice" readonly
+									[ngClass]="{ 'is-invalid': isFormSubmitted && item.get('serviceListedPrice').invalid }"
+									tooltip="{{item.get('serviceListedPrice').valid ? '' : 'Display price is required.'}}"
+									[isDisabled]="!isFormSubmitted">
+							</td>
+							<td>
+								<div *ngIf="servicesForm.get('servicesFormItems')['controls'].length > 1">
+									<img src="assets/images/shared-new-theme/deleteicon.svg" alt=""
+										(click)="deleteItem(i)">
+								</div>
+							</td>
+						</tr>
+
+						<tr>
+							<td class="text-style" style="text-align: left;">
+								<a (click)="addService()"> <i class="fa fa-plus mr-2"
+										style="font-size:15px;font-weight: bold;"></i>
+									Add Service</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+	</div>
+</div>

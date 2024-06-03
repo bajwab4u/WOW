@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="row mb-4" style="gap: 15px; display: flex; align-items: center;">
+
+        <div class="col-5" style="padding: 0;">
+            <wow-auto-complete
+                [config]="serviceConfig"
+                [(ngModel)]="staffId"></wow-auto-complete>
+        </div>
+
+        <button type="button" class="btn savebtn-size btnAddColor float-left search-new-btn" 
+            (click)="onChangeStaffService()">Add Staff
+        </button>
+
+        <img  class="imgCustom infoIcon tooltipIconSize tooltipstylePurple"
+            style="margin-left: -6px !important;" 
+            src="assets/images/shared-new-theme/tooltipIcon.svg"
+            tooltip="Select the staff that works on this location">
+    </div>
+
+    <div class="col-md-12 pl-0 pr-0 mb-3">
+
+        <wow-table 
+			[config]="config" 
+			[actions]="action"
+			(signals)="onTableSignals($event)" #staffDetailRef>
+
+			<ng-template dataTableCell="profileImageUrl" 
+				let-row="row" let-col="col">
+				<div class="imgsize">
+                    <img class="imgsize responsive-image rounded-circle"
+                        [src]="profileImg(row)"
+                        onError="this.src='assets/images/profile_icon.svg'">
+                </div>
+			</ng-template>
+
+            <ng-template dataTableCell="staffFirstName" 
+				let-row="row" let-col="col">
+				{{row?.staffFirstName}} {{row?.staffLastName}}
+			</ng-template>
+
+            <ng-template dataTableCell="staffEmail" 
+				let-row="row" let-col="col">
+                <p class="m-0 text-overflow"  [title]="row.staffEmail">
+                    <i class="fa fa-envelope mr-2"style="display: inline-block; color: #524456;">
+                    </i>
+                    {{row.staffEmail}}
+                </p>
+			</ng-template>
+
+            <ng-template dataTableCell="contactNumber1" 
+				let-row="row" let-col="col">
+				{{row?.contactNumber1 | mask: maskedFormat}}
+			</ng-template>
+        
+		</wow-table>
+
+    </div>
+</div>

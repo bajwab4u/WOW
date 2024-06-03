@@ -1,0 +1,20 @@
+<div class="tab-container">
+
+	<div class="tab mt-3">
+		<ng-container *ngFor="let tab of tabs; let idx=index">
+
+			<button class="tablinks tab-item tab-btn" [attr.id]="'tab_'+idx"
+				[class.active-tab]="tab.active" *ngIf="tab.visible"
+				(click)="selectTab(tab, idx)">{{tab.tabTitle}}</button>
+
+		</ng-container>
+	</div>
+
+	<div class="linebar tab-body"></div>
+
+	<!-- tab body projected here -->
+	<div class="tab-body">
+		<ng-content></ng-content>
+	</div>
+
+</div>

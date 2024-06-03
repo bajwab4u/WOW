@@ -1,0 +1,117 @@
+<div style="height: 100%; padding: 0;">
+
+    <form [formGroup]="form" (mouseover)="item='focused'" (mouseout)="item='none'">
+        <div class="row inputLabelText">
+            <div class="col-12 p-0">
+                <div class="form-group row">
+
+                    <label  class="col-lg-2 col-md-6 col-sm-12 col-form-label text-align-c">
+                        <a> <img src="assets/images/profile/person-details-icon.svg" alt="Null"> </a>
+                    </label>
+
+                    <div class="col-lg-5 col-md-6 col-sm-12 mt-3">
+
+                        <div class="mt-3">
+                            <input [type]="item" wowInputBehaviour class="form-control" placeholder="e.g John"
+                                formControlName="firstName" required maxlength="35"
+                                [ngClass]="{'is-invalid': isFormSubmitted && form.controls['firstName'].invalid}">
+
+                            <div class="invalid-feedback" *ngIf="isFormSubmitted && form.controls['firstName'].invalid">
+
+                                <i aria-hidden="true" class="fa fa-info-circle fa-errorIcon" [tooltip]="form.controls.firstName.errors.required ? 'First Name is required' 
+                                    : 'Max 35 characters allowed'">
+                                </i>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <input [type]="item" wowInputBehaviour class="form-control" placeholder="e.g Doe"
+                                formControlName="lastName" required maxlength="35"
+                                [ngClass]="{'is-invalid': isFormSubmitted && form.controls['lastName'].invalid}">
+
+                            <div class="invalid-feedback" *ngIf="isFormSubmitted && form.controls['lastName'].invalid">
+
+                                <i aria-hidden="true" class="fa fa-info-circle fa-errorIcon" [tooltip]="form.controls.lastName.errors.required ? 'Last Name is required' 
+                                    : 'Max 35 characters allowed'">
+                                </i>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 fontuser">
+                            <i class="fa fa-envelope float-left iconPlacement" aria-hidden="true"></i>
+                            <input [type]="item" wowInputBehaviour class="form-control" formControlName="email" required
+                                maxlength="50" [wowWhiteSpaceAllowed]="false" readonly
+                                [ngClass]="{'is-invalid': isFormSubmitted && form.controls['email'].invalid}"
+                                placeholder="example@mail.com" />
+
+                            <div class="invalid-feedback" *ngIf="isFormSubmitted && form.controls['email'].invalid">
+
+                                <i aria-hidden="true" class="fa fa-info-circle fa-errorIcon"
+                                    [tooltip]="form.controls.email.errors.required ? 'Email is required' 
+                                    : (form.controls.email.errors.email ? 'Invalid Email' : 'Max 50 characters allowed')">
+                                </i>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- <div style="position: relative;" class="col-lg-4">
+                        <div style="position: absolute; bottom: 7px;">
+                            <i class="fa fa-paper-plane mr-2"></i><a>Resend Invitation Link</a>
+                        </div>
+                    </div> -->
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-lg-2 col-md-6 col-sm-12 col-form-label text-align-l">
+                        Group
+                    </label>
+
+                    <div class="col-lg-5 col-md-6 col-sm-12">
+
+                        <wow-auto-complete [config]="groupConfig" [type]="item" wowInputBehaviour
+                            formControlName="groupId" [invalid]="isFormSubmitted && form.controls['groupId'].invalid">
+                        </wow-auto-complete>
+
+                        <div class="invalid-feedback" *ngIf="isFormSubmitted && form.controls['groupId'].invalid">
+
+                            <i aria-hidden="true" class="fa fa-info-circle fa-errorIcon" tooltip="Group is required">
+                            </i>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-12 p-0">
+                <div class="linebar mb-3"></div>
+                <div class="form-group row">
+                    <label class="col-lg-2 col-md-6 col-sm-12 pl-0">
+                        Dependents
+                    </label>
+
+                    <div class="col-lg-5 col-md-6 col-sm-12">
+                        <label style="text-align: center; padding: 0;" class="text-align-l width-100">Covered family
+                            members of
+                            this employee</label>
+                        <input maxlength="2" [type]="item" wowInputBehaviour class="form-control mt-1"
+                            formControlName="dependentsCovered" wowOnlyNumbers readonly
+                            [ngClass]="{'is-invalid': isFormSubmitted && form.controls['dependentsCovered'].invalid}">
+
+                        <div class="invalid-feedback"
+                            *ngIf="isFormSubmitted && form.controls['dependentsCovered'].invalid">
+
+                            <i aria-hidden="true" class="fa fa-info-circle fa-errorIcon" tooltip="Max 2 digits allowed">
+                            </i>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 mt-4 pt-3 text-align-l">
+                        <a class="viewD" (click)="viewDetail()">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,45 @@
+<ng-container>
+  <wow-table class="w-100" [actions]="actions" [config]="config">
+
+    <ng-template dataTableCell="membershipPlanGroup" let-row="row" let-col="col">
+      {{row?.membershipPlanGroup ? row?.membershipPlanGroup : "n/a"}}
+    </ng-template>
+    <ng-template dataTableCell="activationDate" let-row="row" let-col="col">
+      {{row?.activationDate ? row?.activationDate : "n/a"}}
+    </ng-template>
+    <ng-template dataTableCell="expirationDate" let-row="row" let-col="col">
+      {{row?.expirationDate ? row?.expirationDate : "n/a"}}
+    </ng-template>
+    <ng-template dataTableCell="txtMembershipProfileStatus" let-row="row" let-col="col">
+      {{row?.txtMembershipProfileStatus == 'IN_COMPLETE' ? 'In Complete' : "Complete"}}
+    </ng-template>
+    <ng-template dataTableCell="renewalDate" let-row="row" let-col="col">
+      {{row?.renewalDate ? row?.renewalDate : "n/a"}}
+    </ng-template>
+    <ng-template dataTableCell="status" let-row="row" let-col="col">
+      {{
+      row?.status == 'IN_ACTIVE' ? 'In Active':
+      row?.status == 'ACTIVE' ? 'Active':
+      row?.status == 'EXPIRED' ? 'Expired':
+      row?.status == 'CANCELLED' ? 'Cancelled': 'N/A'
+      }}
+    </ng-template>
+    <ng-template dataTableCell="actions" let-row="row" let-col="col">
+      <div class="btn-group d-flex justify-content-start align-items-center">
+        <button type="button" class="btn more-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="more-dot"></span>
+          <span class="more-dot"></span>
+          <span class="more-dot"></span>
+        </button>
+        <div class="dropdown-menu">
+          <a  *ngIf="row?.txtMembershipProfileStatus == 'IN_COMPLETE'" class="dropdown-item" (click)="ActivateNow(row)">Activate Now</a>
+          <a class="dropdown-item" *ngIf="row?.status == 'ACTIVE' && row?.membershipId != 994915"
+            (click)="CancelMembership(row)">Cancel Immediately</a>
+          <a class="dropdown-item" (click)="Details(row)">Details</a>
+          <a class="dropdown-item" (click)="History(row)">History</a>
+          <a class="dropdown-item" *ngIf="row?.txtMembershipProfileStatus == 'IN_COMPLETE'" (click)="ResendLink(row)">Resend Activation Link</a>
+        </div>
+      </div>
+    </ng-template>
+
+  </wow-table>

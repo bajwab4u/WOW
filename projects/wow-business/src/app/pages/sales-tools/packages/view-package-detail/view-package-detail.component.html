@@ -1,0 +1,49 @@
+<div style="height: 100%; padding: 0;">
+
+	<div class="container component-paddingRL content-box-mt float-left  col-12 package-form-container">
+
+
+		<div class="row" style="display: flex;">
+
+			<div class="col-md-6 text-left" style="padding: 0;">
+				<h3 class="text-overflow" style="width: 30ch;" [title]="packageDeatil?.title">
+					{{packageDeatil?.title}}</h3>
+			</div>
+
+			<div class="col-md-6" style="padding: 0;">
+				<div class="text-right float-right mt-1">
+					<button type="button" class="btn mr-2" [title]="isActive ? 'Inactive Package' : 'Active Package'"
+						[ngClass]="isActive ? 'custom-danger-btn' : 'custom-success-btn'"
+						(click)="onActivateDactivePackage()">
+						<i style="font-size: 17px;" class="fa mt-1" [ngClass]="isActive ? 'fa-ban' : 'fa-check'"></i>
+					</button>
+					<button type="button" class="btn btn-space btn-properties-white px-4 mr-2"
+						(click)="goBack()">Cancel</button>
+					<button type="button" class="btn btn-properties-gray" [disabled]="isDisable"
+						[ngClass]="isDisable ? 'btn-properties-gray' : 'btnAddColor'" (click)="onSubmit()">Save</button>
+				</div>
+			</div>
+
+		</div>
+
+		<wow-tabs-group (selectedTabChange)="onSelectedTabChange($event)">
+			
+			<wow-tab-item tabTitle="Details">
+				<ng-container *ngIf="selectedTabIndex === 0">
+					<wow-package-details [packageDetail]="packageDeatil" (signals)="onUpdatePackageDetails($event)"
+						[submitForm]="submitForm">
+					</wow-package-details>
+				</ng-container>
+			</wow-tab-item>
+
+			<wow-tab-item tabTitle="Services">
+				<ng-container *ngIf="selectedTabIndex === 1">
+					<wow-package-services-detail [packageDetail]="packageDeatil" [submitForm]="submitForm"
+						(signals)="onUpdatePackageServices($event)">
+					</wow-package-services-detail>
+				</ng-container>
+			</wow-tab-item>
+		</wow-tabs-group>
+	</div>
+
+</div>

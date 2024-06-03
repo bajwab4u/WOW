@@ -1,0 +1,83 @@
+<div class="modal-header">
+	<h4 class="modal-title">Appointment Details</h4>
+
+	<i class="fa fa-times" *ngIf="!isFromDashboard" 
+		(click)="signals.emit({type: 'CLOSE', data: reload})"
+		style="font-size: 12px; cursor: pointer;"></i>
+</div>
+  
+<div class="modal-body appointment-detail-content">
+	
+	<div class="row" style="margin-bottom: 1.5rem;">
+		<div class="col-sm-8 font-size-12">{{appointmentTime}}</div>
+		<div class="col-sm-4" style="text-align: right; padding: 0 1rem 0 0;">
+			<span class="font-size-12" 
+				style="padding: 3px 3px;" [ngClass]="className">
+				{{appStatus}}</span>
+		</div>
+	</div>
+
+	<div style="line-height: 30px;">
+		<div class="row">
+			<div class="col-sm-5 font-size-12 appointment-detail-label">Staff Member</div>
+			<div class="col-sm-7 font-size-12">{{staffMember}}</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-5 font-size-12 appointment-detail-label">Service</div>
+			<div class="col-sm-7 font-size-12">{{data?.appointmentDTO?.serviceName ? data?.appointmentDTO?.serviceName : '--'}}</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-5 font-size-12 appointment-detail-label">Cost</div>
+			<div class="col-sm-7 font-size-12">{{data?.appointmentDTO?.appointmentCharges ? data?.appointmentDTO?.appointmentCharges : '--'}}</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-5 font-size-12 appointment-detail-label">Patient</div>
+			<div class="col-sm-7 font-size-12">{{patientName}}</div>
+		</div>
+
+		<div class="row" style="margin-bottom: 12px;">
+			<div class="col-sm-5 font-size-12 appointment-detail-label">Patient's Phone No</div>
+			<div class="col-sm-7 font-size-12">{{data?.appointmentDTO?.patientPhoneNumber | mask: maskedFormat}}</div>
+		</div>
+
+		<ng-container *ngIf="!isFromDashboard">
+			<div class="row" style="margin-bottom: 12px;" *ngIf="data?.appointmentClinicalNotes?.length > 0">
+				<div class="col-sm-5 font-size-12 appointment-detail-label">Clinical Notes</div>
+				<div class="col-sm-7 font-size-12">
+					<p>{{data?.appointmentClinicalNotes[0]?.appointmentClinicalNotes}}</p>
+				</div>
+			</div>
+
+			<div class="row" style="margin-bottom: 12px;" *ngIf="data?.appointmentAttachments?.length > 0">
+				<div class="col-sm-5 font-size-12 appointment-detail-label">Attachments</div>
+				<div class="col-sm-7 font-size-12">
+					<p>
+						<ng-container *ngFor="let f of data?.appointmentAttachments; let idx=index; let last=last">
+							<span (click)="previewFile(f)">{{getFileName(f, idx)}}
+								<!-- <span *ngIf="!last">,&nbsp;</span> -->
+							</span>
+						</ng-container>
+					</p>
+				</div>
+			</div>
+			
+		</ng-container>
+
+	</div>
+
+</div>
+
+<div class="modal-footer row edit-appointment-section" *ngIf="canEdit">
+
+	<div class="col-sm-12 appointment-footer-detail">
+		<span 
+			style="cursor: pointer; font-size: 13px; font-weight: 600;" (click)="onEditAppointment()">
+			<i class="fa fa-pen" style="font-size: 10px; margin-right: 5px"></i>
+			Edit Appointment
+		</span>
+	</div>
+
+</div>

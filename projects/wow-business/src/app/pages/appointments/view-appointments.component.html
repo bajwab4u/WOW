@@ -1,0 +1,18 @@
+<div style="height: 100%">
+
+	<div class="col-md-12 layout-blank component-paddingRL">
+		<div class="content-box-mt mb-3">
+
+			<div class="row"> <h2>Calendar</h2> </div>
+
+			<div class="row">
+				<div class="col-md-12" style="padding: 0">
+					<main-calendar [appointments]="appointments" (signals)="onHandleActions($event)">
+						<providers-card [searchTerm]="searchTerm" (signals)="onSelectedProvider($event)"></providers-card>
+					</main-calendar>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>

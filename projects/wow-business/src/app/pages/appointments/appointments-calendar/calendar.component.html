@@ -1,0 +1,67 @@
+<main-calendar-header [viewDate]="viewDate" [view]="view" (signals)="onHandlSignals($event)"></main-calendar-header>
+
+<ng-content></ng-content>
+
+<ng-template #customCellTemplate let-column="column" let-weekEvent="weekEvent">
+
+	<!-- <div class="custom-hour-cell-temp" [ngClass]="bgClass(weekEvent, 'appointmentType')"
+		(click)="handleAction(weekEvent)"  [ngbPopover]="popContent"  placement="right" 
+		#popover="ngbPopover" container="body" popoverClass="my-custom-class"> -->
+
+	<div class="custom-hour-cell-temp" [ngClass]="bgClass(weekEvent, 'appointmentType')"
+		(click)="handleAction(weekEvent)">
+
+		<div class="row">
+			<div class="custom-hour-cell-title" [style.font-size.px]="getFontSize(weekEvent)">
+				<div
+					[ngClass]="weekEvent.event.appointmentDurationInMinutes <= 10 ? 'limited-text-less' : 'limited-text-greater'">
+					{{weekEvent?.event?.patientName}}
+				</div>
+			</div>
+
+			<div *ngIf="displayStatus(weekEvent)" class="custom-hour-cell-status" style="font-size: 10px;">
+				<span [ngClass]="bgClass(weekEvent, 'appointmentStatus')" style="padding: 3px 4px;">
+					{{weekEvent.event?.appointmentStatus}}
+				</span>
+			</div>
+		</div>
+		<div class="custom-hour-cell-title"
+			[ngClass]="weekEvent.event.appointmentDurationInMinutes <= 20 ? 'limited-text-less' : 'limited-text-greater'"
+			[style.font-size.px]="getFontSize(weekEvent)" style="padding: 5% 0 0 0;">
+			<span *ngIf="weekEvent?.event?.serviceName && displayStatus(weekEvent, 'serviceName')">
+				<!-- <br/> -->
+				{{weekEvent?.event?.serviceName}}
+			</span>
+		</div>
+	</div>
+
+	<!-- <ng-template #popContent>
+		<appointment-detail-comp [appointmentId]="weekEvent.event.appointmentId"></appointment-detail-comp>
+	</ng-template> -->
+
+</ng-template>
+
+<div [ngSwitch]="view">
+	<!-- <mwl-calendar-month-view
+	  *ngSwitchCase="CalendarView.Month"
+	  [viewDate]="viewDate"
+	  [events]="events"
+	  [refresh]="refresh"
+	  [activeDayIsOpen]="activeDayIsOpen"
+	  (dayClicked)="dayClicked($event.day)"
+	  (eventClicked)="handleEvent('Clicked', $event.event)"
+	  (eventTimesChanged)="eventTimesChanged($event)"
+	>
+	</mwl-calendar-month-view> -->
+
+	<mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="appointments"
+		[refresh]="refresh" [hourSegments]="6" [eventTemplate]="customCellTemplate"
+		(eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+	</mwl-calendar-week-view>
+
+	<mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="appointments"
+		[refresh]="refresh" [hourSegments]="6" [eventTemplate]="customCellTemplate"
+		(eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+	</mwl-calendar-day-view>
+
+</div>

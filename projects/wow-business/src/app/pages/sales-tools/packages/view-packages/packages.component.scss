@@ -1,0 +1,15 @@
+.imgsize {
+	width: 41px;
+	height: 36px;
+	float: right;
+}
+
+.wow-res-header-btns{
+	padding-right: 0;
+}
+@media (min-width: 400px) and (max-width: 786px) {
+    .wow-res-header-btns{
+        padding-left: 0;
+        margin-top: 1rem;
+    }
+}

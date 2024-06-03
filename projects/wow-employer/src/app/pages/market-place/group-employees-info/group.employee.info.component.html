@@ -1,0 +1,85 @@
+<div class="container p-0 mt-3 pb-3">
+    <div class="row">
+        <div class="col-md-12 p-0">
+            <div class="group-info-details-wrapper">
+                <div class="group-info-details">
+
+                    <table class="table">
+                        <tr class="bg-light border-light">
+                            <!-- <th class="group-info-checkbox">
+                                <input type="checkbox" name="checkAll" [(ngModel)]="checkAll"
+                                    (click)="checkAllRecords($event)">
+                            </th> -->
+                            <th class="group-info-email">
+                                Email
+                            </th>
+                            <th>
+                                Package For
+                            </th>
+                        </tr>
+                    </table>
+
+                    <div class="accordion-wrapper" *ngFor="let group of groups; let i=index">
+                        <div class="accordion" id="accordionExample">
+                            <div class="card">
+                                <div class="card-header" [id]="group.employeeGroupName">
+                                    <div class="accordion-icon">
+                                        <i class="fas fa-angle-down rotate-icon"></i>
+                                    </div>
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left" type="button"
+                                            data-toggle="collapse" [attr.data-target]="'#group' + i"
+                                            aria-expanded="true" [attr.aria-controls]="i">
+                                            <span class="group-name">{{group.employeeGroupName}}</span>
+                                        </button>
+                                    </h2>
+                                </div>
+
+                                <div [id]="'group' + i" class="collapse show"
+                                    [attr.aria-labelledby]="group.employeeGroupName" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="group-record-wrapper">
+                                            <div class="group-record-single-wrapper">
+                                                <div class="group-record-single"
+                                                    *ngFor="let record of group.groupEmployeeDetailsDTOList;let j = index;">
+                                                    <div class="row single-record-row">
+                                                        <!-- <div class="col-md-1 p-0">
+                                                            <input type="checkbox" name="isSelected"
+                                                                [(ngModel)]="record.isSelected"
+                                                                (click)="toggleRecordValue(i,j)">
+                                                        </div> -->
+                                                        <div class="col-md-5 record-email">
+                                                            {{record.txtEmail}}
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <select name="package" class="record-package" id=""
+                                                                [(ngModel)]="record.package"
+                                                                (change)="onPackageChange(group.employeeGroupId,i,j)">
+                                                                <option value="null" selected disabled>Select</option>
+                                                                <option value="Individual">Individual</option>
+                                                                <option value="IndividualSpouse">Individual + Spouse</option>
+                                                                <option value="IndividualChildren">Individual + Children</option>
+                                                                <option value="IndividualFamily">Family</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-2 apply-all-link" *ngIf="j === 0">
+                                                            <a (click)="applyAllFilter(i)">Apply
+                                                                All</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

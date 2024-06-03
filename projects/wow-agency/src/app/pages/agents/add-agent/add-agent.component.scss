@@ -1,0 +1,37 @@
+.wow-adg-root{
+    text-align: left;
+    .wow-adg-header{
+        display: flex;
+        justify-content: space-between;
+        .wow-adg-header-right{
+            margin-top: 1rem;
+        }
+    }
+    .wow-adg-content-desc-box{
+        background-color: #B786B721;
+        padding: 0.7rem;
+        //width: 100%;
+      width: 60%;
+        border-radius: 4px;
+        .wow-adg-content-desc{
+            font-size: 13px;
+        }
+    }
+    .wow-adg-form-fields-wrapper{
+        .wow-adg-form-field{
+            padding-bottom: 0.5rem;
+
+        }
+    }
+}
+@media (min-width: 400px) and (max-width: 786px) {
+  .wow-adg-header{
+    display: block !important;
+    .wow-adg-header-right{
+      margin-bottom: 1rem;
+    }
+  }
+  .wow-adg-content-desc-box{
+    width: 100% !important;
+  }
+}

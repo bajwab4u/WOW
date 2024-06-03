@@ -1,0 +1,63 @@
+<div class="row" style="height: 100%; position: relative;">
+
+	<div class="service-sub-menu" [ngStyle]="{'display': showSubMenu ? 'block' : 'none'}"
+		[ngClass]="{'col-md-3': !removecss, 'col-auto': removecss}">
+
+		<wow-sub-menu
+                [showPopUp]="true"
+              [config]="subMenuConfig"
+              [selectedItemName]="selectedItemName"
+              (signal)="handleSignal($event)">
+		</wow-sub-menu>
+	</div>
+
+	<div [ngClass]="colClass"
+	 	class="layout-blank" style="padding: 0;">
+		
+		 <!-- <ng-container [ngSwitch]="activeState">
+
+			<ng-container *ngSwitchCase="'TABLE'">
+				<wow-view-services [selectedSubMenu]="selectedSubMenu" (signals)="onHandleSignals($event)"></wow-view-services>
+			</ng-container>
+
+			<ng-container *ngSwitchCase="'ADD'">
+				<wow-add-service (closeAddservice)="activeState = 'TABLE'"></wow-add-service>
+			</ng-container>
+	
+			<ng-container *ngSwitchCase="'DETAIL'">
+				<wow-view-service-detail  [serviceEvent]="servicedetails" 
+					[removecss]="removecss" (closeAddservice)="activeState = 'TABLE'"></wow-view-service-detail>
+			</ng-container>
+	
+		</ng-container> -->
+        <ng-container *ngIf="selectedMenu.name === 'Business Details'">
+            <div class="container float-left component-paddingRL content-box-mt col-12">
+              <wow-setup (signals)="onHandleSignals($event)"></wow-setup>
+            </div>
+          </ng-container>
+        <ng-container *ngIf="selectedMenu.name === 'Locations'">
+            <div class="container float-left  col-12" style="padding: 0;">
+              <wow-view-locations [activeState]="activeStateLocation" [action]="action"></wow-view-locations>
+            </div>
+          </ng-container>
+        
+          <ng-container *ngIf="selectedMenu.name === 'Billing History'">
+            <div class="container float-left component-paddingRL content-box-mt col-12" >
+              <wow-view-billing-history></wow-view-billing-history>
+            </div>
+          </ng-container>
+        
+          <ng-container *ngIf="selectedMenu.name === 'Working Hours'">
+            <div class="container float-left component-paddingRL col-12">
+              <wow-update-working-hours [action]="action"></wow-update-working-hours>
+            </div>
+          </ng-container>
+        
+          <ng-container *ngIf="selectedMenu.name === 'Profile Settings'">
+            <div class="container float-left component-paddingRL content-box-mt col-12" >
+              <wow-shared-profile-settings></wow-shared-profile-settings>
+            </div>
+          </ng-container>
+
+	</div>
+</div>

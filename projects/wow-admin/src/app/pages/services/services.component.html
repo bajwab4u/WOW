@@ -1,0 +1,67 @@
+<div class="row" style="height: 100%; position: relative;">
+
+    <!-- <div class="service-sub-menu p-0" [ngClass]="{'col-md-3': !removecss, 'col-auto': removecss}">
+        <wow-sub-menu [config]="subMenuConfig" [selectedItemName]="selectedItemName"
+            (signal)="handleSubMenuSignal($event)" [showPopUp]="true">
+        </wow-sub-menu>
+    </div> 
+[ngClass]="{'col-md-9':!removecss,'col-md-12':removecss}"-->
+    <div  class="layout-blank p-0 col-12">
+        <ng-container>
+      
+            <div style="height: 100%" *ngIf="activeState === 'TABLE'">
+                <div class="col-md-12 layout-blank component-paddingRL">
+                    <div class="content-box-mt">
+                        <wow-table class="w-100" [config]="config" [actions]="action" (signals)="onTableSignals($event)">
+                            <ng-template dataTableCell="image" let-row="row" let-col="col">
+                                <div class="imgsize">
+                                    <img class="imgsize responsive-image rounded-circle"
+                                        src="assets/images/services-dash.svg"
+                                        onError="this.src='assets/images/services-dash.svg'" alt="">
+                                </div>
+                            </ng-template>
+    
+                            <ng-template dataTableCell="name" let-row="row" let-col="col">
+                                <p class="m-0 text-overflow-20ch wow-clients-cellwidth" [title]="row?.name">
+                                    {{row?.name}}
+                                </p>
+                            </ng-template>
+    
+                            <ng-template dataTableCell="category" let-row="row" let-col="col">
+                                <p class="m-0 text-overflow text-overflow-20ch" [title]="row?.categoryName">
+                                    {{row?.categoryName}}
+                                </p>
+                            </ng-template>
+    
+                            <ng-template dataTableCell="description" let-row="row" let-col="col" let-i="index">
+                                <span class="col-width">
+                                    {{row?.description}}
+                                </span>
+                            </ng-template>
+    
+                            <ng-template dataTableCell="status" let-row="row" let-col="col" let-i="index">
+                                <span class="col-width">
+                                    {{row?.active ? 'Active': 'Inactive'}}
+                                </span>
+                            </ng-template>
+                        </wow-table>
+                    </div>
+                </div>
+            </div>
+    
+        </ng-container>
+    
+        <ng-container *ngIf="activeState === 'DETAIL'">
+            <wow-view-service-details (signals)="onHandleSignals($event)" [selectedService]="selectedService">
+            </wow-view-service-details>
+        </ng-container>
+    
+        <ng-container *ngIf="activeState === 'ADD'">
+            <wow-add-service (signals)="onHandleSignals($event)">
+            </wow-add-service>
+        </ng-container>
+    
+    </div>
+
+
+</div>

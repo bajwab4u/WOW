@@ -1,0 +1,10 @@
+.form-control:focus {
+  border-color: #8055805E;
+  box-shadow: 0 0 0 1px #B9B2BA;
+  outline: none;
+}
+.form-control::-webkit-input-placeholder {
+  color: #707070B3;
+  font-size: 13px;
+}
+

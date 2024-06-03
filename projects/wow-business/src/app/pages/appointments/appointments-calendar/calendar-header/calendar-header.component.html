@@ -1,0 +1,73 @@
+<div class="">
+	<form [formGroup]="calendarForm">
+
+		<div class="row" style="padding: 0">
+			
+			<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 margnTblTop" style="padding: 0">
+				<search-control palceHolder="Search Staff Member" 
+					(signal)="signals.emit({action: 'SEARCH_FILTER', data: $event})">
+				</search-control>                
+			</div>
+
+			<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 calendar-date-view pt-2 margnTblTop">
+
+				<span 
+					class="fa fa-caret-left" 
+					aria-hidden="true" 
+					style="cursor: pointer;"
+					mwlCalendarPreviousView
+					[view]="view"
+					[(viewDate)]="viewDate"
+					(viewDateChange)="signals.emit({action: 'CALENDAR_DATE_FILTER', data: viewDate})"></span>&nbsp;&nbsp;
+
+				<span style="font-weight: 600; cursor: pointer;" mwlCalendarToday [(viewDate)]="viewDate"
+					(viewDateChange)="signals.emit({action: 'CALENDAR_DATE_FILTER', data: viewDate})">Today</span> &nbsp;&nbsp;
+				<span>{{ viewDate | calendarDate: view + 'ViewTitle':locale }}</span> &nbsp;&nbsp;
+
+				<span 
+					class="fa fa-caret-right" 
+					aria-hidden="true"  
+					style="cursor: pointer;"
+					mwlCalendarNextView
+					[view]="view"
+					[(viewDate)]="viewDate"
+					(viewDateChange)="signals.emit({action: 'CALENDAR_DATE_FILTER', data: viewDate})"></span>
+			</div>
+
+			<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 cal-filter-container margnTblTop">
+				<select style="display: inline-block;" class="tbldropdown" formControlName="calendar_view" style="margin-right: 10px;"
+					(change)="signals.emit({action: 'CALENDAR_VIEW_CHANGE', data: calendarForm?.controls?.calendar_view?.value, subData: viewDate})">
+					<option value="day">Daily</option>
+					<option value="week">Weekly</option>
+				</select>
+	
+				<select style="display: inline-block;" class="tbldropdown" formControlName="appointment_type" 
+					style="margin-right: 5px; width: 190px;"
+					(change)="signals.emit({action: 'APPOINTMENT_TYPE_FILTER', data: calendarForm?.controls?.appointment_type?.value})">
+					<option value="All">All Appointments</option>
+					<option value="BY_REQUEST_APPOINTMENT">Scheduled By Request</option>
+					<option value="DIRECT_APPOINTMENT">Scheduled Directly</option>
+				</select>
+
+				<!-- <li class="nav-item dropdown"> -->
+					<a style="display: inline-block;" class="nav-item nav-link pl-2 pr-2" data-toggle="dropdown">
+						<img src="assets/images/filter-icon.svg" style="cursor: pointer;"/>
+					</a>
+					<ul class="dropdown-menu dropdown-menu-right appoint-status-dp" role="menu" style="padding: 0">
+					
+						<div class="dropdown-container">
+							<li class="menu-item status-content" *ngFor="let status of appointmentStatus; let last=last"
+								[class.status-divider]="!last"
+								(click)="onChangeAppointStatus(status)"> 
+								
+								<i class="fa fa-check" aria-hidden="true" *ngIf="status.selected"></i>&nbsp;&nbsp;
+								{{status.displayValue}} </li>
+						</div>
+					</ul>
+				<!-- </li> -->
+
+			</div>
+			
+		</div>
+	</form>
+</div>

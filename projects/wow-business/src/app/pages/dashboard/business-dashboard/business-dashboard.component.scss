@@ -1,0 +1,140 @@
+*{
+    // font-size: 0.9rem !important;
+    color: #524456;
+  }
+  .top-margin
+  {
+      margin-top: 20px;
+  }
+  .btn-properties-inner
+  {
+      color: white;
+      background-color: #524456;
+      border-color: #524456;
+      width : max-content;
+      padding: 8px 23px;
+
+      .fa-plus 
+      {
+        color: white;
+      }
+  }
+
+  .show>.btn-properties-inner.profileImageContainer
+  {
+    background-color: white;
+    color: #524456;
+    font-weight: 400 ;
+    border: none !important; 
+    box-shadow: 0px 0px 10px #C9C9C9 !important;
+    padding : 8px 23px !important;
+    border-radius: 6px;
+
+    .fa-plus 
+      {
+        color: #524456;
+      }
+}
+
+  /* .navbar {
+    width: 100%;
+    background-color: #E0E0E0;
+    overflow: auto;
+    overflow: visible;
+  }
+  
+  .navbar a {
+    float: left;
+    text-align: center;
+    padding: 10px;
+    color: #403244;
+    text-decoration: none;
+    font-size: 20px;
+    cursor: pointer;
+  } */
+  .dropdown-menu{
+    // right: 0 !important;
+    left: unset !important;
+    top: 2px !important;
+    width: 200px;
+    border-radius: 6px;
+  }
+  .dropdown-menu li>a{
+   font-size: 12px !important;
+   padding: 6px;;
+
+  }
+  .dropdown-menu li{
+    width: 200px !important;
+    // margin: 0 15px;
+  }
+  // .dropdownStyling{
+  //   padding: 10px;
+  // }
+  // .appoint-status-dp{
+  //   padding: 5px;
+  // }
+  hr.firstDiv {
+    border: 2.5px solid;
+    // background-color: #E282AF;
+    margin: 1px 5px !important;
+    // padding: 0px !important;
+
+  }
+  .card{
+    border-color: #C9C9C94A;
+    border-radius: 4px;
+  }
+//   .tbldropdown{
+//     width: 120px;
+//     padding-top: 6px;
+//     padding-bottom: 4px;
+//     padding-left: 10px;
+//     padding-right: 9px;
+//     height: 42px;
+//     /* background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box; */
+//     background: #FFFFFF 0% 0% no-repeat padding-box !important;
+//     box-shadow: 0px 3px 16px #CCCCCC29 !important;
+//     border: 1px solid #8055805E !important;
+//     border-radius: 6px !important;
+//     opacity: 1;
+// }
+
+.appoint-status-dp
+{
+    box-shadow: 1px 0px 5px 0px #aaa;
+    // box-shadow: rgb(170 170 170) -2px 0px 2px 0px;
+    position: absolute;
+    transform: translate3d(214px, 39px, 0px);
+    // top: 0px;
+    left: 0px;
+    z-index: 10001;
+    will-change: transform;
+    top: 10px !important;
+}
+
+.status-content
+{
+    text-align: left;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 5px;
+}
+.profileImageContainer{
+  border-radius: 5px;
+}
+.btn-properties-white
+{
+    background-color: white;
+    color: #524456;
+    margin-right: 5px;
+    font-weight: 400 ;
+    border: none !important; 
+    box-shadow: 0px 0px 10px #C9C9C9 !important;
+    padding : 8px 23px !important;
+    border-radius: 6px;
+}
+.statsName{
+  font-size: 15px;
+}
+

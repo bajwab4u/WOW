@@ -1,0 +1,92 @@
+<ng-container [ngSwitch]="activeState">
+
+	<ng-container *ngSwitchCase="'TABLE'">
+		<div class="container float-left col-12 component-paddingRL content-box-mt">
+			<div class="row">
+				<div class="col-lg-8 col-md-10 col-sm-12 text-left p-0">
+					<h3>Billing</h3>
+					<div class="subheading">Add credit and manage your cards</div>
+				</div>
+				<div class="col-lg-4 col-md-2 col-sm-12 text-right text-align-l wow-mt-1rem p-0">
+					<button type="submit" class="btn btn-icon-properties btnAddColor" style="outline: none;"
+						(click)="addCredit()">
+						<img style="height: 22px; padding-right: 10px;"
+							src="assets/images/shared-new-theme/addicon.svg">Add Credit </button>
+				</div>
+			</div>
+			<hr />
+
+			<div class="column py-3" style="align-items: center;">
+				<div class="y" style="display: flex; align-items: center; flex-wrap: wrap;">
+					<h3 class="text-left wow-resp-font" style="flex: 1 1 100%"> Available Balance</h3>
+					<p *ngIf="data?.lastTransactionDate"
+						style="text-align: left; margin: 0; font-size: 12px; color: #575757;">last added on
+						{{transcationDate}}</p>
+				</div>
+				<div class="z text-right" id="sliceZ">
+					<h3 class="m-0 wow-resp-font">${{ data?.balance }}</h3>
+				</div>
+			</div>
+
+			<div class="d-flex pb-2 pt-4" style="justify-content: space-between; align-items: center;">
+				<h3 class="text-left m-0">Saved Payment Methods
+					<img 
+						class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple" 
+						src="assets/images/shared-new-theme/tooltipIcon.svg" 
+						tooltip="Default payment method will be used for membership renewals.">
+				</h3>
+				<div class="text-right">
+					<button type="submit" class="btn btn-properties-gray " style="outline: none;" data-toggle="dropdown">
+						<!-- <img style="height: 22px; padding-right: 10px;"
+							src="assets/images/shared-new-theme/addicon.svg"> -->
+						<i class="fa pr-2 fa-plus"></i>
+						Add New Method
+					</button>
+					<ul class="dropdown-menu  dropdown-menu-right ">
+						<div class="dropdown-container">
+							<li class="menu-item status-content pl-3"><a (click)="addCard()">
+								<img src="assets/images/add-card.svg" >&nbsp;&nbsp; Add Debit/Credit Card</a></li>
+							<div class="dropdown-divider"></div>
+							<li class="menu-item status-content pl-3"><a (click)="addBank()">
+								<img src="assets/images/bank-building-light.svg" >&nbsp;&nbsp; Add Bank Account</a></li>
+						</div>
+					</ul>
+				</div>
+			</div>
+
+			<!--If no billing details  -->
+			<div style="border: 1px solid lightgrey; border-radius: 5px;"
+				*ngIf="methods.length === 0 && !loadingState; else saveCardsRef">
+				<div class="row p-5">
+					<div class="col-md-12">
+						<img src="assets/images/billing_icon.svg" class="image-pointer pb-4" alt="Null">
+						<p style="font-size: 14px; color: #575757;" class="pt-2">You have no saved payment method to show.</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- If Employer had added cards already -->
+			<ng-template #saveCardsRef>
+
+				<wow-billing-cards [data]="methods" [showMakeDefault]="true" [showDelete]="true" [showAddBtn]="false" [allSelection]="false"
+					(signals)="onHandleSignals($event)"></wow-billing-cards>
+
+			</ng-template>
+		</div>
+	</ng-container>
+
+	<ng-container *ngSwitchCase="'ADDCREDIT'">
+		<wow-add-billing (previousPage)="onGoBack($event)">
+		</wow-add-billing>
+	</ng-container>
+
+	<ng-container *ngSwitchCase="'ADDCARD'">
+		<wow-add-credit-card [showHeader]="true" (previousPage)="onGoBack($event)">
+		</wow-add-credit-card>
+	</ng-container>
+
+	<ng-container *ngSwitchCase="'ADDBANK'">
+		<wow-payment-info (previousPage)="onGoBack($event)"></wow-payment-info>
+	</ng-container>
+
+</ng-container>

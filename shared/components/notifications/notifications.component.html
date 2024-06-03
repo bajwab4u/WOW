@@ -1,0 +1,30 @@
+<ul class="dropdown-menu dropdown-menu-right notification-menu" role="menu">
+    
+    <div class="dropdown-header">
+        <span>Notifications</span>
+        <span style="padding-top: 3px;" class="fa fa-times float-right"></span>
+    </div>
+
+    <div class="dropdown-container" #notificationContainer>
+        <li *ngIf="notifications.length === 0" style="text-align: center;"> no notification</li>
+        <li class="menu-item" 
+            *ngFor="let notif of notifications" 
+            (mouseover)="notif['showIcon'] = true" (mouseleave)="notif['showIcon'] = false"
+            (click)="statusRead($event, notif)" [class.un-read]="!notif.status">
+            <div class="menu-item-icon">
+                <img src="assets/images/notification-dpd-icon.svg" alt="">
+            </div>
+            <div class="menu-item-content">
+                <span class="menu-item-heading">{{getTitle(notif) | titlecase}} </span>
+                <span class="menu-item-news">{{notif.detail}}</span>
+                <br>
+                <span class="menu-item-timestamp">{{getTime(notif)}}</span>
+            </div>
+
+            <i *ngIf="notif?.showIcon" class="fa fa-trash notfication-delete-icon"
+				(click)="onDeletNotification($event, notif)"></i>
+
+        </li>
+
+    </div>
+</ul>

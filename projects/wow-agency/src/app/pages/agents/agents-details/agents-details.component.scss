@@ -1,0 +1,79 @@
+.wow-agdc-root{
+    text-align: left;
+    // padding-top: 2rem;
+    .wow-dh-wrapper{
+        display: flex;
+        justify-content: space-between;
+        .wow-dh-action-btns-wrapper{
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+    .tab-item{
+        margin-right: 13rem !important;
+    }
+    .pr-2rem{
+        padding-right: 1.5rem;;
+    }
+}
+.wow-adg-content{
+    // display: flex;
+    padding: 0 2.5rem;
+    padding-left: 0;
+
+    .p-15px{
+        padding: 15px;
+    }
+    .wow-agd-light-bg{
+        background-color: #faf9f9;
+    }
+    .margin-left-1rem{
+        margin-left: 1rem;
+    }
+    .wow-country-img{
+        height: 35px;
+        border-radius: 4px;
+        padding-bottom: 0;
+    }
+    .wow-ai-baseline{
+        align-items: baseline !important;
+    }
+    .wow-ta-right{
+        text-align: right;
+    }
+    .wow-agd-link-btn-wrapper{
+        display: flex;
+        button{
+            width: 34%;
+        }
+        .wow-agd-links-tooltip{
+            position: absolute;
+            right: 240px;
+            top: 10px;
+        }
+    }
+    .wow-adg-phone{
+        max-width:  40.666667% !important;
+    }
+}
+@media (min-width: 400px) and (max-width: 786px) {
+  .wow-ta-right{
+    text-align: left !important;
+  }
+  .wow-adg-content .wow-agd-link-btn-wrapper .wow-agd-links-tooltip {
+    right: 200px;
+  }
+  .wow-agd-light-bg{
+    height: 34px;
+  }
+  .wow-adg-phone{
+    flex-basis: 78%;
+  }
+  .wow-ags-counts-wrapper{
+    display: block !important;
+    width: 100%;
+  }
+  .wow-adgd-img{
+    padding: 2rem 0;
+  }
+}

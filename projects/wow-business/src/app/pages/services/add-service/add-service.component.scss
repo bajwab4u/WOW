@@ -1,0 +1,132 @@
+label {
+	letter-spacing: 0px;
+	color: #575757;
+	opacity: 1;
+}
+
+.inputMarginBot10 {
+	margin-bottom: 10px !important;
+}
+
+// .keywords {
+// 	/* border-radius: 10px ; */
+// 	width: 100% !important;
+// 	min-height: 60px;
+// 	height: auto;
+// 	overflow: auto;
+// 	border: 1px solid #ced4da;
+// 	border-radius: 4px;
+// 	padding: 1px;
+// }
+
+.form-control::-webkit-input-placeholder {
+	color: #707070b3;
+	font-size: 13px;
+}
+
+.advanceStyling {
+	font-size: 16px !important;
+	color: #524456;
+	font-weight: 500;
+	cursor: pointer;
+}
+
+.add-service-modal {
+	border-spacing: 0;
+	border-collapse: separate;
+	/* border-spacing: 0 1em; */
+}
+
+.add-service-modal tbody tr {
+	border: 0px;
+	height: 40px;
+	border-spacing: 5px 0;
+}
+
+.add-service-modal tbody tr td {
+	padding-left: 12px;
+	border-top: 0;
+}
+
+.add-service-modal tbody tr td p {
+	background-color: #f3f3f3;
+	margin: 5px;
+	border: 1px solid #fff;
+
+	text-align: left;
+	width: 135px;
+	padding: 7px;
+	margin: 0 auto;
+}
+
+@media only screen and (max-width: 991px) {
+	.add-service-modal tbody tr td p {
+		width: 100px;
+	}
+}
+
+[contenteditable]:focus {
+	outline: 0px solid transparent;
+	background-color: yellow;
+}
+
+.customBadge {
+	display: inline-block;
+	padding: 8px 20px 25px 12px;
+	height: 25px;
+	font-size: 12px;
+	font-weight: 400 !important;
+	color: white;
+	border-radius: 3px;
+	background-color: #a1a1a1;
+}
+
+.modal-content {
+	max-height: 85vh;
+}
+
+input[type="file"] {
+	display: none;
+}
+
+.responsive-image {
+	height: 82px;
+	width: 82px;
+	border-radius: 51px;
+}
+
+::ng-deep .ng2-tag-input__text-input:placeholder-shown {
+	font-size: 13px;
+}
+
+::ng-deep .tag-input {
+	border-bottom: none !important;
+}
+
+::ng-deep .dark.ng2-tag-input {
+	border-bottom: none !important;
+}
+
+.dlg-footer {
+	padding-left: 4rem;
+	padding-right: 4rem;
+	justify-content: flex-end;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+	height: 70px;
+	margin-bottom: 2rem;
+	border: 0px !important;
+}
+
+.modal .modal-body {
+	overflow: auto;
+}
+
+.modal-footer {
+	background: white;
+}
+
+.form-control:disabled {
+	background-color: #faf9f9;
+}

@@ -1,0 +1,22 @@
+<label for="exampleInputEmail1" style="width: 100%;">
+
+    <a (click)="onChooseImage()">
+
+        <img *ngIf="!label" style="cursor: pointer;" [src]="img" width="100px"
+            [class.img-border]="image" (error)="onImgError($event)"
+            height="100px" class="image-pointer" [ngClass]="{ 'responsive-image rounded-circle': image }" alt="Null">
+
+        <span *ngIf="label">{{label}}</span>
+    </a>
+
+    <input style="display: none;" type="file"
+        hidden #fileInput name="file_picker"
+        [multiple]="allowMultiple" 
+        [accept]="allowedFileTypes || 'images/*'"
+        id="file_picker_id"
+        multiple (change)="onFileChange()" />
+    
+    <!-- <div class="progress-bar" *ngIf="progressValue > 0 && progressValue < 100">
+        <span class="upload" [style.width.px]="progressValue"></span>
+    </div> -->
+</label>

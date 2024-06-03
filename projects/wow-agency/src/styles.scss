@@ -1,0 +1,48 @@
+@import "shared-styles/scss/core";
+
+.color-picker-field
+{
+    width: 25px;
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    padding: 0;
+    margin: 0;
+    padding: 0;
+    border-radius: 0px;
+}
+
+.viewD{
+    text-decoration: underline !important;
+  }
+
+  .viewD:hover{
+    color: #660066 !important;
+    cursor: pointer;
+  }
+
+.wow-width-60{
+  width: 60%;
+}
+.wow-ta-center{
+  text-align: center;
+}
+.wow-el-center{
+  display: flex;
+  justify-content: center;
+}
+.imgsize img{
+  width: 36px;
+}
+@media (min-width: 400px) and (max-width: 786px) {
+
+  table td[displaylabel="image"], table td[label="image"]{
+    margin-bottom: 1rem;
+  }
+  .imgsize{
+    margin-top: 1rem;
+    img{
+      width: 50px !important;
+    }
+  }
+}

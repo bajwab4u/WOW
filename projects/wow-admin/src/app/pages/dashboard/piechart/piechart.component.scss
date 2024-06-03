@@ -1,0 +1,57 @@
+#chartdiv {
+  width: 80%;
+  height: 500px;
+}
+
+#piechartdiv > div > svg > g > g:nth-child(2) > g:nth-child(2) > g > g:nth-child(3) > g:nth-child(2) {
+  visibility: hidden !important;
+}
+.wow-ags-graph {
+  padding: 2px 4px;
+  box-shadow: 0px 3px 6px #00000014;
+  border: 1px solid #5244561c;
+  border-radius: 8px;
+  opacity: 1;
+  height: 70vh;
+
+}
+.no-data-card{
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+}
+
+:host::ng-deep {
+  polyline{
+    display: none;
+  }
+}
+.boxColorsContainer{
+  color: black; 
+  position: relative; 
+  top: 22%; 
+  display: flex; 
+  align-items: flex-end; 
+  justify-content: space-around;
+}
+.box{
+  // box-shadow: 2px 2px #888888;
+  height: 6px;
+  margin-right: 10px;
+  width: 6px;
+  border-radius: 30%;
+  border: 1px solid #00000043;
+  display: inline;
+}
+.dentalBoxColor{
+  color: #C178FF;
+  background-color: #C178FF;
+}
+.pharmacyBoxColor{
+  color: #68D4A6;
+  background-color: #68D4A6;
+}
+.telemeteryBoxColor{
+  color: #F1B763;
+  background-color: #F1B763;
+}

@@ -1,0 +1,35 @@
+<div class="">
+    <form name="from" autocomplete="off" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
+        <div class="row margnTblTop mt-0">
+            <div class="col-md-6 pl-0" style="text-align: left;">
+                <h2 class="pb-3">Pending Invites</h2>
+            </div>
+            <div *ngIf="data.length > 0" class="col-md-6 pr-0 wow-res-btn" >
+                <div class="text-right float-right">
+                    <button type="submit" style="padding: 10px 18px" class="btn btnAddColor mr-2">
+                        <i class="fa fa-paper-plane mr-2"></i>Resend Invite
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- <div class="col-md-12 pl-0 pr-0"> -->
+            <div class="table-responsive table-border-radius">
+                <wow-table 
+                    [config]="pendingInvConfig" 
+                    [actions]="action" 
+                    (signals)="onTableSignals($event)">
+
+                    <ng-template dataTableCell="sideBorder" 
+						let-row="row" let-col="col">
+						<div class="tblcolorDivRed" 
+							[style.background]="borderColor(row)"></div>
+					</ng-template>
+                    
+                </wow-table>
+            </div>
+        </div>
+
+    </form>
+</div>
+

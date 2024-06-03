@@ -1,0 +1,78 @@
+<form [formGroup]="form">
+    <div class="" (mouseover)="item='focused'" (mouseout)="item='none'">
+
+
+        <div class="form-group row inputLabelText mt-3 details-flex">
+            <div class="col-md-2">
+                <div class="form-group text-right text-align-c mb-0">
+                    <div class="wow-agc-profile col-form-label">
+
+                        <img src="assets/images/service-detail.svg" />
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12 text-right form-field">
+                <textarea type="text" rows="4" maxlength="1000" col="" name="description" formControlName="description"
+                    #description wowInputBehaviour [type]="item" class="form-control" placeholder="Service description">
+						</textarea>
+                <!-- <span class="pull-right label label-default" id="count_message">{{description.value.length
+                    || 0}}/1000
+                    char.</span> -->
+                <div *ngIf="isControlValid('description','maxlength')" class="invalid-feedback">
+                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" [tooltip]="
+											form.controls.description.errors.maxlength?
+											'Description can contain upto 1000 characters only': 
+											'Invalid value'">
+                    </i>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="form-group-label text-right col-lg-2 col-md-6 col-sm-12 text-align-l ">
+                <label class="col-form-label col-form-label-sm">
+                    Service Name
+                </label>
+            </div>
+
+            <div class="col-md-4 col-sm-12 form-field">
+                <div class="text-area-tooltip-wrapper">
+                    <div class="agc-text-area text-right">
+                        <input type="text" name="serviceName" formControlName="name" #serviceName wowInputBehaviour
+                            required class="form-control" placeholder="Name"
+                            [class.is-invalid]="isControlValid('name', 'required')" />
+
+                        <div *ngIf="isControlValid('name', 'required')" class="invalid-feedback">
+                            <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                tooltip="Service Name is required">
+                            </i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="form-group-label text-right col-lg-2 col-md-6 col-sm-12 text-align-l ">
+                <label class="col-form-label col-form-label-sm">
+                    Category
+                </label>
+            </div>
+
+            <div class="col-md-4 col-sm-12 form-field">
+                <select type="text" wowInputBehaviour [type]="item" formControlName="categoryName" class="form-control"
+                    [ngClass]="{ 'is-invalid': isControlValid('categoryName')}" placeholder="Category Name" required>
+                    <option [selected]="selectedService.categoryName" disabled>{{ selectedService.categoryName }}
+                    </option>
+                    <option [ngValue]="category.name" *ngFor="let category of serviceCategoriesList">
+                        {{ category.name }}
+                    </option>
+                </select>
+                <div *ngIf="isControlValid('categoryName')" class="invalid-feedback">
+                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Category Name is required.">
+                    </i>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

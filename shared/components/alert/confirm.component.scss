@@ -1,0 +1,16 @@
+.confirm-dialog-actions
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    .actions-btn
+    {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    .btn-success{
+        background-color: #009C6D;
+    }
+}

@@ -1,0 +1,47 @@
+<div style="height: 100%; padding: 0;">
+
+	<div class="col-12 service-form-container component-paddingRL content-box-mt">
+
+		<div class="row">
+			<div class="col-md-6 p-0 text-left">
+				<h3>All Services&nbsp;>&nbsp;{{servicetypes}}</h3>
+			</div>
+			<div class="col-md-6" style="padding: 0;">
+
+				<div class="text-right float-right mt-1">
+					<button type="button" class="btn custom-danger-btn mr-2" title="Delete" (click)="onDeactiveStaff()">
+						<i style="font-size: 17px;" class="fa fa-trash"></i>
+					</button>
+					<button class="btn btn-space btn-properties-white mr-2" (click)="back()">Cancel</button>
+					<button type="button" class="btn btn-properties-gray" form="ngForm" [disabled]="isDisable"
+						[ngClass]="isDisable ? 'btn-properties-gray' : 'btnAddColor'"
+						(click)="submitCategory()">Save</button>
+				</div>
+			</div>
+		</div>
+
+		<wow-tabs-group (selectedTabChange)="onSelectedTabChange($event)">
+			
+			<wow-tab-item tabTitle="Details">
+				<ng-container *ngIf="selectedTabIndex === 0">
+					<wow-service-details [submitForm]="submitForm" [serviceEvent]="serviceEvent"
+						(signals)="onHandleSignalFromDetails($event)">
+					</wow-service-details>
+				</ng-container>
+
+
+			</wow-tab-item>
+
+			<wow-tab-item tabTitle="Staff">
+				<ng-container *ngIf="selectedTabIndex === 1">
+					<wow-view-service-staff style="width: 100%;" [providerServiceId]="serviceEvent?.providerServiceId"
+						[submitForm]="submitForm" [serviceEvent]="serviceEvent">
+					</wow-view-service-staff>
+				</ng-container>
+			</wow-tab-item>
+
+		</wow-tabs-group>
+
+	</div>
+
+</div>

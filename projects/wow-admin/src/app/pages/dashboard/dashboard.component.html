@@ -1,0 +1,104 @@
+<div class="col-md-12 layout-blank component-paddingRL content-box-mt">
+  <ng-container *ngIf="!IS_CSR_ADMIN">
+    <div class="row d-flex justify-content-center pb-4">
+        <div class="col-md-4 d-flex justify-content-center">
+            <div class="date-picker-wrapper">
+                <input autocomplete="off" class="form-control wow-ta-center" readonly
+                daterangepicker id="datefilter" style="position: relative;"
+                [options]="dateFilterConfig" wowInputBehaviour #dateFilter
+                placeholder="MMM DD, YYYY" (selected)="setFilterValue($event)">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 pr-0">
+            <div class="card p-0">
+                <div class="card-body">
+                    <div class="card-title heading-wrapper">
+                        <div class="text-left title-heading">
+                            <h4>
+                                {{statistics?.signUps?.heading}}
+                            </h4>
+                        </div>
+                        <div class="img-wrapper">
+                            <img src="assets/images/profile-signup.svg">
+                        </div>
+                    </div>
+                    <h4 class="text-left countheading mb-5">{{statistics?.signUps?.totalCount}}</h4>
+                    <p class="card-text text-left">Patients <span
+                            style="float: right;font-weight: bold;">{{statistics?.signUps?.data?.patientsCount ? statistics?.signUps?.data?.patientsCount : 0 }}</span></p>
+                    <p class="card-text text-left">Providers  <span style="float: right;font-weight: bold;">{{statistics.signUps.data.providersCount ? statistics?.signUps?.data?.providersCount : 0}}</span>
+                    </p>
+                    <p class="card-text text-left">Employers  <span
+                            style="float: right;font-weight: bold;">{{statistics?.signUps?.data?.employersCount ? statistics?.signUps?.data?.employersCount : 0 }}</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 pr-0">
+            <div class="card p-0">
+                <div class="card-body">
+                    <div class="card-title heading-wrapper">
+                        <div class="text-left title-heading">
+                            <h4>
+                                {{statistics?.appointments?.heading}}
+                            </h4>
+                        </div>
+                        <div class="img-wrapper">
+                            <img src="assets/images/appts-icon.svg">
+                        </div>
+                    </div>
+                    <h4 class="text-left countheading mb-5">{{statistics?.appointments?.totalCount}}</h4>
+                    <p class="card-text text-left">Teletherapy
+                        <span style="float: right;font-weight: bold;">{{statistics?.appointments?.data?.teletherapyCount ? statistics?.appointments?.data?.teletherapyCount : 0 }}</span>
+                    </p>
+                    <p class="card-text text-left">Virtual Urgent Care<span
+                            style="float: right;font-weight: bold;">{{statistics?.appointments?.data?.vucCount ? statistics?.appointments?.data?.vucCount : 0}}</span>
+                    </p>
+                    <p class="card-text text-left">Appointment By Service
+                        <span style="float: right;font-weight: bold;">{{statistics?.appointments?.data?.apptByService ? statistics?.appointments?.data?.apptByService : 0 }}</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 pr-0">
+            <div class="card p-0">
+                <div class="card-body">
+                    <div class="card-title heading-wrapper">
+                        <div class="text-left title-heading">
+                            <h4>
+                                {{statistics?.memberships?.heading}}
+                            </h4>
+                        </div>
+                        <div class="img-wrapper">
+                            <img src="assets/images/memberships-icon.svg">
+                        </div>
+                    </div>
+                    <h4 class="text-left countheading mb-5">{{statistics?.memberships?.totalCount}}</h4>
+                    <p class="card-text text-left">Dental
+                        <span style="float: right;font-weight: bold;">{{statistics?.memberships?.data?.dentalSubscriptions }}</span>
+                    </p>
+                    <p class="card-text text-left">Pharmacy
+                        <span style="float: right;font-weight: bold;">{{statistics?.memberships?.data?.pharmacySubscriptions }}</span>
+                    </p>
+                    <p class="card-text text-left">Telemedicine
+                        <span style="float: right;font-weight: bold;">{{statistics?.memberships?.data?.telemedSubscriptions }}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-md-7 pr-0">
+            <div class="totalUsersDiv">
+                <span class="float-left mt-3 pl-2 font-weight-bold">Total Users <span class="my-2"
+                    style="color: #AA2ADF; margin-left: 8px;">{{totalUsers | number }}</span></span>
+            </div>
+            <wow-graph [startDate]="getStartDate()" [endDate]="getEndDate()" (val)="totalUsers = $event" [action]="dateAction"> </wow-graph>
+        </div>
+        <div class="col-md-5 pr-0">
+            <wow-piechart  [action]="action"></wow-piechart>
+        </div>
+    </div>
+
+  </ng-container>
+</div>

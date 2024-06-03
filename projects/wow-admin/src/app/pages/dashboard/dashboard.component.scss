@@ -1,0 +1,30 @@
+.countheading {
+    color: #b992be;
+    font-size: 24px !important;
+}
+.card-title {
+    font-size: 20px !important;
+}
+.card {
+    box-shadow: 0px 3px 6px #00000012;
+}
+.content {
+    padding: 10vh 8vh;
+}
+.date-picker-wrapper{
+    border: 1px solid #8055805E;
+    border-radius: 5px;
+    &:focus{
+        border: none;
+    }
+}
+.heading-wrapper{
+    display: flex;
+    justify-content: space-between;
+    .title-heading{
+        color: #575757;
+        display: flex;
+        align-items: center;
+    }
+   
+}

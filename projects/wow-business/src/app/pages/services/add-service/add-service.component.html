@@ -1,0 +1,340 @@
+<div class="row" style="height: 100%;">
+
+	<div style="overflow: auto;" class="component-paddingRL col-12">
+
+		<!--  -->
+		<form name="form" (ngSubmit)="onSubmit()" #f="ngForm" autocomplete="off">
+			<div class="content-box-mt">
+				<div class="row">
+					<div class="col-md-6 text-left" style="padding: 0;">
+						<h3>Add Service</h3>
+						<p class="subheading">Add service and assign to the staff member</p>
+					</div>
+					<div class="col-md-6 mt-2 wow-mb" style="padding: 0;">
+						<div class="text-right float-right mt-2">
+							<button class="btn addbtn-size btnDownloadColor btn-properties-white mr-2"
+								(click)="back()">Cancel</button>
+							<button type="submit" class="btn addbtn-size btnAddColor">Save</button>
+						</div>
+					</div>
+				</div>
+				<div class="linebar"></div>
+				<div class="row">
+					<div class="col-md-5 col-sm-12 text-align-c w-100" style="padding: 0;">
+						<div class="form-row mt-3 mr-0 ml-0">
+
+							<wow-file-picker class="w-100" style="text-align: left;"
+								[reteriveFileUrl]="false"
+								defaultImg="assets/images/business-setup/business_details_icon.svg"
+								(change)="onChangeImage($event)"></wow-file-picker>
+
+							<div class="form-group col-12 text-left inputMarginBot10 mt-3 p-0">
+								<label>Select Category</label>
+								<select name="servicetype" type="text" class="form-control"
+									[(ngModel)]="servicecategory" #servicetype="ngModel"
+									(change)="onchangeServiceType(servicetype.value)"
+									[ngClass]="{ 'is-invalid': f.submitted && servicetype.invalid}" required>
+									<option [ngValue]="null" disabled>Select</option>
+									<option *ngFor="let type of serviceCategory" [value]="type"> {{ type }} </option>
+								</select>
+								<div *ngIf="f.submitted && servicetype.invalid" class="invalid-feedback">
+									<div *ngIf="servicetype.errors.required">
+										<i class="fa fa-info-circle fa-errorIcon"
+											aria-hidden="true" tooltip="Service Category is required."> </i>
+									</div>
+								</div>
+							</div>
+							<div class="form-group col-12 text-left inputMarginBot10 p-0">
+								<label>Service Name</label>
+								<input list="city" type="search" name="servicename" #servicename="ngModel"
+									[(ngModel)]="providerService.serviceName" class="form-control" maxlength="35"
+									[ngClass]="{ 'is-invalid': f.submitted && servicename.invalid}" required
+									placeholder="Search existing or Add new" autocomplete="off"
+									(change)="setServiceidCategory(servicename.value)">
+								<datalist id="city">
+									<option *ngFor="let city of servicesList" [value]="city.serviceName"> {{
+										city.serviceName }}</option>
+								</datalist>
+								<div *ngIf="f.submitted && servicetype.invalid" class="invalid-feedback">
+									<div *ngIf="servicetype.errors.required">
+										<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+											tooltip="Service Name is required."> </i>
+									</div>
+								</div>
+							</div>
+							<div class="form-group col-12 text-left inputMarginBot10 p-0">
+								<label>Related Keywords <span style="font-size: 10px; color: #575757;">(Type keywords and press Enter)</span> <img
+										class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple"
+										src="assets/images/shared-new-theme/tooltipIcon.svg"
+										tooltip="Keywords help your patients to find you more easily"></label>
+								<br>
+								<!-- <div *ngFor="let item of serviceCategory; let i=index"> -->
+								<h4>
+									<div class="badge badge-primary customBadge mr-2 mb-2"
+										*ngFor="let item of keywords; let i=index">
+										{{item}}
+									</div>
+								</h4>
+
+								<!-- </div> -->
+
+
+								<div class="keywords form-control">
+									<tag-input class="tags m-2" name="users" #users="ngModel"
+										[(ngModel)]="providerService.keywords" [theme]="'dark'" [theme]="'dark'"
+										[modelAsStrings]="true" [editable]="true">
+									</tag-input>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="offset-md-1 col-md-6 mt-3 p-0">
+						<!-- <wow-assign-staffor-service [heading]="'Assign Staff'" [tooltipcontent]="'Staff who provide the service'"></wow-assign-staffor-service> -->
+						<wow-assign-staffor-service [config]="assignStaffServiceConfig"
+							(signals)="onAssignServices($event)">></wow-assign-staffor-service>
+					</div>
+				</div>
+				<div class="linebar mt-4 mb-4"></div>
+				<div class="row">
+					<div class="col-md-12 text-left" style="padding: 0;">
+						<h3>Pricing Options</h3>
+						<p class="subheading">Set basic pricing options for this service. Use advance pricing options
+							for more details</p>
+					</div>
+				</div>
+
+				<div class="row mt-2">
+					<div class="form-group form-row col-12 text-left inputMarginBot10" style="padding: 0;">
+						<div class="col-md-3 col-sm-12">
+							<label>Duration</label>
+							<select name="duration" disabled="{{buttonDisabled}}" type="number" maxlength="12"
+								class="form-control" required [(ngModel)]="providerService.serviceDurationInMinutes"
+								#duration="ngModel" [ngClass]="{ 'is-invalid': f.submitted && duration.invalid}">
+								<option [ngValue]="null" disabled>Select</option>
+								<option *ngFor="let item of serviceDuration" [ngValue]="item"> {{item}} </option>
+							</select>
+							<div *ngIf="f.submitted && duration.invalid" class="invalid-feedback">
+								<div *ngIf="duration.errors.required">
+									<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Service Duration is required."> </i>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-12">
+							<label>Service Price</label>
+							<input name="serviceprice" class="form-control " id="ex1" type="text" maxlength="12"
+								[wowOnlyNumbers]="true" placeholder="Service Price"
+								[(ngModel)]="providerService.servicePrice" #serviceprice="ngModel" #toTarget
+								(input)="onPriceChange(serviceprice.value)"
+								[ngClass]="{ 'is-invalid': f.submitted && serviceprice.invalid}" required>
+							<div *ngIf="f.submitted && serviceprice.invalid" class="invalid-feedback">
+								<div *ngIf="serviceprice.errors.required">
+									<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+										tooltip="Service Price is required."> </i>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-12">
+							<label>Display Price</label>
+							<input name="displayprice" disabled class="form-control" id="ex1" type="number"
+								placeholder="Display Price" [(ngModel)]="providerService.serviceListedPrice"
+								#displayprice="ngModel" [ngClass]="{ 'is-invalid': f.submitted && displayprice.invalid}"
+								required style="border: none;">
+							<div *ngIf="f.submitted && displayprice.invalid" class="invalid-feedback">
+								<div *ngIf="displayprice.errors.required">
+									<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+										tooltip="Display Price is required."> </i>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-12">
+							<label>Returning Discount (%)<img
+									class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple"
+									src="assets/images/shared-new-theme/tooltipIcon.svg"
+									tooltip="Discount for established customers"></label>
+							<input type="text" [wowOnlyNumbers]="true" name="returningDiscount"
+								[(ngModel)]="providerService.returningDiscount"
+								[ngClass]="{ 'is-invalid': f.submitted && returningDiscount?.errors?.customMax}"
+								#returningDiscount="ngModel" class="form-control" placeholder="0" [customMax]="maxVal"
+								maxlength="5">
+
+							<div *ngIf="f.form.get('returningDiscount')?.errors?.customMax" class="invalid-feedback">
+								<i class="fa fa-info-circle fa-errorIcon mb-1" aria-hidden="true"
+									tooltip="Number between 1-100 with up to two decimal places.">
+								</i>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group form-row col-6 col-sm-12  text-left inputMarginBot10" style="padding: 0;">
+						<div class="col-12 mt-2 mb-2">
+							<label>This service is eligible for</label>
+							<div class="row">
+								<div class="col-sm-6 col-md-1">
+									<div class="form-check float-left pl-1">
+										<input type="checkbox" name="HSA" class=" form-check-input"
+											[(ngModel)]="providerService.eligibleForHSA" id="checkHSA">
+										<label class="form-check-label label-style font-weight-normal"
+											for="checkHSA">HSA</label>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-1">
+									<div class="form-check float-right pl-0">
+										<input type="checkbox" name="HRA" class=" form-check-input"
+											[(ngModel)]="providerService.eligibleForHRA" id="checkHRA">
+										<label class="form-check-label label-style font-weight-normal"
+											for="checkHRA">HRA</label>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+
+				<div class="row">
+					<div class="form-group form-row col-6 col-sm-12 text-left inputMarginBot10" style="padding: 0;">
+						<div class="col-12 ">
+							<a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+								<i class="fas fa-plus-square fa-lg" style="color: #524456;"></i>
+								<label class="advanceStyling pl-3 mt-3 tooltipstylePurple">Advance Pricing
+									Options</label>
+							</a>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="linebar mt-4 mb-4"></div>
+				<div class="row">
+					<div class="col-md-12 text-left" style="padding: 0;">
+						<h3>Visit</h3>
+						<p class="subheading">Choose the type of visit for this service</p>
+					</div>
+				</div>
+
+
+				<div class="row mb-5">
+					<div class="form-group form-row col-12 text-left inputMarginBot10" style="padding: 0;">
+						<div class="col-12">
+							<!-- <label>This service is eligible for</label> -->
+							<div class="row">
+								<div class="col-md-4 col-sm-4">
+									<div class="form-check float-left pl-1">
+										<input type="checkbox" name="inperson" class=" form-check-input"
+											[(ngModel)]="providerService.inPersonAllowed" id="checkInperson"
+											(change)="selectModeOfAppointment($event)">
+										<label class="form-check-label label-style font-weight-normal"
+											for="checkInperson">In-Person</label>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-1">
+									<div class="form-check float-right pl-0">
+										<input type="checkbox" name="video" class=" form-check-input"
+											[(ngModel)]="providerService.videoAllowed" id="checkVideo"
+											(change)="selectModeOfAppointment($event)">
+										<label class="form-check-label label-style font-weight-normal"
+											for="checkVideo">Video/Online</label>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<form class="form-group" autocomplete="off" class="formText" name="form" #staffServiceForm="ngForm">
+				<div class="modal-body"
+					style="height: calc(85vh - 70px); max-height: calc(85vh - 70px); padding: 1.1rem">
+					<table class="table table-borderless px-4 add-service-modal">
+						<thead class="thead-light">
+							<tr class="headingColor">
+								<th></th>
+								<th scope="col">Staff Name</th>
+								<th scope="col">Duration</th>
+								<th scope="col">Service Price <img
+										class="imgCustom infoIcon tooltipIconSize tooltipstylePurple"
+										src="assets/images/shared-new-theme/tooltipIcon.svg"
+										tooltip="Price you want to charge for this service"></th>
+								<th scope="col">Display Price <img
+										class="imgCustom infoIcon tooltipIconSize tooltipstylePurple"
+										src="assets/images/shared-new-theme/tooltipIcon.svg"
+										tooltip="This price includes WoW service charges"></th>
+							</tr>
+						</thead>
+						<tbody>
+
+							<tr *ngFor="let item of selectedIds; let i = index;" class="ml-2">
+								<td style="width: 6px;"></td>
+								<td>
+									<input type="text" class="form-control" disabled style="width: 135px; border: none;"
+										name="servicPrice" placeholder="{{item.staffFirstName}}">
+									<!-- {{item.staffFirstName }} -->
+								</td>
+								<td>
+									<!-- <input style="width: 135px" name="duration" class="form-control" type="number" placeholder="Duration" [(ngModel)]="selectedIds[i].durationInMinutes" #duration="ngModel">              -->
+									<select name="duration" style="width: 135px" disabled="{{buttonDisabled}}"
+										type="number" class="form-control" required
+										[(ngModel)]="selectedIds[i].durationInMinutes" #duration="ngModel"
+										[ngClass]="{ 'is-invalid': staffServiceForm.submitted && duration.invalid}">
+										<option [ngValue]="null" disabled>Select</option>
+										<option *ngFor="let item of serviceDuration" [ngValue]="item"> {{item}}
+										</option>
+									</select>
+									<div *ngIf="staffServiceForm.submitted && duration.invalid"
+										class="invalid-feedback">
+										<div *ngIf="duration.errors.required">
+											<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+												tooltip="Service Duration is required."> </i>
+										</div>
+									</div>
+								</td>
+								<td>
+									<input style="width: 135px" [name]="getControlName('service_price',i)" maxlength="12"
+										class="form-control" type="text" placeholder="Service Price"
+										[(ngModel)]="selectedIds[i].serviceListedPrice" #serviceprices="ngModel"
+										[wowOnlyNumbers]="true"
+										(input)="onStaffPriceChange($event.target.value, i)"
+										[ngClass]="{ 'is-invalid': staffServiceForm.submitted && serviceprices.invalid}"
+										required>
+									<div *ngIf="staffServiceForm.submitted && serviceprices.invalid"
+										class="invalid-feedback">
+										<div *ngIf="serviceprices.errors.required">
+											<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+												tooltip="Servic Price Duration is required."> </i>
+										</div>
+									</div>
+								</td>
+								<td>
+									<input style="width: 135px; border: none;"
+										[name]="getControlName('display_price', i)" disabled class="form-control"
+										id="ex1" type="number" [(ngModel)]="selectedIds[i].displayPrice"
+										#displayprice="ngModel">
+
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="modal-footer dlg-footer">
+					<div class="float-right mt-2">
+						<button type="button" class="btn addbtn-size btnDownloadColor btn-properties-white"
+							data-dismiss="modal">Cancel</button>
+						<button type="submit" class="btn addbtn-size btnAddColor" (click)="onSubmitdata()"
+							data-dismiss="modal">Save</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

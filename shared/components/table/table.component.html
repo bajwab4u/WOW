@@ -1,0 +1,184 @@
+<div style="width: 100%;">
+
+    <div *ngIf="config?.showHeader">
+        <div *ngIf="config?.showTitle" class="row">
+            <h2>{{title}}</h2>
+        </div>
+
+        <div class="row margnTblTop">
+            <div class="col-md-4 col-sm-12" style="padding-left: 0px !important;" *ngIf="config?.showSearchBar">
+                <search-control [palceHolder]="config?.searchPlaceholder" (signal)="onSearch($event)">
+                </search-control>
+            </div>
+
+            <div [ngClass]="config?.showSearchBar ? 'col-md-8' : 'col-md-12'"
+                class="table-header-btn-wrapper wow-resp-tbl-filter wow-pr-0" *ngIf="config?.showAddBtn">
+
+                <div class="nav-item dropdown float-right ">
+
+                    <button type="button" class="btn btn-size btnAddColor" (click)="onHeaderAction()">
+                        <i class="fa pr-2" [ngClass]="config?.addBtnIconClass"></i>
+                        {{config?.addBtnTxt}}</button>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="table-responsive table-border-radius">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 45px;" *ngIf="config?.selectionEnabled" label="selectAll"
+                            class="wow-resp-tbl-checkbox">
+                            <input class="mb-1" style="float: right;" type="checkbox" name="selectAll"
+                                [(ngModel)]="checked" (change)="onSelectAll()" title="Select All" />
+                        </th>
+
+                        <th scope="col" style="width: 1%;"
+                            *ngIf="config?.showRowActions && config?.alignRowActions === 'left'" label="spaceElement">
+                        </th>
+
+                        <ng-container *ngFor="let col of config?.columns">
+
+                            <th scope="col" *ngIf="col.visible" [style.width]="col.width"
+                                [style.text-align]="col.align">
+
+                                {{col.title}}
+
+                                <img *ngIf="col?.tooltipTitle"
+                                    class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple tbltooltip"
+                                    src="assets/images/shared-new-theme/tooltipIcon.svg" [tooltip]="col?.tooltipTitle"
+                                    [placement]="col?.tooltipPosition">
+
+                                    <span (click)="sortData(col)" style="cursor: pointer;" *ngIf="col?.isSortable">
+                                        <i [class]="getSortIcon(col)"></i>
+                                    </span>
+                            </th>
+
+                        </ng-container>
+
+                        <th style="width: 1%;" *ngIf="config?.showRowActions && config?.alignRowActions === 'right'">
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <ng-container *ngIf="!loadingState && data && data.length === 0">
+                        <tr>
+                            <td style="text-align: center !important;" class="wow-rm-min-width" colspan="100%">no record
+                                found!
+                            </td>
+                        </tr>
+                    </ng-container>
+
+                    <ng-container *ngIf="!config?.enablePagination; else paginationRef">
+                        <tr *ngFor="let row of data; let idx = index;" (click)="onRowAction($event, row, idx)"
+                            [style.cursor]="config?.cusorType" (mouseenter)="onHoverLeave(idx)"
+                            (mouseleave)="onHoverLeave()">
+
+                            <td style="width: 45px;" *ngIf="config?.selectionEnabled" label="checkbox">
+                                <input class="mb-1" style="float: right;" type="checkbox" [name]="'selection_'+idx"
+                                    [(ngModel)]="row['selected']" (change)="onSelectSingle(idx)" />
+                            </td>
+
+                            <ng-container *ngIf="config?.showRowActions && config?.alignRowActions === 'left'"
+                                [ngTemplateOutlet]="rowActionsRef"
+                                [ngTemplateOutletContext]="{ row: row, actions: config?.rowActions, idx: idx }">
+                            </ng-container>
+
+                            <ng-container *ngFor="let col of config?.columns">
+
+                                <td scope="col" *ngIf="col.visible" [style.width]="col.width"
+                                    [style.text-align]="col.align" (click)="onCellAction($event, col, row)">
+
+
+                                    <span
+                                        *ngIf="!getCellTemplateRef(col.name) && col.isKeyExist">{{row[col.name]}}</span>
+
+                                    <ng-template *ngIf="getCellTemplateRef(col.name)"
+                                        [ngTemplateOutlet]="getCellTemplateRef(col.name)"
+                                        [ngTemplateOutletContext]="{ row: row, col: col, index:idx }">
+                                    </ng-template>
+                                </td>
+
+                            </ng-container>
+
+                            <ng-container *ngIf="config?.showRowActions && config?.alignRowActions === 'right'"
+                                [ngTemplateOutlet]="rowActionsRef"
+                                [ngTemplateOutletContext]="{ row: row, actions: config?.rowActions, idx: idx }">
+                            </ng-container>
+                        </tr>
+                    </ng-container>
+
+                    <ng-template #paginationRef>
+
+                        <tr *ngFor="let row of data | paginate:   {
+                            itemsPerPage: config?.pagination?.numberOfRecordsPerPage,
+                            currentPage: config?.pagination?.pageNumber,
+                            totalItems: config?.pagination?.totalNumberOfRecords }; let idx = index;"
+                            (click)="onRowAction($event, row, idx)" [style.cursor]="config?.cusorType"
+                            (mouseenter)="onHoverLeave(idx)" (mouseleave)="onHoverLeave()">
+
+                            <td style="width: 45px;" *ngIf="config?.selectionEnabled" label="checkbox">
+                                <input class="mb-1" style="float: right;" type="checkbox" [name]="'selection_'+idx"
+                                    [(ngModel)]="row['selected']" (change)="onSelectSingle(idx)" />
+                            </td>
+
+                            <ng-container *ngIf="config?.showRowActions && config?.alignRowActions === 'left'"
+                                [ngTemplateOutlet]="rowActionsRef"
+                                [ngTemplateOutletContext]="{ row: row, actions: config?.rowActions, idx: idx }">
+                            </ng-container>
+
+                            <ng-container *ngFor="let col of config?.columns">
+
+                                <td scope="col" *ngIf="col.visible" [style.width]="col.width" [attr.label]="col.title"
+                                    [style.text-align]="col.align" (click)="onCellAction($event, col, row)"
+                                    [attr.displayLabel]="col.name">
+
+                                    <span
+                                    [tooltip]="row[col.name]?.length>18 ? row[col.name] : ''"
+                                        *ngIf="!getCellTemplateRef(col.name) && col.isKeyExist">{{ (row[col.name]?.length>18)? (row[col.name] | slice:0:18)+'...': (row[col.name]) }}</span>
+
+                                    <ng-template *ngIf="getCellTemplateRef(col.name)"
+                                        [ngTemplateOutlet]="getCellTemplateRef(col.name)"
+                                        [ngTemplateOutletContext]="{ row: row, col: col, index: idx }">
+                                    </ng-template>
+                                </td>
+
+                            </ng-container>
+
+                            <ng-container *ngIf="config?.showRowActions && config?.alignRowActions === 'right'"
+                                [ngTemplateOutlet]="rowActionsRef"
+                                [ngTemplateOutletContext]="{ row: row, actions: config?.rowActions, idx: idx }">
+                            </ng-container>
+
+                        </tr>
+                    </ng-template>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div style="width: 100%;" *ngIf="!loadingState && config?.enablePagination">
+            <wow-pagination [pagination]="config?.pagination" (signal)="onPageChange($event)"></wow-pagination>
+        </div>
+    </div>
+
+</div>
+
+<ng-template #rowActionsRef let-row="row" let-actions="actions" let-idx="idx">
+    <td style="width: 1%; position: relative;padding: 0" label="spaceElement">
+        <ng-container *ngFor="let ac of actions">
+            <div [style.padding]="ac?.styles?.padding ? ac?.styles?.padding :  '10px'">
+                <img [src]="ac?.imgSrc" style="cursor: pointer; position: absolute;"
+                    (click)="onRowAction($event, row, idx, ac.action)" />
+                &nbsp;&nbsp;
+            </div>
+
+        </ng-container>
+    </td>
+</ng-template>

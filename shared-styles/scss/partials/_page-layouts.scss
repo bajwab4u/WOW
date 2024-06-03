@@ -1,0 +1,105 @@
+
+::-webkit-scrollbar {
+    width: 0.4em;
+    /* scrollbar-width: thin !important; */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #ddd;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+.row
+{
+	width: 100%;
+	margin-left: 0px !important;
+	margin-right: 0px !important;
+}
+
+.schedule-textStyle
+{
+    color: #575757;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.mainContainer {
+    padding-left: 25px;
+    padding-right: 5px;
+}
+
+.margnTop-30 {
+    margin-top: 30px !important;
+}
+.margnTop-45{
+    margin-top: 26px;
+}
+
+.margnbot-40 {
+    margin-bottom: 40px;
+}
+
+.margnTblTop {
+    margin-top: 16px;
+    margin-bottom: 30px;
+}
+
+.icon {
+    padding: 15px;
+    color: rgb(49, 0, 128);
+    width: 70px;
+    text-align: left;
+}
+
+.mrgnleft15
+{
+    margin-left: 17px;
+}
+
+/* simple horizontal gray line styling */
+.linebar {
+    border-bottom:2px solid #E0E0E0;
+    /* margin-left: 15px;
+    margin-right: 23px; */
+}
+
+.layout-blank
+{
+  height: 100%;
+  overflow: auto;
+}
+
+.mrgnTop
+  {
+      margin-top: 45px;
+  }
+
+  .tablinks{
+    font-size: 14px !important;
+    font-family:  Poppins !important;
+    font-weight: 500 !important;
+  }
+  
+  .content-box-mt
+  {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+  
+  .content-box-pt
+  {
+    padding-top: 2.5rem !important;
+  }
+
+  .component-paddingRL{
+    padding-right: 40px !important;
+    padding-left: 40px !important;
+  }
+

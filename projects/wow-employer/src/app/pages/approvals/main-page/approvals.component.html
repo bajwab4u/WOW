@@ -1,0 +1,27 @@
+<div class="row" style="height: 100%; position: relative;">
+
+	<div class="service-sub-menu p-0" [ngClass]="{'col-md-3': !removecss, 'col-auto': removecss}">
+
+		<wow-sub-menu 
+			[config]="subMenuConfig" 
+			[selectedItemName]="selectedItemName" 
+			(signal)="handleSignal($event)">
+		</wow-sub-menu>
+	</div>
+
+	<div [ngClass]="{'col-md-9': !removecss,'col-md-12': removecss}" class="layout-blank p-0">
+
+		<ng-container *ngIf="selectedItemName === 'New Employees'">
+			<div class="container float-left col-12 component-paddingRL content-box-mt">
+				<wow-new-employees (signals)="onHandleSignals($event)"></wow-new-employees>
+			</div>
+		</ng-container>
+
+		<ng-container *ngIf="selectedItemName === 'Pending Invites'">
+			<div class="container float-left col-12 component-paddingRL content-box-mt">
+				<wow-pending-invites (signals)="onHandleSignals($event)"></wow-pending-invites>
+			</div>
+		</ng-container>
+
+	</div>
+</div>

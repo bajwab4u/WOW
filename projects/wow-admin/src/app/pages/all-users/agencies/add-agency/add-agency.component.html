@@ -1,0 +1,191 @@
+<div class="wow-adg-root layout-blank component-paddingRL">
+    <div class="wow-adg-parent content-box-mt">
+        <div class="wow-adg-sub-parent">
+            <div class="wow-adg-wrapper">
+                <div class="wow-adg-form-wrapper">
+                    <div class="wow-adg-form">
+                        <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+                            <div class="row">
+                                <div class="col-md-12 p-0">
+                                    <div class="wow-adg-header">
+                                        <div class="wow-adg-header-left">
+                                            <div class="wow-adg-heading">
+                                                <h2>
+                                                    <span (click)="onGoBack()" style="cursor: pointer">
+                                                        <img src="assets/images/details-back-btn.svg" height="12px">
+                                                    </span>
+                                                    Add Agency
+                                                </h2>
+                                            </div>
+                                            <div class="wow-adg-sm-heading">
+                                                <p>Add the required details of the agency
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="wow-adg-header-right">
+                                            <button class="btn addbtn-size btnDownloadColor btn-properties-white"
+                                                (click)="onGoBack()" type="button">
+                                                Cancel
+                                            </button>
+                                            <button class="btn addbtn-size" [disabled]="!form.dirty"
+                                                [ngClass]="!form.dirty ? 'btn-properties-gray' : 'btnAddColor'">
+                                                Save
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                    <div class="linebar"></div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="row pt-5">
+                                <div class="col-md-10 p-0">
+                                    <div class="wow-adg-form-fields-wrapper">
+                                        <div class="form-group row">
+                                            <div
+                                                class="form-group-label text-right col-lg-3 col-md-3 col-sm-12 text-align-l ">
+                                                <label class="col-form-label col-form-label-sm">
+                                                    Agency Name
+                                                </label>
+                                            </div>
+                                            <div class="col-md-5 col-sm-12 form-field">
+                                                <input type="text" wowInputBehaviour name="affiliateName"
+                                                    formControlName="affiliateName" class="form-control" maxlength="45"
+                                                    [ngClass]="{ 'is-invalid': isControlValid('affiliateName', 'required') ||  isControlValid('affiliateName', 'maxlength') }"
+                                                    placeholder="Agency Name" required maxlength="200">
+                                                <div *ngIf="isControlValid('affiliateName', 'required') ||
+                                                isControlValid('affiliateName', 'maxlength')" class="invalid-feedback">
+                                                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                                        [tooltip]="isControlValid('affiliateName', 'required') ? 'Agency Name is required.'
+                                                        : 'Agency Name can contain upto 45 characters only.'">
+                                                    </i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div
+                                                class="form-group-label text-right col-lg-3 col-md-3 col-sm-12 text-align-l ">
+                                                <label class="col-form-label col-form-label-sm">
+                                                    Email
+                                                </label>
+                                            </div>
+                                            <div class="col-md-5 col-sm-12 form-field">
+                                                <input type="text" wowInputBehaviour name="email"
+                                                    formControlName="email" class="form-control"
+                                                    [ngClass]="{ 'is-invalid': isControlValid('email', 'required') || isControlValid('email', 'email') }"
+                                                    placeholder="Business Email" required>
+                                                <div *ngIf="isControlValid('email', 'required') || isControlValid('email', 'email')"
+                                                    class="invalid-feedback">
+                                                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                                        [tooltip]="isControlValid('email', 'required') ? 'Email is required': 'Invalid email address'">
+                                                    </i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div
+                                                class="form-group-label text-right col-lg-3 col-md-3 col-sm-12 text-align-l ">
+                                                <label class="col-form-label col-form-label-sm">
+                                                    Parent Agency
+                                                </label>
+                                            </div>
+                                            <div class="col-md-5 col-sm-12 form-field">
+                                                <select name="parentAgency" type="text" class="form-control"
+                                                    [ngClass]="{ 'is-invalid': isControlValid('parentAgency', 'required') }"
+                                                    wowInputBehaviour formControlName="parentAgency">
+                                                    <option [ngValue]="null" disabled>Type in to select parent</option>
+                                                    <option *ngFor="let agency of parentAgencies"
+                                                        [value]="agency.affiliateId"> {{ agency.affiliateName
+                                                        }}
+                                                    </option>
+
+                                                </select>
+                                                <div *ngIf="isControlValid('parentAgency', 'required')"
+                                                    class="invalid-feedback">
+                                                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                                        tooltip="Please select a parent agency.">
+                                                    </i>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <div
+                                                class="form-group-label text-right col-lg-3 col-md-3 col-sm-12 text-align-l ">
+                                                <label class="col-form-label col-form-label-sm">
+                                                    Parent Share
+                                                </label>
+                                            </div>
+                                            <div class="col-md-5 col-sm-12 form-field">
+                                                <input type="text" wowInputBehaviour name="parentShare"
+                                                    [ngClass]="{ 'is-invalid': isControlValid('parentShare', 'required') }"
+                                                    class="form-control" formControlName="parentShare" mask="percent"
+                                                    suffix="%" [dropSpecialCharacters]="false"
+                                                    placeholder="Set % for parent share">
+                                                <div *ngIf="isControlValid('parentShare', 'required')"
+                                                    class="invalid-feedback">
+                                                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                                        tooltip="Parent share is required.">
+                                                    </i>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <div
+                                                class="form-group-label text-right col-lg-3 col-md-3 col-sm-12 text-align-l ">
+                                                <label class="col-form-label col-form-label-sm">
+                                                    Provider Share
+                                                </label>
+                                            </div>
+                                            <div class="col-md-5 col-sm-12 form-field">
+                                                <input type="text" wowInputBehaviour name="providerShare" mask="percent"
+                                                    [dropSpecialCharacters]="false" suffix="%"
+                                                    formControlName="providerShare" class="form-control"
+                                                    [ngClass]="{ 'is-invalid': isControlValid('providerShare', 'required')}"
+                                                    placeholder="Set % for provider share" required>
+
+                                                <div *ngIf="isControlValid('providerShare')" class="invalid-feedback">
+                                                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                                        tooltip="Provider Share is required.">
+                                                    </i>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <div
+                                                class="form-group-label text-right col-lg-3 col-md-3 col-sm-12 text-align-l ">
+                                                <label class="col-form-label col-form-label-sm">
+                                                    Employer Share
+                                                </label>
+                                            </div>
+                                            <div class="col-md-5 col-sm-12 form-field">
+                                                <input type="text" wowInputBehaviour name="employerShare"
+                                                    [dropSpecialCharacters]="false" mask="percent" suffix="%"
+                                                    formControlName="employerShare" class="form-control"
+                                                    [ngClass]="{ 'is-invalid': isControlValid('employerShare', 'required') }"
+                                                    placeholder="Set % for employer share" required>
+                                                <div *ngIf="isControlValid('employerShare')" class="invalid-feedback">
+                                                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                                        tooltip="Employer Share is required.">
+                                                    </i>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

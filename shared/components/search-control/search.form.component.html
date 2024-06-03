@@ -1,0 +1,15 @@
+<div class="col-md-12" style="padding: 0;">
+	<img style="position: absolute; left: 13px; top: 15px;" class="" src="assets/images/search-icon.svg">
+	<input type="text"
+		style="width: 100%;"
+		[(ngModel)]="searchVal"
+		#searchInput
+		[placeholder]="palceHolder" 
+		[class.remove-borders]="showOnlyBottomBorder"
+		class="tblHeaderInput form-control  float-left"
+		autocomplete="off"
+		[mask]="maskFormat"
+		(blur)="handleBlur()"
+		(search)="stopPropagation($event)"
+		(keyup.enter)="handleSearch($event)"> 
+</div>

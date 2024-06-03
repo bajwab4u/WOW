@@ -1,0 +1,27 @@
+
+@import "shared-styles/scss/core";
+@import "~mapbox-gl/dist/mapbox-gl.css";
+@import "../../../node_modules/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
+
+
+.btn-properties-inner:hover,
+  .btn-properties-inner:active,
+  .btn-properties-inner:focus,
+  .btn-properties-inner.active {
+    /* let's darken #004E64 a bit for hover effect */
+    background: #524456;
+    color: #ffffff;
+    border-color: #524456;
+  }
+
+  .service-sub-menu
+{
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+
+.col-lg-1half
+{
+    width: 60px;
+    margin-left: 19px ;
+}

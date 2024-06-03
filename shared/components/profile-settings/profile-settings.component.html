@@ -1,0 +1,87 @@
+<div class="container col-9 float-left p-0" style="min-width: 100% !important;padding: 0;">
+	<form name="from" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" autocomplete="off">
+
+		<div class="row">
+			<div class="col-lg-7 col-sm-7 text-left p-0">
+				<h2>Profile Settings</h2>
+				<p class="subheading"> Update your personal settings</p>
+			</div>
+			<div class="col-lg-5 col-sm-5 text-right p-0" style="margin-top: 7px !important;">
+				<!-- <button type="button" class="btn addbtn-size btnDownloadColor btn-properties-white mr-2">Cancel</button> -->
+				<button type="submit" [disabled]="isFormDisabled" class="btn btn-properties-gray"
+					[ngClass]="isFormDisabled ? 'btn-properties-gray' : 'btnAddColor'">Save</button>
+			</div>
+		</div>
+		<div class="linebar mb-3"></div>
+
+		<div class="row" (focus)="item='focusout'" (mouseover)="item='focused'" (mouseout)="item='none'">
+			<div class="col-lg-2 p-0">
+
+				<wow-file-picker [image]="imageUrl" (change)="onChangeImage($event)"></wow-file-picker>
+			</div>
+
+			<div class="col-lg-5">
+				<div class="form-group">
+					<input type="text" class="form-control" name="firstName" [type]="item" wowInputBehaviour
+						[(ngModel)]="profileDetail.profileDetails.firstName" #firstName="ngModel"
+						[class.is-invalid]="f.submitted && firstName.invalid" required placeholder="First Name"
+						maxlength="35" [disabled]="isRoleAdmin">
+
+					<div *ngIf="f.submitted && firstName.invalid" class="invalid-feedback">
+						<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+							[tooltip]="firstName.errors.required ? 'First Name is required.' : 'Max 35 characters allowed'">
+						</i>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<input type="text" class="form-control" name="lastName" [type]="item" wowInputBehaviour
+						maxlength="35" [(ngModel)]="profileDetail.profileDetails.lastName" #lastName="ngModel" required
+						[class.is-invalid]="f.submitted && lastName.invalid" placeholder="Last Name"
+						[disabled]="isRoleAdmin">
+
+					<div *ngIf="f.submitted && lastName.invalid" class="invalid-feedback">
+						<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+							[tooltip]="lastName.errors.required ? 'Last Name is required.' : 'Max 35 characters allowed'">
+						</i>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="fontuser">
+						<i class="fa fa-envelope float-left iconPlacement"></i>
+						<input type="email" disabled class="form-control" style="padding-left: 45px;" [type]="item"
+							wowInputBehaviour name="email" [(ngModel)]="profileDetail.profileDetails.email"
+							pattern="^(\s*[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9}\s*)$"
+							#email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
+							placeholder="Email">
+
+						<div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+							<div *ngIf="email.errors.required"><i class="fa fa-info-circle fa-errorIcon"
+									aria-hidden="true" tooltip="Email is required.">
+								</i>
+							</div>
+							<div *ngIf="email.errors.pattern"><i class="fa fa-info-circle fa-errorIcon"
+									aria-hidden="true" tooltip=" Email is not valid.">
+								</i>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="fontuser" id="emailInputIcon">
+						<img src="assets/images/ic_https_24px.svg" class="float-left passwrordIcon">
+						<input type="password" class="form-control" disabled [type]="item" wowInputBehaviour name="pass"
+							#pass="ngModel" [(ngModel)]="password" id="exampleInputEmail1" style="padding-left: 45px;"
+							aria-describedby="emailHelp" autocomplete="off" placeholder="********">
+					</div>
+					<small id="passwordHelpInline" class="float-right forgot-style;" style="margin-top: 5px;">
+						<a class="changePassword-style" (click)="onChangePassword()">Change Password</a>
+					</small>
+				</div>
+
+			</div>
+		</div>
+	</form>
+</div>

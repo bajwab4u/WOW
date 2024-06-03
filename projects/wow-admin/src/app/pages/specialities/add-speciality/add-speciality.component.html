@@ -1,0 +1,57 @@
+<div class="container col-9 float-left content-box-mt component-paddingRL" style="min-width: 100% !important;">
+    <form name="from" [formGroup]="form" autocomplete="off">
+        <div class="row">
+            <div class="col col-sm-12 col-md-7 text-left p-0 ai-center">
+                <h3>Add Specialty</h3>
+            </div>
+            <div class="col col-sm-12 col-md-5 text-align-l text-right mt-2 p-0">
+                <button type="button" class="btn addbtn-size btnDownloadColor btn-properties-white mr-2"
+                    (click)="onGoBack()">Cancel</button>
+                <button type="button" class="btn addbtn-size btn-properties-gray" (click)="submitForm()"
+                    [disabled]="!form.dirty "
+                    [ngClass]="!form.dirty ? 'btn-properties-gray' : 'btnAddColor'">Save</button>
+            </div>
+        </div>
+        <hr />
+        <div class="col-6 float-left p-0">
+            <div class="row inputLabelText ml-5">
+                <div class="col-10 p-0">
+
+                    <div class="">
+                        <div class="form-group form-row mr-0 ml-0">
+                            <label class="float-left">Specialty Name
+                                <img class="imgCustom  ml-4 infoIcon tooltipIconSize tooltipstylePurple"
+                                    src="assets/images/shared-new-theme/tooltipIcon.svg"
+                                    tooltip="Keywords help your patients to find you more easily">
+                            </label>
+                            <input type="text" class="form-control" formControlName="name" placeholder="e.g Endoscopy"
+                                [ngClass]="{ 'is-invalid': isControlValid('name', 'required')
+                                  || isControlValid('description', 'maxlength') }" maxlength="45" required>
+                            <div *ngIf="isControlValid('name', 'required') ||
+                             isControlValid('name', 'maxlength') " class="invalid-feedback">
+                                <div *ngIf="form.get('name').errors.required"><i class="fa fa-info-circle fa-errorIcon"
+                                        aria-hidden="true" [tooltip]="
+                                    form.controls.name.errors.required ? 'Specialty Name is required.'
+                                    : 'Specialty name can contain upto 45 characters only.'">
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="">
+                        <div class="form-group form-row mr-0 ml-0">
+                            <label class="float-left">Description</label>
+                            <textarea rows="5" type="text" class="form-control" formControlName="description"
+                                placeholder="Speciality Description"> </textarea>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>

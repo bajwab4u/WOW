@@ -1,0 +1,91 @@
+<div class="container float-left col-12">
+  <ng-container>
+    <div style="height: 100%" *ngIf="activeState === 'TABLE'">
+        <div class="col-md-12 layout-blank component-paddingRL">
+            <div class="content-box-mt"  style="width: 1400px;">
+
+                <div class="row" style="width: 60%">
+                    <h2 class="mb-0">
+                        Appointments
+                        <span *ngIf="totalItems > 0" class="red">({{totalItems}})</span>
+                    </h2>
+                </div>
+
+                <div class="row margnTblTop"  style="width: 60%;">
+                    <div class="col-md-4" style="padding-left: 0px !important;">
+
+                        <search-control [palceHolder]="'Search Wow ID'" (signal)="onSearchValueChange($event)">
+                        </search-control>
+                    </div>
+
+                    <div class="col-md-2" style="padding-left: 0px !important;">
+
+                      <div>
+                        <select class="tbldropdown" #filterBySelect (change)="onChangeFilter($event.target.value)">
+                            <option value="default" selected>Filter by</option>
+                            <option value="FirstName">First Name</option>
+                            <option value="LastName">Last Name</option>
+                            <option value="MobileNumber">Mobile Number</option>
+                            <option value="Email">Email</option>
+                        </select>
+                    </div>
+
+                    </div>
+
+                    <div class="col-md-4" style="padding-right: 0;">
+                        <div class="wow-stats-df-wrapper p-0">
+                            <input autocomplete="off" class="form-control" readonly daterangepicker id="datefilter"
+                                style="position: relative;" [options]="dateFilterConfig" #dateFilter
+                                placeholder="MMM DD, YYYY" (selected)="setFilterValue($event)">
+                        </div>
+                    </div>
+                </div>
+
+
+                <wow-table class="w-100" [config]="config" [actions]="action" (signals)="onTableSignals($event)">
+
+                    <!-- <ng-template dataTableCell="patientName" let-row="row" let-col="col">
+                        <p class="m-0 text-overflow-20ch wow-clients-cellwidth" [title]="row?.patientName">
+                            {{row?.patientName}}
+                        </p>
+                    </ng-template>
+
+                    <ng-template dataTableCell="txtWowId" let-row="row" let-col="col">
+                        <p class="m-0 text-overflow text-overflow-20ch" [title]="row?.txtWowId">
+                            {{row?.txtWowId}}
+                        </p>
+                    </ng-template>
+
+                    <ng-template dataTableCell="profName" let-row="row" let-col="col">
+                        <p class="m-0 text-overflow text-overflow-20ch" [title]="row?.profName">
+                            {{row?.profName}}
+                        </p>
+                    </ng-template>
+
+                    <ng-template dataTableCell="dteCreatedDate" let-row="row" let-col="col" let-i="index">
+                        <p class="m-0 text-overflow text-overflow-20ch" [title]="row?.dteCreatedDate">
+                            {{row?.dteCreatedDate}}
+                        </p>
+                    </ng-template>
+
+                    <ng-template dataTableCell="txtStatus" let-row="row" let-col="col" let-i="index">
+                        <p class="m-0 text-overflow text-overflow-20ch" [title]="row?.txtStatus">
+                            {{row?.txtStatus ? row?.txtStatus : 'N/A'}}
+                        </p>
+                    </ng-template>
+
+                    <ng-template dataTableCell="listedAmount" let-row="row" let-col="col" let-i="index">
+                        <span class="col-width" style="cursor: pointer;" (click)="cashRefund(row)">
+                            <img src="assets/images/cashback.svg" alt="cashback">
+                            <a class="pl-2 pt-1 anchor-tab">Refund Amount</a>
+                        </span>
+                    </ng-template> -->
+
+                </wow-table>
+
+
+              </div>
+          </div>
+      </div>
+  </ng-container>
+</div>

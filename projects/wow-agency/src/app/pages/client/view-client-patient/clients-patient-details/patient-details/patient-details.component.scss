@@ -1,0 +1,38 @@
+.wow-ta-right{
+  text-align: right;
+}
+
+.wow-ai-baseline{
+  align-items: baseline !important;
+}
+
+.wow-agd-link-btn-wrapper{
+  display: flex;
+  button{
+      width: 34%;
+  }
+  .wow-agd-links-tooltip{
+      position: absolute;
+      right: 240px;
+      top: 10px;
+  }
+}
+
+@media (min-width: 400px) and (max-width: 786px) {
+.wow-ta-right{
+  text-align: left !important;
+}
+//   .wow-agd-link-btn-wrapper {
+//     right: 200px;
+//   }
+.wow-agd-light-bg{
+  height: 34px;
+}
+.wow-adg-phone{
+  flex-basis: 78%;
+}
+
+.wow-adgd-img{
+  padding: 2rem 0;
+}
+}

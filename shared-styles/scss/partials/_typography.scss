@@ -1,0 +1,119 @@
+html,
+body {
+    font-family: "Poppins";
+    font-size: 14px !important;
+    font-weight: normal;
+    overflow-x: hidden;
+}
+
+h1 {
+    font-size: 28px !important;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 22px !important;
+    font-weight: 500;
+}
+
+h3 {
+    font-size: 20px !important;
+    font-weight: 500;
+    color: black;
+}
+
+h4 {
+    font-size: 18px !important;
+    font-weight: 500;
+}
+
+h5 {
+    font-size: 15px !important;
+    font-weight: 500;
+}
+
+h5 {
+    font: normal medium 30px/46px Poppins !important;
+}
+
+hr {
+    border: none;
+    height: 2px;
+    /* Set the hr color */
+    color: #e0e0e0; /* old IE */
+    background-color: #e0e0e0; /* Modern Browsers */
+}
+
+label {
+    font-size: 13px !important;
+    font-weight: normal;
+}
+
+.form-control::placeholder {
+    font-size: 13px;
+    font-weight: normal;
+}
+
+input::placeholder {
+    font-size: 13px;
+    font-weight: normal;
+}
+
+textarea::placeholder {
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.form-control::-webkit-input-placeholder {
+    font-size: 13px;
+    font-weight: normal;
+}
+
+input::-webkit-input-placeholder {
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.form-control[type="password"]::placeholder {
+    opacity: 0.3 !important;
+}
+
+input[type="password"]::placeholder {
+    opacity: 0.3 !important;
+}
+
+textarea::-webkit-input-placeholder {
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.text-style {
+    color: #707070B3;
+    font-size: 18px;
+}
+
+.text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* display: inline-block; */
+}
+
+.text-overflow-20ch
+{
+  width: 20ch;
+}
+
+.text-overflow-30ch
+{
+  width: 30ch;
+}
+
+#count_message {
+    color: #A1A1A1;
+    margin-top: -20px;
+    margin-right: 5px;
+    font-size: xx-small;
+  }
+
+

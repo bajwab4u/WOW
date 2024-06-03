@@ -1,0 +1,67 @@
+<div class="col-md-12 layout-blank component-paddingRL content-box-mt">
+  <ng-container>
+    <div style="height: 100%" *ngIf="activeState === 'TABLE'">
+      <wow-table style="width: 100%" [config]="config" (signals)="onTableSignals($event)">
+        <ng-template dataTableCell="image" let-row="row" let-col="col">
+          <div class="imgsize">
+            <img
+              class="imgsize responsive-image rounded-circle"
+              src="{{ row?.logoPath }}"
+              width="36px"
+              height="36px"
+              onError="this.src='assets/images/profile_icon.svg'"
+            />
+          </div>
+        </ng-template>
+
+        <ng-template dataTableCell="name" let-row="row" let-col="col">
+          <p
+            class="m-0 text-overflow-20ch wow-clients-cellwidth"
+            [title]="row?.firstName + ' ' + row.lastName"
+          >
+            {{ row?.firstName + " " + row?.lastName }}
+          </p>
+        </ng-template>
+
+        <ng-template dataTableCell="email" let-row="row" let-col="col">
+          <p class="m-0 text-overflow text-overflow-20ch" [title]="row?.email">
+            {{ row?.email }}
+          </p>
+        </ng-template>
+
+        <ng-template
+          dataTableCell="phone"
+          let-row="row"
+          let-col="col"
+          let-i="index"
+        >
+          <span
+            class="col-width"
+            [title]="row?.phoneMobile | mask: maskedFormat"
+          >
+            {{ row?.phoneMobile | mask: maskedFormat }}
+          </span>
+        </ng-template>
+        <ng-template
+          dataTableCell="wowId"
+          let-row="row"
+          let-col="col"
+          let-i="index"
+        >
+          <span class="col-width" [title]="row?.wowID">
+            {{ row?.wowID }}
+          </span>
+        </ng-template>
+      </wow-table>
+    </div>
+  </ng-container>
+
+
+
+
+
+
+  <ng-container *ngIf="activeState === 'PROFILE'">
+    <wow-view-patient-details [selectedPatient]="selectedPatient" (signals)="onHandleDetailSignals($event)"></wow-view-patient-details>
+  </ng-container>
+</div>

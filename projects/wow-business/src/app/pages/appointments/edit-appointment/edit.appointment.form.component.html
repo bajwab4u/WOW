@@ -1,0 +1,250 @@
+<form name="from" autocomplete="off" class="form-margin" 
+	#appointmentForm="ngForm" 
+	(ngSubmit)="appointmentForm.valid && updateAppointment()">
+
+	<div class="modal-header modal-title">
+		<h4 class="modal-title update-appointment-contnet-padding">Edit Appointment</h4>
+
+		<i class="fa fa-times" (click)="activeModal.dismiss('Cross click')"
+			style="font-size: 14px; cursor: pointer;"></i>
+	</div>
+	
+	<div class="modal-body" style="max-height: calc(80vh - 4rem); overflow: auto;">
+
+		<div class="col-sm-12 update-appointment-contnet-padding" 
+			style="text-align: right; padding: 0; margin-bottom: 1.5rem; padding-right: 1rem;">
+			<span class="font-size-12" 
+				style="padding: 3px 10px;" [ngClass]="className()">{{appStatus}}</span>
+		</div>
+
+		<div class="row inputLabelText update-appointment-contnet-padding" style="line-height: 30px;">
+			
+			<div class="form-group row">
+				<label style="padding: 0; font-weight: 600;" 
+					class="col-4 col-form-label col-form-label-sm"> Date/Time<sup>*</sup> </label>
+				<div style="padding: 0 2px 0 0;"  class="col-4">
+					
+					<input [type]="item" autocomplete="off" class="form-control" readonly
+						daterangepicker id="appointmentDate" style="position: relative;"
+						[options]="appointmentDateConfig"
+						wowInputBehaviour #appointmentDateRef 
+						placeholder="MMM DD, YYYY" 
+						name="appointment-date"
+						#appointmentDate="ngModel"
+						[(ngModel)]="data.appointmentDate"
+						required
+						[disabled]="isFieldDisabled"
+						[ngClass]="{ 'is-invalid': appointmentForm.submitted && appointmentDate.invalid}"
+						(selected)="setAppointmentDate($event)">
+					
+					<div *ngIf="appointmentForm.submitted && appointmentDate.invalid" class="invalid-feedback">
+						<i class="fa fa-info-circle fa-errorIcon" 
+							aria-hidden="true" tooltip="Appointment schedule date is required"> </i>
+					</div>
+				</div>
+
+				<div style="padding: 0 0 0 2px;"  class="col-4">
+					
+					<wow-time-picker 
+						[required]="true"
+						[tooltipIconMR]="18"
+						[disabled]="isFieldDisabled"
+						[isFormSubmitted]="appointmentForm.submitted"
+						controlName="appointment-schedule-time"
+						[value]="data.appointmentTime"
+						(signals)="onChangeValue($event)"
+						[type]="item"
+						wowInputBehaviour>
+					</wow-time-picker>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label style="padding: 0; font-weight: 600;" 
+					class="col-4 col-form-label col-form-label-sm"> Service </label>
+				<div style="padding: 0;" class="col-8">
+					
+					<select class="form-control hoveronfield" style="width: 100%;"
+						name="appointment-service-name"
+						[disabled]="isServiceCostDisabled"
+						[(ngModel)]="data.serviceId"
+						#appointmentService="ngModel"
+						required (change)="onChangeService()"
+						[ngClass]="{ 'is-invalid': appointmentForm.submitted && appointmentService.invalid}">
+						<!-- <option value=null>Search Service</option> -->
+						<option *ngFor="let opt of staffServices" 
+							[value]="opt.serviceId">
+							{{opt.serviceName}}
+						</option>
+					</select>
+
+					<div *ngIf="appointmentForm.submitted && appointmentService.invalid" class="invalid-feedback">
+						<i class="fa fa-info-circle fa-errorIcon"
+							aria-hidden="true" tooltip="Service is required"> </i>
+					</div>
+
+				</div>
+			</div>
+		
+			<div class="form-group row">
+				<label style="padding: 0; font-weight: 600;" 
+					class="col-4 col-form-label col-form-label-sm"> Staff Member </label>
+				<div style="padding: 0;" class="col-8">
+					
+					<select class="form-control hoveronfield" style="width: 100%;"
+						name="appointment-staff-name"
+						[(ngModel)]="data.assignedStaffMemberId"
+						#appointmentService="ngModel"
+						required (change)="onChangeStaff()"
+						>
+						<option *ngFor="let opt of staffList" 
+							[value]="opt.serProfessionalId">
+							{{opt.txtFirstName}} {{opt.txtLastName}}
+						</option>
+					</select>
+					<!-- [ngClass]="{ 'is-invalid': appointmentForm.submitted && appointmentService.invalid}" -->
+					<!-- <div *ngIf="appointmentForm.submitted && appointmentService.invalid" class="invalid-feedback">
+						<i class="fa fa-info-circle fa-errorIcon"
+							aria-hidden="true" tooltip="Service is required"> </i>
+					</div> -->
+
+				</div>
+			</div>
+
+			<!-- <div class="form-group row">
+				<label style="padding: 0;  font-weight: 600;" 
+					class="col-4 col-form-label col-form-label-sm"> Staff Member </label>
+				<div style="padding: 0;" class="col-8">
+					<input autocomplete="off" disabled 
+						name="appointment-staff-member"
+						[(ngModel)]="data.staffMember"
+						[type]="item" class="form-control"
+						wowInputBehaviour>
+				</div>
+			</div> -->
+
+			<div class="form-group row">
+				<label style="padding: 0; font-weight: 600;" 
+					class="col-4 col-form-label col-form-label-sm"> Cost<sup>*</sup> </label>
+				<div style="padding: 0;" class="col-8">
+					<input autocomplete="off"
+						[disabled]="isServiceCostDisabled"
+						[type]="item" class="form-control"
+						name="appointment-cost"
+						[(ngModel)]="data.cost"
+						wowInputBehaviour
+						#appointmentCost="ngModel"
+						required  maxlength="9"
+						[wowOnlyNumbers]="true"
+						[ngClass]="{ 'is-invalid': appointmentForm.submitted && appointmentCost.invalid}"
+						(focus)="getServiceDisplayPrice($event)">
+
+					<div *ngIf="appointmentForm.submitted && appointmentCost.invalid" class="invalid-feedback">
+						<i class="fa fa-info-circle fa-errorIcon" 
+							aria-hidden="true" [tooltip]="appointmentCost.errors.required ? 'Appointment cost is required' : 'Max 9 digits allowed'"> </i>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label style="padding: 0;  font-weight: 600;" 
+					class="col-4 col-form-label col-form-label-sm"> Patient will pay </label>
+				<div style="padding: 0;" class="col-8">
+					<input autocomplete="off" disabled
+						[type]="item" class="form-control"
+						name="appointment-display-price"
+						[(ngModel)]="displayPrice"
+						wowInputBehaviour>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label style="padding: 0;  font-weight: 600;" 
+					class="col-4 col-form-label col-form-label-sm"> Patient Name </label>
+				<div style="padding: 0;" class="col-8">
+					<input autocomplete="off" disabled
+						[type]="item" class="form-control"
+						name="appointment-patient-name"
+						[(ngModel)]="data.patientName"
+						wowInputBehaviour>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label style="padding: 0;  font-weight: 600;" 
+					class="col-4 col-form-label col-form-label-sm"> Patient Phone No </label>
+				<div style="padding: 0;" class="col-8">
+					<input autocomplete="off" disabled
+						[type]="item" class="form-control"
+						name="appointment-patient-phone"
+						[(ngModel)]="data.patientPhoneNo"
+						[mask]="maskedFormat"
+						wowInputBehaviour>
+				</div>
+			</div>
+
+			<ng-container>
+				<div class="form-group row">
+					<label style="padding: 0;  font-weight: 600;" 
+						class="col-4 col-form-label col-form-label-sm">Secretary Notes</label>
+					<div style="padding: 0;" class="col-8">
+						<textarea rows="4"
+							[type]="item" class="form-control"
+							wowInputBehaviour 
+							name="appointment-sectary-notes" 
+							[(ngModel)]="sectaryNotes">
+						</textarea>
+					</div>
+				</div> 
+				<!-- *ngIf="!isFromDashboard" -->
+				<div class="form-group row" *ngIf="!isFromDashboard">
+					<label style="padding: 0;  font-weight: 600;" 
+						class="col-4 col-form-label col-form-label-sm"> Clinical Notes </label>
+					<div style="padding: 0;" class="col-8">
+						<textarea rows="4"  
+							[disabled]="isNotesEditable"
+							[type]="item" class="form-control"
+							wowInputBehaviour 
+							name="appointment-clinical-notes" 
+							[(ngModel)]="clinicalNotes">
+						</textarea>
+					</div>
+				</div>
+
+				<div class="form-group row" *ngIf="!isFromDashboard">
+					<input style="display: none;" 
+						(change)="onAddAttachments($event)" 
+						type="file" name="file"
+						accept=".jpg, .png, .jpeg, .pdf, .gif, .bmp, .tif, .tiff|image/*"            
+						multiple id="clinical-attachements"/>
+					<div class="col-12 attachments-btn" (click)="onChooseFile()">
+						<i class="fa fa-paperclip" style="transform: rotate(-40deg);"></i> Add Attachments
+					</div>
+				</div>
+
+				<div class="form-group row" *ngIf="data?.appointmentAttachments && data?.appointmentAttachments?.length > 0">
+					<div class="col-12 attachments-sec" *ngFor="let attachment of data.appointmentAttachments; let idx=index">
+						<span style="font-weight: 600;">{{getFileName(attachment, idx)}}</span>
+						<i class="fa fa-download" style="cursor: pointer;margin-left: auto;padding-right: 15px" (click)="downloadAttachment(attachment.url)"></i>
+						<i *ngIf="!isFromDashboard" class="fa fa-trash" style="color: red; cursor: pointer;" 
+							(click)="onDeletAttachment(idx)"></i>
+					</div>
+				</div>
+				<a href="" id="downloadLink"></a>
+			</ng-container>
+
+		</div>
+		
+	</div>
+	
+	<div class="modal-footer dlg-footer">
+
+		<button style="padding: 10px !important; margin-left: 1rem;" type="submit" class="btn addbtn-size btnAddColor"> 
+			{{data?.appointmentStatus !== 'MISSED' ? ' Save Appointment' : ' Re-schedule Appointment'}} </button>
+		<button style="padding: 10px !important;" *ngIf="canCancellAppointment"
+			type="button" class="btn addbtn-size btn-danger" 
+			(click)="cancelAppointment()"> Cancel Appointment </button>
+		
+	</div>
+
+</form>

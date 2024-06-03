@@ -1,0 +1,130 @@
+<form [formGroup]="form">
+    <div class="" (mouseover)="item='focused'" (mouseout)="item='none'">
+
+        <div class="form-group row">
+            <div class="form-group-label text-right col-lg-3 col-md-3 col-sm-12 text-align-l ">
+                <label class=" col-form-label col-form-label-sm">
+                    Start Date
+                </label>
+            </div>
+
+            <div class="col-md-5 col-sm-12 form-field">
+                <div class="form-group">
+                    <input wowInputBehaviour type="date" class="form-control" formControlName="date"
+                    [readonly]="response['startDate']"
+                [min]="minDate" required (change)="onChangeDate($event)"
+                [ngClass]="{ 'is-invalid': isControlValid('date') || invalidTime}">
+                <div *ngIf="isControlValid('date') || invalidTime" class="invalid-feedback">
+                  <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                    [tooltip]="invalidTime? 'Date & Time is required' : invalidTime ? 'Past time cannot be selected' : 'Invalid Date'">
+                  </i>
+                </div>
+                </div>
+
+            </div>
+        </div>
+
+        
+
+        <div class="form-group row">
+          <div class="form-group-label text-right col-lg-3 col-md-3 col-sm-12 text-align-l ">
+            <label class=" col-form-label col-form-label-sm">
+                Frequency
+            </label>
+        </div>
+  
+          <div class="col-md-5 col-sm-12 form-field">
+            <select class="form-control" formControlName="frequency" [ngClass]="{ 'is-invalid': isControlValid('frequency') }">
+              <option [ngValue]="null" [selected]="true" disabled>
+                Select Frequency
+              </option>
+              <option *ngFor="let data of frequencies" [value]="data.value">
+                {{ data.name }}
+              </option>
+            </select>
+            <div *ngIf="isControlValid('frequency')" class="invalid-feedback">
+              <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Frequency is required">
+              </i>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="response['nextInvoiceDate']" class="form-group row">
+          <div class="form-group-label text-right col-lg-3 col-md-3 col-sm-12 text-align-l ">
+              <label class=" col-form-label col-form-label-sm">
+                  Next Invoice Date
+              </label>
+          </div>
+
+          <div  class="col-md-5 col-sm-12 form-field">
+              <div class="form-group">
+                  <input wowInputBehaviour type="date" class="form-control" formControlName="nextInvoiceDate"
+              [min]="minDate" required (change)="onChangeDate($event)"
+              [ngClass]="{ 'is-invalid': isControlValid('nextInvoiceDate') || invalidTime}">
+              <div *ngIf="isControlValid('nextInvoiceDate') || invalidTime" class="invalid-feedback">
+                <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                  [tooltip]="invalidTime? 'Next Invoice Date is required' : invalidTime ? 'Past time cannot be selected' : 'Invalid Date'">
+                </i>
+              </div>
+              </div>
+
+          </div>
+      </div>
+      
+
+
+    </div>
+</form>
+
+<div class="layout-blank component-paddingRL content-box-mt">
+    <div class="row">
+    <div class="col-12 p-0">
+      <div class="wow-dh-wrapper">
+        <div class="wow-dh-left-parent text-left">
+        </div>
+
+        <div class="wow-dh-right-parent">
+          <div class="wow-dh-action-btns-wrapper text-left">
+            <div class="wow-dh-action-btn">
+              <button
+                type="button"
+                class="btn btn-space btn-properties-white mr-2"
+                (click)="onGoBack()"
+              >
+                Cancel
+              </button>
+            </div>
+            <div class="wow-dh-action-btn">
+              <button
+              *ngIf="!response['nextInvoiceDate']"
+                type="button"
+                class="btn btn-properties-gray"
+                [disabled]="isFormDisabled"
+                [ngClass]="
+                  isFormDisabled ? 'btn-properties-gray' : 'btnAddColor'
+                "
+                (click)="onSave()"
+              >
+                Setup Invoice                                                                                                                               
+              </button>
+              <button
+              *ngIf="response['nextInvoiceDate']"
+              type="button"
+              class="btn btn-properties-gray"
+              [disabled]="isFormDisabled"
+              [ngClass]="
+                isFormDisabled ? 'btn-properties-gray' : 'btnAddColor'
+              "
+              (click)="onUpdate()"
+            >
+              Update Invoice Setup
+            </button>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+

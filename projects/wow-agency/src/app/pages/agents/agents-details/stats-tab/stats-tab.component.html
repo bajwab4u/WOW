@@ -1,0 +1,49 @@
+<div class="wow-ags-root">
+    <div class="wow-ags-parent">
+        <div class="wow-ags-subparent">
+            <div class="wow-ags-wrapper">
+                <div class="container p-0">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-12 p-0 flex-basis20">
+                            <div class="wow-stats-df-wrapper">
+                                <input autocomplete="off" class="form-control" readonly daterangepicker id="datefilter"
+                                    style="position: relative;" [options]="dateFilterConfig" #dateFilter
+                                    placeholder="MMM DD, YYYY" (selected)="setFilterValue($event)">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 p-0">
+                            <!-- Clients count here -->
+                            <div class="wow-ags-counts-wrapper">
+                                <div class="wow-ags-count-single" *ngFor="let item of statsCount"
+                                    [style.backgroundColor]="item.bgColor" [style.border]="item.border">
+                                    <div class="wow-ags-count-content">
+                                        <div class="wow-ags-count-content-desc">
+                                            <p>{{ item.content }}</p>
+                                        </div>
+                                        <div class="wow-ags-count-content-number">
+                                            <h2>{{ item.count }}</h2>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="row">
+                        <div class="col-md-12 p-0">
+                            <div class="wow-ags-graph-wrapper">
+                                <wow-details-graph [data]="data"></wow-details-graph>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="row mb-4" style="gap: 15px; display: flex; align-items: center;">
+
+        <div class="col-5" style="padding: 0;">
+            <wow-auto-complete
+                [config]="serviceConfig"
+                [(ngModel)]="serviceId"
+				(change)="onInputChange($event)"></wow-auto-complete>
+        </div>
+
+		<button type="button" (click)="onAssignService()" class="btn btn-size btnAddColor" style="margin-top: 0;">
+			<img style="height: 22px;" src="assets/images/shared-new-theme/addicon.svg">
+			Add Service
+		</button>
+    </div>
+
+    <div class="col-md-12 pl-0 pr-0 mb-3">
+
+        <wow-table 
+			[data]="data"
+			[config]="config" 
+			[actions]="action" 
+			(signals)="onTableSignals($event)" 
+			#serviceDetailRef>
+			<ng-template dataTableCell="serviceName" let-row="row" let-col="col">
+				{{row?.serviceName}}
+			</ng-template>
+		</wow-table>
+
+    </div>
+</div>

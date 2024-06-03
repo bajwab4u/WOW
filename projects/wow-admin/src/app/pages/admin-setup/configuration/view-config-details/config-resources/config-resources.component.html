@@ -1,0 +1,24 @@
+<div class="w-100">
+    <div class="row mb-4" style="gap: 15px; display: flex; align-items: center;">
+        <div>
+            <wow-auto-complete [config]="resourceConfig" [(ngModel)]="resourceId"></wow-auto-complete>
+        </div>
+
+        <button type="button" class="btn savebtn-size btnAddColor float-left search-new-btn"
+        (click)="addResource()">Add Resource
+        </button>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 pl-0">
+            <wow-table [config]="config" (signals)="onTableSignals($event)" [actions]="action">
+
+                <ng-template dataTableCell="name" let-row="row" let-col="col">
+                    <p class="m-0 " [title]="row?.name">
+                        {{row?.name}}
+                    </p>
+                </ng-template>
+            </wow-table>
+        </div>
+    </div>
+</div>

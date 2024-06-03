@@ -1,0 +1,101 @@
+<div class="container float-left  col-12" style="padding: 0 !important; height: 100%;">
+    <ng-container>
+        <div style="height: 100%" *ngIf="activeState === 'TABLE'">
+            <div class="col-md-12 layout-blank component-paddingRL">
+                <div class="content-box-mt">
+
+                    <div class="row">
+                        <h2 class="mb-0">
+                            {{selectedMenu?.name}}
+                            <span *ngIf="totalItems > 0" class="red">({{totalItems}})</span>
+                        </h2>
+                    </div>
+
+                    <div class="row margnTblTop">
+                        <div class="col-md-4" style="padding-left: 0px !important;">
+
+                            <search-control palceHolder="Search {{selectedMenu?.name}}"
+                                (signal)="onSearchValueChange($event)">
+                            </search-control>
+                        </div>
+
+                        <div class="col-md-8 text-right" style="padding-right: 0;">
+                            <a href="" id="downloadLink"></a>
+                            <div class="text-right dropdown">
+                                <button [disabled]="totalItems === 0"
+                                    class="btn addbtn-size btnDownloadColor btn-properties-white mr-2 dropbtn">
+                                    Download
+                                    <img src="assets/images/ic_vertical_align_bottom_24px.svg" height="12px">
+                                </button>
+                                <div class="dropdown-content" *ngIf="totalItems > 0">
+                                    <a *ngFor="let format of downloadFormats" (click)="generateAndDownloadCsv(format)">
+                                        {{format}}
+                                    </a>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <wow-table class="w-100" [config]="config" [actions]="action" (signals)="onTableSignals($event)">
+
+                        <ng-template dataTableCell="image" let-row="row" let-col="col">
+                            <div class="imgsize">
+                                <img class="imgsize responsive-image rounded-circle" [src]="row?.logoPathUrl"
+                                    width="36px" height="36px" onError="this.src='assets/images/profile_icon.svg'"
+                                    alt="">
+                            </div>
+                        </ng-template>
+
+                        <ng-template dataTableCell="name" let-row="row" let-col="col">
+                            <p class="m-0 text-overflow-20ch wow-clients-cellwidth" [title]="row?.name">
+                                {{row?.name}}
+                            </p>
+                        </ng-template>
+
+                        <ng-template dataTableCell="email" let-row="row" let-col="col">
+                            <p class="m-0 text-overflow text-overflow-20ch" [title]="row?.email">
+                                {{row?.email}}
+                            </p>
+                        </ng-template>
+
+                        <ng-template dataTableCell="noOfStaff" let-row="row" let-col="col" let-i="index">
+                            <span class="col-width">
+                                {{row?.noOfStaff}}
+                            </span>
+                        </ng-template>
+                        <ng-template dataTableCell="advocate" let-row="row" let-col="col" let-i="index">
+                            <span class="col-width" [title]="row?.advocateName">
+                                {{row?.advocateName}}
+                            </span>
+                        </ng-template>
+                        <ng-template dataTableCell="status" let-row="row" let-col="col" let-i="index">
+                            <span class="col-width">
+                                {{row?.status ? 'Active': 'Inactive'}}
+                            </span>
+                        </ng-template>
+
+                    </wow-table>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+    </ng-container>
+
+    <ng-container *ngIf="activeState === 'DETAIL'">
+        <wow-provider-details [selectedProvider]="selectedProvider" (signals)="onHandleDetailSignals($event)">
+        </wow-provider-details>
+    </ng-container>
+
+
+</div>

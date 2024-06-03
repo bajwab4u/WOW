@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLongTitle"><strong>Services</strong></h5>
+    <button type="button" class="btn py-0" (click)="closeModal()" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true"><i class="fa fa-times"></i></span>
+    </button>
+</div>
+
+<div class="modal-body">
+    <div class="plansCard">
+        <img [src]="previewImage(data)" class="product-badge">
+
+        <div class="membershipCardHeading">
+            <h2>{{data?.membershipTitle}}</h2>
+        </div>
+        
+        <div class="planDetail">
+            <div *ngFor="let item of data.packageDetails" class="planItems">
+                <img *ngIf="item?.available" src="assets/images/ic_done_24px.svg" alt="">
+                <img *ngIf="!item?.available" src="assets/images/ic_close_24px.svg" alt="">
+                <p>{{item.label}}</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

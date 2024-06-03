@@ -1,0 +1,74 @@
+<div class=" layout-blank component-paddingRL content-box-mt">
+
+    <div class="row">
+        <div class="col-12 p-0">
+            <div class="wow-dh-wrapper ">
+                <div class="wow-dh-left-parent text-left">
+                    <div class="wow-dh-left-heading ">
+                        <h3 class="mb-0">
+                            <span (click)="onGoBack()" style="cursor: pointer" class="mr-2">
+                                <img src="assets/images/details-back-btn.svg" height="12px">
+                            </span>
+                            {{selectedInsurance.txtPlanName}}
+                        </h3>
+                    </div>
+                </div>
+                <div class="wow-dh-right-parent">
+                    <div class="wow-dh-action-btns-wrapper">
+                        <div class="wow-dh-action-btn">
+                            <button type="button" class="btn mr-2" [title]="'Delete Insurance'"
+                                [ngClass]="'custom-danger-btn'" (click)="alertDeleteInsurance()">
+                                <i style="color:rgb(242, 243, 243)" class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="wow-dh-action-btn">
+                            <button type="button" class="btn btn-space btn-properties-white mr-2"
+                                (click)="onGoBack()">Cancel</button>
+                        </div>
+                        <div class="wow-dh-action-btn">
+                            <button type="button" class="btn btn-properties-gray" [disabled]="isFormDisabled"
+                                [ngClass]="isFormDisabled ? 'btn-properties-gray' : 'btnAddColor'"
+                                (click)="onSubmit()">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 p-0">
+
+            <wow-tabs-group (selectedTabChange)="onSelectedTabChange($event)" [showConfirmPopup]="true">
+                <wow-tab-item tabTitle="Details">
+
+                    <ng-container *ngIf="selectedTabIndex === 0">
+                        <div class="row">
+                            <div class="col-12 p-0">
+                                <div class="wow-adg-content">
+                                    <wow-view-insurance-details [isProcedural]="true" [selectedInsurance]="selectedInsurance"
+                                        (signals)="onHandleSignals($event)" [action]="action">
+                                    </wow-view-insurance-details>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </ng-container>
+                </wow-tab-item>
+
+                <!-- 2nd Tab start -->
+                <wow-tab-item tabTitle="Services">
+                    <ng-container *ngIf="selectedTabIndex === 1">
+                        <wow-view-insurance-services class="w-100"  [InsuranceId]="selectedInsurance.id">
+                        </wow-view-insurance-services>
+                    </ng-container>
+                </wow-tab-item>
+                <!-- 2nd Tab end -->
+
+            </wow-tabs-group>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,26 @@
+<div class="row plansContainer m-0" *ngIf="memberships.length > 0">
+    <div *ngFor="let item of memberships" class="col-md-4 col-sm-12 divheight">
+        <div class="membershipCard">
+
+            <img [src]="previewImage(item, 'membership')" style="margin-bottom: 10px;"
+                onError="this.src='assets/images/packages/membership.svg'">
+
+            <div class="membershipCardHeading">
+                <h2>{{item?.name}}</h2>
+                <span *ngIf="item.price">{{item.price | currency}}/mo</span>
+            </div>
+
+            <div class="planDetail">
+                <div *ngFor="let item of item.packageDetails" class="planItems">
+                    <img *ngIf="item?.available" src="assets/images/ic_done_24px.svg" alt="">
+                    <img *ngIf="!item?.available" src="assets/images/ic_close_24px.svg" alt="">
+                    <p>{{item.label}}</p>
+
+                </div>
+                <div class="btnDiv">
+                    <a class="btn btn-size btnAddColor" (click)="onClickBuyBtn(item)">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,218 @@
+<div class="row" style="height: 100%;">
+
+    <div style="overflow: auto;" class="col-12 p-0">
+        <form>
+            <div class="">
+                <div class="row">
+                    <div class="col-md-6 text-left p-0">
+                        <h3>Invite Multiple Employees</h3>
+                        <p class="subheading">Invite multiple employee and assign them a group.</p>
+                    </div>
+                    <div class="col-md-6 mt-2 p-0 wow-mb-1rem">
+                        <div class="text-right float-right mt-2">
+                            <button class="btn addbtn-size btnDownloadColor btn-properties-white mr-2"
+                                (click)="back()">Cancel</button>
+                            <button type="button" (click)="onSubmit()" class="btn btn-properties-gray"
+                                [disabled]="!empForm.dirty"
+                                [ngClass]="!empForm.dirty ? 'btn-properties-gray' : 'btnAddColor'">Send Invite</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="linebar"></div>
+
+                <div class="row">
+                    <div class="row">
+                        <div class="col-md-12 text-left px-0 pt-4">
+                            <h3>Invite Employee by Link <img
+                                    class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple tbltooltip"
+                                    src="assets/images/shared-new-theme/tooltipIcon.svg" placement="bottom"
+                                    tooltip="Select the group and share the link with employees you want in this group. This link will help them register to WoW Health. Once they register, they can use the memberships assigned to this particular group.">
+                            </h3>
+                            <p class="subheading">
+                                Share a link with your team to get them on-board. You approve each request to keep your
+                                WoW Health secure.
+                            </p>
+                        </div>
+                        <div class="col-9 p-4 mb-4 jumbotron">
+                            <div id="inviteCode" class="form-group col-12 text-left inputMarginBot10 p-0">
+                                <label>Employee Group*</label>
+
+                                <select type="text" class="form-control col-md-7" name="group-name-ctrl"
+                                    [(ngModel)]="inviteLink">
+                                    <option value=null disabled selected>Select</option>
+                                    <option *ngFor="let opt of empGroups" [value]="opt.groupInviteLink">
+                                        {{opt.employeeGroupName}}</option>
+                                </select>
+
+                                <!-- <div  class="col-md-7">
+                                    <wow-auto-complete
+                                        [config]="groupLinkConfig"
+                                        [(ngModel)]="inviteLink"></wow-auto-complete>
+                                </div> -->
+
+                                <div id="inviteCode" class="invite-page mt-3">
+                                    <input type="text" class="form-control" name="group-link-ctrl" readonly
+                                        #inviteGroupLinkRef [(ngModel)]="inviteLink" style="width: 87%; height: 40px;"
+                                        placeholder="Link will be generated here" />
+
+                                    <button type="button" style="cursor: pointer;" (click)="copLinkAddress()"
+                                        title="copy link" class="btn btnAddColor">
+                                        <img src="assets/images/copy-link.svg">
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="linebar"></div>
+                    <div class="row mb-4">
+                        <div class="col-md-12 text-left px-0 pt-4">
+                            <h3>Invite using CSV/Excel File <img
+                                    class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple tbltooltip"
+                                    src="assets/images/shared-new-theme/tooltipIcon.svg"
+                                    tooltip="Open the sample and add your employees details under the headings. Save the file anywhere in your computer and upload the file by clicking on the 'Upload a file' Button.">
+                            </h3>
+                            <p class="subheading">Invite new employees by uploading file. You can start with our
+                                template.
+                            </p>
+                        </div>
+                        <div class="col-3 p-0">
+                            <div class="float-left mt-2">
+                                <a type="button" class="btn addbtn-size btnAddColor"
+                                    href="assets/files/employee-invitee.csv" download>Download Template</a>
+                            </div>
+                            <div class="float-left mt-3">
+                                <button type="button" (click)="uploadTemplate()" style="padding-left: 44px !important; padding-right: 44px !important;"
+                                    class="btn addbtn-size btnDownloadColor btn-properties-white">Upload
+                                    Template</button>
+
+                                <input style="display: none;" type="file" accept=".csv, .xlx"
+                                    id="upload-invite-emp-temp" name="file"
+                                    (change)="handleInputChangeImg($event)" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="linebar"></div>
+                    <div class="row mb-5">
+                        <div class="col-md-12 text-left px-0 pt-4">
+                            <h3>Invite Employees Manually</h3>
+                            <p class="subheading">Choose a group for your new employees and then invite as many as you
+                                want
+                                by typing their email addresses. You can always edit someone's details later.</p>
+                        </div>
+                        <div class="p-0">
+                            <label>
+                                <i class="fa fa-envelope mr-2" style="display: inline-block; color: #524456;"></i>
+                                Invitation link will be sent to the employees
+                            </label>
+                        </div>
+                        <div class="col-12 p-0 mt-3">
+
+                            <form class="form-group" [formGroup]="empForm">
+                                <table class="table table-borderless" style="border-spacing: 0;">
+
+                                    <thead class="thead-light">
+                                        <tr style="background-color: #fff;" class="">
+                                            <th style="background-color: #fff;" scope="col">Email <sup>*</sup>
+                                                <img class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple tbltooltip"
+                                                    src="assets/images/shared-new-theme/tooltipIcon.svg"
+                                                    tooltip="Enter the email account of the employee you want to sent an invite to. Your employee will create WoW Account using this email.">
+                                            </th>
+                                            <th style="background-color: #fff;" class="pl-2" scope="col">Employee Group
+                                                <sup>*</sup>
+                                                <img class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple tbltooltip"
+                                                    src="assets/images/shared-new-theme/tooltipIcon.svg"
+                                                    tooltip="Allocating a group will allow the user to acquire the benefits associated with the particular group.">
+                                            </th>
+                                            <th style="background-color: #fff;"></th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr formArrayName="empFormItems" class="wow-am-manually" 
+                                            *ngFor="let item of empForm.get('empFormItems')['controls']; let i = index">
+                                            <td [formGroupName]="i" class="pl-2" label="Email" style="width: 40%;">
+                                                <input [attr.id]="'ctrl_email_'+i" type="text" formControlName="email"
+                                                    required class="form-control "
+                                                    placeholder="e.g example@mail.com"
+                                                    [ngClass]="{ 'is-invalid': (isFormSubmitted && item.get('email').invalid) || item.get('email').hasError('mustMatch') }"
+                                                    tooltip="" [isDisabled]="!isFormSubmitted"
+                                                    (focusout)="uniqueEmailValidator(item, i)" maxlength="50"
+                                                    autocomplete="off">
+
+                                                <div *ngIf="item.get('email').hasError('mustMatch')"
+                                                    class="fa fa-info-circle fa-errorIcon"
+                                                    tooltip="You are not allowed to add multiple employee with same email">
+                                                </div>
+
+                                                <div class="invalid-feedback"
+                                                    *ngIf="isFormSubmitted && !item.get('email').valid">
+
+                                                    <i aria-hidden="true" class="fa fa-info-circle fa-errorIcon"
+                                                        [tooltip]="item.get('email').errors.required ? 'Email is required' 
+                                                        : (item.get('email').errors.email ? 'Invalid Email' : 'Max 50 characters allowed')">
+                                                    </i>
+                                                </div>
+
+                                            </td>
+
+                                            <td [formGroupName]="i" class="pl-2" label="Employee Group"
+                                                style="width: 40%; position: relative;">
+
+                                                <!-- <select [attr.id]="'ctrl_groupId_'+i" type="text" class="form-control "
+                                                    formControlName="groupId" required
+                                                    [ngClass]="{'is-invalid': isFormSubmitted && item.get('groupId').invalid}">
+                                                    <option value=null selected disabled>Select</option>
+                                                    <option *ngFor="let opt of empGroups" [value]="opt.employeeGroupId">
+                                                        {{opt.employeeGroupName}}</option>
+                                                </select> -->
+
+                                                <wow-auto-complete
+                                                    [required]="true"
+                                                    [config]="groupConfig"
+                                                    formControlName="groupId"
+                                                    [invalid]="isFormSubmitted && item.get('groupId').invalid"></wow-auto-complete>
+
+                                                <!-- <div *ngIf="item.get('staffEmail').hasError('mustMatch')"
+                                                    class="fa fa-info-circle fa-errorIcon"
+                                                    tooltip="You are not allowed to add multiple staff members with same email">
+                                                </div> -->
+
+                                                <div class="invalid-feedback"
+                                                    *ngIf="isFormSubmitted && item.get('groupId').invalid">
+
+                                                    <i aria-hidden="true" style="margin-top: -29px !important;" class="fa fa-info-circle fa-errorIcon"
+                                                        tooltip="Group is required">
+                                                    </i>
+                                                </div>
+
+                                            </td>
+
+                                            <td style="padding: 10px;" label="image">
+                                                <div *ngIf="empForm.get('empFormItems')['controls'].length > 1">
+                                                    <img src="assets/images/shared-new-theme/deleteicon.svg" alt=""
+                                                        (click)="deleteEmp(i)" style="cursor: pointer;">
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        <tr style="height: 40px; border: none;">
+                                            <td class="text-style wow-am-mbtn p-0" label="image" style="text-align: left; ">
+                                                <a (click)="addEmpManually()" style="cursor: pointer; font-size:14px;">
+                                                    <i class="fa fa-plus mr-2" style="font-weight: bold;"></i>
+                                                    Add New Employee</a>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

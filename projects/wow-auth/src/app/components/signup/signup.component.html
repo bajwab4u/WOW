@@ -1,0 +1,24 @@
+<div class="row signup-container pb-5" [style.background-image]="'url(../assets/images/signup/signup-background.svg)'">
+
+	<ng-container *ngFor="let opt of signUpActors">
+		<div class="col-md-4 actors">
+			<div>
+				<h1 style="color: #660066; font-weight: 500;">{{opt?.title}}</h1>
+				<h5>{{opt?.subHeading}}</h5>
+				<div class="title-divider"></div>
+				<ul class="dashed">
+					<li *ngFor="let c of opt.content">{{c}}</li>
+				</ul>
+			</div>
+			<div>
+				<button type="button" style="margin-top: 80px !important; padding: 15px 43px;" class="btn"
+				(click)="onSignup(opt)"
+				[ngClass]="opt.title === 'Providers' ? 'btnProvider' : 'btnEmployer'">{{opt.btnText}}</button>
+			</div>
+			
+		</div>
+
+	</ng-container>
+</div>
+
+<!-- <div><img src="assets/images/signup/signup-background.svg" height="100px" width="100px" alt=""></div> -->

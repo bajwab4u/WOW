@@ -1,0 +1,25 @@
+.inc-dec-icon
+{
+    margin-right: 7px;
+    cursor: pointer;
+    height: 22px;
+    width: 23px;
+}
+
+.apply-to-all:hover
+{
+    color: blue !important;
+    text-decoration: underline !important;
+    cursor: pointer;
+}
+
+.text-style 
+{
+    font-size: 14px !important;
+    color: #575757;
+    font-weight: 600;
+}
+
+:host ::ng-deep wow-time-picker .fa-errorIcon {
+    margin-top: -27px !important;
+}

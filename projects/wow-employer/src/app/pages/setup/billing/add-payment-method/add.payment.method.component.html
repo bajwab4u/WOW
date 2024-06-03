@@ -1,0 +1,37 @@
+<div class="radioNewMethod form-check-inline">
+    <input type="radio" id="bankMeth"
+        name="radio-bankMeth" value="bank" ngModel
+        [(ngModel)]="newMethodType" (change)="onChange($event)">
+    <label class="radioLabel" for="bankMeth">Bank Account</label>
+</div>
+
+<div *ngIf="newMethodType === 'bank'" class="methodCont">
+    <wow-payment-info
+        [isMarketPlace]="isMarketPlace"
+        [action]="action"
+        [isMSC]="isMSC"
+        (termsAndConditions)="getTermsAndConditions($event)"
+        (paymentValue)="onclickPaymentProfile($event, 'BankAccount')">
+    </wow-payment-info>
+</div>
+
+<div class="radioNewMethod wow-ap-cards-img form-check-inline">
+    <input type="radio" id="cardMeth"
+        name="radio-cardMeth" value="card" ngModel
+        [(ngModel)]="newMethodType" (change)="onChange($event)">
+    <label class="radioLabel" for="cardMeth">Credit/Debit Card</label>
+
+    <img src="assets/images/cards/cards-group-small.svg" alt="">
+</div>
+
+<div *ngIf="newMethodType === 'card'" class="methodCont">
+    <wow-add-credit-card
+        [isMarketPlace]="true"
+        [price]="price"
+        [action]="action"
+        [isMSC]="isMSC"
+        (termsAndConditions)="getTermsAndConditions($event)"
+        (previousPage)="goBack($event)"
+        (paymentProfile)="onclickPaymentProfile($event, 'CreditCard')">
+    </wow-add-credit-card>
+</div>

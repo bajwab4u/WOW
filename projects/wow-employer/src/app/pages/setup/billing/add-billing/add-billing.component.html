@@ -1,0 +1,72 @@
+<div class="container float-left col-12 component-paddingRL content-box-mt" id="cont-body">
+
+	<form name="form" #f="ngForm" (ngSubmit)="onSubmit()">
+		<div class="row">
+			<div class="col-md-6 col-sm-12 text-left p-0">
+				<h3>Add Credit</h3>
+				<div class="subheading">Add balance to your wallet from saved methods or from a new one.</div>
+			</div>
+
+			<div class="col-md-6 col-sm-12 p-0">
+				<div class="text-right text-align-l wow-mt-1rem">
+
+					<button type="button" class="btn btn-space btn-properties-white" (click)="goBack()">Cancel</button>
+					<button type="submit" class="btn addbtn-size btnAddColor">{{addNewCard ? 'Save and Confirm Payment' : 'Confirm Payment'}}</button>
+
+				</div>
+			</div>
+
+		</div>
+		<hr />
+
+		<div class="form-row">
+			<div class="col-md-4 mb-3">
+				<label class="labelStyling">Amount($)</label>
+				<input type="text" class="form-control" id="validationTooltip01" placeholder="$$$"
+					name="creditAmount" #creditAmount="ngModel" [wowOnlyNumbers]="true"
+					[(ngModel)]="amountAdded" required [class.is-invalid]="f.submitted && creditAmount.invalid">
+
+				<div *ngIf="f.submitted && creditAmount.invalid" class="invalid-feedback">
+					<i class="fa fa-info-circle fa-errorIcon" aria-hidden="true" tooltip="Amount is required"> </i>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<h3 *ngIf="!addNewCard" class="pt-3 text-left">Select from Saved Cards</h3>
+	<div *ngIf="cards.length === 0 && !loadingState && !addNewCard"
+		class="add-card-btn">
+		<button type="submit" class="btn btn-properties-gray " (click)="addCard()"
+			style="outline: none;"><i class="fa fa-plus pr-2"></i>Add New Card
+		</button>
+	</div>
+
+	<ng-container style="border: 1px solid lightgrey; border-radius: 5px;"
+		*ngIf="cards.length === 0 && !loadingState && !addNewCard; else saveCardsRef">
+		<div class="row p-5">
+			<div class="col-md-12">
+				<img src="assets/images/billing_icon.svg" class="image-pointer pb-4" alt="Null">
+				<p style="font-size: 14px; color: #575757;" class="pt-2">You have no saved cards to show.</p>
+			</div>
+		</div>
+	</ng-container>
+
+	<ng-template #saveCardsRef>
+
+		<wow-billing-cards
+      *ngIf="!addNewCard"
+			[showWallet]="false"
+			[width]="49"
+			[data]="cards"
+			[showAddBtn]="!addNewCard"
+			[allSelection]="true"
+			(signals)="onHandleSignals($event)"></wow-billing-cards>
+
+	</ng-template>
+
+	<ng-container *ngIf="addNewCard === true">
+		<wow-add-credit-card [showImageTitle]="true" (signals)="onHandleSignals($event)" (previousPage)="onPreviousPage($event)">
+		</wow-add-credit-card>
+	</ng-container>
+
+</div>

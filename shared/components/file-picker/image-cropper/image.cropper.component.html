@@ -1,0 +1,37 @@
+<div class="modal-header">
+	<h4 class="modal-title">Crop Image</h4>
+
+	<!-- <i class="fa fa-times" *ngIf="!isFromDashboard" 
+		(click)="signals.emit({type: 'CLOSE', data: reload})"
+		style="font-size: 12px; cursor: pointer;"></i> -->
+</div>
+  
+<div class="modal-body appointment-detail-content">
+	<div class="col-md-12">
+        <image-cropper 
+            [imageFile]="fileEvent" 
+            [maintainAspectRatio]="true" 
+            [aspectRatio]="4 / 4"
+            [resizeToWidth]="256" 
+            format="png" 
+            (imageLoaded)="showCropper()"
+            (cropperReady)="invokeCropper()"       
+            (imageCropped)="imageCrop($event)" 
+            (loadImageFailed)="error()">
+        </image-cropper>
+    </div>
+
+    <!-- <div class="col-md-12">
+        <p><strong>Cropped Image Preview</strong></p>
+        <img [src]="preview" />
+    </div> -->
+</div>
+
+<div class="modal-footer dlg-footer">
+    <div class="float-right mt-2">
+        <button type="button" class="btn addbtn-size btnDownloadColor btn-properties-white"
+            (click)="onCancel()">Cancel</button>
+        <button type="submit" class="btn addbtn-size btnAddColor"
+            (click)="onSave()">Save</button>
+    </div>
+</div>

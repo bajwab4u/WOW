@@ -1,0 +1,78 @@
+
+<div class="container col-9 float-left content-box-mt component-paddingRL" style="min-width: 100% !important;">
+	<form name="from" [formGroup]="form" autocomplete="off">
+		<div class="row">
+			<div class="col wow-ac-heading col-sm-12 col-md-7 text-left p-0">
+				<h3 class="mb-0">Add Category</h3>
+			</div>
+			<div class="col col-sm-12 col-md-5 text-align-l text-right mt-2 p-0">
+				<button type="button" class="btn addbtn-size btnDownloadColor btn-properties-white mr-2" (click)="goBack()">Cancel</button>
+				<button type="button" class="btn addbtn-size btnAddColor" (click)="submitForm()">Save</button>
+			</div>
+		</div>
+		<hr />
+		<div class="col-6 float-left p-0">
+			<div class="row inputLabelText ml-5">
+				<div class="col-10 p-0">
+
+					<div class="">
+						<div class="form-group form-row mr-0 ml-0">
+							<label class="float-left">Category Name</label>
+							<input type="text" class="form-control" formControlName="name"
+								placeholder="Category Name"
+								   [ngClass]="{'is-invalid' : isControlValid('name', 'required')}"required>
+							 <div *ngIf="isFormSubmitted && form.get('name').invalid"
+								class="invalid-feedback">
+								<div *ngIf="form.get('name').errors.required"><i
+										class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+										tooltip="Category name is required.">
+									</i>
+								</div>
+							</div>
+						</div>
+                        <div class="form-group col-12 text-left inputMarginBot10 p-0">
+                            <label>Related Keywords <span style="font-size: 10px; color: #575757;">(Type keywords and press Enter)</span>
+								<img
+                                    class="imgCustom ml-3 infoIcon tooltipIconSize tooltipstylePurple"
+                                    src="assets/images/shared-new-theme/tooltipIcon.svg"
+                                    tooltip="Keywords help your patients to find you more easily">
+							</label>
+                            <br>
+                            <!-- <div *ngFor="let item of serviceCategory; let i=index"> -->
+                            <h4>
+                                <div class="badge badge-primary customBadge mr-2 mb-2"
+                                    *ngFor="let item of keywords; let i=index">
+                                    {{item}}
+                                </div>
+                            </h4>
+
+                            <!-- </div> -->
+
+
+                            <div class="keywords form-control">
+                                <tag-input class="tags m-2" placeholder="Add keywords"
+                                     [theme]="'dark'" formControlName="keywords" (onRemove)="onItemRemoved($event)" (onAdd)="onItemAdded($event)"
+                                    [modelAsStrings]="true" [editable]="true">
+                                </tag-input>
+                            </div>
+                        </div>
+                        <div class="form-group form-row mr-0 ml-0">
+							<label class="float-left">Description</label>
+							<textarea type="text" class="form-control" formControlName="description"
+								placeholder="Service category description"
+								maxlength="1000" style="height: 93px;"></textarea>
+							<div *ngIf="isFormSubmitted && form.get('description').invalid"
+								class="invalid-feedback">
+								<div *ngIf="form.get('description').errors.required"><i
+										class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+										tooltip="Description is required.">
+									</i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,48 @@
+// .subheading {
+// 	color: #575757;
+// 	font-size: 14px;
+// }
+.dropdown-menu {
+	width: 250px !important;
+}
+
+.bd-highlight {
+	background-color: #b786b721;
+}
+.column {
+	flex: 1;
+	height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	background-color: #b786b721;
+	border-radius: 6px;
+}
+.x {
+	width: 100%;
+	height: 50%;
+}
+.y,
+.z {
+	width: 50%;
+	height: 50%;
+}
+
+.column,
+.x,
+.y,
+.z {
+	//   background: rgba(0,0,0,0.1);
+	//   border: 1px solid;
+	//   box-sizing: border-box;
+	padding: 1em;
+}
+
+.btn-properties-gray
+{
+	padding: 12px 30px !important;
+}
+@media (min-width: 400px) and (max-width: 786px) {
+    .wow-resp-font{
+        font-size: 1.4em !important;
+    }
+}

@@ -1,0 +1,68 @@
+<div class="row" style="height: 100%; padding: 0;">
+
+    <div style="height: 100%; overflow: auto;" class="col-12 component-paddingRL content-box-mt">
+
+        <form [formGroup]="form">
+            <div class="">
+
+                <div class="row">
+                    <div class="col-md-7 text-left" style="padding: 0;">
+                        <h3>Invite Client</h3>
+                        <p>You can send invites to employees, patients and providers.</p>
+                    </div>
+                    <div class="col-md-5" style="padding: 0;">
+                        <div class="text-right float-right mt-3">
+                            <button type="button" class="btn addbtn-size btnDownloadColor btn-properties-white mr-2"
+                                (click)="goBack()">Cancel</button>
+                            <button type="button" (click)="onSubmit()" class="btn addbtn-size btnAddColor">Send
+                                Invite</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="linebar"></div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-row mt-4">
+                            <div class="form-group col-12 text-left inputMarginBot10">
+                                <label>Email</label>
+
+                                <input autocomplete="nope" type="text" class="form-control" name="email" required
+                                    placeholder="example@mail.com" maxlength="50" formControlName="email" [ngClass]="{ 'is-invalid':isControlValid('email') 
+                                    || isControlValid('email', 'email') 
+                                    || isControlValid('email', 'maxlength')}">
+
+                                <div *ngIf="isControlValid('email') || isControlValid('email', 'email') || isControlValid('email', 'maxlength')"
+                                    class="invalid-feedback">
+                                    <i class="fa fa-info-circle fa-errorIcon"
+                                        *ngIf="isControlValid('email') || isControlValid('email', 'email') || isControlValid('email', 'maxlength')"
+                                        aria-hidden=" true"
+                                        [tooltip]="form.controls.email.errors.required?'Email is required': 
+                                                form.controls.email.errors.maxlength ? 'Email can contain upto 50 letters' : 'Invalid Email'">
+                                    </i>
+
+
+                                </div>
+                            </div>
+
+                            <div class="form-group col-12 text-left inputMarginBot10">
+                                <label>Type</label>
+                                <select name="title" type="text" class="form-control" formControlName="type" required
+                                    [ngClass]="{ 'is-invalid': isControlValid('type') }" name="type"
+                                    [(ngModel)]="clientType">
+                                    <option value="null" disabled>Select</option>
+                                    <option *ngFor="let opt of clientTypes" [selected]="clientType === opt.name">
+                                        {{opt.name}}
+                                    </option>
+                                </select>
+                                <div *ngIf="isControlValid('type')" class="invalid-feedback">
+                                    <i class="fa fa-info-circle fa-errorIcon" aria-hidden="true"
+                                        tooltip="Type is required."> </i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
